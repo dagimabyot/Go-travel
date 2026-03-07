@@ -1,0 +1,7 @@
+{
+  "name": " GoTravel",
+  "description": "A modern, user-friendly flight ticket booking application with real-time search, booking management, and interactive flight maps.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
