@@ -25,7 +25,7 @@ export const PackageDetailsScreen = ({ pkg, user, onBack, onBook, language, appe
   const galleryImages = pkg.images || [pkg.image];
 
   return (
-    <div className={`fixed inset-0 z-[80] flex flex-col overflow-y-auto no-scrollbar pt-24 transition-colors duration-300 ${appearance === 'Dark Mode' ? 'bg-slate-950 text-white' : 'bg-white text-slate-900'}`}>
+    <div className={`fixed inset-0 z-[210] flex flex-col overflow-y-auto no-scrollbar pt-12 transition-colors duration-300 ${appearance === 'Dark Mode' ? 'bg-slate-950 text-white' : 'bg-white text-slate-900'}`}>
       {/* Hero Section */}
       <div className="relative w-full px-6 pt-12 flex flex-col gap-6">
         {/* Main Image Container */}
@@ -75,48 +75,78 @@ export const PackageDetailsScreen = ({ pkg, user, onBack, onBook, language, appe
       </div>
 
       {/* Content Section */}
-      <div className="px-8 pt-10 pb-32">
+      <div className="px-8 pt-10 pb-12">
         <div className="mb-8">
           <h2 className={`text-4xl font-bold mb-2 ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{pkg.name}</h2>
           <p className="text-slate-400 text-lg">{pkg.location}</p>
         </div>
 
-        <div className="mb-10">
-          <h3 className={`font-bold text-xl mb-4 ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>We know what you want</h3>
-          <p className="text-slate-400 text-sm leading-relaxed">
-            Life on land offers plenty of tantalizing options for adventure travelers, but there's a whole other world of excitement waiting under the sea.
+        <div className="mb-12">
+          <h3 className={`font-normal text-2xl mb-4 ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>
+            We Know What You Want
+          </h3>
+          <p className="text-slate-400 text-base leading-relaxed mb-6">
+            {pkg.weKnowWhatYouWant || "This destination is designed for travelers who seek balance — adventure, relaxation, and unforgettable moments all in one place. From breathtaking natural views to rich local culture, every experience here feels carefully crafted just for you."}
           </p>
-        </div>
-
-        {/* Additional Images */}
-        <div className="space-y-6 mb-10">
-          {galleryImages.slice(1, 4).map((img, i) => (
-            <div key={i} className="h-56 rounded-[40px] overflow-hidden shadow-lg">
-              <img src={img} className="w-full h-full object-cover" alt={`Detail ${i + 1}`} referrerPolicy="no-referrer" />
-            </div>
-          ))}
-          {galleryImages.length <= 1 && (
-            <div className="h-56 rounded-[40px] overflow-hidden shadow-lg">
-              <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=800&q=80" className="w-full h-full object-cover" alt="Scenic View" referrerPolicy="no-referrer" />
+          {pkg.weKnowWhatYouWantSecondary && (
+            <p className="text-slate-400 text-base leading-relaxed mb-10">
+              {pkg.weKnowWhatYouWantSecondary}
+            </p>
+          )}
+          
+          {pkg.highlights && pkg.highlights.length > 0 && (
+            <div className="mb-12">
+              <h3 className={`font-bold text-2xl mb-6 ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>✨ Highlights</h3>
+              
+              <div className="space-y-8">
+                {pkg.highlights.map((highlight, index) => (
+                  <div key={index}>
+                    <h4 className={`font-bold text-lg mb-2 ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{highlight.title}</h4>
+                    <p className="text-slate-400 text-sm leading-relaxed">
+                      {highlight.description}
+                    </p>
+                  </div>
+                ))}
+              </div>
             </div>
           )}
-          <div className="mb-4">
-            <h3 className={`font-bold text-xl mb-2 ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>The Best Sunset Ever!</h3>
-            <p className="text-slate-400 text-sm leading-relaxed mb-4">
-              Life on land offers plenty of tantalizing options for adventure travelers, but there's a whole other world of excitement waiting under the sea.
+
+          <div className="mb-10">
+            <h3 className={`font-bold text-2xl mb-4 ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>
+              {pkg.sunsetTitle || "🌅 The Best Sunset Ever!"}
+            </h3>
+            <p className="text-slate-400 text-base leading-relaxed mb-6">
+              {pkg.sunsetDescription || "As the day comes to an end, the destination reveals its most magical moment. Golden light spreads across the horizon, reflecting on the landscape and creating a peaceful, unforgettable sunset experience."}
             </p>
+            {pkg.sunsetDescriptionSecondary && (
+              <p className="text-slate-400 text-base leading-relaxed mb-8">
+                {pkg.sunsetDescriptionSecondary}
+              </p>
+            )}
+          </div>
+
+          {/* 1 image below */}
+          {(pkg.sunsetImage || pkg.image) && (
+            <div className="h-72 rounded-[40px] overflow-hidden shadow-lg mb-12">
+              <img 
+                src={pkg.sunsetImage || pkg.image} 
+                className="w-full h-full object-cover" 
+                alt="Beautiful Sunset" 
+                referrerPolicy="no-referrer" 
+              />
+            </div>
+          )}
+
+          {/* Let's Go Button - Moved inside scrollable content to appear at the end */}
+          <div className="flex justify-center pb-12">
+            <button 
+              onClick={onBook}
+              className={`px-20 py-6 bg-blue-600 text-white rounded-[32px] font-bold text-xl shadow-2xl active:scale-95 transition-all hover:bg-blue-700 ${appearance === 'Dark Mode' ? 'shadow-blue-900/40' : 'shadow-blue-200'}`}
+            >
+              Let's Go
+            </button>
           </div>
         </div>
-      </div>
-
-      {/* Let's Go Button */}
-      <div className="fixed bottom-10 left-8 right-8 z-[90]">
-        <button 
-          onClick={onBook}
-          className={`w-full py-6 bg-blue-700 text-white rounded-[32px] font-bold text-xl shadow-2xl active:scale-95 transition-all ${appearance === 'Dark Mode' ? 'shadow-blue-900/40' : 'shadow-blue-200'}`}
-        >
-          Let's Go
-        </button>
       </div>
 
       <AnimatePresence>

@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { ChevronLeft, AlertCircle, Calendar, Download, Star } from 'lucide-react';
+import { ChevronLeft, AlertCircle, Download, Star } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Booking, User } from '../../types';
 import { Avatar } from '../../components/ui/Avatar';
-import { CalendarModal } from '../../components/ui/CalendarModal';
 import { generateProfessionalPDF } from '../../utils/pdfGenerator';
 
 interface FlightBookingDetailsScreenProps {
@@ -28,7 +27,6 @@ export const FlightBookingDetailsScreen = ({
   toggleSaved
 }: FlightBookingDetailsScreenProps) => {
   const [showCancelConfirm, setShowCancelConfirm] = useState(false);
-  const [showCalendar, setShowCalendar] = useState(false);
 
   const handleCancel = () => {
     onCancel(booking.id);
@@ -43,47 +41,38 @@ export const FlightBookingDetailsScreen = ({
   return (
     <div className={`min-h-screen px-8 pt-12 pb-24 transition-colors duration-300 ${appearance === 'Dark Mode' ? 'bg-slate-950 text-white' : 'bg-white text-slate-900'}`}>
       <header className="flex justify-between items-center mb-12">
-        <div className="flex gap-3">
-          <button 
-            onClick={onBack}
-            className={`w-12 h-12 flex items-center justify-center rounded-full shadow-sm border active:scale-95 transition-all ${appearance === 'Dark Mode' ? 'bg-slate-900 border-slate-800 text-white' : 'bg-white border-slate-100 text-slate-600'}`}
-          >
-            <ChevronLeft size={24} />
-          </button>
-          <button 
-            onClick={toggleSaved}
-            className={`w-12 h-12 flex items-center justify-center rounded-full shadow-sm border active:scale-95 transition-all ${appearance === 'Dark Mode' ? 'bg-slate-900 border-slate-800 text-white' : 'bg-white border-slate-100 text-slate-600'}`}
-          >
-            <Star size={24} fill={isSaved ? (appearance === 'Dark Mode' ? "white" : "black") : "none"} className={isSaved ? "text-amber-500" : ""} />
-          </button>
-        </div>
-        <div className={`rounded-full border-2 shadow-md ${appearance === 'Dark Mode' ? 'border-slate-800' : 'border-white'}`}>
-          <Avatar user={user} size={48} />
-        </div>
+        <button 
+          onClick={onBack}
+          className={`w-12 h-12 flex items-center justify-center rounded-full shadow-sm border active:scale-95 transition-all ${appearance === 'Dark Mode' ? 'bg-slate-900 border-slate-800 text-white' : 'bg-white border-slate-100 text-slate-600'}`}
+        >
+          <ChevronLeft size={24} />
+        </button>
+        <h1 className="text-2xl font-bold">Flight Details</h1>
       </header>
 
-      <h1 className="text-2xl font-bold mb-10">Flight Details</h1>
-
-      <div className="space-y-10 mb-16">
-        <div>
-          <p className="text-sm font-bold text-slate-400 mb-2">Date :</p>
-          <p className="text-lg font-bold">{booking.departure_time || booking.date || '10 May, 10 AM GST'}</p>
+      <div className="space-y-6 mb-16">
+        <div className={`p-4 rounded-2xl transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-900' : 'bg-slate-50'}`}>
+          <p className="text-xl font-bold">
+            Date : {booking.departure_time ? booking.departure_time.replace(' ', ' T') : '2026-08-20 T14:00:00'}
+          </p>
         </div>
 
-        <div className="grid grid-cols-2 gap-8">
-          <div>
-            <p className="text-sm font-bold text-slate-400 mb-2">From :</p>
-            <p className="text-lg font-bold">{booking.from_city || 'Sylhet, BD'}</p>
-          </div>
-          <div>
-            <p className="text-sm font-bold text-slate-400 mb-2">To :</p>
-            <p className="text-lg font-bold">{booking.to_city || 'Italy, Manarola'}</p>
-          </div>
+        <div className={`p-4 rounded-2xl transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-900' : 'bg-slate-50'}`}>
+          <p className="text-xl font-bold">
+            From : {booking.from_city || 'New York'}
+          </p>
         </div>
 
-        <div>
-          <p className="text-sm font-bold text-slate-400 mb-2">Flight :</p>
-          <p className="text-lg font-bold">{booking.airline || 'Alaska Airlines'}</p>
+        <div className={`p-4 rounded-2xl transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-900' : 'bg-slate-50'}`}>
+          <p className="text-xl font-bold">
+            To : {booking.to_city || 'Tokyo'}
+          </p>
+        </div>
+
+        <div className={`p-4 rounded-2xl transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-900' : 'bg-slate-50'}`}>
+          <p className="text-xl font-bold">
+            Flight : {booking.airline || 'Japan Airlines'}
+          </p>
         </div>
 
         <div>
@@ -107,13 +96,6 @@ export const FlightBookingDetailsScreen = ({
       </div>
 
       <div className="space-y-4">
-        <button 
-          onClick={() => setShowCalendar(true)}
-          className={`w-full py-5 rounded-[24px] font-bold text-lg flex items-center justify-center gap-2 active:scale-95 transition-all ${appearance === 'Dark Mode' ? 'bg-slate-800 text-white' : 'bg-slate-100 text-slate-900'}`}
-        >
-          <Calendar size={20} className="text-primary" />
-          Add to Calendar
-        </button>
         <button 
           onClick={handleDownloadPDF}
           className={`w-full bg-blue-600 text-white py-6 rounded-[32px] font-bold text-xl shadow-xl active:scale-95 transition-all ${appearance === 'Dark Mode' ? 'shadow-blue-900/40' : 'shadow-blue-200'}`}
@@ -163,14 +145,6 @@ export const FlightBookingDetailsScreen = ({
           </div>
         )}
       </AnimatePresence>
-
-      <CalendarModal 
-        isOpen={showCalendar}
-        onClose={() => setShowCalendar(false)}
-        tripDate={booking.departure_time || booking.date || new Date().toISOString()}
-        tripName={booking.airline || 'Your Flight'}
-        appearance={appearance}
-      />
     </div>
   );
 };

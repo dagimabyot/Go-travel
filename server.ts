@@ -309,7 +309,18 @@ async function startServer() {
         description: "A wonderful trip to the most beautiful places on earth. Enjoy the sun, the sea and the local culture.",
         included: ["Flight", "Hotel", "Transfer"],
         duration: "3 days 2 nights",
-        category: "Beach"
+        category: "Beach",
+        weKnowWhatYouWant: "This destination is designed for travelers who seek balance — adventure, relaxation, and unforgettable moments all in one place. From breathtaking natural views to rich local culture, every experience here feels carefully crafted just for you.",
+        weKnowWhatYouWantSecondary: "Life on land offers plenty of exciting options for explorers, but this destination goes beyond the ordinary. Whether you’re walking along scenic paths, enjoying local cuisine, or simply relaxing under open skies, every moment feels meaningful.",
+        highlights: [
+          { title: "Detail 1 – Nature & Scenery", description: "Discover stunning landscapes filled with vibrant colors, fresh air, and peaceful surroundings. Perfect for photography, relaxation, and reconnecting with nature." },
+          { title: "Detail 2 – Local Experience", description: "Immerse yourself in authentic local culture. Meet friendly people, taste traditional food, and experience daily life the way locals live it." },
+          { title: "Detail 3 – Adventure & Comfort", description: "Enjoy exciting activities during the day and comfortable, well-prepared accommodations at night. This trip blends thrill with ease." }
+        ],
+        sunsetTitle: "🌅 The Best Sunset Ever!",
+        sunsetDescription: "As the day comes to an end, the destination reveals its most magical moment. Golden light spreads across the horizon, reflecting on the landscape and creating a peaceful, unforgettable sunset experience.",
+        sunsetDescriptionSecondary: "This is the perfect time to relax, take photos, or simply enjoy the view — a moment that stays with you long after the trip ends.",
+        sunsetImage: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80"
       },
       {
         id: "PKG-2",
@@ -327,7 +338,18 @@ async function startServer() {
         description: "Explore the vibrant history and culture of Berlin. From the Brandenburg Gate to the East Side Gallery.",
         included: ["Flight", "Hotel", "Transfer"],
         duration: "3 days 2 nights",
-        category: "Forest"
+        category: "Forest",
+        weKnowWhatYouWant: "Berlin is a city that never sleeps, offering a unique blend of historical significance and modern urban energy. It's perfect for those who want to dive deep into European history while enjoying a cutting-edge art scene.",
+        weKnowWhatYouWantSecondary: "From the remnants of the Berlin Wall to the bustling nightlife of Kreuzberg, every corner of this city tells a story of resilience and creativity.",
+        highlights: [
+          { title: "Detail 1 – Historical Landmarks", description: "Visit the Brandenburg Gate, Reichstag, and Checkpoint Charlie to witness the pivotal moments of the 20th century." },
+          { title: "Detail 2 – Urban Art Scene", description: "Explore the East Side Gallery and numerous street art spots that make Berlin a global capital for creative expression." },
+          { title: "Detail 3 – Culinary Diversity", description: "From traditional Currywurst to Michelin-starred dining, Berlin's food scene is as diverse as its population." }
+        ],
+        sunsetTitle: "🌇 Urban Golden Hour",
+        sunsetDescription: "Watch the sun set over the Spree river, casting long shadows across the city's iconic skyline and historical monuments.",
+        sunsetDescriptionSecondary: "The rooftop bars offer the perfect vantage point to see the city lights begin to twinkle as the day fades.",
+        sunsetImage: "https://images.unsplash.com/photo-1560930950-5cc20e80e392?auto=format&fit=crop&w=1200&q=80"
       },
       {
         id: "PKG-3",
@@ -345,7 +367,18 @@ async function startServer() {
         description: "Soak up the sun at Venice Beach. Experience the unique boardwalk, street performers, and beautiful sunsets.",
         included: ["Flight", "Hotel", "Transfer"],
         duration: "2 days 3 night",
-        category: "Beach"
+        category: "Beach",
+        weKnowWhatYouWant: "Venice Beach is the epitome of California cool. It's a place where the eccentric meets the athletic, and where every day feels like a festival of human expression.",
+        weKnowWhatYouWantSecondary: "Whether you're here for the surf, the skate park, or the famous Muscle Beach, you'll find an energy that is uniquely Southern Californian.",
+        highlights: [
+          { title: "Detail 1 – The Boardwalk", description: "A world-famous stretch of shops, street performers, and artists that captures the bohemian spirit of Venice." },
+          { title: "Detail 2 – Surf & Skate Culture", description: "Watch world-class skaters at the Venice Beach Skatepark or catch a wave at the Breakwater." },
+          { title: "Detail 3 – Sunset Sessions", description: "End your day with a drum circle on the sand as the sun dips below the Pacific horizon." }
+        ],
+        sunsetTitle: "🌊 Pacific Sunset Magic",
+        sunsetDescription: "The California sky turns into a canvas of pink and orange as the sun sets over the ocean, creating a silhouette of palm trees against the horizon.",
+        sunsetDescriptionSecondary: "It's the quintessential West Coast experience that you'll never forget.",
+        sunsetImage: "https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=1200&q=80"
       },
       {
         id: "PKG-4",
@@ -363,7 +396,18 @@ async function startServer() {
         description: "Discover the architectural wonders of Gaudi and the lively atmosphere of Las Ramblas.",
         included: ["Flight", "Hotel", "Transfer"],
         duration: "3 days 2 nights",
-        category: "Beach"
+        category: "Beach",
+        weKnowWhatYouWant: "Barcelona is a Mediterranean masterpiece where Gothic charm meets Modernist genius. It's a city that celebrates life through its food, its art, and its vibrant street culture.",
+        weKnowWhatYouWantSecondary: "From the whimsical spires of the Sagrada Familia to the narrow alleys of the Gothic Quarter, Barcelona is a feast for the senses.",
+        highlights: [
+          { title: "Detail 1 – Gaudi's Legacy", description: "Explore the surreal architecture of Park Güell, Casa Batlló, and the awe-inspiring Sagrada Família." },
+          { title: "Detail 2 – Tapas & Gastronomy", description: "Indulge in the local flavors at La Boqueria market and enjoy endless tapas in the El Born district." },
+          { title: "Detail 3 – Mediterranean Vibes", description: "Relax at Barceloneta beach or stroll along the palm-lined Passeig de Colom." }
+        ],
+        sunsetTitle: "🏰 Catalan Sunset Glow",
+        sunsetDescription: "Watch the sun set from Bunkers del Carmel, offering a 360-degree view of the city as the Mediterranean Sea glimmers in the distance.",
+        sunsetDescriptionSecondary: "The city's architecture takes on a warm, golden hue that is truly breathtaking.",
+        sunsetImage: "https://images.unsplash.com/photo-1523531294919-4bcd7c65e216?auto=format&fit=crop&w=1200&q=80"
       },
       {
         id: "PKG-5",
@@ -381,7 +425,18 @@ async function startServer() {
         description: "The city of lights awaits. Visit the Eiffel Tower, the Louvre, and enjoy world-class cuisine.",
         included: ["Flight", "Hotel", "Transfer"],
         duration: "3 days 2 nights",
-        category: "Forest"
+        category: "Forest",
+        weKnowWhatYouWant: "Paris is the ultimate destination for romance, art, and elegance. It's a city where every street feels like a movie set and every meal is a celebration of culinary art.",
+        weKnowWhatYouWantSecondary: "Whether you're exploring the grand boulevards or the hidden gardens of Montmartre, Paris will capture your heart.",
+        highlights: [
+          { title: "Detail 1 – Iconic Landmarks", description: "Ascend the Eiffel Tower, visit the Notre-Dame Cathedral, and walk the historic Champs-Élysées." },
+          { title: "Detail 2 – Artistic Treasures", description: "Get lost in the Louvre, the world's largest art museum, and admire the Impressionist masterpieces at Musée d'Orsay." },
+          { title: "Detail 3 – Café Culture", description: "Experience the quintessential Parisian life by lingering over a café au lait at a sidewalk bistro." }
+        ],
+        sunsetTitle: "🗼 Parisian Twilight",
+        sunsetDescription: "As the sun sets, the Eiffel Tower begins its hourly sparkle, and the city's bridges are illuminated, reflecting in the Seine river.",
+        sunsetDescriptionSecondary: "There's a reason they call it the City of Light, and twilight is when it truly shines.",
+        sunsetImage: "https://images.unsplash.com/photo-1500313830540-7b6650a74fd0?auto=format&fit=crop&w=1200&q=80"
       },
       {
         id: "PKG-6",
@@ -399,7 +454,18 @@ async function startServer() {
         description: "Experience the majestic beauty of the Swiss Alps. Perfect for skiing and hiking enthusiasts.",
         included: ["Flight", "Resort", "Ski Pass"],
         duration: "5 days 4 nights",
-        category: "Mountain"
+        category: "Mountain",
+        weKnowWhatYouWant: "The Swiss Alps offer a pristine escape into nature's most dramatic landscapes. It's a destination for those who seek the thrill of the peaks and the serenity of alpine meadows.",
+        weKnowWhatYouWantSecondary: "With world-class resorts and breathtaking vistas at every turn, this is the ultimate mountain retreat.",
+        highlights: [
+          { title: "Detail 1 – Peak Adventures", description: "Take the Gornergrat Railway for views of the Matterhorn or ski the legendary slopes of Zermatt." },
+          { title: "Detail 2 – Alpine Serenity", description: "Hike through wildflower meadows and past crystal-clear glacial lakes in the Lauterbrunnen Valley." },
+          { title: "Detail 3 – Swiss Hospitality", description: "Enjoy traditional fondue in a cozy mountain chalet after a day of exploration." }
+        ],
+        sunsetTitle: "🏔️ Alpenglow Magic",
+        sunsetDescription: "Witness the 'Alpenglow' as the setting sun paints the snow-capped peaks in shades of pink and gold.",
+        sunsetDescriptionSecondary: "The silence of the mountains at dusk is a spiritual experience unlike any other.",
+        sunsetImage: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80"
       },
       {
         id: "PKG-7",
@@ -417,7 +483,18 @@ async function startServer() {
         description: "Deep dive into the heart of the Amazon. Discover unique wildlife and lush greenery.",
         included: ["Flight", "Eco-lodge", "Guided Tour"],
         duration: "7 days 6 nights",
-        category: "Forest"
+        category: "Forest",
+        weKnowWhatYouWant: "The Amazon is the world's most vital ecosystem, a place of immense biodiversity and ancient wisdom. It's for the true adventurer who wants to disconnect and rediscover the natural world.",
+        weKnowWhatYouWantSecondary: "Navigate the winding waterways and listen to the symphony of the jungle as you immerse yourself in this green paradise.",
+        highlights: [
+          { title: "Detail 1 – Wildlife Encounters", description: "Spot pink river dolphins, colorful macaws, and elusive jaguars in their natural habitat." },
+          { title: "Detail 2 – River Expeditions", description: "Canoe through flooded forests and visit remote indigenous communities to learn about their way of life." },
+          { title: "Detail 3 – Jungle Trekking", description: "Walk beneath the massive canopy and discover the medicinal secrets of the rainforest's plants." }
+        ],
+        sunsetTitle: "🌿 Jungle Sunset Symphony",
+        sunsetDescription: "As the sun sets over the Amazon river, the sky turns deep crimson and the jungle comes alive with the sounds of nocturnal creatures.",
+        sunsetDescriptionSecondary: "The reflection of the setting sun on the water is a sight of pure, raw beauty.",
+        sunsetImage: "https://images.unsplash.com/photo-1516939884455-1445c8652f83?auto=format&fit=crop&w=1200&q=80"
       },
       {
         id: "PKG-8",
@@ -435,7 +512,18 @@ async function startServer() {
         description: "Explore the world's largest coral reef system. A paradise for divers and snorkelers.",
         included: ["Flight", "Resort", "Diving Gear"],
         duration: "6 days 5 nights",
-        category: "Submarine"
+        category: "Submarine",
+        weKnowWhatYouWant: "The Great Barrier Reef is a vibrant underwater metropolis, teeming with life and color. It's a destination for those who want to explore the last great wildernesses of our planet.",
+        weKnowWhatYouWantSecondary: "From the tiny clownfish to the majestic humpback whales, the reef offers an encounter with nature that is truly humbling.",
+        highlights: [
+          { title: "Detail 1 – Underwater Wonders", description: "Dive or snorkel among thousands of species of coral and fish in the world's largest reef system." },
+          { title: "Detail 2 – Island Hopping", description: "Visit the stunning Whitsunday Islands and walk on the pure white sands of Whitehaven Beach." },
+          { title: "Detail 3 – Marine Conservation", description: "Learn about the efforts to protect this fragile ecosystem and how you can contribute to its preservation." }
+        ],
+        sunsetTitle: "🌅 Coral Sea Sunset",
+        sunsetDescription: "Watch the sun set over the turquoise waters of the Coral Sea, casting a warm glow over the islands and the reef.",
+        sunsetDescriptionSecondary: "The transition from the vibrant day to the peaceful night on the reef is magical.",
+        sunsetImage: "https://images.unsplash.com/photo-1582967788606-a171c1080cb0?auto=format&fit=crop&w=1200&q=80"
       },
       {
         id: "PKG-9",
@@ -453,7 +541,18 @@ async function startServer() {
         description: "Witness the iconic beauty of Mount Fuji. Enjoy the serene lakes and traditional Japanese culture.",
         included: ["Flight", "Ryokan", "Train Pass"],
         duration: "4 days 3 nights",
-        category: "Mountain"
+        category: "Mountain",
+        weKnowWhatYouWant: "Mount Fuji is more than just a mountain; it's a symbol of Japan's spiritual and natural beauty. It's for the traveler who seeks harmony and inspiration in a landscape of perfect symmetry.",
+        weKnowWhatYouWantSecondary: "From the cherry blossoms of spring to the snow-capped peak of winter, Fuji is a timeless masterpiece.",
+        highlights: [
+          { title: "Detail 1 – Iconic Views", description: "Visit Lake Kawaguchi and the Chureito Pagoda for the most famous views of the mountain." },
+          { title: "Detail 2 – Cultural Immersion", description: "Stay in a traditional Ryokan, enjoy an Onsen bath, and experience the art of the tea ceremony." },
+          { title: "Detail 3 – Spiritual Journey", description: "Explore the ancient shrines at the base of the mountain and learn about its significance in Japanese culture." }
+        ],
+        sunsetTitle: "🗻 Fuji Five Lakes Sunset",
+        sunsetDescription: "Watch as the sun sets behind Mount Fuji, creating a perfect silhouette against a sky of deep purple and orange.",
+        sunsetDescriptionSecondary: "The reflection of the mountain in the still waters of the lakes is a moment of pure Zen.",
+        sunsetImage: "https://images.unsplash.com/photo-1528164344705-47542687000d?auto=format&fit=crop&w=1200&q=80"
       },
       {
         id: "PKG-10",
@@ -471,7 +570,18 @@ async function startServer() {
         description: "The ultimate luxury getaway. Stay in overwater villas and enjoy crystal clear waters.",
         included: ["Flight", "Overwater Villa", "All-inclusive"],
         duration: "5 days 4 nights",
-        category: "Beach"
+        category: "Beach",
+        weKnowWhatYouWant: "The Maldives is the definition of paradise on earth. It's for those who want to escape the world and find themselves in a landscape of infinite blue and white sand.",
+        weKnowWhatYouWantSecondary: "With unmatched luxury and privacy, every moment in the Maldives feels like a dream come true.",
+        highlights: [
+          { title: "Detail 1 – Overwater Luxury", description: "Stay in a private villa perched over the turquoise lagoon, with direct access to the ocean." },
+          { title: "Detail 2 – Marine Paradise", description: "Snorkel or dive right from your deck and encounter vibrant coral reefs and gentle sea turtles." },
+          { title: "Detail 3 – Island Dining", description: "Enjoy romantic dinners on a private sandbank under the stars, with the sound of the waves as your soundtrack." }
+        ],
+        sunsetTitle: "🏝️ Maldivian Horizon Sunset",
+        sunsetDescription: "Experience the most spectacular sunsets in the world, where the sky and the ocean merge in a symphony of colors.",
+        sunsetDescriptionSecondary: "It's the perfect end to another day in paradise.",
+        sunsetImage: "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=1200&q=80"
       }
     ];
     res.json(packages);

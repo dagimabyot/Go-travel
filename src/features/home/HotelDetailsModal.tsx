@@ -38,7 +38,7 @@ export const HotelDetailsModal = ({ onClose, language }: HotelDetailsModalProps)
           </button>
         </div>
 
-        <div className="space-y-6">
+        <div className="space-y-6 max-h-[60vh] overflow-y-auto pr-2 hide-scrollbar">
           {hotels.map((hotel, idx) => (
             <div key={idx} className="relative h-48 rounded-[40px] overflow-hidden group cursor-pointer shadow-lg">
               <img src={hotel.image} alt={hotel.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" referrerPolicy="no-referrer" />

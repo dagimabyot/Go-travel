@@ -1,18 +1,20 @@
 import React, { useState } from 'react';
-import { ChevronLeft, Info, Minus, Plus } from 'lucide-react';
-import { Flight } from '../../types';
+import { ChevronLeft, Info, Minus, Plus, CreditCard, FileText } from 'lucide-react';
+import { Flight, User } from '../../types';
 
 interface FlightConfirmationScreenProps {
   flight?: Flight;
+  user: User | null;
   onBack: () => void;
-  onContinue: (guests: number) => void;
+  onContinue: (guests: number, passport: string) => void;
   language: string;
   onEdit: (field: string) => void;
   appearance: string;
 }
 
-export const FlightConfirmationScreen = ({ flight, onBack, onContinue, language, onEdit, appearance }: FlightConfirmationScreenProps) => {
+export const FlightConfirmationScreen = ({ flight, user, onBack, onContinue, language, onEdit, appearance }: FlightConfirmationScreenProps) => {
   const [guests, setGuests] = useState(2);
+  const [passport, setPassport] = useState(user?.passport || '');
   const pricePerGuest = flight?.price || 700;
   const total = guests * pricePerGuest;
 
@@ -31,34 +33,53 @@ export const FlightConfirmationScreen = ({ flight, onBack, onContinue, language,
         <div className="space-y-8">
           <div className="flex justify-between items-start gap-4">
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-bold text-slate-400 mb-1">Date :</p>
-              <p className={`text-lg font-bold break-words ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{flight?.departure || '10 May, 10 AM GST'}</p>
+              <p className="text-sm font-bold text-slate-400 mb-1">Date : </p>
+              <p className={`text-lg font-bold break-words ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{flight?.departure ? flight.departure.replace(' ', ' T') : '2026-08-20 T14:00:00'}</p>
             </div>
             <button onClick={() => onEdit('date')} className="text-red-400 font-bold text-sm shrink-0">Edit</button>
           </div>
 
           <div className="flex justify-between items-start gap-4">
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-bold text-slate-400 mb-1">From :</p>
-              <p className={`text-lg font-bold break-words ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{flight?.from || 'Sylhet, BD'}</p>
+              <p className="text-sm font-bold text-slate-400 mb-1">From : </p>
+              <p className={`text-lg font-bold break-words ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{flight?.from || 'New York'}</p>
             </div>
             <button onClick={() => onEdit('from')} className="text-red-400 font-bold text-sm shrink-0">Edit</button>
           </div>
 
           <div className="flex justify-between items-start gap-4">
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-bold text-slate-400 mb-1">To :</p>
-              <p className={`text-lg font-bold break-words ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{flight?.to || 'Italy, Manarola'}</p>
+              <p className="text-sm font-bold text-slate-400 mb-1">To : </p>
+              <p className={`text-lg font-bold break-words ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{flight?.to || 'Tokyo'}</p>
             </div>
             <button onClick={() => onEdit('to')} className="text-red-400 font-bold text-sm shrink-0">Edit</button>
           </div>
 
           <div className="flex justify-between items-start gap-4">
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-bold text-slate-400 mb-1">Flight :</p>
-              <p className={`text-lg font-bold break-words ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{flight?.airline || 'Alaska Airlines'}</p>
+              <p className="text-sm font-bold text-slate-400 mb-1">Flight : </p>
+              <p className={`text-lg font-bold break-words ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{flight?.airline || 'Japan Airlines'}</p>
             </div>
             <button onClick={() => onEdit('flight')} className="text-red-400 font-bold text-sm shrink-0">Edit</button>
+          </div>
+
+          <div className={`p-6 rounded-3xl border transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-900 border-slate-800' : 'bg-slate-50 border-slate-100'}`}>
+            <h3 className={`text-sm font-bold mb-4 flex items-center gap-2 ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>
+              <FileText size={18} className="text-blue-600" />
+              Traveler Information
+            </h3>
+            <div className="space-y-4">
+              <div className="space-y-1.5">
+                <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">Passport Number</label>
+                <input 
+                  type="text" 
+                  value={passport} 
+                  onChange={e => setPassport(e.target.value)} 
+                  placeholder="Enter your passport number"
+                  className={`w-full text-base font-bold px-4 py-3 rounded-xl border focus:outline-none transition-all ${appearance === 'Dark Mode' ? 'bg-slate-950 text-white border-slate-800 focus:border-blue-600' : 'bg-white text-slate-900 border-slate-200 focus:border-blue-600'}`} 
+                />
+              </div>
+            </div>
           </div>
 
           <div>
@@ -96,8 +117,9 @@ export const FlightConfirmationScreen = ({ flight, onBack, onContinue, language,
         </div>
 
         <button 
-          onClick={() => onContinue(guests)}
-          className={`w-full bg-blue-600 text-white py-6 rounded-[32px] font-bold text-xl shadow-xl active:scale-95 transition-all mt-12 ${appearance === 'Dark Mode' ? 'shadow-blue-900/40' : 'shadow-blue-200'}`}
+          onClick={() => onContinue(guests, passport)}
+          disabled={!passport.trim()}
+          className={`w-full bg-blue-600 text-white py-6 rounded-[32px] font-bold text-xl shadow-xl active:scale-95 transition-all mt-12 disabled:opacity-50 disabled:active:scale-100 ${appearance === 'Dark Mode' ? 'shadow-blue-900/40' : 'shadow-blue-200'}`}
         >
           Continue
         </button>

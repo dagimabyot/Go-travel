@@ -121,8 +121,8 @@ interface NavItemProps {
 }
 
 const NavItem = ({ icon, label, active, onClick, appearance }: NavItemProps) => (
-  <button onClick={onClick} className={`flex flex-col items-center gap-1 transition-all group ${active ? 'text-blue-600' : appearance === 'Dark Mode' ? 'text-slate-600 hover:text-slate-400' : 'text-slate-400 hover:text-slate-600'}`}>
-    <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-all ${active ? 'bg-blue-600 text-white shadow-md shadow-blue-100' : 'group-hover:bg-slate-100 dark:group-hover:bg-slate-800'}`}>
+  <button onClick={onClick} className={`flex flex-col items-center gap-1 transition-all group ${active ? 'text-blue-600' : appearance === 'Dark Mode' ? 'text-slate-600 hover:text-blue-400' : 'text-slate-400 hover:text-blue-600'}`}>
+    <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-all ${active ? 'bg-blue-600 text-white shadow-md shadow-blue-100' : 'group-hover:bg-blue-50 dark:group-hover:bg-blue-900/20'}`}>
       {React.cloneElement(icon as React.ReactElement, { 
         size: 20,
         strokeWidth: active ? 2.5 : 2

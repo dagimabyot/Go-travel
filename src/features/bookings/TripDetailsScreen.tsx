@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { ChevronLeft, Star, Calendar, Plane, Hotel, Car, MapPin, X, Download, AlertCircle, CheckCircle2, Info, Edit2, Trash2 } from 'lucide-react';
+import { ChevronLeft, Star, Calendar, Plane, Hotel, Car, MapPin, X, Download, AlertCircle, CheckCircle2, Info, Trash2 } from 'lucide-react';
 import { MapContainer, TileLayer, Marker, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import { Booking, User } from '../../types';
@@ -49,10 +49,6 @@ export const TripDetailsScreen = ({ booking: initialBooking, user, onBack, onCan
   const [showFlightModal, setShowFlightModal] = useState(false);
   const [showHotelModal, setShowHotelModal] = useState(false);
   const [showCancelConfirm, setShowCancelConfirm] = useState(false);
-  const [isEditing, setIsEditing] = useState(false);
-  const [editField, setEditField] = useState<string | null>(null);
-  const [editValue, setEditValue] = useState('');
-  const [showCalendar, setShowCalendar] = useState(false);
 
   // Mock flight map data
   const flightMapData = {
@@ -72,22 +68,6 @@ export const TripDetailsScreen = ({ booking: initialBooking, user, onBack, onCan
     onCancel(booking.id);
     setShowCancelConfirm(false);
     onBack(); // Go back to trips list after cancellation
-  };
-
-  const handleEdit = (field: string, currentValue: string = '') => {
-    setEditField(field);
-    setEditValue(currentValue);
-    setIsEditing(true);
-  };
-
-  const handleSaveEdit = () => {
-    if (editField) {
-      setBooking(prev => ({
-        ...prev,
-        [editField]: editValue
-      }));
-    }
-    setIsEditing(false);
   };
 
   const handleDownloadPDF = async () => {
@@ -131,10 +111,10 @@ export const TripDetailsScreen = ({ booking: initialBooking, user, onBack, onCan
     </AnimatePresence>
   );
 
-  const renderEditModal = () => (
+  const renderFlightModal = () => (
     <AnimatePresence>
-      {isEditing && (
-        <div className="fixed inset-0 z-[100] flex items-end justify-center bg-black/60 backdrop-blur-sm">
+      {showFlightModal && (
+        <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/40 backdrop-blur-sm">
           <motion.div 
             initial={{ y: '100%' }}
             animate={{ y: 0 }}
@@ -142,28 +122,87 @@ export const TripDetailsScreen = ({ booking: initialBooking, user, onBack, onCan
             className={`w-full max-w-md rounded-t-[48px] p-8 transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-900' : 'bg-white'}`}
           >
             <div className="flex justify-between items-center mb-8">
-              <h3 className={`text-xl font-bold capitalize ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>Edit {editField}</h3>
-              <button onClick={() => setIsEditing(false)} className={`w-10 h-10 flex items-center justify-center rounded-full transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-800 text-white' : 'bg-slate-50 text-slate-900'}`}>
+              <h3 className={`text-xl font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>Flight Details</h3>
+              <button onClick={() => setShowFlightModal(false)} className={`w-10 h-10 flex items-center justify-center rounded-full transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-800 text-white' : 'bg-slate-50 text-slate-900'}`}>
                 <X size={20} />
               </button>
             </div>
-            <div className="space-y-6">
-              <div className="space-y-2">
-                <label className="text-xs font-bold text-slate-400 uppercase tracking-wider">New {editField?.replace('_', ' ')}</label>
-                <input 
-                  type="text" 
-                  value={editValue}
-                  onChange={(e) => setEditValue(e.target.value)}
-                  placeholder={`Enter new ${editField?.replace('_', ' ')}...`}
-                  className={`w-full p-4 rounded-2xl border-none focus:ring-2 focus:ring-primary outline-none transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-800 text-white' : 'bg-slate-50 text-slate-900'}`}
-                />
-              </div>
-              <button 
-                onClick={handleSaveEdit}
-                className="w-full py-5 bg-primary text-white rounded-[24px] font-bold text-lg shadow-lg shadow-primary/30"
-              >
-                Save Changes
+            <div className="space-y-4 max-h-[60vh] overflow-y-auto pr-2 hide-scrollbar">
+              {[1, 2].map((i) => (
+                <div key={i} className={`p-6 rounded-[32px] border transition-colors ${i === 1 ? 'border-red-400' : (appearance === 'Dark Mode' ? 'border-slate-800' : 'border-slate-100')}`}>
+                  <div className="flex justify-center mb-4">
+                    <span className="text-[10px] font-bold text-primary uppercase tracking-widest">{i === 1 ? '100% on time' : '90% on time'}</span>
+                  </div>
+                  <div className="flex justify-between items-center mb-6">
+                    <div className="text-center">
+                      <p className={`text-lg font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>7:30 AM</p>
+                      <p className="text-[10px] text-slate-400 font-bold">Larkrow</p>
+                    </div>
+                    <div className="flex-1 px-4 flex flex-col items-center">
+                      <div className={`w-full h-[1px] relative ${appearance === 'Dark Mode' ? 'bg-slate-800' : 'bg-slate-100'}`}>
+                        <Plane size={14} className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-primary" />
+                      </div>
+                      <p className="text-[10px] text-slate-400 mt-2">2h 40m</p>
+                    </div>
+                    <div className="text-center">
+                      <p className={`text-lg font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>9:30 PM</p>
+                      <p className="text-[10px] text-slate-400 font-bold">Goa</p>
+                    </div>
+                  </div>
+                  <div className={`flex justify-between items-center pt-4 border-t ${appearance === 'Dark Mode' ? 'border-slate-800' : 'border-slate-50'}`}>
+                    <p className={`text-lg font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>$150<span className="text-xs font-normal text-slate-400">/person</span></p>
+                    <button 
+                      onClick={toggleSaved}
+                      className={`w-8 h-8 flex items-center justify-center rounded-xl transition-colors ${isSaved ? 'bg-slate-900 text-white' : appearance === 'Dark Mode' ? 'bg-slate-800 text-slate-400' : 'bg-slate-50 text-slate-400'}`}
+                    >
+                      <Star size={16} fill={isSaved ? "currentColor" : "none"} />
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      )}
+    </AnimatePresence>
+  );
+
+  const renderHotelModal = () => (
+    <AnimatePresence>
+      {showHotelModal && (
+        <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/40 backdrop-blur-sm">
+          <motion.div 
+            initial={{ y: '100%' }}
+            animate={{ y: 0 }}
+            exit={{ y: '100%' }}
+            className={`w-full max-w-md rounded-t-[48px] p-8 transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-900' : 'bg-white'}`}
+          >
+            <div className="flex justify-between items-center mb-8">
+              <h3 className={`text-xl font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>Hotel Details</h3>
+              <button onClick={() => setShowHotelModal(false)} className={`w-10 h-10 flex items-center justify-center rounded-full transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-800 text-white' : 'bg-slate-50 text-slate-900'}`}>
+                <X size={20} />
               </button>
+            </div>
+            <div className="space-y-4 max-h-[60vh] overflow-y-auto pr-2 hide-scrollbar">
+              {[
+                { name: 'Luxury Suite', image: 'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=400&q=80' },
+                { name: 'Ocean View', image: 'https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=400&q=80' }
+              ].map((htl, i) => (
+                <div key={i} className="relative h-40 rounded-[32px] overflow-hidden group">
+                  <img src={htl.image} alt={htl.name} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
+                  <button 
+                    onClick={toggleSaved}
+                    className={`absolute top-4 right-4 w-8 h-8 rounded-xl flex items-center justify-center transition-all ${isSaved ? 'bg-slate-900 text-white' : 'bg-white/20 text-white'}`}
+                  >
+                    <Star size={14} fill={isSaved ? "currentColor" : "none"} />
+                  </button>
+                  <div className="absolute bottom-6 left-6">
+                    <h4 className="text-lg font-bold text-white mb-1">{htl.name}</h4>
+                    <p className="text-white/80 text-xs font-medium">$15.99<span className="text-[10px] opacity-60">/per day</span></p>
+                  </div>
+                </div>
+              ))}
             </div>
           </motion.div>
         </div>
@@ -249,15 +288,9 @@ export const TripDetailsScreen = ({ booking: initialBooking, user, onBack, onCan
         <div className="mb-6">
           <div className="flex justify-between items-start mb-2">
             <h1 className={`text-3xl font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{booking.name || 'Palolem Beach'}</h1>
-            <button onClick={() => handleEdit('name', booking.name || 'Palolem Beach')} className="p-2 text-slate-400 hover:text-primary transition-colors">
-              <Edit2 size={18} />
-            </button>
           </div>
           <div className="flex justify-between items-center">
             <p className="text-slate-400 text-sm">{booking.location || 'Italy, Manarola'}</p>
-            <button onClick={() => handleEdit('location', booking.location || 'Italy, Manarola')} className="p-2 text-slate-400 hover:text-primary transition-colors">
-              <Edit2 size={14} />
-            </button>
           </div>
         </div>
 
@@ -267,20 +300,14 @@ export const TripDetailsScreen = ({ booking: initialBooking, user, onBack, onCan
               <Calendar size={20} className={appearance === 'Dark Mode' ? 'text-slate-300' : 'text-slate-600'} />
             </div>
             <div>
-              <p className="text-xs text-slate-400">Date : {booking.date || '10 May, 10AM GST'}</p>
+              <p className="text-xs text-slate-400">Date : {booking.date ? booking.date.replace(' ', ' T') : '2026-08-20 T14:00:00'}</p>
             </div>
           </div>
-          <button onClick={() => handleEdit('date', booking.date || '10 May, 10AM GST')} className="p-2 text-slate-400 hover:text-primary transition-colors">
-            <Edit2 size={16} />
-          </button>
         </div>
 
         <div className="mb-8">
           <div className="flex justify-between items-center mb-3">
             <h2 className={`text-lg font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>About Trip</h2>
-            <button onClick={() => handleEdit('description', booking.description || 'Manarola is one of the most famous and picturesque villages of the Cinque Terre. Known for its colorful houses that seem to tumble down the cliffs into the sea, it offers a truly unique and breathtaking experience. The village is surrounded by lush vineyards that produce the famous Sciacchetrà wine. Visitors can explore the narrow winding streets, enjoy fresh seafood at local trattorias, and take in the stunning sunsets from the harbor. Whether you are looking for a romantic getaway or an adventurous hiking trip, Manarola has something for everyone. The famous Via dell\'Amore (Path of Love) connects Manarola to Riomaggiore, offering spectacular coastal views.')} className="p-2 text-slate-400 hover:text-primary transition-colors">
-              <Edit2 size={16} />
-            </button>
           </div>
           <p className="text-slate-400 text-sm leading-relaxed">
             {booking.description || 'Manarola is one of the most famous and picturesque villages of the Cinque Terre. Known for its colorful houses that seem to tumble down the cliffs into the sea, it offers a truly unique and breathtaking experience. The village is surrounded by lush vineyards that produce the famous Sciacchetrà wine. Visitors can explore the narrow winding streets, enjoy fresh seafood at local trattorias, and take in the stunning sunsets from the harbor. Whether you are looking for a romantic getaway or an adventurous hiking trip, Manarola has something for everyone. The famous Via dell\'Amore (Path of Love) connects Manarola to Riomaggiore, offering spectacular coastal views.'}
@@ -372,13 +399,6 @@ export const TripDetailsScreen = ({ booking: initialBooking, user, onBack, onCan
 
         <div className="space-y-4">
           <button 
-            onClick={() => setShowCalendar(true)}
-            className={`w-full py-5 rounded-[24px] font-bold text-lg flex items-center justify-center gap-2 active:scale-95 transition-all ${appearance === 'Dark Mode' ? 'bg-slate-800 text-white' : 'bg-slate-100 text-slate-900'}`}
-          >
-            <Calendar size={20} className="text-primary" />
-            Add to Calendar
-          </button>
-          <button 
             onClick={handleDownloadPDF}
             className={`w-full py-5 rounded-[24px] font-bold text-lg flex items-center justify-center gap-2 active:scale-95 transition-all ${appearance === 'Dark Mode' ? 'bg-slate-800 text-white' : 'bg-slate-100 text-slate-900'}`}
           >
@@ -397,96 +417,8 @@ export const TripDetailsScreen = ({ booking: initialBooking, user, onBack, onCan
 
       {/* Modals */}
       {renderCancelModal()}
-      {renderEditModal()}
-      <CalendarModal 
-        isOpen={showCalendar}
-        onClose={() => setShowCalendar(false)}
-        tripDate={booking.date || booking.departure_time || new Date().toISOString()}
-        tripName={booking.name || booking.location || 'Your Trip'}
-        appearance={appearance}
-      />
-      {showFlightModal && (
-        <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/40 backdrop-blur-sm">
-          <motion.div 
-            initial={{ y: '100%' }}
-            animate={{ y: 0 }}
-            className={`w-full max-w-md rounded-t-[48px] p-8 transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-900' : 'bg-white'}`}
-          >
-            <div className="flex justify-between items-center mb-8">
-              <h3 className={`text-xl font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>Flight Details</h3>
-              <button onClick={() => setShowFlightModal(false)} className={`w-10 h-10 flex items-center justify-center rounded-full transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-800 text-white' : 'bg-slate-50 text-slate-900'}`}>
-                <X size={20} />
-              </button>
-            </div>
-            <div className="space-y-4">
-              {[1, 2].map((i) => (
-                <div key={i} className={`p-6 rounded-[32px] border transition-colors ${i === 1 ? 'border-red-400' : (appearance === 'Dark Mode' ? 'border-slate-800' : 'border-slate-100')}`}>
-                  <div className="flex justify-center mb-4">
-                    <span className="text-[10px] font-bold text-primary uppercase tracking-widest">{i === 1 ? '100% on time' : '90% on time'}</span>
-                  </div>
-                  <div className="flex justify-between items-center mb-6">
-                    <div className="text-center">
-                      <p className={`text-lg font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>7:30 AM</p>
-                      <p className="text-[10px] text-slate-400 font-bold">Larkrow</p>
-                    </div>
-                    <div className="flex-1 px-4 flex flex-col items-center">
-                      <div className={`w-full h-[1px] relative ${appearance === 'Dark Mode' ? 'bg-slate-800' : 'bg-slate-100'}`}>
-                        <Plane size={14} className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-primary" />
-                      </div>
-                      <p className="text-[10px] text-slate-400 mt-2">2h 40m</p>
-                    </div>
-                    <div className="text-center">
-                      <p className={`text-lg font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>9:30 PM</p>
-                      <p className="text-[10px] text-slate-400 font-bold">Goa</p>
-                    </div>
-                  </div>
-                  <div className={`flex justify-between items-center pt-4 border-t ${appearance === 'Dark Mode' ? 'border-slate-800' : 'border-slate-50'}`}>
-                    <p className={`text-lg font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>$150<span className="text-xs font-normal text-slate-400">/person</span></p>
-                    <button className={`w-8 h-8 flex items-center justify-center rounded-xl transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-800 text-slate-400' : 'bg-slate-50 text-slate-400'}`}>
-                      <Star size={16} />
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </motion.div>
-        </div>
-      )}
-
-      {showHotelModal && (
-        <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/40 backdrop-blur-sm">
-          <motion.div 
-            initial={{ y: '100%' }}
-            animate={{ y: 0 }}
-            className={`w-full max-w-md rounded-t-[48px] p-8 transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-900' : 'bg-white'}`}
-          >
-            <div className="flex justify-between items-center mb-8">
-              <h3 className={`text-xl font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>Hotel Details</h3>
-              <button onClick={() => setShowHotelModal(false)} className={`w-10 h-10 flex items-center justify-center rounded-full transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-800 text-white' : 'bg-slate-50 text-slate-900'}`}>
-                <X size={20} />
-              </button>
-            </div>
-            <div className="space-y-4">
-              {[
-                { name: 'Luxury Suite', image: 'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=400&q=80' },
-                { name: 'Ocean View', image: 'https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=400&q=80' }
-              ].map((htl, i) => (
-                <div key={i} className="relative h-40 rounded-[32px] overflow-hidden group">
-                  <img src={htl.image} alt={htl.name} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
-                  <button className="absolute top-4 right-4 w-8 h-8 bg-white/20 backdrop-blur-md rounded-xl flex items-center justify-center text-white">
-                    <Star size={14} fill="white" />
-                  </button>
-                  <div className="absolute bottom-6 left-6">
-                    <h4 className="text-lg font-bold text-white mb-1">{htl.name}</h4>
-                    <p className="text-white/80 text-xs font-medium">$15.99<span className="text-[10px] opacity-60">/per day</span></p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </motion.div>
-        </div>
-      )}
+      {renderFlightModal()}
+      {renderHotelModal()}
     </div>
   );
 
@@ -499,15 +431,8 @@ export const TripDetailsScreen = ({ booking: initialBooking, user, onBack, onCan
         >
           <ChevronLeft size={24} />
         </button>
-        <div 
-          onClick={() => {}}
-          className={`rounded-full border-2 shadow-md cursor-pointer ${appearance === 'Dark Mode' ? 'border-slate-800' : 'border-white'}`}
-        >
-          <Avatar user={user} size={48} />
-        </div>
+        <h1 className={`text-2xl font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>Flight Details</h1>
       </header>
-
-      <h1 className={`text-2xl font-bold mb-8 ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>Flight Details</h1>
 
       <div className="mb-10">
         <FlightMap 
@@ -519,86 +444,30 @@ export const TripDetailsScreen = ({ booking: initialBooking, user, onBack, onCan
       </div>
 
       <div className="space-y-8 mb-12">
-        <div className="grid grid-cols-2 gap-4">
-          <div className={`p-4 rounded-2xl flex justify-between items-start transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-900' : 'bg-slate-50'}`}>
-            <div>
-              <p className="text-slate-400 text-[10px] font-bold uppercase tracking-wider mb-1">From</p>
-              <p className={`text-lg font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{booking.from_city || 'Sylhet'}</p>
-            </div>
-            <button onClick={() => handleEdit('from_city', booking.from_city || 'Sylhet')} className="text-slate-300 hover:text-primary">
-              <Edit2 size={12} />
-            </button>
+        <div className="space-y-4">
+          <div className={`p-4 rounded-2xl transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-900' : 'bg-slate-50'}`}>
+            <p className={`text-lg font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>
+              Date : {booking.date ? booking.date.replace(' ', ' T') : '2026-08-20 T14:00:00'}
+            </p>
           </div>
-          <div className={`p-4 rounded-2xl flex justify-between items-start transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-900' : 'bg-slate-50'}`}>
-            <div>
-              <p className="text-slate-400 text-[10px] font-bold uppercase tracking-wider mb-1">To</p>
-              <p className={`text-lg font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{booking.to_city || 'Manarola'}</p>
-            </div>
-            <button onClick={() => handleEdit('to_city', booking.to_city || 'Manarola')} className="text-slate-300 hover:text-primary">
-              <Edit2 size={12} />
-            </button>
-          </div>
-        </div>
 
-        <div className={`flex justify-between items-center p-4 rounded-2xl transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-900' : 'bg-slate-50'}`}>
-          <div>
-            <p className="text-slate-400 text-[10px] font-bold uppercase tracking-wider mb-1">Flight Number</p>
-            <p className={`text-lg font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{booking.flight_id || 'AK-407'}</p>
+          <div className={`p-4 rounded-2xl transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-900' : 'bg-slate-50'}`}>
+            <p className={`text-lg font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>
+              From : {booking.from_city || 'New York'}
+            </p>
           </div>
-          <button onClick={() => handleEdit('flight_id', booking.flight_id || 'AK-407')} className="p-2 text-slate-400 hover:text-primary transition-colors">
-            <Edit2 size={16} />
-          </button>
-        </div>
 
-        <div className="grid grid-cols-2 gap-4">
-          <div className={`p-4 rounded-2xl flex justify-between items-start transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-900' : 'bg-slate-50'}`}>
-            <div>
-              <p className="text-slate-400 text-[10px] font-bold uppercase tracking-wider mb-1">Departure</p>
-              <p className={`text-lg font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{booking.departure_time || '7:30 AM'}</p>
-            </div>
-            <button onClick={() => handleEdit('departure_time', booking.departure_time || '7:30 AM')} className="text-slate-300 hover:text-primary">
-              <Edit2 size={12} />
-            </button>
+          <div className={`p-4 rounded-2xl transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-900' : 'bg-slate-50'}`}>
+            <p className={`text-lg font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>
+              To : {booking.to_city || 'Tokyo'}
+            </p>
           </div>
-          <div className={`p-4 rounded-2xl flex justify-between items-start transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-900' : 'bg-slate-50'}`}>
-            <div>
-              <p className="text-slate-400 text-[10px] font-bold uppercase tracking-wider mb-1">Arrival</p>
-              <p className={`text-lg font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{booking.arrival_time || '9:30 PM'}</p>
-            </div>
-            <button onClick={() => handleEdit('arrival_time', booking.arrival_time || '9:30 PM')} className="text-slate-300 hover:text-primary">
-              <Edit2 size={12} />
-            </button>
-          </div>
-        </div>
 
-        <div className={`flex justify-between items-center p-4 rounded-2xl transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-900' : 'bg-slate-50'}`}>
-          <div>
-            <p className="text-slate-400 text-[10px] font-bold uppercase tracking-wider mb-1">Seat Number</p>
-            <p className={`text-lg font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{booking.seat || '12A'}</p>
+          <div className={`p-4 rounded-2xl transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-900' : 'bg-slate-50'}`}>
+            <p className={`text-lg font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>
+              Flight : {booking.airline || 'Japan Airlines'}
+            </p>
           </div>
-          <button onClick={() => handleEdit('seat', booking.seat || '12A')} className="p-2 text-slate-400 hover:text-primary transition-colors">
-            <Edit2 size={16} />
-          </button>
-        </div>
-
-        <div className={`flex justify-between items-center p-4 rounded-2xl transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-900' : 'bg-slate-50'}`}>
-          <div>
-            <p className="text-slate-400 text-[10px] font-bold uppercase tracking-wider mb-1">Date</p>
-            <p className={`text-lg font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{booking.date || '10 May, 2024'}</p>
-          </div>
-          <button onClick={() => handleEdit('date', booking.date || '10 May, 2024')} className="p-2 text-slate-400 hover:text-primary transition-colors">
-            <Edit2 size={16} />
-          </button>
-        </div>
-
-        <div className={`flex justify-between items-center p-4 rounded-2xl transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-900' : 'bg-slate-50'}`}>
-          <div>
-            <p className="text-slate-400 text-[10px] font-bold uppercase tracking-wider mb-1">Airline</p>
-            <p className={`text-lg font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{booking.airline || 'Alaska Airlines'}</p>
-          </div>
-          <button onClick={() => handleEdit('airline', booking.airline || 'Alaska Airlines')} className="p-2 text-slate-400 hover:text-primary transition-colors">
-            <Edit2 size={16} />
-          </button>
         </div>
 
         <div className={`flex justify-between items-center p-4 rounded-2xl transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-900' : 'bg-slate-50'}`}>
@@ -606,22 +475,12 @@ export const TripDetailsScreen = ({ booking: initialBooking, user, onBack, onCan
             <p className="text-slate-400 text-[10px] font-bold uppercase tracking-wider mb-1">Guests</p>
             <p className={`text-lg font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{booking.guests || '1 Adult'}</p>
           </div>
-          <button onClick={() => handleEdit('guests', booking.guests || '1 Adult')} className="p-2 text-slate-400 hover:text-primary transition-colors">
-            <Edit2 size={16} />
-          </button>
         </div>
       </div>
 
       {renderMoreInfo()}
 
       <div className="space-y-4">
-        <button 
-          onClick={() => setShowCalendar(true)}
-          className={`w-full py-5 rounded-[24px] font-bold text-lg flex items-center justify-center gap-2 active:scale-95 transition-all ${appearance === 'Dark Mode' ? 'bg-slate-800 text-white' : 'bg-slate-100 text-slate-900'}`}
-        >
-          <Calendar size={20} className="text-primary" />
-          Add to Calendar
-        </button>
         <button 
           onClick={handleDownloadPDF}
           className={`w-full bg-blue-600 text-white py-5 rounded-[24px] font-bold text-lg shadow-lg active:scale-95 transition-all flex items-center justify-center gap-2 ${appearance === 'Dark Mode' ? 'shadow-blue-900/40' : 'shadow-blue-200'}`}
@@ -638,14 +497,8 @@ export const TripDetailsScreen = ({ booking: initialBooking, user, onBack, onCan
         </button>
       </div>
       {renderCancelModal()}
-      {renderEditModal()}
-      <CalendarModal 
-        isOpen={showCalendar}
-        onClose={() => setShowCalendar(false)}
-        tripDate={booking.date || booking.departure_time || new Date().toISOString()}
-        tripName={booking.airline || 'Your Flight'}
-        appearance={appearance}
-      />
+      {renderFlightModal()}
+      {renderHotelModal()}
     </div>
   );
 
@@ -692,15 +545,9 @@ export const TripDetailsScreen = ({ booking: initialBooking, user, onBack, onCan
         <div className="mb-6">
           <div className="flex justify-between items-start mb-2">
             <h1 className={`text-3xl font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{booking.name || 'Water Hotel'}</h1>
-            <button onClick={() => handleEdit('name', booking.name || 'Water Hotel')} className="p-2 text-slate-400 hover:text-primary transition-colors">
-              <Edit2 size={18} />
-            </button>
           </div>
           <div className="flex justify-between items-center">
             <p className="text-slate-400 text-sm">{booking.location || 'Italy, Manarola'}</p>
-            <button onClick={() => handleEdit('location', booking.location || 'Italy, Manarola')} className="p-2 text-slate-400 hover:text-primary transition-colors">
-              <Edit2 size={14} />
-            </button>
           </div>
         </div>
 
@@ -713,9 +560,6 @@ export const TripDetailsScreen = ({ booking: initialBooking, user, onBack, onCan
               <p className="text-xs text-slate-400">Date : {booking.date || '10 May - 14 May'}</p>
             </div>
           </div>
-          <button onClick={() => handleEdit('date', booking.date || '10 May - 14 May')} className="p-2 text-slate-400">
-            <Edit2 size={16} />
-          </button>
         </div>
 
         {renderMoreInfo()}
@@ -744,9 +588,6 @@ export const TripDetailsScreen = ({ booking: initialBooking, user, onBack, onCan
         <div className="mb-8">
           <div className="flex justify-between items-center mb-4">
             <h2 className={`text-lg font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>Sleeping Arrangements</h2>
-            <button onClick={() => handleEdit('guests')} className="p-2 text-slate-400">
-              <Edit2 size={16} />
-            </button>
           </div>
           <div className="flex gap-4">
             <div className={`flex-1 p-6 rounded-[32px] border transition-colors ${appearance === 'Dark Mode' ? 'border-red-500/50 bg-slate-800' : 'border-red-400 bg-white'}`}>
@@ -764,13 +605,6 @@ export const TripDetailsScreen = ({ booking: initialBooking, user, onBack, onCan
 
         <div className="space-y-4">
           <button 
-            onClick={() => setShowCalendar(true)}
-            className={`w-full py-5 rounded-[24px] font-bold text-lg flex items-center justify-center gap-2 active:scale-95 transition-all ${appearance === 'Dark Mode' ? 'bg-slate-800 text-white' : 'bg-slate-100 text-slate-900'}`}
-          >
-            <Calendar size={20} className="text-primary" />
-            Add to Calendar
-          </button>
-          <button 
             onClick={handleDownloadPDF}
             className={`w-full py-5 rounded-[24px] font-bold text-lg flex items-center justify-center gap-2 active:scale-95 transition-all ${appearance === 'Dark Mode' ? 'bg-slate-800 text-white' : 'bg-slate-100 text-slate-900'}`}
           >
@@ -787,14 +621,8 @@ export const TripDetailsScreen = ({ booking: initialBooking, user, onBack, onCan
         </div>
       </div>
       {renderCancelModal()}
-      {renderEditModal()}
-      <CalendarModal 
-        isOpen={showCalendar}
-        onClose={() => setShowCalendar(false)}
-        tripDate={booking.date || booking.departure_time || new Date().toISOString()}
-        tripName={booking.name || 'Hotel Stay'}
-        appearance={appearance}
-      />
+      {renderFlightModal()}
+      {renderHotelModal()}
     </div>
   );
 

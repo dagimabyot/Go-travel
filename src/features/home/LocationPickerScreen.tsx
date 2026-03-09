@@ -117,7 +117,7 @@ export const LocationPickerScreen = ({ onBack, onSelect, appearance }: LocationP
   };
 
   return (
-    <div className={`fixed inset-0 z-[100] flex flex-col transition-colors duration-300 ${appearance === 'Dark Mode' ? 'bg-slate-950 text-white' : 'bg-white text-slate-900'}`}>
+    <div className={`fixed inset-0 z-[210] flex flex-col transition-colors duration-300 ${appearance === 'Dark Mode' ? 'bg-slate-950 text-white' : 'bg-white text-slate-900'}`}>
       <header className={`flex items-center justify-between px-6 pt-12 pb-6 shadow-sm z-20 transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-950 border-b border-slate-900' : 'bg-white'}`}>
         <button onClick={onBack} className={`w-12 h-12 border rounded-full flex items-center justify-center shadow-sm transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-900 border-slate-800 text-white' : 'bg-white border-slate-100 text-slate-900'}`}>
           <ChevronLeft size={24} />

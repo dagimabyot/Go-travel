@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ChevronLeft, Edit3, SlidersHorizontal, Plane, Bookmark, X } from 'lucide-react';
+import { ChevronLeft, Edit3, SlidersHorizontal, Plane, Star, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Flight } from '../../types';
 
@@ -186,8 +186,8 @@ export const FlightListScreen = ({ onBack, onSelectFlight, language, appearance 
               <p className={`text-lg font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>
                 ${flight.price}<span className="text-xs text-slate-400 font-normal">/person</span>
               </p>
-              <button className={`w-8 h-8 border rounded-full flex items-center justify-center transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-800 border-slate-700 text-slate-400' : 'bg-white border-slate-100 text-slate-400'}`}>
-                <Bookmark size={14} />
+              <button className={`w-8 h-8 border rounded-full flex items-center justify-center transition-colors shadow-sm ${appearance === 'Dark Mode' ? 'bg-slate-800 border-slate-700 text-slate-400' : 'bg-white border-slate-100 text-slate-400'}`}>
+                <Star size={14} />
               </button>
             </div>
           </div>

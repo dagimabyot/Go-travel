@@ -67,8 +67,8 @@ export const HistoryScreen = ({ bookings, user, onCancel, onSelect, onBack, onPr
   ];
 
   return (
-    <div className={`pb-24 pt-8 px-4 md:px-6 max-w-4xl mx-auto overflow-x-hidden min-h-screen transition-colors duration-300 ${appearance === 'Dark Mode' ? 'bg-slate-950 text-white' : 'bg-white text-slate-900'}`}>
-      <header className="flex justify-between items-center mb-8">
+    <div className={`pb-24 pt-4 px-4 md:px-6 max-w-4xl mx-auto overflow-x-hidden min-h-screen transition-colors duration-300 ${appearance === 'Dark Mode' ? 'bg-slate-950 text-white' : 'bg-white text-slate-900'}`}>
+      <header className="flex justify-between items-center mb-6">
         <div className="w-12" /> {/* Spacer to keep title centered */}
         <h1 className={`text-xl font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>My Bookings</h1>
         <div className="w-12" /> {/* Spacer to keep title centered */}
@@ -149,7 +149,7 @@ export const HistoryScreen = ({ bookings, user, onCancel, onSelect, onBack, onPr
                           e.stopPropagation();
                           toggleSavedBooking(booking);
                         }}
-                        className={`absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center transition-all z-10 ${savedBookings.some(b => b.id === booking.id) ? 'text-amber-500 bg-amber-500/10' : 'text-slate-400 bg-slate-100 dark:bg-slate-800'}`}
+                        className={`absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center shadow-sm transition-all z-10 ${savedBookings.some(b => b.id === booking.id) ? (appearance === 'Dark Mode' ? 'bg-slate-800 text-amber-500' : 'bg-white text-amber-500') : (appearance === 'Dark Mode' ? 'bg-slate-800 text-slate-400' : 'bg-white text-slate-400')}`}
                       >
                         <Star size={16} fill={savedBookings.some(b => b.id === booking.id) ? "currentColor" : "none"} />
                       </button>

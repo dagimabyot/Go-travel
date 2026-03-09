@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { X, Plane, Bookmark } from 'lucide-react';
+import { X, Plane, Star } from 'lucide-react';
 import { translations } from '../../constants/translations';
 
 interface FlightDetailsModalProps {
@@ -38,7 +38,7 @@ export const FlightDetailsModal = ({ onClose, language }: FlightDetailsModalProp
           </button>
         </div>
 
-        <div className="space-y-6">
+        <div className="space-y-6 max-h-[60vh] overflow-y-auto pr-2 hide-scrollbar">
           {flights.map((flight, idx) => (
             <div key={idx} className="bg-white p-8 rounded-[40px] border border-slate-100 shadow-sm">
               <div className="text-center mb-4">
@@ -68,8 +68,8 @@ export const FlightDetailsModal = ({ onClose, language }: FlightDetailsModalProp
 
               <div className="flex justify-between items-center pt-6 border-t border-slate-50">
                 <p className="text-xl font-bold text-slate-900">${flight.price}<span className="text-xs font-normal text-slate-400 ml-1">/person</span></p>
-                <button className="w-10 h-10 bg-slate-50 rounded-full flex items-center justify-center text-slate-300 hover:text-blue-600 transition-colors">
-                  <Bookmark size={18} />
+                <button className="w-10 h-10 bg-white border border-slate-100 shadow-sm rounded-full flex items-center justify-center text-slate-300 hover:text-blue-600 transition-colors">
+                  <Star size={18} />
                 </button>
               </div>
             </div>

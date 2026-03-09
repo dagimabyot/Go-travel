@@ -173,7 +173,20 @@ export const Router = (props: RouterProps) => {
           appearance={appearance}
         />;
       case 'confirmation':
-        return <FlightConfirmationScreen flight={selectedFlight || undefined} onBack={() => setScreen('seat-selection')} onContinue={() => setScreen('payment')} language={language} onEdit={(field) => { console.log('Edit', field); setScreen('flight-search'); }} appearance={appearance} />;
+        return <FlightConfirmationScreen 
+          flight={selectedFlight || undefined} 
+          user={user}
+          onBack={() => setScreen('seat-selection')} 
+          onContinue={(guests, passport) => {
+            if (user && passport !== user.passport) {
+              setUser({ ...user, passport });
+            }
+            setScreen('payment');
+          }} 
+          language={language} 
+          onEdit={(field) => { console.log('Edit', field); setScreen('flight-search'); }} 
+          appearance={appearance} 
+        />;
       case 'success':
         return <SuccessScreen onBackToHome={() => setScreen('home')} onViewTrips={() => setScreen('my-trips')} appearance={appearance} />;
       case 'my-trips':

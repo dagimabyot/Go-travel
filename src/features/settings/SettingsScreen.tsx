@@ -67,66 +67,83 @@ export const SettingsScreen = ({
         return <TermsOfServiceSubScreen appearance={appearance} />;
       default:
         return (
-          <div className="space-y-0">
-            <SettingItem 
-              label="Personal Information" 
-              onClick={() => setSubScreen('profile')}
-              appearance={appearance}
-            />
-            <SettingToggle 
-              label="Notification" 
-              enabled={notificationsEnabled} 
-              onToggle={() => setNotificationsEnabled(!notificationsEnabled)} 
-              appearance={appearance}
-            />
-            <SettingToggle 
-              label="Dark Mode" 
-              enabled={appearance === 'Dark Mode'} 
-              onToggle={() => setAppearance(appearance === 'Dark Mode' ? 'Light Mode' : 'Dark Mode')} 
-              appearance={appearance}
-            />
-            <SettingToggle 
-              label="Email Notification" 
-              enabled={emailNotificationsEnabled} 
-              onToggle={() => setEmailNotificationsEnabled(!emailNotificationsEnabled)} 
-              appearance={appearance}
-            />
-            <SettingItem 
-              label="About App" 
-              onClick={() => setSubScreen('about')}
-              appearance={appearance}
-            />
-            <SettingItem 
-              label="Share App" 
-              appearance={appearance}
-              onClick={() => {
-                const shareData = {
-                  title: 'GoTravel',
-                  text: 'Check out this awesome travel app!',
-                  url: window.location.href,
-                };
-                if (navigator.share) {
-                  navigator.share(shareData).catch(() => {
+          <>
+            <div className="flex flex-col items-center mb-10 pt-4">
+              <div className="relative">
+                <div className={`rounded-full p-1 border-2 ${appearance === 'Dark Mode' ? 'border-slate-800' : 'border-white shadow-lg'}`}>
+                  <Avatar user={user} size={110} />
+                </div>
+                <div className="absolute bottom-1 right-1 w-7 h-7 bg-blue-600 rounded-full flex items-center justify-center text-white border-2 border-white">
+                  <Camera size={14} />
+                </div>
+              </div>
+              <div className="mt-4 text-center">
+                <h2 className={`text-2xl font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{user.name}</h2>
+                <p className="text-slate-400 text-sm">{user.email}</p>
+              </div>
+            </div>
+
+            <div className="space-y-0">
+              <SettingItem 
+                label="Personal Information" 
+                onClick={() => setSubScreen('profile')}
+                appearance={appearance}
+              />
+              <SettingToggle 
+                label="Notification" 
+                enabled={notificationsEnabled} 
+                onToggle={() => setNotificationsEnabled(!notificationsEnabled)} 
+                appearance={appearance}
+              />
+              <SettingToggle 
+                label="Dark Mode" 
+                enabled={appearance === 'Dark Mode'} 
+                onToggle={() => setAppearance(appearance === 'Dark Mode' ? 'Light Mode' : 'Dark Mode')} 
+                appearance={appearance}
+              />
+              <SettingToggle 
+                label="Email Notification" 
+                enabled={emailNotificationsEnabled} 
+                onToggle={() => setEmailNotificationsEnabled(!emailNotificationsEnabled)} 
+                appearance={appearance}
+              />
+              <SettingItem 
+                label="About App" 
+                onClick={() => setSubScreen('about')}
+                appearance={appearance}
+              />
+              <SettingItem 
+                label="Share App" 
+                appearance={appearance}
+                onClick={() => {
+                  const shareData = {
+                    title: 'GoTravel',
+                    text: 'Check out this awesome travel app!',
+                    url: window.location.href,
+                  };
+                  if (navigator.share) {
+                    navigator.share(shareData).catch(() => {
+                      navigator.clipboard.writeText(window.location.href);
+                      alert('App link copied to clipboard!');
+                    });
+                  } else {
                     navigator.clipboard.writeText(window.location.href);
                     alert('App link copied to clipboard!');
-                  });
-                } else {
-                  navigator.clipboard.writeText(window.location.href);
-                  alert('App link copied to clipboard!');
-                }
-              }}
-            />
-            
-            <div className="mt-12">
-              <button 
-                onClick={() => setShowLogoutConfirm(true)}
-                className={`w-full flex items-center justify-center gap-3 py-5 rounded-[24px] font-bold active:scale-95 transition-all ${appearance === 'Dark Mode' ? 'bg-red-900/20 text-red-400 hover:bg-red-900/30' : 'bg-red-50 text-red-500 hover:bg-red-100'}`}
-              >
-                <LogOut size={20} />
-                {t('logout')}
-              </button>
+                  }
+                }}
+              />
+              
+              <div className="mt-12">
+                <button 
+                  onClick={() => setShowLogoutConfirm(true)}
+                  className={`w-full flex items-center justify-center gap-3 py-5 rounded-[24px] font-bold active:scale-95 transition-all ${appearance === 'Dark Mode' ? 'bg-red-900/20 text-red-400 hover:bg-red-900/30' : 'bg-red-50 text-red-500 hover:bg-red-100'}`}
+                >
+                  <LogOut size={20} />
+                  {t('logout')}
+                </button>
+              </div>
             </div>
-          </div>
+          </>
         );
     }
   };
@@ -169,8 +186,8 @@ export const SettingsScreen = ({
   );
 
   return (
-    <div className={`min-h-screen pb-24 pt-8 px-6 max-w-4xl mx-auto transition-colors duration-300 ${appearance === 'Dark Mode' ? 'bg-slate-950 text-white' : 'bg-white text-slate-900'}`}>
-      <header className="flex justify-between items-center mb-10">
+    <div className={`min-h-screen pb-24 pt-2 px-6 max-w-4xl mx-auto transition-colors duration-300 ${appearance === 'Dark Mode' ? 'bg-slate-950 text-white' : 'bg-white text-slate-900'}`}>
+      <header className="flex justify-between items-center mb-6">
         {subScreen !== 'main' ? (
           <button onClick={() => setSubScreen('main')} className={`w-12 h-12 rounded-full flex items-center justify-center shadow-sm ${appearance === 'Dark Mode' ? 'bg-slate-900 border-slate-800 text-white' : 'bg-white border-slate-100 text-slate-900 border'}`}>
             <ChevronLeft size={24} />
@@ -180,7 +197,7 @@ export const SettingsScreen = ({
         )}
       </header>
 
-      <h1 className={`text-2xl font-bold mb-8 ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>
+      <h1 className={`text-2xl font-bold mb-6 ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>
         {subScreen === 'main' ? 'Settings' : t(subScreen === 'profile' ? 'personalInfo' : subScreen)}
       </h1>
 
@@ -223,7 +240,9 @@ const PersonalInformationSubScreen = ({ user, onSave, language, onBack, appearan
     gender: user.gender || 'Male',
     phone: user.phone || '+1-123-345-678',
     country: user.country || 'BD',
-    zipCode: user.zipCode || '5699'
+    zipCode: user.zipCode || '5699',
+    bio: user.bio || 'Travel enthusiast exploring the world one city at a time.',
+    passport: user.passport || ''
   });
   const [isSaved, setIsSaved] = React.useState(false);
   const fileInputRef = React.useRef<HTMLInputElement>(null);
@@ -236,7 +255,9 @@ const PersonalInformationSubScreen = ({ user, onSave, language, onBack, appearan
       gender: formData.gender,
       phone: formData.phone,
       country: formData.country,
-      zipCode: formData.zipCode
+      zipCode: formData.zipCode,
+      bio: formData.bio,
+      passport: formData.passport
     });
     setIsSaved(true);
     setTimeout(() => {
@@ -246,21 +267,27 @@ const PersonalInformationSubScreen = ({ user, onSave, language, onBack, appearan
   };
 
   return (
-    <div className={`fixed inset-0 z-[110] flex flex-col transition-colors duration-300 ${appearance === 'Dark Mode' ? 'bg-slate-950 text-white' : 'bg-white text-slate-900'}`}>
-      <header className={`flex items-center justify-between px-6 pt-12 pb-6 transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-950' : 'bg-white'}`}>
-        <button onClick={onBack} className={`w-12 h-12 rounded-full flex items-center justify-center shadow-sm transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-900 border-slate-800 text-white' : 'bg-white border-slate-100 text-slate-900 border'}`}>
-          <ChevronLeft size={24} />
+    <div className={`fixed inset-0 z-[210] flex flex-col transition-colors duration-300 ${appearance === 'Dark Mode' ? 'bg-slate-950 text-white' : 'bg-slate-50 text-slate-900'}`}>
+      <header className={`flex items-center justify-between px-6 pt-12 pb-6 transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-950' : 'bg-white border-b border-slate-100'}`}>
+        <button onClick={onBack} className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-900 text-white' : 'bg-slate-100 text-slate-900'}`}>
+          <ChevronLeft size={20} />
         </button>
-        <h1 className={`text-xl font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>My Profile</h1>
-        <button onClick={handleSave} className="text-blue-600 font-bold">Save</button>
+        <h1 className={`text-lg font-semibold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>Edit Profile</h1>
+        <button onClick={handleSave} className="text-blue-600 font-semibold px-4 py-2 rounded-xl hover:bg-blue-50 transition-colors">Save</button>
       </header>
 
-      <div className="flex-1 px-8 pt-6 overflow-y-auto no-scrollbar pb-32">
-        <div className="flex flex-col items-center mb-12">
-          <div className="relative">
-            <div className={`rounded-full border-4 shadow-lg ${appearance === 'Dark Mode' ? 'bg-slate-900 border-slate-800' : 'bg-slate-100 border-white'}`}>
-              <Avatar user={user} size={96} />
+      <div className="flex-1 px-6 pt-8 overflow-y-auto no-scrollbar pb-32">
+        <div className="flex flex-col items-center mb-10">
+          <div className="relative group">
+            <div className={`rounded-full p-1 border-2 transition-all ${appearance === 'Dark Mode' ? 'border-slate-800' : 'border-white shadow-md'}`}>
+              <Avatar user={user} size={100} />
             </div>
+            <button 
+              onClick={() => fileInputRef.current?.click()}
+              className="absolute bottom-0 right-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center shadow-lg border-2 border-white hover:bg-blue-700 transition-all"
+            >
+              <Camera size={16} />
+            </button>
             <input 
               type="file" 
               ref={fileInputRef} 
@@ -278,96 +305,120 @@ const PersonalInformationSubScreen = ({ user, onSave, language, onBack, appearan
               }}
             />
           </div>
-          <button 
-            onClick={() => fileInputRef.current?.click()}
-            className="text-blue-600 font-bold text-sm mt-4"
-          >
-            Upload Photo
-          </button>
+          <div className="mt-4 text-center">
+            <h2 className={`text-xl font-semibold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{formData.name}</h2>
+            <p className="text-slate-400 text-sm">{formData.email}</p>
+          </div>
         </div>
 
-        <div className="space-y-8">
-          <div className="space-y-2">
-            <label className="text-sm font-bold text-slate-400">Name</label>
-            <input 
-              type="text" 
-              value={formData.name} 
-              onChange={e => setFormData({...formData, name: e.target.value})} 
-              className={`w-full text-xl font-bold border-b pb-4 focus:outline-none bg-transparent ${appearance === 'Dark Mode' ? 'text-white border-slate-800' : 'text-slate-900 border-slate-100'}`} 
-            />
-          </div>
-
-          <div className="grid grid-cols-2 gap-8">
-            <div className="space-y-2">
-              <label className="text-sm font-bold text-slate-400">Birth Date</label>
-              <input 
-                type="text" 
-                value={formData.dob} 
-                onChange={e => setFormData({...formData, dob: e.target.value})} 
-                className={`w-full text-xl font-bold border-b pb-4 focus:outline-none bg-transparent ${appearance === 'Dark Mode' ? 'text-white border-slate-800' : 'text-slate-900 border-slate-100'}`} 
-              />
-            </div>
-            <div className="space-y-2">
-              <label className="text-sm font-bold text-slate-400">Gender</label>
-              <input 
-                type="text" 
-                value={formData.gender} 
-                onChange={e => setFormData({...formData, gender: e.target.value})} 
-                className={`w-full text-xl font-bold border-b pb-4 focus:outline-none bg-transparent ${appearance === 'Dark Mode' ? 'text-white border-slate-800' : 'text-slate-900 border-slate-100'}`} 
-              />
-            </div>
-          </div>
-
-          <div className="space-y-2">
-            <label className="text-sm font-bold text-slate-400">Email</label>
-            <div className={`flex items-center justify-between border-b pb-4 ${appearance === 'Dark Mode' ? 'border-slate-800' : 'border-slate-100'}`}>
-              <input 
-                type="email" 
-                value={formData.email} 
-                onChange={e => setFormData({...formData, email: e.target.value})} 
-                className={`w-full text-xl font-bold bg-transparent focus:outline-none ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`} 
-              />
-              <div className="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center text-white">
-                <Check size={12} strokeWidth={4} />
-              </div>
-            </div>
-          </div>
-
-          <div className="space-y-2">
-            <label className="text-sm font-bold text-slate-400">Mobile</label>
-            <input 
-              type="tel" 
-              value={formData.phone} 
-              onChange={e => setFormData({...formData, phone: e.target.value})} 
-              className={`w-full text-xl font-bold border-b pb-4 focus:outline-none bg-transparent ${appearance === 'Dark Mode' ? 'text-white border-slate-800' : 'text-slate-900 border-slate-100'}`} 
-            />
-          </div>
-
-          <div className="grid grid-cols-2 gap-8">
-            <div className="space-y-2">
-              <label className="text-sm font-bold text-slate-400">Country</label>
-              <div className={`flex items-center justify-between border-b pb-4 ${appearance === 'Dark Mode' ? 'border-slate-800' : 'border-slate-100'}`}>
+        <div className="space-y-6">
+          <section className="space-y-4">
+            <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest px-1">Basic Information</h3>
+            <div className={`rounded-3xl p-6 space-y-6 ${appearance === 'Dark Mode' ? 'bg-slate-900' : 'bg-white shadow-sm border border-slate-100'}`}>
+              <div className="space-y-1.5">
+                <label className="text-xs font-medium text-slate-400 ml-1">Full Name</label>
                 <input 
                   type="text" 
-                  value={formData.country} 
-                  onChange={e => setFormData({...formData, country: e.target.value})} 
-                  className={`w-full text-xl font-bold bg-transparent focus:outline-none ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`} 
+                  value={formData.name} 
+                  onChange={e => setFormData({...formData, name: e.target.value})} 
+                  className={`w-full text-base font-medium px-4 py-3 rounded-xl border focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all ${appearance === 'Dark Mode' ? 'bg-slate-950 text-white border-slate-800 focus:border-blue-500' : 'bg-slate-50 text-slate-900 border-slate-100 focus:border-blue-500'}`} 
                 />
-                <div className="w-6 h-4 bg-green-600 rounded-sm relative flex items-center justify-center overflow-hidden shrink-0">
-                  <div className="w-2 h-2 bg-red-500 rounded-full" />
+              </div>
+
+              <div className="space-y-1.5">
+                <label className="text-xs font-medium text-slate-400 ml-1">Bio</label>
+                <textarea 
+                  value={formData.bio} 
+                  onChange={e => setFormData({...formData, bio: e.target.value})} 
+                  rows={3}
+                  className={`w-full text-base font-medium px-4 py-3 rounded-xl border focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all resize-none ${appearance === 'Dark Mode' ? 'bg-slate-950 text-white border-slate-800 focus:border-blue-500' : 'bg-slate-50 text-slate-900 border-slate-100 focus:border-blue-500'}`} 
+                />
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-1.5">
+                  <label className="text-xs font-medium text-slate-400 ml-1">Birth Date</label>
+                  <input 
+                    type="text" 
+                    value={formData.dob} 
+                    onChange={e => setFormData({...formData, dob: e.target.value})} 
+                    className={`w-full text-base font-medium px-4 py-3 rounded-xl border focus:outline-none transition-all ${appearance === 'Dark Mode' ? 'bg-slate-950 text-white border-slate-800 focus:border-blue-500' : 'bg-slate-50 text-slate-900 border-slate-100 focus:border-blue-500'}`} 
+                  />
+                </div>
+                <div className="space-y-1.5">
+                  <label className="text-xs font-medium text-slate-400 ml-1">Gender</label>
+                  <input 
+                    type="text" 
+                    value={formData.gender} 
+                    onChange={e => setFormData({...formData, gender: e.target.value})} 
+                    className={`w-full text-base font-medium px-4 py-3 rounded-xl border focus:outline-none transition-all ${appearance === 'Dark Mode' ? 'bg-slate-950 text-white border-slate-800 focus:border-blue-500' : 'bg-slate-50 text-slate-900 border-slate-100 focus:border-blue-500'}`} 
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-1.5">
+                <label className="text-xs font-medium text-slate-400 ml-1">Passport Number</label>
+                <input 
+                  type="text" 
+                  value={formData.passport} 
+                  onChange={e => setFormData({...formData, passport: e.target.value})} 
+                  placeholder="A12345678"
+                  className={`w-full text-base font-medium px-4 py-3 rounded-xl border focus:outline-none transition-all ${appearance === 'Dark Mode' ? 'bg-slate-950 text-white border-slate-800 focus:border-blue-500' : 'bg-slate-50 text-slate-900 border-slate-100 focus:border-blue-500'}`} 
+                />
+              </div>
+            </div>
+          </section>
+
+          <section className="space-y-4">
+            <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest px-1">Contact Details</h3>
+            <div className={`rounded-3xl p-6 space-y-6 ${appearance === 'Dark Mode' ? 'bg-slate-900' : 'bg-white shadow-sm border border-slate-100'}`}>
+              <div className="space-y-1.5">
+                <label className="text-xs font-medium text-slate-400 ml-1">Email Address</label>
+                <div className="relative">
+                  <input 
+                    type="email" 
+                    value={formData.email} 
+                    onChange={e => setFormData({...formData, email: e.target.value})} 
+                    className={`w-full text-base font-medium px-4 py-3 rounded-xl border focus:outline-none transition-all pr-12 ${appearance === 'Dark Mode' ? 'bg-slate-950 text-white border-slate-800 focus:border-blue-500' : 'bg-slate-50 text-slate-900 border-slate-100 focus:border-blue-500'}`} 
+                  />
+                  <div className="absolute right-4 top-1/2 -translate-y-1/2 text-green-500">
+                    <Check size={18} />
+                  </div>
+                </div>
+              </div>
+
+              <div className="space-y-1.5">
+                <label className="text-xs font-medium text-slate-400 ml-1">Phone Number</label>
+                <input 
+                  type="tel" 
+                  value={formData.phone} 
+                  onChange={e => setFormData({...formData, phone: e.target.value})} 
+                  className={`w-full text-base font-medium px-4 py-3 rounded-xl border focus:outline-none transition-all ${appearance === 'Dark Mode' ? 'bg-slate-950 text-white border-slate-800 focus:border-blue-500' : 'bg-slate-50 text-slate-900 border-slate-100 focus:border-blue-500'}`} 
+                />
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-1.5">
+                  <label className="text-xs font-medium text-slate-400 ml-1">Country</label>
+                  <input 
+                    type="text" 
+                    value={formData.country} 
+                    onChange={e => setFormData({...formData, country: e.target.value})} 
+                    className={`w-full text-base font-medium px-4 py-3 rounded-xl border focus:outline-none transition-all ${appearance === 'Dark Mode' ? 'bg-slate-950 text-white border-slate-800 focus:border-blue-500' : 'bg-slate-50 text-slate-900 border-slate-100 focus:border-blue-500'}`} 
+                  />
+                </div>
+                <div className="space-y-1.5">
+                  <label className="text-xs font-medium text-slate-400 ml-1">Zip Code</label>
+                  <input 
+                    type="text" 
+                    value={formData.zipCode} 
+                    onChange={e => setFormData({...formData, zipCode: e.target.value})} 
+                    className={`w-full text-base font-medium px-4 py-3 rounded-xl border focus:outline-none transition-all ${appearance === 'Dark Mode' ? 'bg-slate-950 text-white border-slate-800 focus:border-blue-500' : 'bg-slate-50 text-slate-900 border-slate-100 focus:border-blue-500'}`} 
+                  />
                 </div>
               </div>
             </div>
-            <div className="space-y-2">
-              <label className="text-sm font-bold text-slate-400">Zip Code</label>
-              <input 
-                type="text" 
-                value={formData.zipCode} 
-                onChange={e => setFormData({...formData, zipCode: e.target.value})} 
-                className={`w-full text-xl font-bold border-b pb-4 focus:outline-none bg-transparent ${appearance === 'Dark Mode' ? 'text-white border-slate-800' : 'text-slate-900 border-slate-100'}`} 
-              />
-            </div>
-          </div>
+          </section>
         </div>
       </div>
     </div>
@@ -521,7 +572,7 @@ const HelpSupportSubScreen = ({ language, appearance }: { language: string, appe
 };
 
 const AboutAppSubScreen = ({ onBack, appearance }: { onBack: () => void, appearance: string }) => (
-  <div className={`fixed inset-0 z-[110] flex flex-col transition-colors duration-300 ${appearance === 'Dark Mode' ? 'bg-slate-950 text-white' : 'bg-white text-slate-900'}`}>
+  <div className={`fixed inset-0 z-[210] flex flex-col transition-colors duration-300 ${appearance === 'Dark Mode' ? 'bg-slate-950 text-white' : 'bg-white text-slate-900'}`}>
     <header className={`flex items-center px-6 pt-12 pb-6 transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-950' : 'bg-white'}`}>
       <button onClick={onBack} className={`w-12 h-12 rounded-full flex items-center justify-center shadow-sm transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-900 border-slate-800 text-white' : 'bg-white border-slate-100 text-slate-900 border'}`}>
         <ChevronLeft size={24} />

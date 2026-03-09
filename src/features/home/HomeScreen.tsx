@@ -68,7 +68,7 @@ export const HomeScreen = ({
             referrerPolicy="no-referrer"
           />
         </div>
-        <div className="relative z-10 flex justify-between items-center px-6 pt-12">
+        <div className="relative z-10 flex justify-between items-center px-6 pt-8">
           <div className="flex items-center gap-2">
             <MapPin size={20} className={appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'} />
             <span className={`font-bold text-lg ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{user?.country || 'New York, USA'}</span>
@@ -76,7 +76,7 @@ export const HomeScreen = ({
         </div>
       </header>
 
-      <div className={`px-6 -mt-12 relative z-20 rounded-t-[40px] pt-8 transition-colors duration-300 ${appearance === 'Dark Mode' ? 'bg-slate-950' : 'bg-white'}`}>
+      <div className={`px-6 -mt-16 relative z-20 rounded-t-[40px] pt-4 transition-colors duration-300 ${appearance === 'Dark Mode' ? 'bg-slate-950' : 'bg-white'}`}>
         {/* Tabs */}
         <div className={`flex gap-8 mb-8 overflow-x-auto hide-scrollbar border-b ${appearance === 'Dark Mode' ? 'border-slate-900' : 'border-slate-100'}`}>
           {(['packages', 'flights', 'places', 'hotels'] as const).map(tab => (
@@ -133,9 +133,9 @@ export const HomeScreen = ({
                         e.stopPropagation();
                         toggleSavedPackage(pkg);
                       }}
-                      className={`absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center shadow-md transition-all ${isSaved(pkg.id) ? 'text-accent' : 'text-slate-400'} ${appearance === 'Dark Mode' ? 'bg-slate-900' : 'bg-white'}`}
+                      className={`absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center shadow-md transition-all ${isSaved(pkg.id) ? (appearance === 'Dark Mode' ? 'bg-slate-800 text-white' : 'bg-white text-amber-500') : (appearance === 'Dark Mode' ? 'bg-slate-800 text-slate-400' : 'bg-white text-slate-400')}`}
                     >
-                      <Bookmark size={14} fill={isSaved(pkg.id) ? 'currentColor' : 'none'} />
+                      <Star size={14} fill={isSaved(pkg.id) ? 'currentColor' : 'none'} />
                     </button>
                   </motion.div>
                 ))}
@@ -174,9 +174,9 @@ export const HomeScreen = ({
                         e.stopPropagation();
                         toggleSavedPackage(popularPackages[0]);
                       }}
-                      className={`absolute top-6 right-6 w-10 h-10 rounded-full flex items-center justify-center shadow-lg transition-all ${isSaved(popularPackages[0].id) ? 'text-accent' : 'text-slate-400'} ${appearance === 'Dark Mode' ? 'bg-slate-900' : 'bg-white'}`}
+                      className={`absolute top-6 right-6 w-10 h-10 rounded-full flex items-center justify-center shadow-lg transition-all ${isSaved(popularPackages[0].id) ? (appearance === 'Dark Mode' ? 'bg-slate-800 text-white' : 'bg-white text-amber-500') : (appearance === 'Dark Mode' ? 'bg-slate-800 text-slate-400' : 'bg-white text-slate-400')}`}
                     >
-                      <Bookmark size={18} fill={isSaved(popularPackages[0].id) ? 'currentColor' : 'none'} />
+                      <Star size={18} fill={isSaved(popularPackages[0].id) ? 'currentColor' : 'none'} />
                     </button>
                   </motion.div>
                   <div className="flex justify-center gap-1.5 mt-4">
@@ -294,9 +294,9 @@ export const HomeScreen = ({
                         e.stopPropagation();
                         toggleSavedPackage(pkg);
                       }}
-                      className={`absolute top-4 right-4 w-8 h-8 backdrop-blur-md rounded-full flex items-center justify-center transition-all ${isSaved(pkg.id) ? 'bg-white text-accent' : 'bg-white/20 text-white'}`}
+                      className={`absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center shadow-md transition-all ${isSaved(pkg.id) ? (appearance === 'Dark Mode' ? 'bg-slate-800 text-white' : 'bg-white text-amber-500') : (appearance === 'Dark Mode' ? 'bg-slate-800 text-slate-400' : 'bg-white text-slate-400')}`}
                     >
-                      <Bookmark size={14} fill={isSaved(pkg.id) ? 'currentColor' : 'none'} />
+                      <Star size={14} fill={isSaved(pkg.id) ? 'currentColor' : 'none'} />
                     </button>
                   </motion.div>
                 ))}
@@ -336,9 +336,9 @@ export const HomeScreen = ({
                         e.stopPropagation();
                         toggleSavedPackage(pkg);
                       }}
-                      className={`absolute top-4 right-4 w-8 h-8 backdrop-blur-md rounded-full flex items-center justify-center transition-all ${isSaved(pkg.id) ? 'bg-white text-accent' : 'bg-white/20 text-white'}`}
+                      className={`absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center shadow-md transition-all ${isSaved(pkg.id) ? (appearance === 'Dark Mode' ? 'bg-slate-800 text-white' : 'bg-white text-amber-500') : (appearance === 'Dark Mode' ? 'bg-slate-800 text-slate-400' : 'bg-white text-slate-400')}`}
                     >
-                      <Bookmark size={14} fill={isSaved(pkg.id) ? 'currentColor' : 'none'} />
+                      <Star size={14} fill={isSaved(pkg.id) ? 'currentColor' : 'none'} />
                     </button>
                   </motion.div>
                 ))}
@@ -357,8 +357,8 @@ export const HomeScreen = ({
               </div>
               <div className="flex overflow-x-auto gap-6 pb-4 hide-scrollbar -mx-6 px-6">
                 {[
-                  { id: 'h1', name: 'Water Hotel', price: 15.99, image: 'https://images.pexels.com/photos/258196/pexels-photo-258196.jpeg' },
-                  { id: 'h2', name: 'Beach Hotel', price: 15.99, image: 'https://images.pexels.com/photos/532826/pexels-photo-532826.jpeg' },
+                  { id: 'h1', name: 'Water Hotel', price: 15.99, image: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=800&q=80' },
+                  { id: 'h2', name: 'Beach Hotel', price: 15.99, image: 'https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=800&q=80' },
                 ].map((hotel, i) => (
                   <motion.div 
                     key={hotel.id}
@@ -372,8 +372,8 @@ export const HomeScreen = ({
                       <p className="font-bold text-lg leading-tight">{hotel.name}</p>
                       <p className="text-sm opacity-80">${hotel.price}/per day</p>
                     </div>
-                    <button className="absolute top-4 right-4 w-8 h-8 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center text-white">
-                      <Bookmark size={14} />
+                    <button className={`absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center shadow-md transition-all ${appearance === 'Dark Mode' ? 'bg-slate-800 text-slate-400' : 'bg-white text-slate-400'}`}>
+                      <Star size={14} />
                     </button>
                   </motion.div>
                 ))}
@@ -388,8 +388,8 @@ export const HomeScreen = ({
               </div>
               <div className="flex overflow-x-auto gap-6 pb-4 hide-scrollbar -mx-6 px-6">
                 {[
-                  { id: 'h3', name: 'Ayo Nagra', price: 10.99, image: 'https://images.pexels.com/photos/2101187/pexels-photo-2101187.jpeg' },
-                  { id: 'h4', name: 'Beach Hotel', price: 15.99, image: 'https://images.pexels.com/photos/1388030/pexels-photo-1388030.jpeg' },
+                  { id: 'h3', name: 'Ayo Nagra', price: 10.99, image: 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=800&q=80' },
+                  { id: 'h4', name: 'Beach Hotel', price: 15.99, image: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=800&q=80' },
                 ].map((hotel, i) => (
                   <motion.div 
                     key={hotel.id}
@@ -403,8 +403,8 @@ export const HomeScreen = ({
                       <p className="font-bold text-lg leading-tight">{hotel.name}</p>
                       <p className="text-sm opacity-80">${hotel.price}/per day</p>
                     </div>
-                    <button className="absolute top-4 right-4 w-8 h-8 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center text-white">
-                      <Bookmark size={14} />
+                    <button className={`absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center shadow-md transition-all ${appearance === 'Dark Mode' ? 'bg-slate-800 text-slate-400' : 'bg-white text-slate-400'}`}>
+                      <Star size={14} />
                     </button>
                   </motion.div>
                 ))}

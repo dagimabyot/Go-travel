@@ -45,17 +45,13 @@ export const SavedScreen = ({
   const resultCount = (activeTab === 'packages' ? savedPackages.length : activeTab === 'hotels' ? savedHotels.length : 0) + filteredSavedBookings.length;
 
   return (
-    <div className={`min-h-screen pb-24 pt-8 px-6 max-w-4xl mx-auto relative overflow-hidden transition-colors duration-300 ${appearance === 'Dark Mode' ? 'bg-slate-950 text-white' : 'bg-white text-slate-900'}`}>
-      <header className="flex justify-between items-center mb-6">
-        <div className="w-12" /> {/* Spacer to keep title centered if needed */}
-      </header>
-
-      <div className="mb-8">
+    <div className={`min-h-screen pb-24 pt-2 px-6 max-w-4xl mx-auto relative overflow-hidden transition-colors duration-300 ${appearance === 'Dark Mode' ? 'bg-slate-950 text-white' : 'bg-white text-slate-900'}`}>
+      <div className="mb-2">
         <h1 className={`text-2xl font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>Saved</h1>
         <p className="text-slate-400 text-sm">Result found ({resultCount})</p>
       </div>
 
-      <div className={`flex gap-8 mb-8 border-b transition-colors duration-300 ${appearance === 'Dark Mode' ? 'border-slate-900' : 'border-slate-50'}`}>
+      <div className={`flex gap-8 mb-6 border-b transition-colors duration-300 ${appearance === 'Dark Mode' ? 'border-slate-900' : 'border-slate-50'}`}>
         {(['packages', 'flights', 'hotels'] as const).map((tab) => (
           <button
             key={tab}
@@ -80,7 +76,7 @@ export const SavedScreen = ({
           {savedPackages.length === 0 && filteredSavedBookings.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-20 text-center">
               <div className={`w-20 h-20 rounded-full flex items-center justify-center text-slate-300 mb-4 ${appearance === 'Dark Mode' ? 'bg-slate-900' : 'bg-slate-50'}`}>
-                <Bookmark size={32} />
+                <Star size={32} />
               </div>
               <p className="text-slate-400 font-medium">No saved packages yet</p>
             </div>
@@ -102,9 +98,9 @@ export const SavedScreen = ({
                       e.stopPropagation();
                       toggleSavedPackage(pkg);
                     }}
-                    className={`absolute top-4 right-4 w-10 h-10 rounded-full flex items-center justify-center text-red-500 shadow-lg ${appearance === 'Dark Mode' ? 'bg-slate-900' : 'bg-white'}`}
+                    className={`absolute top-4 right-4 w-10 h-10 rounded-full flex items-center justify-center shadow-lg transition-all bg-slate-900 text-white`}
                   >
-                    <Bookmark size={20} fill="currentColor" />
+                    <Star size={20} fill="currentColor" />
                   </button>
 
                   <div className="absolute bottom-6 left-6 right-6">
@@ -135,9 +131,9 @@ export const SavedScreen = ({
                       e.stopPropagation();
                       toggleSavedBooking(booking);
                     }}
-                    className={`absolute top-4 right-4 w-10 h-10 rounded-full flex items-center justify-center text-red-500 shadow-lg ${appearance === 'Dark Mode' ? 'bg-slate-900' : 'bg-white'}`}
+                    className={`absolute top-4 right-4 w-10 h-10 rounded-full flex items-center justify-center shadow-lg transition-all bg-slate-900 text-white`}
                   >
-                    <Bookmark size={20} fill="currentColor" />
+                    <Star size={20} fill="currentColor" />
                   </button>
 
                   <div className="absolute bottom-6 left-6 right-6">
@@ -156,7 +152,7 @@ export const SavedScreen = ({
           {savedHotels.length === 0 && filteredSavedBookings.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-20 text-center">
               <div className={`w-20 h-20 rounded-full flex items-center justify-center text-slate-300 mb-4 ${appearance === 'Dark Mode' ? 'bg-slate-900' : 'bg-slate-50'}`}>
-                <Bookmark size={32} />
+                <Star size={32} />
               </div>
               <p className="text-slate-400 font-medium">No saved hotels yet</p>
             </div>
@@ -178,9 +174,9 @@ export const SavedScreen = ({
                       e.stopPropagation();
                       toggleSavedHotel(hotel);
                     }}
-                    className={`absolute top-4 right-4 w-10 h-10 rounded-full flex items-center justify-center text-red-500 shadow-lg ${appearance === 'Dark Mode' ? 'bg-slate-900' : 'bg-white'}`}
+                    className={`absolute top-4 right-4 w-10 h-10 rounded-full flex items-center justify-center shadow-lg transition-all bg-slate-900 text-white`}
                   >
-                    <Bookmark size={20} fill="currentColor" />
+                    <Star size={20} fill="currentColor" />
                   </button>
   
                   <div className="absolute bottom-6 left-6 right-6">
@@ -212,9 +208,9 @@ export const SavedScreen = ({
                       e.stopPropagation();
                       toggleSavedBooking(booking);
                     }}
-                    className={`absolute top-4 right-4 w-10 h-10 rounded-full flex items-center justify-center text-red-500 shadow-lg ${appearance === 'Dark Mode' ? 'bg-slate-900' : 'bg-white'}`}
+                    className={`absolute top-4 right-4 w-10 h-10 rounded-full flex items-center justify-center shadow-lg transition-all bg-slate-900 text-white`}
                   >
-                    <Bookmark size={20} fill="currentColor" />
+                    <Star size={20} fill="currentColor" />
                   </button>
 
                   <div className="absolute bottom-6 left-6 right-6">
@@ -233,7 +229,7 @@ export const SavedScreen = ({
           {filteredSavedBookings.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-20 text-center">
               <div className={`w-20 h-20 rounded-full flex items-center justify-center text-slate-300 mb-4 ${appearance === 'Dark Mode' ? 'bg-slate-900' : 'bg-slate-50'}`}>
-                <Bookmark size={32} />
+                <Star size={32} />
               </div>
               <p className="text-slate-400 font-medium">No saved flights yet</p>
             </div>
@@ -250,9 +246,9 @@ export const SavedScreen = ({
                     e.stopPropagation();
                     toggleSavedBooking(booking);
                   }}
-                  className={`absolute top-4 right-4 w-10 h-10 rounded-full flex items-center justify-center text-red-500 shadow-lg ${appearance === 'Dark Mode' ? 'bg-slate-800' : 'bg-slate-50'}`}
+                  className={`absolute top-4 right-4 w-10 h-10 rounded-full flex items-center justify-center shadow-lg transition-all bg-slate-900 text-white`}
                 >
-                  <Bookmark size={20} fill="currentColor" />
+                  <Star size={20} fill="currentColor" />
                 </button>
 
                 <div className="flex justify-between items-center mb-6 pr-10">

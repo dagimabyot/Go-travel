@@ -20,8 +20,15 @@ export const FlightSearchScreen = ({ onBack, onSearch, language, appearance }: F
 
   return (
     <div className={`min-h-screen pb-24 pt-8 px-6 max-w-4xl mx-auto transition-colors duration-300 ${appearance === 'Dark Mode' ? 'bg-slate-950 text-white' : 'bg-white text-slate-900'}`}>
-      <header className="flex items-center justify-center mb-12 relative">
-        <h1 className={`text-xl font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>Flight</h1>
+      <header className="flex items-center justify-between mb-12 relative">
+        <button 
+          onClick={onBack}
+          className={`w-12 h-12 rounded-full flex items-center justify-center shadow-sm transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-900 text-white' : 'bg-white text-slate-900 border border-slate-100'}`}
+        >
+          <ChevronLeft size={24} />
+        </button>
+        <h1 className={`text-xl font-bold absolute left-1/2 -translate-x-1/2 ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>Flight</h1>
+        <div className="w-12" /> {/* Spacer */}
       </header>
 
       <div className="space-y-6">

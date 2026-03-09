@@ -10,6 +10,8 @@ export interface User {
   country?: string;
   zipCode?: string;
   avatar?: string;
+  bio?: string;
+  passport?: string;
 }
 
 export interface Flight {
@@ -61,6 +63,11 @@ export interface AppNotification {
   type: 'booking' | 'reminder' | 'system';
 }
 
+export interface PackageHighlight {
+  title: string;
+  description: string;
+}
+
 export interface Package {
   id: string;
   name: string;
@@ -73,6 +80,13 @@ export interface Package {
   included: string[];
   duration: string;
   category?: string;
+  weKnowWhatYouWant?: string;
+  weKnowWhatYouWantSecondary?: string;
+  highlights?: PackageHighlight[];
+  sunsetTitle?: string;
+  sunsetDescription?: string;
+  sunsetDescriptionSecondary?: string;
+  sunsetImage?: string;
 }
 
 export interface Hotel {

@@ -75,8 +75,8 @@ export const FlightResultsScreen = ({ flights, onSelect, onBack, language }: Fli
   );
 
   return (
-    <div className="pb-24 pt-8 px-4 md:px-6 max-w-4xl mx-auto overflow-x-hidden bg-white min-h-screen">
-      <header className="flex justify-between items-center mb-8">
+    <div className="pb-24 pt-4 px-4 md:px-6 max-w-4xl mx-auto overflow-x-hidden bg-white min-h-screen">
+      <header className="flex justify-between items-center mb-6">
         <div className="flex items-center gap-4">
           <button onClick={onBack} className="bg-white p-2 rounded-full shadow-sm border border-slate-100">
             <ArrowLeft size={20} className="text-slate-600" />
@@ -127,37 +127,18 @@ export const FlightResultsScreen = ({ flights, onSelect, onBack, language }: Fli
               onClick={() => onSelect(flight)}
               className="bg-white rounded-[32px] p-6 shadow-sm border border-slate-100 cursor-pointer hover:border-primary/50 transition-all group"
             >
-              <div className="flex justify-between items-center mb-6">
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 bg-slate-50 rounded-2xl flex items-center justify-center border border-slate-100">
-                    <Plane size={24} className="text-primary" />
-                  </div>
-                  <div>
-                    <p className="font-bold text-base text-slate-900">{flight.airline}</p>
-                    <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">100% on time</p>
-                  </div>
-                </div>
-                <div className="text-right">
-                  <p className="text-xl font-bold text-primary">${flight.price}</p>
-                  <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">/ person</p>
-                </div>
+              <div className="space-y-4 bg-slate-50/50 p-6 rounded-2xl">
+                <p className="text-lg font-bold text-slate-900">Date : {flight.departure ? flight.departure.replace(' ', ' T') : '2026-08-20 T14:00:00'}</p>
+                <p className="text-lg font-bold text-slate-900">From : {flight.from}</p>
+                <p className="text-lg font-bold text-slate-900">To : {flight.to}</p>
+                <p className="text-lg font-bold text-slate-900">Flight : {flight.airline}</p>
               </div>
 
-              <div className="flex justify-between items-center bg-slate-50/50 p-4 rounded-2xl">
-                <div className="text-center">
-                  <p className="text-lg font-bold text-slate-900">{flight.departure?.split('T')[1]?.substring(0, 5) || '07:30'}</p>
-                  <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">{flight.from?.substring(0, 3) || 'LHR'}</p>
-                </div>
-                <div className="flex-1 px-4 flex flex-col items-center">
-                  <div className="w-full h-[1px] bg-slate-200 relative">
-                    <Plane size={14} className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-primary" />
-                  </div>
-                  <p className="text-[8px] font-bold text-slate-400 mt-1 uppercase tracking-widest">2h 45m</p>
-                </div>
-                <div className="text-center">
-                  <p className="text-lg font-bold text-slate-900">{flight.arrival?.split('T')[1]?.substring(0, 5) || '09:30'}</p>
-                  <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">{flight.to?.substring(0, 3) || 'JFK'}</p>
-                </div>
+              <div className="flex justify-between items-center mt-6 pt-6 border-t border-slate-100">
+                <p className="text-2xl font-bold text-primary">${flight.price}<span className="text-xs font-normal text-slate-400 ml-1">/ person</span></p>
+                <button className="px-6 py-2 bg-primary text-white rounded-full text-sm font-bold shadow-md shadow-primary/20">
+                  Select
+                </button>
               </div>
             </motion.div>
           ))
