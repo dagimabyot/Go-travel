@@ -8,9 +8,9 @@ export const useApp = () => {
     if (saved) return JSON.parse(saved);
     return { 
       id: 1, 
-      email: 'demo@example.com', 
-      name: 'Felix',
-      avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Felix'
+      email: '', 
+      name: '',
+      avatar: ''
     };
   });
 
@@ -41,6 +41,8 @@ export const useApp = () => {
   const [authEmail, setAuthEmail] = useState('');
   const [toast, setToast] = useState<{ message: string; type: 'success' | 'info' } | null>(null);
   const [settingsSubScreen, setSettingsSubScreen] = useState('main');
+  const [guestCount, setGuestCount] = useState(1);
+  const [travelers, setTravelers] = useState<import('../types').Traveler[]>([]);
 
   const showToast = (message: string, type: 'success' | 'info' = 'success') => {
     setToast({ message, type });
@@ -160,7 +162,9 @@ export const useApp = () => {
     let bookingData: Partial<Booking> = {
       user_id: user.id,
       status: 'confirmed',
-      date: new Date().toISOString()
+      date: new Date().toISOString(),
+      guests: guestCount.toString(),
+      travelers: travelers
     };
 
     if (selectedFlight) {
@@ -299,6 +303,8 @@ export const useApp = () => {
     authEmail, setAuthEmail,
     toast, setToast,
     settingsSubScreen, setSettingsSubScreen,
+    guestCount, setGuestCount,
+    travelers, setTravelers,
     handleLogin, handleSignup, handleSearch, handleBooking, handleCancelBooking,
     onClearNotifications, toggleSavedPackage, toggleSavedHotel, toggleSavedBooking, handleSearchHotels
   };

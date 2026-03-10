@@ -19,6 +19,7 @@ import { FlightSearchScreen } from '../features/flights/FlightSearchScreen';
 import { FlightListScreen } from '../features/flights/FlightListScreen';
 import { SeatSelectionScreen } from '../features/flights/SeatSelectionScreen';
 import { FlightConfirmationScreen } from '../features/flights/FlightConfirmationScreen';
+import { TravelerInformationScreen } from '../features/flights/TravelerInformationScreen';
 import { PaymentScreen } from '../features/flights/PaymentScreen';
 import { SuccessScreen } from '../features/bookings/SuccessScreen';
 import { HistoryScreen } from '../features/bookings/HistoryScreen';
@@ -82,6 +83,10 @@ interface RouterProps {
   onClearNotifications: () => void;
   settingsSubScreen: string;
   setSettingsSubScreen: (s: string) => void;
+  guestCount: number;
+  setGuestCount: (c: number) => void;
+  travelers: import('../types').Traveler[];
+  setTravelers: (t: import('../types').Traveler[]) => void;
 }
 
 export const Router = (props: RouterProps) => {
@@ -98,7 +103,9 @@ export const Router = (props: RouterProps) => {
     authEmail, setAuthEmail,
     handleLogin, handleSignup, handleSearch, handleSearchHotels, handleBooking, 
     handleCancelBooking, onClearNotifications,
-    settingsSubScreen, setSettingsSubScreen
+    settingsSubScreen, setSettingsSubScreen,
+    guestCount, setGuestCount,
+    travelers, setTravelers
   } = props;
 
   React.useEffect(() => {
@@ -168,7 +175,7 @@ export const Router = (props: RouterProps) => {
             await handleBooking(selectedSeat);
             setScreen('success');
           }} 
-          onBack={() => setScreen('confirmation')} 
+          onBack={() => setScreen('traveler-info')} 
           language={language} 
           appearance={appearance}
         />;
@@ -177,15 +184,26 @@ export const Router = (props: RouterProps) => {
           flight={selectedFlight || undefined} 
           user={user}
           onBack={() => setScreen('seat-selection')} 
-          onContinue={(guests, passport) => {
-            if (user && passport !== user.passport) {
-              setUser({ ...user, passport });
-            }
-            setScreen('payment');
+          onContinue={(guests) => {
+            setGuestCount(guests);
+            setScreen('traveler-info');
           }} 
           language={language} 
           onEdit={(field) => { console.log('Edit', field); setScreen('flight-search'); }} 
           appearance={appearance} 
+        />;
+      case 'traveler-info':
+        return <TravelerInformationScreen 
+          guestCount={guestCount}
+          user={user}
+          onBack={() => setScreen('confirmation')}
+          onContinue={(t) => {
+            setTravelers(t);
+            setScreen('payment');
+          }}
+          appearance={appearance}
+          initialTravelers={travelers}
+          language={language}
         />;
       case 'success':
         return <SuccessScreen onBackToHome={() => setScreen('home')} onViewTrips={() => setScreen('my-trips')} appearance={appearance} />;

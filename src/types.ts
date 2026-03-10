@@ -11,7 +11,6 @@ export interface User {
   zipCode?: string;
   avatar?: string;
   bio?: string;
-  passport?: string;
 }
 
 export interface Flight {
@@ -51,6 +50,7 @@ export interface Booking {
   date?: string;
   description?: string;
   guests?: string;
+  travelers?: Traveler[];
   isFavorite?: boolean;
 }
 
@@ -101,10 +101,19 @@ export interface Hotel {
   amenities: string[];
 }
 
+export interface Traveler {
+  fullName: string;
+  passportNumber: string;
+  nationality: string;
+  dateOfBirth: string;
+  passportExpiration: string;
+  gender: 'Male' | 'Female' | 'Other' | '';
+}
+
 export type Screen = 
   | 'splash' 
   | 'auth-welcome' | 'auth-email' | 'auth-password' | 'auth-signup' | 'auth-forgot' | 'auth-verify' 
   | 'home' | 'packages-list' | 'package-details' | 'place-list' | 'flight-search' | 'flight-results' | 'flight-details' 
   | 'hotel-search' | 'hotel-results' | 'hotel-details' | 'hotel-confirmation' | 'location-picker'
-  | 'seat-selection' | 'check-availability' | 'payment' | 'confirmation' | 'ticket' | 'success'
+  | 'seat-selection' | 'check-availability' | 'payment' | 'confirmation' | 'traveler-info' | 'ticket' | 'success'
   | 'my-trips' | 'trip-details' | 'saved' | 'profile' | 'settings' | 'alerts';

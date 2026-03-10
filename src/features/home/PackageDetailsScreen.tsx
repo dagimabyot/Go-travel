@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ChevronLeft, Bookmark, Plane, Hotel, Car, MapPin, Star, Compass } from 'lucide-react';
 import { Package, User } from '../../types';
+import { translations } from '../../constants/translations';
 import { CheckAvailabilityModal } from './CheckAvailabilityModal';
 import { FlightDetailsModal } from './FlightDetailsModal';
 import { HotelDetailsModal } from './HotelDetailsModal';
@@ -23,6 +24,8 @@ export const PackageDetailsScreen = ({ pkg, user, onBack, onBook, language, appe
   const [mainImage, setMainImage] = useState(pkg.image);
 
   const galleryImages = pkg.images || [pkg.image];
+
+  const t = (key: string) => translations[language]?.[key] || translations['English'][key];
 
   return (
     <div className={`fixed inset-0 z-[210] flex flex-col overflow-y-auto no-scrollbar pt-12 transition-colors duration-300 ${appearance === 'Dark Mode' ? 'bg-slate-950 text-white' : 'bg-white text-slate-900'}`}>
@@ -53,7 +56,7 @@ export const PackageDetailsScreen = ({ pkg, user, onBack, onBook, language, appe
             </button>
           </div>
           
-          <div className="absolute top-6 left-1/2 -translate-x-1/2 text-white font-bold text-lg">Details</div>
+          <div className="absolute top-6 left-1/2 -translate-x-1/2 text-white font-bold text-lg">{t('details')}</div>
         </div>
 
         {/* Horizontal Gallery (Below Main Image) */}
@@ -83,7 +86,7 @@ export const PackageDetailsScreen = ({ pkg, user, onBack, onBook, language, appe
 
         <div className="mb-12">
           <h3 className={`font-normal text-2xl mb-4 ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>
-            We Know What You Want
+            {t('weKnowWhatYouWant')}
           </h3>
           <p className="text-slate-400 text-base leading-relaxed mb-6">
             {pkg.weKnowWhatYouWant || "This destination is designed for travelers who seek balance — adventure, relaxation, and unforgettable moments all in one place. From breathtaking natural views to rich local culture, every experience here feels carefully crafted just for you."}
@@ -96,7 +99,7 @@ export const PackageDetailsScreen = ({ pkg, user, onBack, onBook, language, appe
           
           {pkg.highlights && pkg.highlights.length > 0 && (
             <div className="mb-12">
-              <h3 className={`font-bold text-2xl mb-6 ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>✨ Highlights</h3>
+              <h3 className={`font-bold text-2xl mb-6 ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>✨ {t('highlights')}</h3>
               
               <div className="space-y-8">
                 {pkg.highlights.map((highlight, index) => (
@@ -113,7 +116,7 @@ export const PackageDetailsScreen = ({ pkg, user, onBack, onBook, language, appe
 
           <div className="mb-10">
             <h3 className={`font-bold text-2xl mb-4 ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>
-              {pkg.sunsetTitle || "🌅 The Best Sunset Ever!"}
+              {pkg.sunsetTitle || `🌅 ${t('bestSunsetEver')}`}
             </h3>
             <p className="text-slate-400 text-base leading-relaxed mb-6">
               {pkg.sunsetDescription || "As the day comes to an end, the destination reveals its most magical moment. Golden light spreads across the horizon, reflecting on the landscape and creating a peaceful, unforgettable sunset experience."}
@@ -143,7 +146,7 @@ export const PackageDetailsScreen = ({ pkg, user, onBack, onBook, language, appe
               onClick={onBook}
               className={`px-20 py-6 bg-blue-600 text-white rounded-[32px] font-bold text-xl shadow-2xl active:scale-95 transition-all hover:bg-blue-700 ${appearance === 'Dark Mode' ? 'shadow-blue-900/40' : 'shadow-blue-200'}`}
             >
-              Let's Go
+              {t('letsGo')}
             </button>
           </div>
         </div>

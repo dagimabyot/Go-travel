@@ -2,6 +2,7 @@ import React from 'react';
 import { ChevronLeft, Plane } from 'lucide-react';
 import { Flight } from '../../types';
 import { generateProfessionalPDF } from '../../utils/pdfGenerator';
+import { translations } from '../../constants/translations';
 
 import { BoardingPass } from '../../components/ui/BoardingPass';
 
@@ -15,6 +16,7 @@ interface TicketScreenProps {
 }
 
 export const TicketScreen = ({ onBack, onDownload, language, appearance, flight, seat }: TicketScreenProps) => {
+  const t = (key: string) => translations[language]?.[key] || translations['English'][key];
   const handleDownload = () => {
     if (flight) {
       // Create a temporary booking object for the PDF generator
@@ -56,7 +58,7 @@ export const TicketScreen = ({ onBack, onDownload, language, appearance, flight,
         <button onClick={onBack} className={`absolute left-0 w-12 h-12 border rounded-full flex items-center justify-center shadow-sm transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-900 border-slate-800 text-white' : 'bg-white border-slate-100 text-slate-900'}`}>
           <ChevronLeft size={24} />
         </button>
-        <h1 className={`text-xl font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>Boarding Pass</h1>
+        <h1 className={`text-xl font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{t('boardingPass')}</h1>
       </header>
 
       <div className="py-8">
@@ -78,7 +80,7 @@ export const TicketScreen = ({ onBack, onDownload, language, appearance, flight,
           onClick={handleDownload}
           className={`w-full bg-blue-600 text-white py-6 rounded-[32px] font-bold text-xl shadow-xl active:scale-95 transition-all ${appearance === 'Dark Mode' ? 'shadow-blue-900/40' : 'shadow-blue-200'}`}
         >
-          Download Ticket
+          {t('downloadTicket')}
         </button>
       </div>
     </div>

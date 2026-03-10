@@ -54,38 +54,39 @@ export const Navbar = ({ activeScreen, setScreen, language, appearance, user, se
           <span className={`font-bold text-xl md:text-2xl tracking-tight ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>GoTravel</span>
         </div>
         
-        <div className="flex justify-around w-full md:w-auto md:justify-center md:gap-12">
+        {/* Desktop Navigation & Avatar Grouped Right */}
+        <div className="hidden md:flex items-center gap-12 ml-auto">
           <NavItem 
             icon={<Home size={22} />} 
-            label="Home" 
+            label={t('home')} 
             active={activeScreen === 'home'} 
             onClick={() => setScreen('home')} 
             appearance={appearance}
           />
           <NavItem 
             icon={<Navigation size={22} />} 
-            label="My Trip" 
+            label={t('trips')} 
             active={isActive('my-trips')} 
             onClick={() => setScreen('my-trips')} 
             appearance={appearance}
           />
           <NavItem 
             icon={<Search size={22} />} 
-            label="Search" 
+            label={t('search')} 
             active={activeScreen === 'flight-search'} 
             onClick={() => setScreen('flight-search')} 
             appearance={appearance}
           />
           <NavItem 
             icon={<Bookmark size={22} />} 
-            label="Saved" 
+            label={t('saved')} 
             active={activeScreen === 'saved'} 
             onClick={() => setScreen('saved')} 
             appearance={appearance}
           />
           <NavItem 
             icon={<Settings size={22} />} 
-            label="Settings" 
+            label={t('settings')} 
             active={activeScreen === 'settings'} 
             onClick={() => {
               setSettingsSubScreen('main');
@@ -93,19 +94,58 @@ export const Navbar = ({ activeScreen, setScreen, language, appearance, user, se
             }} 
             appearance={appearance}
           />
-        </div>
-
-        {/* Desktop Avatar */}
-        <div className="hidden md:flex items-center gap-4">
+          
           <div 
             onClick={() => {
               setSettingsSubScreen('profile');
               setScreen('settings');
             }}
-            className="cursor-pointer hover:scale-105 transition-all"
+            className="cursor-pointer hover:scale-105 transition-all ml-4"
           >
             <Avatar user={user} size={40} />
           </div>
+        </div>
+
+        {/* Mobile Navigation (Bottom) */}
+        <div className="flex md:hidden justify-around w-full">
+          <NavItem 
+            icon={<Home size={22} />} 
+            label={t('home')} 
+            active={activeScreen === 'home'} 
+            onClick={() => setScreen('home')} 
+            appearance={appearance}
+          />
+          <NavItem 
+            icon={<Navigation size={22} />} 
+            label={t('trips')} 
+            active={isActive('my-trips')} 
+            onClick={() => setScreen('my-trips')} 
+            appearance={appearance}
+          />
+          <NavItem 
+            icon={<Search size={22} />} 
+            label={t('search')} 
+            active={activeScreen === 'flight-search'} 
+            onClick={() => setScreen('flight-search')} 
+            appearance={appearance}
+          />
+          <NavItem 
+            icon={<Bookmark size={22} />} 
+            label={t('saved')} 
+            active={activeScreen === 'saved'} 
+            onClick={() => setScreen('saved')} 
+            appearance={appearance}
+          />
+          <NavItem 
+            icon={<Settings size={22} />} 
+            label={t('settings')} 
+            active={activeScreen === 'settings'} 
+            onClick={() => {
+              setSettingsSubScreen('main');
+              setScreen('settings');
+            }} 
+            appearance={appearance}
+          />
         </div>
       </nav>
     </>

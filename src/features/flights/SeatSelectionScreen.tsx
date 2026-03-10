@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ChevronLeft, Plane } from 'lucide-react';
 import { Flight } from '../../types';
+import { translations } from '../../constants/translations';
 
 interface SeatSelectionScreenProps {
   onBack: () => void;
@@ -11,6 +12,7 @@ interface SeatSelectionScreenProps {
 }
 
 export const SeatSelectionScreen = ({ onBack, onContinue, language, appearance, flight }: SeatSelectionScreenProps) => {
+  const t = (key: string) => translations[language]?.[key] || translations['English'][key];
   const [selectedSeat, setSelectedSeat] = useState('04');
 
   const economySeats = Array.from({ length: 60 }, (_, i) => i + 1);
@@ -44,26 +46,26 @@ export const SeatSelectionScreen = ({ onBack, onContinue, language, appearance, 
         <button onClick={onBack} className={`absolute left-0 w-12 h-12 border rounded-full flex items-center justify-center shadow-sm transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-900 border-slate-800 text-white' : 'bg-white border-slate-100 text-slate-900'}`}>
           <ChevronLeft size={24} />
         </button>
-        <h1 className={`text-xl font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>Select Seat</h1>
+        <h1 className={`text-xl font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{t('selectSeat')}</h1>
       </header>
 
       <div className="flex items-center justify-between gap-4 mb-12">
         <div className="flex-1 min-w-0">
           <p className={`text-2xl font-bold truncate ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{flight?.from || 'Origin'}</p>
-          <p className="text-xs text-slate-400 truncate">Departure</p>
+          <p className="text-xs text-slate-400 truncate">{t('departure')}</p>
         </div>
         <div className={`shrink-0 w-16 h-16 rounded-full flex items-center justify-center text-blue-600 border transition-colors ${appearance === 'Dark Mode' ? 'bg-blue-900/20 border-blue-900/30' : 'bg-blue-50 border-blue-100'}`}>
           <Plane size={24} className="rotate-45" />
         </div>
         <div className="flex-1 min-w-0 text-right">
           <p className={`text-2xl font-bold truncate ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{flight?.to || 'Destination'}</p>
-          <p className="text-xs text-slate-400 truncate">Arrival</p>
+          <p className="text-xs text-slate-400 truncate">{t('arrival')}</p>
         </div>
       </div>
 
       <div className="space-y-12 max-h-[60vh] overflow-y-auto pr-2 hide-scrollbar">
         <div>
-          <p className="text-center text-slate-400 font-bold text-sm mb-8 sticky top-0 bg-inherit py-2 z-10">Business Class</p>
+          <p className="text-center text-slate-400 font-bold text-sm mb-8 sticky top-0 bg-inherit py-2 z-10">{t('businessClass')}</p>
           <div className="grid grid-cols-[1fr_auto_1fr] gap-4 justify-items-center">
             <div className="grid grid-cols-2 gap-2 sm:gap-4">
               {businessSeats.filter((_, i) => i % 4 < 2).map(n => <Seat key={n} num={n} isBusiness />)}
@@ -76,7 +78,7 @@ export const SeatSelectionScreen = ({ onBack, onContinue, language, appearance, 
         </div>
 
         <div>
-          <p className="text-center text-slate-400 font-bold text-sm mb-8 sticky top-0 bg-inherit py-2 z-10">Economy Class</p>
+          <p className="text-center text-slate-400 font-bold text-sm mb-8 sticky top-0 bg-inherit py-2 z-10">{t('economyClass')}</p>
           <div className="grid grid-cols-[1fr_auto_1fr] gap-4 justify-items-center">
             <div className="grid grid-cols-2 gap-2 sm:gap-4">
               {economySeats.filter((_, i) => i % 4 < 2).map(n => <Seat key={n} num={n} />)}
@@ -92,11 +94,11 @@ export const SeatSelectionScreen = ({ onBack, onContinue, language, appearance, 
       <div className={`mt-12 p-8 rounded-[40px] border transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-900 border-slate-800' : 'bg-slate-50 border-slate-100'}`}>
         <div className="flex justify-between items-center mb-6">
           <div className="text-center">
-            <p className="text-xs font-bold text-slate-400 mb-1">Seat Number</p>
+            <p className="text-xs font-bold text-slate-400 mb-1">{t('seatNumber')}</p>
             <p className={`text-lg font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{selectedSeat}</p>
           </div>
           <div className="text-center">
-            <p className="text-xs font-bold text-slate-400 mb-1">Ticket Price</p>
+            <p className="text-xs font-bold text-slate-400 mb-1">{t('ticketPrice')}</p>
             <p className={`text-lg font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>${flight?.price || '120'}</p>
           </div>
         </div>
@@ -109,7 +111,7 @@ export const SeatSelectionScreen = ({ onBack, onContinue, language, appearance, 
           onClick={() => onContinue(selectedSeat)}
           className="w-full bg-blue-600 text-white py-4 rounded-2xl font-bold text-lg active:scale-95 transition-all shadow-lg shadow-blue-600/20"
         >
-          Continue
+          {t('continue')}
         </button>
       </div>
     </div>

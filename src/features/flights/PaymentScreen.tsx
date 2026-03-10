@@ -84,11 +84,11 @@ export const PaymentScreen = ({ flight, pkg, onConfirm, onBack, language, appear
           <button onClick={onBack} className={`absolute left-0 w-12 h-12 border rounded-full flex items-center justify-center shadow-sm transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-900 border-slate-800 text-white' : 'bg-white border-slate-100 text-slate-900'}`}>
             <ChevronLeft size={24} />
           </button>
-          <h1 className={`text-xl font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>Payment Method</h1>
+          <h1 className={`text-xl font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{t('paymentMethod')}</h1>
         </header>
 
         <div className="space-y-4">
-          <p className="text-slate-400 text-xs font-bold uppercase tracking-widest mb-6 px-2">Select your preferred method</p>
+          <p className="text-slate-400 text-xs font-bold uppercase tracking-widest mb-6 px-2">{t('selectPreferredMethod')}</p>
           
           <button 
             onClick={() => handleMethodSelect('card')}
@@ -98,8 +98,8 @@ export const PaymentScreen = ({ flight, pkg, onConfirm, onBack, language, appear
               <CreditCard size={28} />
             </div>
             <div className="flex-1 text-left">
-              <p className={`font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>Credit or Debit Card</p>
-              <p className="text-xs text-slate-400">Visa, Mastercard, AMEX</p>
+              <p className={`font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{t('creditDebitCard')}</p>
+              <p className="text-xs text-slate-400">{t('visaMastercardAmex')}</p>
             </div>
             <ChevronLeft size={20} className="text-slate-300 rotate-180" />
           </button>
@@ -120,8 +120,8 @@ export const PaymentScreen = ({ flight, pkg, onConfirm, onBack, language, appear
               />
             </div>
             <div className="flex-1 text-left">
-              <p className={`font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>PayPal</p>
-              <p className="text-xs text-slate-400">Fast and secure checkout</p>
+              <p className={`font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{t('paypal')}</p>
+              <p className="text-xs text-slate-400">{t('fastSecureCheckout')}</p>
             </div>
             <ChevronLeft size={20} className="text-slate-300 rotate-180" />
           </button>
@@ -143,8 +143,8 @@ export const PaymentScreen = ({ flight, pkg, onConfirm, onBack, language, appear
               />
             </div>
             <div className="flex-1 text-left">
-              <p className={`font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>Stripe Account</p>
-              <p className="text-xs text-slate-400">Direct checkout with Stripe</p>
+              <p className={`font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{t('stripeAccount')}</p>
+              <p className="text-xs text-slate-400">{t('directCheckoutStripe')}</p>
             </div>
             <ChevronLeft size={20} className="text-slate-300 rotate-180" />
           </button>
@@ -157,8 +157,8 @@ export const PaymentScreen = ({ flight, pkg, onConfirm, onBack, language, appear
               <Building2 size={28} />
             </div>
             <div className="flex-1 text-left">
-              <p className={`font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>Bank Transfer</p>
-              <p className="text-xs text-slate-400">Direct wire from your bank</p>
+              <p className={`font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{t('bankTransfer')}</p>
+              <p className="text-xs text-slate-400">{t('directWireBank')}</p>
             </div>
             <ChevronLeft size={20} className="text-slate-300 rotate-180" />
           </button>
@@ -174,7 +174,7 @@ export const PaymentScreen = ({ flight, pkg, onConfirm, onBack, language, appear
           <ChevronLeft size={24} />
         </button>
         <h1 className={`text-xl font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>
-          {method === 'card' ? 'Card Details' : method === 'paypal' ? 'PayPal Checkout' : method === 'stripe' ? 'Stripe Checkout' : 'Bank Details'}
+          {method === 'card' ? t('cardDetails') : method === 'paypal' ? t('paypalCheckout') : method === 'stripe' ? t('stripeCheckout') : t('bankDetails')}
         </h1>
         <div className="w-12" />
       </header>
@@ -183,14 +183,14 @@ export const PaymentScreen = ({ flight, pkg, onConfirm, onBack, language, appear
         <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white shrink-0">
           <CheckCircle2 size={16} />
         </div>
-        <p className={`text-xs font-bold ${appearance === 'Dark Mode' ? 'text-blue-200' : 'text-blue-900'}`}>Your trip will be marked as <span className="uppercase tracking-wider">Upcoming</span> after payment.</p>
+        <p className={`text-xs font-bold ${appearance === 'Dark Mode' ? 'text-blue-200' : 'text-blue-900'}`}>{t('tripUpcomingNote')}</p>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-8">
         {method === 'card' && (
           <>
             <div className="space-y-3">
-              <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">Cardholder Name</label>
+              <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">{t('cardholderName')}</label>
               <input 
                 type="text"
                 name="cardHolder"
@@ -200,20 +200,20 @@ export const PaymentScreen = ({ flight, pkg, onConfirm, onBack, language, appear
               />
             </div>
             <div className="space-y-3">
-              <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">Card Number</label>
+              <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">{t('cardNumber')}</label>
               <div className={`p-5 rounded-2xl border transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-900 border-slate-800' : 'bg-slate-50 border-slate-100'}`}>
                 <CardNumberElement options={elementOptions} />
               </div>
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-3">
-                <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">Expiry Date</label>
+                <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">{t('expiryDate')}</label>
                 <div className={`p-5 rounded-2xl border transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-900 border-slate-800' : 'bg-slate-50 border-slate-100'}`}>
                   <CardExpiryElement options={elementOptions} />
                 </div>
               </div>
               <div className="space-y-3">
-                <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">CVV</label>
+                <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">{t('cvv')}</label>
                 <div className={`p-5 rounded-2xl border transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-900 border-slate-800' : 'bg-slate-50 border-slate-100'}`}>
                   <CardCvcElement options={elementOptions} />
                 </div>
@@ -236,7 +236,7 @@ export const PaymentScreen = ({ flight, pkg, onConfirm, onBack, language, appear
               />
             </div>
             <div className="space-y-3">
-              <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">PayPal Email</label>
+              <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">{t('paypalEmail')}</label>
               <input 
                 type="email"
                 name="email"
@@ -245,7 +245,7 @@ export const PaymentScreen = ({ flight, pkg, onConfirm, onBack, language, appear
                 className={`w-full p-5 rounded-2xl border focus:border-blue-600 focus:outline-none font-bold transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-900 border-slate-800 text-white' : 'bg-slate-50 border-slate-100 text-slate-900'}`}
               />
             </div>
-            <p className="text-xs text-slate-400 text-center">You will be redirected to PayPal to authorize the payment.</p>
+            <p className="text-xs text-slate-400 text-center">{t('paypalRedirectNote')}</p>
           </div>
         )}
 
@@ -266,8 +266,8 @@ export const PaymentScreen = ({ flight, pkg, onConfirm, onBack, language, appear
               </div>
             </div>
             <div className={`p-6 rounded-3xl border transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-900 border-slate-800' : 'bg-slate-50 border-slate-100'}`}>
-              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Checkout Info</p>
-              <p className={`text-xs leading-relaxed ${appearance === 'Dark Mode' ? 'text-slate-400' : 'text-slate-600'}`}>You will be redirected to Stripe's secure checkout page to complete your payment for this trip.</p>
+              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">{t('checkoutInfo')}</p>
+              <p className={`text-xs leading-relaxed ${appearance === 'Dark Mode' ? 'text-slate-400' : 'text-slate-600'}`}>{t('stripeRedirectNote')}</p>
             </div>
           </div>
         )}
@@ -275,7 +275,7 @@ export const PaymentScreen = ({ flight, pkg, onConfirm, onBack, language, appear
         {method === 'bank' && (
           <div className="space-y-6">
             <div className="space-y-3">
-              <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">Account Holder Name</label>
+              <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">{t('accountHolderName')}</label>
               <input 
                 type="text"
                 name="accountHolder"
@@ -285,7 +285,7 @@ export const PaymentScreen = ({ flight, pkg, onConfirm, onBack, language, appear
               />
             </div>
             <div className="space-y-3">
-              <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">Account Number / IBAN</label>
+              <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">{t('accountNumberIban')}</label>
               <input 
                 type="text"
                 name="accountNumber"
@@ -295,8 +295,8 @@ export const PaymentScreen = ({ flight, pkg, onConfirm, onBack, language, appear
               />
             </div>
             <div className={`p-6 rounded-3xl border transition-colors ${appearance === 'Dark Mode' ? 'bg-emerald-900/20 border-emerald-900/30' : 'bg-emerald-50 border-emerald-100'}`}>
-              <p className="text-[10px] font-bold text-emerald-600 uppercase tracking-widest mb-2">Instructions</p>
-              <p className={`text-xs leading-relaxed ${appearance === 'Dark Mode' ? 'text-emerald-200' : 'text-emerald-900'}`}>Please complete the transfer within 24 hours. Your booking will be confirmed once funds are received.</p>
+              <p className="text-[10px] font-bold text-emerald-600 uppercase tracking-widest mb-2">{t('bankInstructions')}</p>
+              <p className={`text-xs leading-relaxed ${appearance === 'Dark Mode' ? 'text-emerald-200' : 'text-emerald-900'}`}>{t('bankTransferNote')}</p>
             </div>
           </div>
         )}
@@ -307,7 +307,7 @@ export const PaymentScreen = ({ flight, pkg, onConfirm, onBack, language, appear
             disabled={loading}
             className={`w-full py-6 rounded-[32px] font-bold text-xl shadow-xl transition-all flex items-center justify-center gap-3 active:scale-95 ${method === 'bank' ? (appearance === 'Dark Mode' ? 'bg-emerald-600 shadow-emerald-900/40' : 'bg-emerald-600 shadow-emerald-100') : (appearance === 'Dark Mode' ? 'bg-blue-600 shadow-blue-900/40' : 'bg-blue-600 shadow-blue-100')} text-white`}
           >
-            {loading ? <Loader2 className="animate-spin" /> : `Pay Now`}
+            {loading ? <Loader2 className="animate-spin" /> : t('payNow')}
           </button>
         </div>
       </form>

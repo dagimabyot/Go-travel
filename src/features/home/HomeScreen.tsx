@@ -43,11 +43,11 @@ export const HomeScreen = ({
   const t = (key: string) => translations[language]?.[key] || translations['English'][key];
   
   const categories = [
-    { name: 'All', icon: <LayoutGrid size={20} /> },
-    { name: 'Beach', icon: <Palmtree size={20} /> },
-    { name: 'Forest', icon: <Trees size={20} /> },
-    { name: 'Mountain', icon: <Mountain size={20} /> },
-    { name: 'Submarine', icon: <Ship size={20} /> },
+    { name: t('all'), icon: <LayoutGrid size={20} />, key: 'All' },
+    { name: t('beach'), icon: <Palmtree size={20} />, key: 'Beach' },
+    { name: t('forest'), icon: <Trees size={20} />, key: 'Forest' },
+    { name: t('mountain'), icon: <Mountain size={20} />, key: 'Mountain' },
+    { name: t('submarine'), icon: <Ship size={20} />, key: 'Submarine' },
   ];
 
   const isSaved = (id: string) => savedPackages.some(p => p.id === id);
@@ -102,9 +102,9 @@ export const HomeScreen = ({
             <div>
               <div className="flex justify-between items-center mb-6">
                 <div className="flex items-baseline gap-2">
-                  <h3 className="font-bold text-sm text-slate-400">101 Packages</h3>
+                  <h3 className="font-bold text-sm text-slate-400">{packages.length} {t('packages')}</h3>
                 </div>
-                <button onClick={onSeeAllPackages} className="text-sm text-primary font-bold">See all</button>
+                <button onClick={onSeeAllPackages} className="text-sm text-primary font-bold">{t('seeAll')}</button>
               </div>
               <div className="flex overflow-x-auto gap-6 pb-4 hide-scrollbar -mx-6 px-6">
                 {filteredPackages.map(pkg => (
@@ -145,8 +145,8 @@ export const HomeScreen = ({
             {/* Popular Packages Section */}
             <div>
               <div className="flex justify-between items-center mb-6">
-                <h3 className={`font-bold text-lg ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>Popular Packages</h3>
-                <button onClick={onSeeAllPackages} className="text-sm text-primary font-bold">See all</button>
+                <h3 className={`font-bold text-lg ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{t('popularPackages')}</h3>
+                <button onClick={onSeeAllPackages} className="text-sm text-primary font-bold">{t('seeAll')}</button>
               </div>
               {popularPackages.length > 0 && (
                 <div className="relative">
@@ -167,7 +167,7 @@ export const HomeScreen = ({
                         <span className="text-xs font-bold">{popularPackages[0].rating.toFixed(1)}</span>
                       </div>
                       <p className="font-bold text-2xl leading-tight mb-1">{popularPackages[0].name}</p>
-                      <p className="text-sm opacity-80">{popularPackages[0].duration} full package</p>
+                      <p className="text-sm opacity-80">{popularPackages[0].duration} {t('fullPackage')}</p>
                     </div>
                     <button 
                       onClick={(e) => {
@@ -191,8 +191,8 @@ export const HomeScreen = ({
             {/* Top Packages Section */}
             <div>
               <div className="flex justify-between items-center mb-6">
-                <h3 className={`font-bold text-lg ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>Top Packages</h3>
-                <button onClick={onSeeAllPackages} className="text-sm text-primary font-bold">See all</button>
+                <h3 className={`font-bold text-lg ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{t('topPackages')}</h3>
+                <button onClick={onSeeAllPackages} className="text-sm text-primary font-bold">{t('seeAll')}</button>
               </div>
               <div className="flex overflow-x-auto gap-4 pb-4 hide-scrollbar -mx-6 px-6">
                 {packages.slice(2, 6).map(pkg => (
@@ -227,14 +227,14 @@ export const HomeScreen = ({
                 <Plane size={40} className="rotate-45" />
               </div>
               <div>
-                <h3 className={`text-xl font-bold mb-2 ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>Ready to fly?</h3>
-                <p className="text-slate-500 text-sm max-w-[200px]">Find the best deals on flights to your favorite destinations.</p>
+                <h3 className={`text-xl font-bold mb-2 ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{t('readyToFly')}</h3>
+                <p className="text-slate-500 text-sm max-w-[200px]">{t('findBestDeals')}</p>
               </div>
               <button 
                 onClick={onSearchFlights}
                 className={`w-full bg-blue-600 text-white py-5 rounded-[24px] font-bold text-lg shadow-xl active:scale-95 transition-all ${appearance === 'Dark Mode' ? 'shadow-blue-900/20' : 'shadow-blue-200'}`}
               >
-                Search Flights
+                {t('searchFlights')}
               </button>
             </div>
           </div>
@@ -244,18 +244,18 @@ export const HomeScreen = ({
           <div className="space-y-10">
             {/* Categories */}
             <div>
-              <h3 className={`font-bold text-lg mb-6 ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>Categories</h3>
+              <h3 className={`font-bold text-lg mb-6 ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{t('categories')}</h3>
               <div className="flex gap-6 overflow-x-auto hide-scrollbar -mx-6 px-6">
                 {categories.map((cat, i) => (
                   <button 
                     key={i} 
-                    onClick={() => setActiveCategory(cat.name)}
+                    onClick={() => setActiveCategory(cat.key)}
                     className="flex flex-col items-center gap-2 outline-none group"
                   >
-                    <div className={`w-14 h-14 rounded-full flex items-center justify-center transition-all ${activeCategory === cat.name ? 'bg-accent text-white shadow-lg shadow-accent/20' : appearance === 'Dark Mode' ? 'bg-slate-900 border border-slate-800 text-slate-600' : 'bg-white border border-slate-100 text-slate-400 group-active:scale-90'}`}>
+                    <div className={`w-14 h-14 rounded-full flex items-center justify-center transition-all ${activeCategory === cat.key ? 'bg-accent text-white shadow-lg shadow-accent/20' : appearance === 'Dark Mode' ? 'bg-slate-900 border border-slate-800 text-slate-600' : 'bg-white border border-slate-100 text-slate-400 group-active:scale-90'}`}>
                       {cat.icon}
                     </div>
-                    <span className={`text-[10px] font-bold ${activeCategory === cat.name ? appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900' : 'text-slate-400'}`}>{cat.name}</span>
+                    <span className={`text-[10px] font-bold ${activeCategory === cat.key ? appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900' : 'text-slate-400'}`}>{cat.name}</span>
                   </button>
                 ))}
               </div>
@@ -264,8 +264,8 @@ export const HomeScreen = ({
             {/* Popular Places */}
             <div>
               <div className="flex justify-between items-center mb-6">
-                <h3 className={`font-bold text-lg ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>Popular Places</h3>
-                <button onClick={onSeeAllPackages} className="text-sm text-primary font-bold">See all</button>
+                <h3 className={`font-bold text-lg ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{t('popularPlaces')}</h3>
+                <button onClick={onSeeAllPackages} className="text-sm text-primary font-bold">{t('seeAll')}</button>
               </div>
               <div className="flex overflow-x-auto gap-6 pb-4 hide-scrollbar -mx-6 px-6">
                 {filteredPackages.slice(0, 3).map(pkg => (
@@ -306,8 +306,8 @@ export const HomeScreen = ({
             {/* Recommended for you */}
             <div>
               <div className="flex justify-between items-center mb-6">
-                <h3 className={`font-bold text-lg ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>Recommended for you</h3>
-                <button onClick={onSeeAllPackages} className="text-sm text-primary font-bold">See all</button>
+                <h3 className={`font-bold text-lg ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{t('recommendedForYou')}</h3>
+                <button onClick={onSeeAllPackages} className="text-sm text-primary font-bold">{t('seeAll')}</button>
               </div>
               <div className="flex overflow-x-auto gap-6 pb-4 hide-scrollbar -mx-6 px-6">
                 {filteredPackages.slice(3, 6).map(pkg => (
@@ -352,8 +352,8 @@ export const HomeScreen = ({
             {/* Popular Hotels */}
             <div>
               <div className="flex justify-between items-center mb-6">
-                <h3 className={`font-bold text-lg ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>Popular Hotels</h3>
-                <button onClick={onSearchHotels} className="text-sm text-primary font-bold">See all</button>
+                <h3 className={`font-bold text-lg ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{t('popularHotels')}</h3>
+                <button onClick={onSearchHotels} className="text-sm text-primary font-bold">{t('seeAll')}</button>
               </div>
               <div className="flex overflow-x-auto gap-6 pb-4 hide-scrollbar -mx-6 px-6">
                 {[
@@ -370,7 +370,7 @@ export const HomeScreen = ({
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                     <div className="absolute bottom-6 left-6 right-6 text-white">
                       <p className="font-bold text-lg leading-tight">{hotel.name}</p>
-                      <p className="text-sm opacity-80">${hotel.price}/per day</p>
+                      <p className="text-sm opacity-80">${hotel.price}/{t('perDay')}</p>
                     </div>
                     <button className={`absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center shadow-md transition-all ${appearance === 'Dark Mode' ? 'bg-slate-800 text-slate-400' : 'bg-white text-slate-400'}`}>
                       <Star size={14} />
@@ -383,8 +383,8 @@ export const HomeScreen = ({
             {/* Near to you */}
             <div>
               <div className="flex justify-between items-center mb-6">
-                <h3 className={`font-bold text-lg ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>Near to you</h3>
-                <button onClick={onSearchHotels} className="text-sm text-primary font-bold">See all</button>
+                <h3 className={`font-bold text-lg ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{t('nearToYou')}</h3>
+                <button onClick={onSearchHotels} className="text-sm text-primary font-bold">{t('seeAll')}</button>
               </div>
               <div className="flex overflow-x-auto gap-6 pb-4 hide-scrollbar -mx-6 px-6">
                 {[
@@ -401,7 +401,7 @@ export const HomeScreen = ({
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                     <div className="absolute bottom-6 left-6 right-6 text-white">
                       <p className="font-bold text-lg leading-tight">{hotel.name}</p>
-                      <p className="text-sm opacity-80">${hotel.price}/per day</p>
+                      <p className="text-sm opacity-80">${hotel.price}/{t('perDay')}</p>
                     </div>
                     <button className={`absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center shadow-md transition-all ${appearance === 'Dark Mode' ? 'bg-slate-800 text-slate-400' : 'bg-white text-slate-400'}`}>
                       <Star size={14} />

@@ -37,7 +37,7 @@ export const FlightResultsScreen = ({ flights, onSelect, onBack, language }: Fli
             className="w-full max-w-md bg-white rounded-t-[48px] p-8 shadow-2xl"
           >
             <div className="flex justify-between items-center mb-8">
-              <h3 className="text-xl font-bold text-slate-900">Filter Flights</h3>
+              <h3 className="text-xl font-bold text-slate-900">{t('filterFlights')}</h3>
               <button onClick={() => setShowFilters(false)} className="w-10 h-10 flex items-center justify-center rounded-full bg-slate-50">
                 <X size={20} />
               </button>
@@ -47,7 +47,7 @@ export const FlightResultsScreen = ({ flights, onSelect, onBack, language }: Fli
               {/* Price Range */}
               <div>
                 <div className="flex justify-between items-center mb-4">
-                  <p className="text-sm font-bold text-slate-900">Max Price</p>
+                  <p className="text-sm font-bold text-slate-900">{t('maxPrice')}</p>
                   <p className="text-sm font-bold text-primary">${maxPrice}</p>
                 </div>
                 <input 
@@ -65,7 +65,7 @@ export const FlightResultsScreen = ({ flights, onSelect, onBack, language }: Fli
                 onClick={() => setShowFilters(false)}
                 className="w-full py-5 bg-primary text-white rounded-[24px] font-bold text-lg shadow-lg shadow-primary/30"
               >
-                Apply Filters
+                {t('applyFilters')}
               </button>
             </div>
           </motion.div>
@@ -128,24 +128,24 @@ export const FlightResultsScreen = ({ flights, onSelect, onBack, language }: Fli
               className="bg-white rounded-[32px] p-6 shadow-sm border border-slate-100 cursor-pointer hover:border-primary/50 transition-all group"
             >
               <div className="space-y-4 bg-slate-50/50 p-6 rounded-2xl">
-                <p className="text-lg font-bold text-slate-900">Date : {flight.departure ? flight.departure.replace(' ', ' T') : '2026-08-20 T14:00:00'}</p>
-                <p className="text-lg font-bold text-slate-900">From : {flight.from}</p>
-                <p className="text-lg font-bold text-slate-900">To : {flight.to}</p>
-                <p className="text-lg font-bold text-slate-900">Flight : {flight.airline}</p>
+                <p className="text-lg font-bold text-slate-900">{t('date')} : {flight.departure ? flight.departure.replace(' ', ' T') : '2026-08-20 T14:00:00'}</p>
+                <p className="text-lg font-bold text-slate-900">{t('from')} : {flight.from}</p>
+                <p className="text-lg font-bold text-slate-900">{t('to')} : {flight.to}</p>
+                <p className="text-lg font-bold text-slate-900">{t('flight')} : {flight.airline}</p>
               </div>
 
               <div className="flex justify-between items-center mt-6 pt-6 border-t border-slate-100">
-                <p className="text-2xl font-bold text-primary">${flight.price}<span className="text-xs font-normal text-slate-400 ml-1">/ person</span></p>
+                <p className="text-2xl font-bold text-primary">${flight.price}<span className="text-xs font-normal text-slate-400 ml-1">/ {t('perPerson')}</span></p>
                 <button className="px-6 py-2 bg-primary text-white rounded-full text-sm font-bold shadow-md shadow-primary/20">
-                  Select
+                  {t('select')}
                 </button>
               </div>
             </motion.div>
           ))
         ) : (
           <div className="flex flex-col items-center justify-center py-20 text-slate-400 text-center">
-            <p className="text-lg font-bold text-slate-900 mb-2">No flights found</p>
-            <p className="text-sm">Try adjusting your filters</p>
+            <p className="text-lg font-bold text-slate-900 mb-2">{t('noFlightsFound')}</p>
+            <p className="text-sm">{t('tryAdjustingFilters')}</p>
           </div>
         )}
       </div>

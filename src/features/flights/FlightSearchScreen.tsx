@@ -27,7 +27,7 @@ export const FlightSearchScreen = ({ onBack, onSearch, language, appearance }: F
         >
           <ChevronLeft size={24} />
         </button>
-        <h1 className={`text-xl font-bold absolute left-1/2 -translate-x-1/2 ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>Flight</h1>
+        <h1 className={`text-xl font-bold absolute left-1/2 -translate-x-1/2 ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{t('flight')}</h1>
         <div className="w-12" /> {/* Spacer */}
       </header>
 
@@ -38,7 +38,7 @@ export const FlightSearchScreen = ({ onBack, onSearch, language, appearance }: F
             <Plane size={24} className="rotate-45" />
           </div>
           <div className="flex-1 min-w-0">
-            <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">From</p>
+            <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">{t('from')}</p>
             <div className="flex items-center justify-between gap-2">
               <input 
                 type="text" 
@@ -60,7 +60,7 @@ export const FlightSearchScreen = ({ onBack, onSearch, language, appearance }: F
             <Plane size={24} className="rotate-[135deg]" />
           </div>
           <div className="flex-1 min-w-0">
-            <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">To</p>
+            <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">{t('to')}</p>
             <div className="flex items-center justify-between gap-2">
               <input 
                 type="text" 
@@ -84,7 +84,7 @@ export const FlightSearchScreen = ({ onBack, onSearch, language, appearance }: F
             <Calendar size={24} />
           </div>
           <div className="flex-1">
-            <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Date</p>
+            <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">{t('date')}</p>
             <input 
               type="text" 
               value={date} 
@@ -101,7 +101,7 @@ export const FlightSearchScreen = ({ onBack, onSearch, language, appearance }: F
             <Calendar size={24} />
           </div>
           <div className="flex-1">
-            <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Return Date</p>
+            <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">{t('returnDate')}</p>
             <input 
               type="text" 
               value={returnDate} 
@@ -118,7 +118,7 @@ export const FlightSearchScreen = ({ onBack, onSearch, language, appearance }: F
             <Users size={24} />
           </div>
           <div className="flex-1">
-            <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Traveler</p>
+            <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">{t('traveler')}</p>
             <input 
               type="text" 
               value={travelers} 
@@ -133,7 +133,7 @@ export const FlightSearchScreen = ({ onBack, onSearch, language, appearance }: F
           onClick={() => onSearch({ from, to, date, returnDate, travelers })}
           className={`w-full bg-blue-600 text-white py-6 rounded-[32px] font-bold text-xl shadow-xl active:scale-95 transition-all mt-8 ${appearance === 'Dark Mode' ? 'shadow-blue-900/20' : 'shadow-blue-200'}`}
         >
-          Search
+          {t('search')}
         </button>
       </div>
     </div>
