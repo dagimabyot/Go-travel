@@ -6,7 +6,8 @@ import {
   ChevronLeft
 } from 'lucide-react';
 import { User, AppNotification } from '../../types';
-import { translations } from '../../constants/translations';
+import { useLanguage } from '../../contexts/LanguageContext';
+import { getLanguageDisplayName, getLanguageFlagEmoji } from '../../utils/i18n';
 import { Avatar } from '../../components/ui/Avatar';
 
 interface SettingsScreenProps {
@@ -47,7 +48,7 @@ export const SettingsScreen = ({
   setSubScreen
 }: SettingsScreenProps) => {
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
-  const t = (key: string) => translations[language]?.[key] || translations['English'][key];
+  const { t } = useLanguage();
 
   const renderSubScreen = () => {
     switch (subScreen) {
@@ -772,12 +773,20 @@ const ContactUsSubScreen = ({ language, appearance, onBack }: { language: string
 };
 
 const LanguageSubScreen = ({ language, setLanguage, appearance, onBack }: { language: string, setLanguage: (l: string) => void, appearance: string, onBack: () => void }) => {
-  const t = (key: string) => translations[language]?.[key] || translations['English'][key];
+  const { t } = useLanguage();
   const languages = [
-    { name: 'English', code: 'English', flag: '🇺🇸' },
-    { name: 'Español', code: 'Spanish', flag: '🇪🇸' },
-    { name: 'Français', code: 'French', flag: '🇫🇷' },
-    { name: 'አማርኛ', code: 'Amharic', flag: '🇪🇹' }
+    { name: 'English', code: 'English' as const, flag: '🇬🇧' },
+    { name: 'Español', code: 'Spanish' as const, flag: '🇪🇸' },
+    { name: 'አማርኛ', code: 'Amharic' as const, flag: '🇪🇹' },
+    { name: 'Français', code: 'French' as const, flag: '🇫🇷' },
+    { name: 'العربية', code: 'Arabic' as const, flag: '🇸🇦' },
+    { name: 'Deutsch', code: 'German' as const, flag: '🇩🇪' },
+    { name: '中文', code: 'Chinese' as const, flag: '🇨🇳' },
+    { name: 'हिन्दी', code: 'Hindi' as const, flag: '🇮🇳' },
+    { name: 'Português', code: 'Portuguese' as const, flag: '🇵🇹' },
+    { name: 'Русский', code: 'Russian' as const, flag: '🇷🇺' },
+    { name: 'Türkçe', code: 'Turkish' as const, flag: '🇹🇷' },
+    { name: 'Kiswahili', code: 'Swahili' as const, flag: '🇹🇿' }
   ];
 
   return (
@@ -786,7 +795,7 @@ const LanguageSubScreen = ({ language, setLanguage, appearance, onBack }: { lang
         <button onClick={onBack} className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-900 text-white' : 'bg-slate-100 text-slate-900'}`}>
           <ChevronLeft size={20} />
         </button>
-        <h1 className={`text-lg font-semibold ml-4 ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{t('selectLanguage')}</h1>
+        <h1 className={`text-lg font-semibold ml-4 ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{t('settings.selectLanguage')}</h1>
       </header>
 
       <div className="flex-1 px-6 pt-8 overflow-y-auto no-scrollbar pb-32">
