@@ -776,8 +776,16 @@ const LanguageSubScreen = ({ language, setLanguage, appearance, onBack }: { lang
   const languages = [
     { name: 'English', code: 'English', flag: '🇺🇸' },
     { name: 'Español', code: 'Spanish', flag: '🇪🇸' },
+    { name: 'አማርኛ', code: 'Amharic', flag: '🇪🇹' },
     { name: 'Français', code: 'French', flag: '🇫🇷' },
-    { name: 'አማርኛ', code: 'Amharic', flag: '🇪🇹' }
+    { name: 'العربية', code: 'Arabic', flag: '🇸🇦' },
+    { name: 'Deutsch', code: 'German', flag: '🇩🇪' },
+    { name: '中文', code: 'Chinese', flag: '🇨🇳' },
+    { name: 'हिन्दी', code: 'Hindi', flag: '🇮🇳' },
+    { name: 'Português', code: 'Portuguese', flag: '🇧🇷' },
+    { name: 'Русский', code: 'Russian', flag: '🇷🇺' },
+    { name: 'Türkçe', code: 'Turkish', flag: '🇹🇷' },
+    { name: 'Swahili', code: 'Swahili', flag: '🇰🇪' }
   ];
 
   return (
