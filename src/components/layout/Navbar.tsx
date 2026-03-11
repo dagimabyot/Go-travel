@@ -1,7 +1,7 @@
 import React from 'react';
 import { Plane, Home, Compass, Search, Bookmark, Settings, Navigation } from 'lucide-react';
 import { Screen, User } from '../../types';
-import { translations } from '../../constants/translations';
+import { useLanguage } from '../../contexts/LanguageContext';
 import { Avatar } from '../ui/Avatar';
 
 interface NavbarProps {
@@ -15,7 +15,7 @@ interface NavbarProps {
 
 export const Navbar = ({ activeScreen, setScreen, language, appearance, user, setSettingsSubScreen }: NavbarProps) => {
   if (activeScreen === 'splash' || (activeScreen as string).startsWith('auth-')) return null;
-  const t = (key: string) => translations[language]?.[key] || translations['English'][key];
+  const { t } = useLanguage();
 
   const isActive = (screen: Screen) => activeScreen === screen || (screen === 'my-trips' && activeScreen === 'trip-details');
 
