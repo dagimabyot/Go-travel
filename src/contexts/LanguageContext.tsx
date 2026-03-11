@@ -1,12 +1,12 @@
-import React, { createContext, useState, useEffect, ReactNode } from 'react';
-import { translations } from '../constants/translations';
+import React, { createContext, useState, useEffect, ReactNode, useContext } from 'react';
+import { translations, Language, AVAILABLE_LANGUAGES } from '../locales/translations';
 
-export type LanguageType = keyof typeof translations;
+export type LanguageType = Language;
 
 interface LanguageContextType {
   language: LanguageType;
   setLanguage: (lang: LanguageType) => void;
-  t: (key: string) => string;
+  t: (key: string, defaultValue?: string) => string;
   isRTL: boolean;
   availableLanguages: LanguageType[];
 }
@@ -25,7 +25,7 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
   useEffect(() => {
     const savedLanguage = localStorage.getItem('go-travel-language') as LanguageType | null;
     
-    if (savedLanguage && translations[savedLanguage]) {
+    if (savedLanguage && AVAILABLE_LANGUAGES.includes(savedLanguage)) {
       setLanguageState(savedLanguage);
     } else {
       // Try to detect browser language
@@ -52,33 +52,56 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
     setMounted(true);
   }, []);
 
+  // Apply RTL when language changes
+  useEffect(() => {
+    const isRTL = language === 'Arabic';
+    const htmlElement = document.documentElement;
+    
+    if (isRTL) {
+      htmlElement.dir = 'rtl';
+      htmlElement.lang = 'ar';
+    } else {
+      htmlElement.dir = 'ltr';
+      htmlElement.lang = language.toLowerCase();
+    }
+  }, [language]);
+
   const setLanguage = (lang: LanguageType) => {
-    if (translations[lang]) {
+    if (AVAILABLE_LANGUAGES.includes(lang)) {
       setLanguageState(lang);
       localStorage.setItem('go-travel-language', lang);
     }
   };
 
-  const t = (key: string): string => {
-    return translations[language]?.[key as keyof typeof translations['English']] || key;
+  const t = (key: string, defaultValue?: string): string => {
+    const keys = key.split('.');
+    let value: any = translations[language];
+
+    for (const k of keys) {
+      value = value?.[k];
+    }
+
+    if (typeof value === 'string') {
+      return value;
+    }
+
+    // Fallback to English if key not found
+    if (language !== 'English') {
+      value = translations['English'];
+      for (const k of keys) {
+        value = value?.[k];
+      }
+      if (typeof value === 'string') {
+        return value;
+      }
+    }
+
+    return defaultValue || key;
   };
 
   const isRTL = language === 'Arabic';
   
-  const availableLanguages: LanguageType[] = [
-    'English',
-    'Spanish',
-    'Amharic',
-    'French',
-    'Arabic',
-    'German',
-    'Chinese',
-    'Hindi',
-    'Portuguese',
-    'Russian',
-    'Turkish',
-    'Swahili'
-  ];
+  const availableLanguages: LanguageType[] = AVAILABLE_LANGUAGES;
 
   if (!mounted) {
     return <>{children}</>;
@@ -97,4 +120,12 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
       {children}
     </LanguageContext.Provider>
   );
+};
+
+export const useLanguage = (): LanguageContextType => {
+  const context = useContext(LanguageContext);
+  if (context === undefined) {
+    throw new Error('useLanguage must be used within a LanguageProvider');
+  }
+  return context;
 };
