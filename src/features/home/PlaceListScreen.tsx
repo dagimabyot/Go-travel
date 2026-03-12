@@ -2,6 +2,7 @@ import React from 'react';
 import { ChevronLeft, SlidersHorizontal, Star, Bookmark } from 'lucide-react';
 import { Package } from '../../types';
 import { motion } from 'motion/react';
+import { translations } from '../../constants/translations';
 
 interface PlaceListScreenProps {
   places: Package[];
@@ -13,7 +14,9 @@ interface PlaceListScreenProps {
   appearance: string;
 }
 
-export const PlaceListScreen = ({ places, onBack, onSelectPlace, toggleSaved, isSaved, appearance }: PlaceListScreenProps) => {
+export const PlaceListScreen = ({ places, onBack, onSelectPlace, toggleSaved, isSaved, appearance, language }: PlaceListScreenProps) => {
+  const t = (key: string) => translations[language]?.[key] || translations['English'][key];
+  
   return (
     <div className={`min-h-screen pb-24 transition-colors duration-300 ${appearance === 'Dark Mode' ? 'bg-slate-950 text-white' : 'bg-white text-slate-900'}`}>
       <header className="flex items-center justify-between px-6 pt-12 mb-8">
@@ -21,7 +24,7 @@ export const PlaceListScreen = ({ places, onBack, onSelectPlace, toggleSaved, is
           <ChevronLeft size={24} />
         </button>
         <div className="text-center">
-          <h1 className={`text-xl font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>Popular Places</h1>
+          <h1 className={`text-xl font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{t('popularPlaces')}</h1>
           <p className="text-xs text-slate-400">Result found ({places.length})</p>
         </div>
         <button className={`w-12 h-12 border rounded-full flex items-center justify-center shadow-sm transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-900 border-slate-800 text-white' : 'bg-white border-slate-100 text-slate-900'}`}>

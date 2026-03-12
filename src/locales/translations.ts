@@ -228,6 +228,35 @@ export const translations = {
     'aboutDesc2': 'Book flights and manage reservations with ease',
     'aboutDesc3': 'Explore the world with confidence',
     'aboutTagline': 'Travel the world with confidence',
+
+    // Category and Navigation
+    'all': 'All',
+    'beach': 'Beach',
+    'forest': 'Forest',
+    'mountain': 'Mountain',
+    'submarine': 'Submarine',
+    'packages': 'Packages',
+    'flights': 'Flights',
+    'places': 'Places',
+    'hotels': 'Hotels',
+
+    // Home Screen Sections
+    'seeAll': 'See All',
+    'popularPackages': 'Popular Packages',
+    'topPackages': 'Top Packages',
+    'fullPackage': 'Full Package',
+    'readyToFly': 'Ready to Fly',
+    'findBestDeals': 'Find the best deals on flights',
+    'categories': 'Categories',
+    'popularPlaces': 'Popular Places',
+    'recommendedForYou': 'Recommended for You',
+
+    // Package Details
+    'details': 'Details',
+    'weKnowWhatYouWant': 'We know what you want',
+    'highlights': 'Highlights',
+    'bestSunsetEver': 'Best Sunset Ever',
+    'letsGo': "Let's Go",
   },
 
   Spanish: {
@@ -449,6 +478,35 @@ export const translations = {
     'aboutDesc2': 'Reserva vuelos y administra reservas fácilmente',
     'aboutDesc3': 'Explora el mundo con confianza',
     'aboutTagline': 'Viaja por el mundo con confianza',
+
+    // Category and Navigation
+    'all': 'Todo',
+    'beach': 'Playa',
+    'forest': 'Bosque',
+    'mountain': 'Montaña',
+    'submarine': 'Submarino',
+    'packages': 'Paquetes',
+    'flights': 'Vuelos',
+    'places': 'Lugares',
+    'hotels': 'Hoteles',
+
+    // Home Screen Sections
+    'seeAll': 'Ver Todo',
+    'popularPackages': 'Paquetes Populares',
+    'topPackages': 'Paquetes Principales',
+    'fullPackage': 'Paquete Completo',
+    'readyToFly': 'Listo para Volar',
+    'findBestDeals': 'Encuentra los mejores tratos en vuelos',
+    'categories': 'Categorías',
+    'popularPlaces': 'Lugares Populares',
+    'recommendedForYou': 'Recomendado para Ti',
+
+    // Package Details
+    'details': 'Detalles',
+    'weKnowWhatYouWant': 'Sabemos lo que quieres',
+    'highlights': 'Destacados',
+    'bestSunsetEver': 'El Mejor Atardecer',
+    'letsGo': 'Vamos',
   },
 
   Amharic: {
@@ -669,6 +727,35 @@ export const translations = {
     'aboutDesc2': 'በረራ ያስቀምጥ እና ቅደም ተከተላቸውን ይቆጠቡ',
     'aboutDesc3': 'ዓለም በገና ይቃኜ',
     'aboutTagline': 'ዓለም ዙሪያ ጉዞ በገና',
+
+    // Category and Navigation
+    'all': 'ሁሉም',
+    'beach': 'ዳርቻ',
+    'forest': 'ጫካ',
+    'mountain': 'ተራ',
+    'submarine': 'የውሃ ታች',
+    'packages': 'ጥቅሎች',
+    'flights': 'ረቂቅ ጉዞ',
+    'places': 'ቦታዎች',
+    'hotels': 'ሆቴሎች',
+
+    // Home Screen Sections
+    'seeAll': 'ሁሉም ተመልከት',
+    'popularPackages': 'ታዋቂ ጥቅሎች',
+    'topPackages': 'ከፍተኛ ጥቅሎች',
+    'fullPackage': 'ሙሉ ጥቅል',
+    'readyToFly': 'ለበረራ ዝግጁ',
+    'findBestDeals': 'በበረራ ላይ ምርጥ ስምምነቶችን ይፈልጉ',
+    'categories': 'ምድቦች',
+    'popularPlaces': 'ታዋቂ ቦታዎች',
+    'recommendedForYou': 'ለእርስዎ የሚመከር',
+
+    // Package Details
+    'details': 'ዝርዝሮች',
+    'weKnowWhatYouWant': 'ምን እንደሚፈልጉ እናውቃለን',
+    'highlights': 'ድምቆች',
+    'bestSunsetEver': 'በጣም ጥሩ ሰቅ',
+    'letsGo': 'እንሂድ',
   },
 
   French: {
@@ -890,6 +977,35 @@ export const translations = {
     'aboutDesc2': 'Réservez des vols et gérez les réservations facilement',
     'aboutDesc3': 'Explorez le monde en toute confiance',
     'aboutTagline': 'Voyagez dans le monde avec confiance',
+
+    // Category and Navigation
+    'all': 'Tous',
+    'beach': 'Plage',
+    'forest': 'Forêt',
+    'mountain': 'Montagne',
+    'submarine': 'Sous-marin',
+    'packages': 'Forfaits',
+    'flights': 'Vols',
+    'places': 'Lieux',
+    'hotels': 'Hôtels',
+
+    // Home Screen Sections
+    'seeAll': 'Voir Tous',
+    'popularPackages': 'Forfaits Populaires',
+    'topPackages': 'Meilleurs Forfaits',
+    'fullPackage': 'Forfait Complet',
+    'readyToFly': 'Prêt à Voler',
+    'findBestDeals': 'Trouvez les meilleures offres sur les vols',
+    'categories': 'Catégories',
+    'popularPlaces': 'Lieux Populaires',
+    'recommendedForYou': 'Recommandé pour Vous',
+
+    // Package Details
+    'details': 'Détails',
+    'weKnowWhatYouWant': 'Nous savons ce que vous voulez',
+    'highlights': 'Points Saillants',
+    'bestSunsetEver': 'Meilleur Coucher de Soleil',
+    'letsGo': 'Allons-y',
   },
 
   Arabic: {
@@ -1045,7 +1161,7 @@ export const translations = {
     'enterBio': 'أخبرنا عن نفسك',
     'savedMethods': 'الطرق المحفوظة',
     'addCard': 'إضافة بطاقة',
-    'connectStripe': 'توصيل حساب Stripe',
+    'connectStripe': 'تو��يل حساب Stripe',
     'recentAlerts': 'التنبيهات الأخيرة',
     'noAlerts': 'لا توجد تنبيهات',
     'bookingConfirmations': 'تأكيدات الحجز',
@@ -1111,6 +1227,35 @@ export const translations = {
     'aboutDesc2': 'احجز الرحلات والإدارة الحجزات بسهولة',
     'aboutDesc3': 'استكشف العالم بثقة',
     'aboutTagline': 'سافر حول العالم بثقة',
+
+    // Category and Navigation
+    'all': 'الكل',
+    'beach': 'شاطئ',
+    'forest': 'غابة',
+    'mountain': 'جبل',
+    'submarine': 'غواصة',
+    'packages': 'الحزم',
+    'flights': 'الرحلات',
+    'places': 'أماكن',
+    'hotels': 'فنادق',
+
+    // Home Screen Sections
+    'seeAll': 'رؤية الكل',
+    'popularPackages': 'الحزم الشهيرة',
+    'topPackages': 'أفضل الحزم',
+    'fullPackage': 'حزمة كاملة',
+    'readyToFly': 'جاهز للطيران',
+    'findBestDeals': 'ابحث عن أفضل الصفقات في الرحلات',
+    'categories': 'فئات',
+    'popularPlaces': 'الأماكن الشهيرة',
+    'recommendedForYou': 'موصى به لك',
+
+    // Package Details
+    'details': 'التفاصيل',
+    'weKnowWhatYouWant': 'نحن نعرف ما تريد',
+    'highlights': 'المميزات',
+    'bestSunsetEver': 'أفضل غروب شمس',
+    'letsGo': 'هيا بنا',
   },
 
   German: {
@@ -1332,6 +1477,35 @@ export const translations = {
     'aboutDesc2': 'Buchen Sie Flüge und verwalten Sie Reservierungen mit Leichtigkeit',
     'aboutDesc3': 'Erkunden Sie die Welt mit Zuversicht',
     'aboutTagline': 'Reisen Sie mit Zuversicht um die Welt',
+
+    // Category and Navigation
+    'all': 'Alle',
+    'beach': 'Strand',
+    'forest': 'Wald',
+    'mountain': 'Berg',
+    'submarine': 'U-Boot',
+    'packages': 'Pakete',
+    'flights': 'Flüge',
+    'places': 'Orte',
+    'hotels': 'Hotels',
+
+    // Home Screen Sections
+    'seeAll': 'Alle anzeigen',
+    'popularPackages': 'Beliebte Pakete',
+    'topPackages': 'Top-Pakete',
+    'fullPackage': 'Vollständiges Paket',
+    'readyToFly': 'Bereit zum Fliegen',
+    'findBestDeals': 'Finden Sie die besten Flüge',
+    'categories': 'Kategorien',
+    'popularPlaces': 'Beliebte Orte',
+    'recommendedForYou': 'Für Sie empfohlen',
+
+    // Package Details
+    'details': 'Details',
+    'weKnowWhatYouWant': 'Wir wissen, was du willst',
+    'highlights': 'Höhepunkte',
+    'bestSunsetEver': 'Bester Sonnenuntergang',
+    'letsGo': 'Lass uns gehen',
   },
 
   Chinese: {
@@ -1481,7 +1655,7 @@ export const translations = {
     'other': '其他',
     'country': '国家',
     'enterCountry': '输入您的国家',
-    'zipCode': '邮政编码',
+    'zipCode': '��政编码',
     'enterZip': '输入您的邮政编码',
     'bio': '个人简介',
     'enterBio': '告诉我们关于您的信息',
@@ -1552,6 +1726,35 @@ export const translations = {
     'aboutDesc2': '轻松预订航班和管理预订',
     'aboutDesc3': '自信地探索世界',
     'aboutTagline': '自信地在世界各地旅行',
+
+    // Category and Navigation
+    'all': '全部',
+    'beach': '海滩',
+    'forest': '森林',
+    'mountain': '山',
+    'submarine': '潜艇',
+    'packages': '套餐',
+    'flights': '航班',
+    'places': '地方',
+    'hotels': '酒店',
+
+    // Home Screen Sections
+    'seeAll': '查看全部',
+    'popularPackages': '热门套餐',
+    'topPackages': '顶级套餐',
+    'fullPackage': '完整套餐',
+    'readyToFly': '准备飞行',
+    'findBestDeals': '寻找最优惠的航班',
+    'categories': '分类',
+    'popularPlaces': '热门地点',
+    'recommendedForYou': '为您推荐',
+
+    // Package Details
+    'details': '详情',
+    'weKnowWhatYouWant': '我们知道你想要什么',
+    'highlights': '亮点',
+    'bestSunsetEver': '最佳日落',
+    'letsGo': '出发吧',
   },
 
   Hindi: {
@@ -1772,6 +1975,35 @@ export const translations = {
     'aboutDesc2': 'आसानी से उड़ानें बुक करें और आरक्षण प्रबंधित करें',
     'aboutDesc3': 'आत्मविश्वास के साथ दुनिया की खोज करें',
     'aboutTagline': 'आत्मविश्वास के साथ दुनिया भर में यात्रा करें',
+
+    // Category and Navigation
+    'all': 'सभी',
+    'beach': 'समुद्र तट',
+    'forest': 'जंगल',
+    'mountain': 'पर्वत',
+    'submarine': 'पनडुब्बी',
+    'packages': 'पैकेज',
+    'flights': 'उड़ानें',
+    'places': 'स्थान',
+    'hotels': 'होटल',
+
+    // Home Screen Sections
+    'seeAll': 'सभी देखें',
+    'popularPackages': 'लोकप्रिय पैकेज',
+    'topPackages': 'शीर्ष पैकेज',
+    'fullPackage': 'पूर्ण पैकेज',
+    'readyToFly': 'उड़ने के लिए तैयार',
+    'findBestDeals': 'उड़ानों पर सर्वोत्तम सौदे खोजें',
+    'categories': 'श्रेणियां',
+    'popularPlaces': 'लोकप्रिय स्थान',
+    'recommendedForYou': 'आपके लिए अनुशंसित',
+
+    // Package Details
+    'details': 'विवरण',
+    'weKnowWhatYouWant': 'हम जानते हैं कि आप क्या चाहते हैं',
+    'highlights': 'मुख्य विशेषताएं',
+    'bestSunsetEver': 'सबसे अच्छा सूर्यास्त',
+    'letsGo': 'चलिए जाएं',
   },
 
   Portuguese: {
@@ -1992,6 +2224,35 @@ export const translations = {
     'aboutDesc2': 'Reserve voos e gerencie reservas facilmente',
     'aboutDesc3': 'Explore o mundo com confiança',
     'aboutTagline': 'Viaje pelo mundo com confiança',
+
+    // Category and Navigation
+    'all': 'Todos',
+    'beach': 'Praia',
+    'forest': 'Floresta',
+    'mountain': 'Montanha',
+    'submarine': 'Submarino',
+    'packages': 'Pacotes',
+    'flights': 'Voos',
+    'places': 'Lugares',
+    'hotels': 'Hotéis',
+
+    // Home Screen Sections
+    'seeAll': 'Ver Todos',
+    'popularPackages': 'Pacotes Populares',
+    'topPackages': 'Principais Pacotes',
+    'fullPackage': 'Pacote Completo',
+    'readyToFly': 'Pronto para Voar',
+    'findBestDeals': 'Encontre as melhores ofertas de voos',
+    'categories': 'Categorias',
+    'popularPlaces': 'Lugares Populares',
+    'recommendedForYou': 'Recomendado para Você',
+
+    // Package Details
+    'details': 'Detalhes',
+    'weKnowWhatYouWant': 'Sabemos o que você quer',
+    'highlights': 'Destaques',
+    'bestSunsetEver': 'Melhor Pôr do Sol',
+    'letsGo': 'Vamos',
   },
 
   Russian: {
@@ -2212,6 +2473,35 @@ export const translations = {
     'aboutDesc2': 'Бронируйте рейсы и управляйте бронированиями с лёгкостью',
     'aboutDesc3': 'Исследуйте мир с уверенностью',
     'aboutTagline': 'Путешествуйте по миру с уверенностью',
+
+    // Category and Navigation
+    'all': 'Всё',
+    'beach': 'Пляж',
+    'forest': 'Лес',
+    'mountain': 'Гора',
+    'submarine': 'Подводная лодка',
+    'packages': 'Пакеты',
+    'flights': 'Рейсы',
+    'places': 'Места',
+    'hotels': 'Отели',
+
+    // Home Screen Sections
+    'seeAll': 'Показать все',
+    'popularPackages': 'Популярные пакеты',
+    'topPackages': 'Лучшие пакеты',
+    'fullPackage': 'Полный пакет',
+    'readyToFly': 'Готово к полёту',
+    'findBestDeals': 'Найдите лучшие предложения на рейсы',
+    'categories': 'Категории',
+    'popularPlaces': 'Популярные места',
+    'recommendedForYou': 'Рекомендуется вам',
+
+    // Package Details
+    'details': 'Детали',
+    'weKnowWhatYouWant': 'Мы знаем, что вы хотите',
+    'highlights': 'Основные моменты',
+    'bestSunsetEver': 'Лучший закат',
+    'letsGo': 'Пойдём',
   },
 
   Turkish: {
@@ -2432,6 +2722,35 @@ export const translations = {
     'aboutDesc2': 'Uçuşları kolaylıkla rezerve edin ve yönetin',
     'aboutDesc3': 'Dünyayı güvenle keşfedin',
     'aboutTagline': 'Dünya çapında güvenle seyahat edin',
+
+    // Category and Navigation
+    'all': 'Tümü',
+    'beach': 'Plaj',
+    'forest': 'Orman',
+    'mountain': 'Dağ',
+    'submarine': 'Denizaltı',
+    'packages': 'Paketler',
+    'flights': 'Uçuşlar',
+    'places': 'Yerler',
+    'hotels': 'Oteller',
+
+    // Home Screen Sections
+    'seeAll': 'Tümünü Gör',
+    'popularPackages': 'Popüler Paketler',
+    'topPackages': 'En İyi Paketler',
+    'fullPackage': 'Tam Paket',
+    'readyToFly': 'Uçmaya Hazır',
+    'findBestDeals': 'Uçuşlarda en iyi fırsatları bulun',
+    'categories': 'Kategoriler',
+    'popularPlaces': 'Popüler Yerler',
+    'recommendedForYou': 'Sizin İçin Önerilen',
+
+    // Package Details
+    'details': 'Detaylar',
+    'weKnowWhatYouWant': 'Ne istediğinizi biliyoruz',
+    'highlights': 'Öne Çıkanlar',
+    'bestSunsetEver': 'En İyi Gün Batışı',
+    'letsGo': 'Gidelim',
   },
 
   Swahili: {
@@ -2652,6 +2971,35 @@ export const translations = {
     'aboutDesc2': 'Boka ndege na daharisha booking kwa urahisi',
     'aboutDesc3': 'Chunguza ulimwengu kwa ujasiri',
     'aboutTagline': 'Safara duniani kwa ujasiri',
+
+    // Category and Navigation
+    'all': 'Zote',
+    'beach': 'Pweza',
+    'forest': 'Misitu',
+    'mountain': 'Mlima',
+    'submarine': 'Kichwa cha bahari',
+    'packages': 'Mipango',
+    'flights': 'Ndege',
+    'places': 'Maeneo',
+    'hotels': 'Hoteli',
+
+    // Home Screen Sections
+    'seeAll': 'Tazama Zote',
+    'popularPackages': 'Mipango Maarufu',
+    'topPackages': 'Mipango Yenye Thamani',
+    'fullPackage': 'Mipango Kamili',
+    'readyToFly': 'Tayari Kuruka',
+    'findBestDeals': 'Tafuta matoleo bora ya ndege',
+    'categories': 'Aina',
+    'popularPlaces': 'Maeneo Maarufu',
+    'recommendedForYou': 'Inakusubiwa Kwako',
+
+    // Package Details
+    'details': 'Maelezo',
+    'weKnowWhatYouWant': 'Tunajua unachotaka',
+    'highlights': 'Mambo Makuu',
+    'bestSunsetEver': 'Mazingira Bora Sana',
+    'letsGo': 'Twende',
   },
 };
 

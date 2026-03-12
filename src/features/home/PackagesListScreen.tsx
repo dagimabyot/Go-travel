@@ -39,7 +39,7 @@ export const PackagesListScreen = ({
       </header>
 
       <div className="mb-8">
-        <h1 className={`text-2xl font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>Popular Packages</h1>
+        <h1 className={`text-2xl font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{t('popularPackages')}</h1>
       </div>
 
       <div className="flex justify-between items-center mb-6">

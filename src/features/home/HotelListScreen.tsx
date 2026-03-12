@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ChevronLeft, SlidersHorizontal, Bookmark, X } from 'lucide-react';
 import { Hotel } from '../../types';
 import { motion, AnimatePresence } from 'motion/react';
+import { translations } from '../../constants/translations';
 
 interface HotelListScreenProps {
   hotels: Hotel[];
@@ -13,7 +14,8 @@ interface HotelListScreenProps {
   appearance: string;
 }
 
-export const HotelListScreen = ({ hotels, onBack, onSelectHotel, savedHotels, toggleSavedHotel, appearance }: HotelListScreenProps) => {
+export const HotelListScreen = ({ hotels, onBack, onSelectHotel, savedHotels, toggleSavedHotel, appearance, language }: HotelListScreenProps) => {
+  const t = (key: string) => translations[language]?.[key] || translations['English'][key];
   const [showFilters, setShowFilters] = useState(false);
   const [filters, setFilters] = useState({
     rating: 4,
@@ -33,7 +35,7 @@ export const HotelListScreen = ({ hotels, onBack, onSelectHotel, savedHotels, to
             className={`w-full max-w-md rounded-t-[48px] p-8 shadow-2xl transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-900' : 'bg-white'}`}
           >
             <div className="flex justify-between items-center mb-8">
-              <h3 className={`text-xl font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>Filter Hotels</h3>
+              <h3 className={`text-xl font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{t('common.filter')} {t('hotels')}</h3>
               <button onClick={() => setShowFilters(false)} className={`w-10 h-10 flex items-center justify-center rounded-full transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-800 text-white' : 'bg-slate-50 text-slate-900'}`}>
                 <X size={20} />
               </button>
