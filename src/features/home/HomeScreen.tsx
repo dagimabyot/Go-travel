@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { Star, Bookmark, Plane, MapPin, LayoutGrid, Palmtree, Trees, Mountain, Ship } from 'lucide-react';
 import { User, Package, Hotel } from '../../types';
-import { translations } from '../../constants/translations';
 import { Avatar } from '../../components/ui/Avatar';
 
 interface HomeScreenProps {
@@ -40,14 +39,13 @@ export const HomeScreen = ({
 }: HomeScreenProps) => {
   const [activeTab, setActiveTab] = useState<'packages' | 'flights' | 'places' | 'hotels'>('packages');
   const [activeCategory, setActiveCategory] = useState('All');
-  const t = (key: string) => translations[language]?.[key] || translations['English'][key];
   
   const categories = [
-    { name: t('all'), icon: <LayoutGrid size={20} />, key: 'All' },
-    { name: t('beach'), icon: <Palmtree size={20} />, key: 'Beach' },
-    { name: t('forest'), icon: <Trees size={20} />, key: 'Forest' },
-    { name: t('mountain'), icon: <Mountain size={20} />, key: 'Mountain' },
-    { name: t('submarine'), icon: <Ship size={20} />, key: 'Submarine' },
+    { name: 'All', icon: <LayoutGrid size={20} />, key: 'All' },
+    { name: 'Beach', icon: <Palmtree size={20} />, key: 'Beach' },
+    { name: 'Forest', icon: <Trees size={20} />, key: 'Forest' },
+    { name: 'Mountain', icon: <Mountain size={20} />, key: 'Mountain' },
+    { name: 'Submarine', icon: <Ship size={20} />, key: 'Submarine' },
   ];
 
   const isSaved = (id: string) => savedPackages.some(p => p.id === id);
@@ -85,7 +83,7 @@ export const HomeScreen = ({
               onClick={() => setActiveTab(tab)}
               className={`pb-4 text-sm font-bold capitalize transition-all relative whitespace-nowrap ${activeTab === tab ? 'text-accent' : 'text-slate-400'}`}
             >
-              {t(tab)}
+              {tab === 'packages' ? 'Packages' : tab === 'flights' ? 'Flights' : tab === 'places' ? 'Places' : 'Hotels'}
               {activeTab === tab && (
                 <motion.div 
                   layoutId="activeTab" 
