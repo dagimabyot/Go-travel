@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Booking, User } from '../../types';
 import { Avatar } from '../../components/ui/Avatar';
 import { generateProfessionalPDF } from '../../utils/pdfGenerator';
+import { useTranslation } from '../../hooks/useTranslation';
 
 interface FlightBookingDetailsScreenProps {
   booking: Booking;
@@ -27,6 +28,7 @@ export const FlightBookingDetailsScreen = ({
   toggleSaved
 }: FlightBookingDetailsScreenProps) => {
   const [showCancelConfirm, setShowCancelConfirm] = useState(false);
+  const { t } = useTranslation();
 
   const handleCancel = () => {
     onCancel(booking.id);
@@ -47,43 +49,46 @@ export const FlightBookingDetailsScreen = ({
         >
           <ChevronLeft size={24} />
         </button>
-        <h1 className="text-2xl font-bold">Flight Details</h1>
+        <h1 className="text-2xl font-bold">{t('flightDetails')}</h1>
       </header>
 
       <div className="space-y-6 mb-16">
         <div className={`p-4 rounded-2xl transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-900' : 'bg-slate-50'}`}>
           <p className="text-xl font-bold">
-            Date : {booking.departure_time ? booking.departure_time.replace(' ', ' T') : '2026-08-20 T14:00:00'}
+            {t('date')} : {booking.departure_time ? booking.departure_time.replace(' ', ' T') : '2026-08-20 T14:00:00'}
           </p>
         </div>
 
         <div className={`p-4 rounded-2xl transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-900' : 'bg-slate-50'}`}>
           <p className="text-xl font-bold">
-            From : {booking.from_city || 'New York'}
+            {t('from')} : {booking.from_city || 'New York'}
           </p>
         </div>
 
         <div className={`p-4 rounded-2xl transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-900' : 'bg-slate-50'}`}>
           <p className="text-xl font-bold">
-            To : {booking.to_city || 'Tokyo'}
+            {t('to')} : {booking.to_city || 'Tokyo'}
           </p>
         </div>
 
         <div className={`p-4 rounded-2xl transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-900' : 'bg-slate-50'}`}>
           <p className="text-xl font-bold">
-            Flight : {booking.airline || 'Japan Airlines'}
+            {t('flight')} : {booking.airline || 'Japan Airlines'}
           </p>
         </div>
 
         <div>
-          <h2 className="text-lg font-bold mb-3">About Your Flight</h2>
+          <h2 className="text-lg font-bold mb-3">{t('aboutYourFlight')}</h2>
           <p className="text-slate-400 text-sm leading-relaxed">
-            Your journey with {booking.airline || 'Alaska Airlines'} is designed for maximum comfort and efficiency. This flight features modern amenities including high-speed Wi-Fi, a wide selection of in-flight entertainment, and premium dining options. Our cabin crew is dedicated to providing you with the best service possible throughout your {booking.from_city || 'Sylhet'} to {booking.to_city || 'Manarola'} route. Please ensure you arrive at the airport at least 3 hours before departure for international flights to allow ample time for check-in and security procedures.
+            {t('flightDescription')
+              .replace('{airline}', booking.airline || 'Alaska Airlines')
+              .replace('{from}', booking.from_city || 'Sylhet')
+              .replace('{to}', booking.to_city || 'Manarola')}
           </p>
         </div>
 
         <div>
-          <h2 className="text-lg font-bold mb-4">Destination Preview</h2>
+          <h2 className="text-lg font-bold mb-4">{t('destinationPreview')}</h2>
           <div className="grid grid-cols-2 gap-3">
             <div className="h-40 rounded-2xl overflow-hidden">
               <img src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=400&q=80" alt="Destination" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
@@ -101,13 +106,13 @@ export const FlightBookingDetailsScreen = ({
           className={`w-full bg-blue-600 text-white py-6 rounded-[32px] font-bold text-xl shadow-xl active:scale-95 transition-all ${appearance === 'Dark Mode' ? 'shadow-blue-900/40' : 'shadow-blue-200'}`}
         >
           <Download size={20} className="mr-2 inline" />
-          Download Ticket (PDF)
+          {t('downloadTicketPDF')}
         </button>
         <button 
           onClick={() => setShowCancelConfirm(true)}
           className="w-full bg-red-500 text-white py-6 rounded-[32px] font-bold text-xl shadow-xl active:scale-95 transition-all shadow-red-500/20"
         >
-          Cancel This Flight
+          {t('cancelThisFlight')}
         </button>
       </div>
 
@@ -123,22 +128,22 @@ export const FlightBookingDetailsScreen = ({
               <div className={`w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 ${appearance === 'Dark Mode' ? 'bg-red-500/10' : 'bg-red-50'}`}>
                 <AlertCircle size={40} className="text-red-500" />
               </div>
-              <h3 className={`text-xl font-bold mb-2 ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>Cancel Flight?</h3>
+              <h3 className={`text-xl font-bold mb-2 ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{t('cancelFlightQuestion')}</h3>
               <p className="text-slate-500 text-sm mb-8">
-                Are you sure you want to cancel this flight? This action cannot be undone and cancellation fees may apply.
+                {t('cancelFlightWarning')}
               </p>
               <div className="flex gap-3">
                 <button 
                   onClick={() => setShowCancelConfirm(false)}
                   className={`flex-1 py-4 rounded-2xl font-bold text-sm transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-800 text-white' : 'bg-slate-100 text-slate-900'}`}
                 >
-                  Keep Flight
+                  {t('keepFlight')}
                 </button>
                 <button 
                   onClick={handleCancel}
                   className="flex-1 py-4 bg-red-500 text-white rounded-2xl font-bold text-sm shadow-lg shadow-red-500/20"
                 >
-                  Yes, Cancel
+                  {t('yesCancel')}
                 </button>
               </div>
             </motion.div>

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
-import { Star, Bookmark, Plane, MapPin, LayoutGrid, Palmtree, Trees, Mountain, Ship } from 'lucide-react';
+import { Star, Plane, MapPin, LayoutGrid, Palmtree, Trees, Mountain, Ship } from 'lucide-react';
 import { User, Package, Hotel } from '../../types';
-import { translations } from '../../constants/translations';
+import { useTranslation } from '../../hooks/useTranslation';
 import { Avatar } from '../../components/ui/Avatar';
 
 interface HomeScreenProps {
@@ -14,7 +14,6 @@ interface HomeScreenProps {
   onSearchHotels: () => void;
   onSelectHotel: (h: any) => void;
   onProfile: () => void;
-  language: string;
   savedPackages: Package[];
   toggleSavedPackage: (p: Package) => void;
   savedHotels: Hotel[];
@@ -31,7 +30,6 @@ export const HomeScreen = ({
   onSearchHotels,
   onSelectHotel,
   onProfile,
-  language,
   savedPackages,
   toggleSavedPackage,
   savedHotels,
@@ -40,7 +38,7 @@ export const HomeScreen = ({
 }: HomeScreenProps) => {
   const [activeTab, setActiveTab] = useState<'packages' | 'flights' | 'places' | 'hotels'>('packages');
   const [activeCategory, setActiveCategory] = useState('All');
-  const t = (key: string) => translations[language]?.[key] || translations['English'][key];
+  const { t } = useTranslation();
   
   const categories = [
     { name: t('all'), icon: <LayoutGrid size={20} />, key: 'All' },
@@ -55,6 +53,12 @@ export const HomeScreen = ({
     ? packages 
     : packages.filter(p => p.category === activeCategory);
   const popularPackages = packages.slice(0, 5);
+
+  const translateLocation = (location: string) => {
+    if (!location) return '';
+    const parts = location.split(',');
+    return parts.map(part => t(part.trim())).join(', ');
+  };
 
   return (
     <div className={`pb-24 max-w-4xl mx-auto min-h-screen transition-colors duration-300 ${appearance === 'Dark Mode' ? 'bg-slate-950 text-white' : 'bg-white text-slate-900'}`}>
@@ -71,7 +75,7 @@ export const HomeScreen = ({
         <div className="relative z-10 flex justify-between items-center px-6 pt-8">
           <div className="flex items-center gap-2">
             <MapPin size={20} className={appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'} />
-            <span className={`font-bold text-lg ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{user?.country || 'New York, USA'}</span>
+            <span className={`font-bold text-lg ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{user?.country ? translateLocation(user.country) : translateLocation('New York City, USA')}</span>
           </div>
         </div>
       </header>
@@ -114,7 +118,7 @@ export const HomeScreen = ({
                     onClick={() => onSelectPackage(pkg)}
                     className={`min-w-[180px] h-[240px] rounded-[32px] overflow-hidden relative cursor-pointer shadow-xl ${appearance === 'Dark Mode' ? 'shadow-black/40' : 'shadow-slate-200'}`}
                   >
-                    <img src={pkg.image} alt={pkg.name} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                    <img src={pkg.image} alt={t(pkg.name)} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                     <div className="absolute bottom-6 left-6 right-6 text-white">
                       <div className="flex items-center gap-1 mb-1">
@@ -125,8 +129,7 @@ export const HomeScreen = ({
                         </div>
                         <span className="text-[10px] font-bold">{pkg.rating.toFixed(1)}</span>
                       </div>
-                      <p className="font-bold text-base leading-tight">{pkg.location.split(',')[0]}</p>
-                      <p className="text-sm opacity-80">{pkg.location.split(',')[1]?.trim() || pkg.name}</p>
+                      <p className="font-bold text-base leading-tight">{translateLocation(pkg.location)}</p>
                     </div>
                     <button 
                       onClick={(e) => {
@@ -155,7 +158,7 @@ export const HomeScreen = ({
                     onClick={() => onSelectPackage(popularPackages[0])}
                     className={`w-full h-[220px] rounded-[40px] overflow-hidden relative cursor-pointer shadow-2xl ${appearance === 'Dark Mode' ? 'shadow-black/40' : 'shadow-slate-200'}`}
                   >
-                    <img src={popularPackages[0].image} alt={popularPackages[0].name} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                    <img src={popularPackages[0].image} alt={t(popularPackages[0].name)} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                     <div className="absolute bottom-8 left-8 right-8 text-white">
                       <div className="flex items-center gap-1 mb-1">
@@ -166,7 +169,7 @@ export const HomeScreen = ({
                         </div>
                         <span className="text-xs font-bold">{popularPackages[0].rating.toFixed(1)}</span>
                       </div>
-                      <p className="font-bold text-2xl leading-tight mb-1">{popularPackages[0].name}</p>
+                      <p className="font-bold text-2xl leading-tight mb-1">{t(popularPackages[0].name)}</p>
                       <p className="text-sm opacity-80">{popularPackages[0].duration} {t('fullPackage')}</p>
                     </div>
                     <button 
@@ -203,11 +206,11 @@ export const HomeScreen = ({
                     className={`flex items-center gap-4 min-w-[200px] p-3 rounded-3xl cursor-pointer ${appearance === 'Dark Mode' ? 'bg-slate-900' : 'bg-slate-50'}`}
                   >
                     <div className="w-16 h-16 rounded-2xl overflow-hidden shadow-md">
-                      <img src={pkg.image} alt={pkg.name} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                      <img src={pkg.image} alt={t(pkg.name)} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
                     </div>
                     <div className="flex-1">
-                      <p className={`font-bold text-sm ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{pkg.name.split(',')[0]}</p>
-                      <p className="text-[10px] text-slate-400 mb-1">{pkg.location.split(',')[1] || 'Spain'}</p>
+                      <p className={`font-bold text-sm ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{t(pkg.name)}</p>
+                      <p className="text-[10px] text-slate-400 mb-1">{translateLocation(pkg.location)}</p>
                       <div className="flex items-center gap-1">
                         <Star size={10} className="text-yellow-400 fill-current" />
                         <span className="text-[10px] font-bold text-slate-400">{pkg.rating.toFixed(1)}</span>
@@ -275,7 +278,7 @@ export const HomeScreen = ({
                     onClick={() => onSelectPackage(pkg)}
                     className={`min-w-[220px] h-[280px] rounded-[40px] overflow-hidden relative cursor-pointer shadow-xl ${appearance === 'Dark Mode' ? 'shadow-black/40' : 'shadow-slate-200'}`}
                   >
-                    <img src={pkg.image} alt={pkg.name} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                    <img src={pkg.image} alt={t(pkg.name)} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                     <div className="absolute bottom-6 left-6 right-6 text-white">
                       <div className="flex items-center gap-1 mb-1">
@@ -286,8 +289,7 @@ export const HomeScreen = ({
                         </div>
                         <span className="text-[10px] font-bold">{pkg.rating.toFixed(1)}</span>
                       </div>
-                      <p className="font-bold text-lg leading-tight">{pkg.location.split(',')[0]}</p>
-                      <p className="text-sm opacity-80">{pkg.location.split(',')[1]?.trim() || pkg.name}</p>
+                      <p className="font-bold text-lg leading-tight">{translateLocation(pkg.location)}</p>
                     </div>
                     <button 
                       onClick={(e) => {
@@ -317,7 +319,7 @@ export const HomeScreen = ({
                     onClick={() => onSelectPackage(pkg)}
                     className={`min-w-[220px] h-[280px] rounded-[40px] overflow-hidden relative cursor-pointer shadow-xl ${appearance === 'Dark Mode' ? 'shadow-black/40' : 'shadow-slate-200'}`}
                   >
-                    <img src={pkg.image} alt={pkg.name} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                    <img src={pkg.image} alt={t(pkg.name)} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                     <div className="absolute bottom-6 left-6 right-6 text-white">
                       <div className="flex items-center gap-1 mb-1">
@@ -328,8 +330,7 @@ export const HomeScreen = ({
                         </div>
                         <span className="text-[10px] font-bold">{pkg.rating.toFixed(1)}</span>
                       </div>
-                      <p className="font-bold text-lg leading-tight">{pkg.location.split(',')[0]}</p>
-                      <p className="text-sm opacity-80">{pkg.location.split(',')[1]?.trim() || pkg.name}</p>
+                      <p className="font-bold text-lg leading-tight">{translateLocation(pkg.location)}</p>
                     </div>
                     <button 
                       onClick={(e) => {
@@ -366,10 +367,10 @@ export const HomeScreen = ({
                     onClick={() => onSelectHotel(hotel)}
                     className={`min-w-[220px] h-[280px] rounded-[40px] overflow-hidden relative cursor-pointer shadow-xl ${appearance === 'Dark Mode' ? 'shadow-black/40' : 'shadow-slate-200'}`}
                   >
-                    <img src={hotel.image} alt={hotel.name} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                    <img src={hotel.image} alt={t(hotel.name)} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                     <div className="absolute bottom-6 left-6 right-6 text-white">
-                      <p className="font-bold text-lg leading-tight">{hotel.name}</p>
+                      <p className="font-bold text-lg leading-tight">{t(hotel.name)}</p>
                       <p className="text-sm opacity-80">${hotel.price}/{t('perDay')}</p>
                     </div>
                     <button className={`absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center shadow-md transition-all ${appearance === 'Dark Mode' ? 'bg-slate-800 text-slate-400' : 'bg-white text-slate-400'}`}>
@@ -397,10 +398,10 @@ export const HomeScreen = ({
                     onClick={() => onSelectHotel(hotel)}
                     className={`min-w-[220px] h-[280px] rounded-[40px] overflow-hidden relative cursor-pointer shadow-xl ${appearance === 'Dark Mode' ? 'shadow-black/40' : 'shadow-slate-200'}`}
                   >
-                    <img src={hotel.image} alt={hotel.name} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                    <img src={hotel.image} alt={t(hotel.name)} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                     <div className="absolute bottom-6 left-6 right-6 text-white">
-                      <p className="font-bold text-lg leading-tight">{hotel.name}</p>
+                      <p className="font-bold text-lg leading-tight">{t(hotel.name)}</p>
                       <p className="text-sm opacity-80">${hotel.price}/{t('perDay')}</p>
                     </div>
                     <button className={`absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center shadow-md transition-all ${appearance === 'Dark Mode' ? 'bg-slate-800 text-slate-400' : 'bg-white text-slate-400'}`}>

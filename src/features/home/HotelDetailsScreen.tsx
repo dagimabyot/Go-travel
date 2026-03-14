@@ -2,18 +2,19 @@ import React from 'react';
 import { ChevronLeft, Bookmark, Star, MapPin, Compass, BedDouble } from 'lucide-react';
 import { Hotel } from '../../types';
 import { motion, AnimatePresence } from 'motion/react';
+import { useTranslation } from '../../hooks/useTranslation';
 
 interface HotelDetailsScreenProps {
   hotel: Hotel;
   onBack: () => void;
   onBook: () => void;
-  language: string;
   toggleSaved: (h: Hotel) => void;
   isSaved: boolean;
   appearance: string;
 }
 
 export const HotelDetailsScreen = ({ hotel, onBack, onBook, toggleSaved, isSaved, appearance }: HotelDetailsScreenProps) => {
+  const { t } = useTranslation();
   const [mainImage, setMainImage] = React.useState(hotel.image);
 
   const galleryImages = hotel.images || [hotel.image];
@@ -47,7 +48,7 @@ export const HotelDetailsScreen = ({ hotel, onBack, onBook, toggleSaved, isSaved
             </button>
           </div>
           
-          <div className="absolute top-6 left-1/2 -translate-x-1/2 text-white font-bold text-lg">Details</div>
+          <div className="absolute top-6 left-1/2 -translate-x-1/2 text-white font-bold text-lg">{t('details')}</div>
         </div>
 
         {/* Horizontal Gallery (Below Main Image) */}
@@ -91,8 +92,8 @@ export const HotelDetailsScreen = ({ hotel, onBack, onBook, toggleSaved, isSaved
         {/* Reviews Section */}
         <div className="mb-10">
           <div className="flex justify-between items-center mb-6">
-            <h3 className={`font-bold text-xl ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>Reviews</h3>
-            <button className="text-sm text-blue-600 font-bold">See all</button>
+            <h3 className={`font-bold text-xl ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{t('reviews')}</h3>
+            <button className="text-sm text-blue-600 font-bold">{t('seeAll')}</button>
           </div>
           <div className="space-y-6">
             {[
@@ -113,7 +114,7 @@ export const HotelDetailsScreen = ({ hotel, onBack, onBook, toggleSaved, isSaved
                   </div>
                 </div>
                 <p className="text-slate-400 text-sm leading-relaxed">
-                  Great place to stay. Food quality is good. Services are good. Overall value for money.
+                  {t('hotelReviewPlaceholder')}
                 </p>
               </div>
             ))}
@@ -122,17 +123,17 @@ export const HotelDetailsScreen = ({ hotel, onBack, onBook, toggleSaved, isSaved
 
         {/* Sleeping Arrangements */}
         <div className="mb-10">
-          <h3 className={`font-bold text-xl mb-6 ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>Sleeping Arrangements</h3>
+          <h3 className={`font-bold text-xl mb-6 ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{t('sleepingArrangements')}</h3>
           <div className="flex gap-4">
             <button className={`flex-1 p-6 rounded-[32px] border text-left transition-all active:scale-95 ${appearance === 'Dark Mode' ? 'border-blue-900/30 bg-blue-900/10' : 'border-red-200 bg-red-50/30'}`}>
               <BedDouble className="text-blue-600 mb-4" size={32} />
-              <p className={`font-bold mb-1 ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>Bedroom 1</p>
-              <p className="text-xs text-slate-400">1 King Bed</p>
+              <p className={`font-bold mb-1 ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{t('bedroom')} 1</p>
+              <p className="text-xs text-slate-400">1 {t('kingBed')}</p>
             </button>
             <button className={`flex-1 p-6 rounded-[32px] border text-left transition-all active:scale-95 ${appearance === 'Dark Mode' ? 'border-slate-800 bg-slate-900' : 'border-slate-100 bg-white'}`}>
               <BedDouble className="text-blue-600 mb-4" size={32} />
-              <p className={`font-bold mb-1 ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>Bedroom 2</p>
-              <p className="text-xs text-slate-400">1 Single Bed</p>
+              <p className={`font-bold mb-1 ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{t('bedroom')} 2</p>
+              <p className="text-xs text-slate-400">1 {t('singleBed')}</p>
             </button>
           </div>
         </div>
@@ -141,14 +142,14 @@ export const HotelDetailsScreen = ({ hotel, onBack, onBook, toggleSaved, isSaved
       {/* Bottom Bar */}
       <div className={`fixed bottom-0 left-0 right-0 backdrop-blur-xl p-8 border-t flex justify-between items-center z-[90] transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-950/90 border-slate-900' : 'bg-white/90 border-slate-100'}`}>
         <div>
-          <p className="text-xs text-slate-400 font-bold mb-1">Total cost</p>
-          <p className={`text-3xl font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>${hotel.price} <span className="text-sm font-normal text-slate-400">/ night</span></p>
+          <p className="text-xs text-slate-400 font-bold mb-1">{t('totalCost')}</p>
+          <p className={`text-3xl font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>${hotel.price} <span className="text-sm font-normal text-slate-400">/ {t('night')}</span></p>
         </div>
         <button 
           onClick={onBook}
           className={`px-14 py-5 bg-blue-700 text-white rounded-[24px] font-bold text-lg shadow-xl active:scale-95 transition-all ${appearance === 'Dark Mode' ? 'shadow-blue-900/40' : 'shadow-blue-200'}`}
         >
-          Book Now
+          {t('bookNow')}
         </button>
       </div>
     </div>

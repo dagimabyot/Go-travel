@@ -2,21 +2,19 @@ import React from 'react';
 import { ChevronLeft, Plane } from 'lucide-react';
 import { Flight } from '../../types';
 import { generateProfessionalPDF } from '../../utils/pdfGenerator';
-import { translations } from '../../constants/translations';
-
+import { useTranslation } from '../../hooks/useTranslation';
 import { BoardingPass } from '../../components/ui/BoardingPass';
 
 interface TicketScreenProps {
   onBack: () => void;
   onDownload: () => void;
-  language: string;
   appearance: string;
   flight: Flight | null;
   seat: string;
 }
 
-export const TicketScreen = ({ onBack, onDownload, language, appearance, flight, seat }: TicketScreenProps) => {
-  const t = (key: string) => translations[language]?.[key] || translations['English'][key];
+export const TicketScreen = ({ onBack, onDownload, appearance, flight, seat }: TicketScreenProps) => {
+  const { t } = useTranslation();
   const handleDownload = () => {
     if (flight) {
       // Create a temporary booking object for the PDF generator

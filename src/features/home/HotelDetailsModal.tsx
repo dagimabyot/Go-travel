@@ -1,15 +1,14 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { X, Bookmark, Star } from 'lucide-react';
-import { translations } from '../../constants/translations';
+import { useTranslation } from '../../hooks/useTranslation';
 
 interface HotelDetailsModalProps {
   onClose: () => void;
-  language: string;
 }
 
-export const HotelDetailsModal = ({ onClose, language }: HotelDetailsModalProps) => {
-  const t = (key: string) => translations[language]?.[key] || translations['English'][key];
+export const HotelDetailsModal = ({ onClose }: HotelDetailsModalProps) => {
+  const { t } = useTranslation();
 
   const hotels = [
     { name: 'Water Hotel', price: 15.99, rating: 4.8, image: 'https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg' },
@@ -32,7 +31,7 @@ export const HotelDetailsModal = ({ onClose, language }: HotelDetailsModalProps)
         onClick={e => e.stopPropagation()}
       >
         <div className="flex justify-center items-center mb-8 relative">
-          <h3 className="text-2xl font-bold text-slate-900">Hotel Details</h3>
+          <h3 className="text-2xl font-bold text-slate-900">{t('hotelDetails')}</h3>
           <button onClick={onClose} className="absolute right-0 w-10 h-10 bg-slate-50 rounded-full flex items-center justify-center text-slate-400">
             <X size={20} />
           </button>
@@ -45,7 +44,7 @@ export const HotelDetailsModal = ({ onClose, language }: HotelDetailsModalProps)
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
               <div className="absolute bottom-6 left-8 right-8 text-white">
                 <p className="font-bold text-xl mb-1">{hotel.name}</p>
-                <p className="text-sm font-bold text-white/90">${hotel.price} <span className="text-[10px] font-normal text-white/60">/ per day</span></p>
+                <p className="text-sm font-bold text-white/90">${hotel.price} <span className="text-[10px] font-normal text-white/60">/ {t('perDay')}</span></p>
               </div>
               <button className="absolute top-6 right-6 w-10 h-10 bg-white rounded-full flex items-center justify-center text-slate-400 shadow-lg">
                 <Bookmark size={18} />

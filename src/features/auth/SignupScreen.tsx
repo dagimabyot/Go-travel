@@ -1,20 +1,22 @@
 import React, { useState } from 'react';
 import { ArrowLeft } from 'lucide-react';
-import { translations } from '../../constants/translations';
+import { useTranslation } from '../../hooks/useTranslation';
 
 interface SignupScreenProps {
   onSignup: (name: string, email: string, pass: string) => void;
   onLogin: () => void;
   onBack: () => void;
-  language: string;
 }
 
-export const SignupScreen = ({ onSignup, onLogin, onBack, language }: SignupScreenProps) => {
+export const SignupScreen = ({ onSignup, onLogin, onBack }: SignupScreenProps) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const t = (key: string) => translations[language]?.[key] || translations['English'][key];
+  const { t } = useTranslation();
   
+  const alreadyAccountText = t('alreadyAccount');
+  const alreadyAccountParts = alreadyAccountText.includes('?') ? alreadyAccountText.split('?') : [alreadyAccountText, 'Sign In'];
+
   return (
     <div className="fixed inset-0 bg-white z-[90] p-8 flex flex-col overflow-y-auto hide-scrollbar">
       <button onClick={onBack} className="mb-10 w-12 h-12 flex items-center justify-center rounded-full border border-slate-50 hover:bg-slate-50 transition-colors">
@@ -66,7 +68,7 @@ export const SignupScreen = ({ onSignup, onLogin, onBack, language }: SignupScre
         
         <div className="text-center pb-10">
           <p className="text-sm text-slate-400">
-            {t('alreadyAccount').split('?')[0]}? <button onClick={onLogin} className="text-primary font-bold">{t('alreadyAccount').split('?')[1].trim()}</button>
+            {alreadyAccountParts[0].trim()}{alreadyAccountText.includes('?') ? '?' : ''} <button onClick={onLogin} className="text-primary font-bold">{alreadyAccountParts[1].trim()}</button>
           </p>
         </div>
       </div>

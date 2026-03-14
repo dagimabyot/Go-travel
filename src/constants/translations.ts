@@ -1,3 +1,3 @@
-// Re-export from new location for backward compatibility
-export { translations, AVAILABLE_LANGUAGES } from '../locales/translations';
-export type { Language } from '../locales/translations';
+import { locales } from '../locales';
+
+export const translations: Record<string, Record<string, string>> = locales;

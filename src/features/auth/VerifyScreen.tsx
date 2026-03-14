@@ -1,18 +1,17 @@
 import React, { useState } from 'react';
 import { ArrowLeft } from 'lucide-react';
-import { translations } from '../../constants/translations';
+import { useTranslation } from '../../hooks/useTranslation';
 
 interface VerifyScreenProps {
   email: string;
   onVerify: (code: string) => void;
   onResend: () => void;
   onBack: () => void;
-  language: string;
 }
 
-export const VerifyScreen = ({ email, onVerify, onResend, onBack, language }: VerifyScreenProps) => {
+export const VerifyScreen = ({ email, onVerify, onResend, onBack }: VerifyScreenProps) => {
   const [code, setCode] = useState(['', '', '', '']);
-  const t = (key: string) => translations[language]?.[key] || translations['English'][key];
+  const { t } = useTranslation();
   
   const handleChange = (index: number, val: string) => {
     if (val.length > 1) return;
@@ -34,7 +33,7 @@ export const VerifyScreen = ({ email, onVerify, onResend, onBack, language }: Ve
       
       <h2 className="text-3xl font-bold text-slate-900 mb-2 text-center">{t('verification')}</h2>
       <p className="text-slate-400 text-sm mb-12 text-center leading-relaxed">
-        Please enter the code we sent to <br/>
+        {t('enterCodeSent')} <br/>
         <span className="text-slate-600 font-bold">{email.replace(/(.{2})(.*)(@.*)/, "$1***$3")}</span>
       </p>
       

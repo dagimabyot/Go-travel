@@ -1,4 +1,5 @@
 import React from 'react';
+import { useLanguage } from '../context/LanguageContext';
 import { Screen, User, Flight, Booking, AppNotification, Package, Hotel } from '../types';
 import { SplashScreen } from '../components/ui/SplashScreen';
 import { WelcomeScreen } from '../features/auth/WelcomeScreen';
@@ -36,8 +37,6 @@ interface RouterProps {
   setScreen: (s: Screen) => void;
   user: User | null;
   setUser: (u: User | null) => void;
-  language: string;
-  setLanguage: (l: string) => void;
   currency: string;
   setCurrency: (c: string) => void;
   appearance: string;
@@ -91,7 +90,7 @@ interface RouterProps {
 
 export const Router = (props: RouterProps) => {
   const { 
-    screen, setScreen, user, setUser, language, setLanguage, 
+    screen, setScreen, user, setUser, 
     currency, setCurrency, appearance, setAppearance, 
     notificationsEnabled, setNotificationsEnabled,
     emailNotificationsEnabled, setEmailNotificationsEnabled,
@@ -108,6 +107,8 @@ export const Router = (props: RouterProps) => {
     travelers, setTravelers
   } = props;
 
+  const { language, setLanguage } = useLanguage();
+
   React.useEffect(() => {
     if (window.location.pathname === '/success') {
       setScreen('success');
@@ -121,23 +122,23 @@ export const Router = (props: RouterProps) => {
       case 'splash':
         return <SplashScreen onNext={() => setScreen('auth-welcome')} />;
       case 'auth-welcome':
-        return <WelcomeScreen onSignup={() => setScreen('auth-signup')} onLogin={() => setScreen('auth-email')} language={language} />;
+        return <WelcomeScreen onSignup={() => setScreen('auth-signup')} onLogin={() => setScreen('auth-email')} />;
       case 'auth-email':
-        return <EmailScreen onContinue={(email) => { setAuthEmail(email); setScreen('auth-password'); }} onSignup={() => setScreen('auth-signup')} onBack={() => setScreen('auth-welcome')} language={language} />;
+        return <EmailScreen onContinue={(email) => { setAuthEmail(email); setScreen('auth-password'); }} onSignup={() => setScreen('auth-signup')} onBack={() => setScreen('auth-welcome')} />;
       case 'auth-password':
-        return <PasswordScreen onContinue={(pass) => handleLogin(authEmail, pass)} onForgot={() => setScreen('auth-forgot')} onBack={() => setScreen('auth-email')} language={language} />;
+        return <PasswordScreen onContinue={(pass) => handleLogin(authEmail, pass)} onForgot={() => setScreen('auth-forgot')} onBack={() => setScreen('auth-email')} />;
       case 'auth-signup':
-        return <SignupScreen onSignup={handleSignup} onLogin={() => setScreen('auth-email')} onBack={() => setScreen('auth-welcome')} language={language} />;
+        return <SignupScreen onSignup={handleSignup} onLogin={() => setScreen('auth-email')} onBack={() => setScreen('auth-welcome')} />;
       case 'auth-forgot':
-        return <ForgotScreen onSend={() => setScreen('auth-verify')} onBack={() => setScreen('auth-password')} language={language} />;
+        return <ForgotScreen onSend={() => setScreen('auth-verify')} onBack={() => setScreen('auth-password')} />;
       case 'auth-verify':
-        return <VerifyScreen email={authEmail} onVerify={() => setScreen('home')} onResend={() => {}} onBack={() => setScreen('auth-forgot')} language={language} />;
+        return <VerifyScreen email={authEmail} onVerify={() => setScreen('home')} onResend={() => {}} onBack={() => setScreen('auth-forgot')} />;
       case 'home':
-        return <HomeScreen user={user} packages={packages} onSelectPackage={(p) => { setSelectedPackage(p); setScreen('package-details'); }} onSeeAllPackages={() => setScreen('place-list')} onSearchFlights={() => setScreen('flight-search')} onSearchHotels={handleSearchHotels} onSelectHotel={(h) => { setSelectedHotel(h); setScreen('hotel-details'); }} onProfile={() => setScreen('settings')} language={language} savedPackages={savedPackages} toggleSavedPackage={toggleSavedPackage} savedHotels={savedHotels} toggleSavedHotel={toggleSavedHotel} appearance={appearance} />;
+        return <HomeScreen user={user} packages={packages} onSelectPackage={(p) => { setSelectedPackage(p); setScreen('package-details'); }} onSeeAllPackages={() => setScreen('place-list')} onSearchFlights={() => setScreen('flight-search')} onSearchHotels={handleSearchHotels} onSelectHotel={(h) => { setSelectedHotel(h); setScreen('hotel-details'); }} onProfile={() => setScreen('settings')} savedPackages={savedPackages} toggleSavedPackage={toggleSavedPackage} savedHotels={savedHotels} toggleSavedHotel={toggleSavedHotel} appearance={appearance} />;
       case 'place-list':
-        return <PlaceListScreen places={packages} onBack={() => setScreen('home')} onSelectPlace={(p) => { setSelectedPackage(p); setScreen('package-details'); }} language={language} toggleSaved={toggleSavedPackage} isSaved={(id) => savedPackages.some(p => p.id === id)} appearance={appearance} />;
+        return <PlaceListScreen places={packages} onBack={() => setScreen('home')} onSelectPlace={(p) => { setSelectedPackage(p); setScreen('package-details'); }} toggleSaved={toggleSavedPackage} isSaved={(id) => savedPackages.some(p => p.id === id)} appearance={appearance} />;
       case 'packages-list':
-        return <PackagesListScreen user={user} packages={packages} onBack={() => setScreen('home')} onSelect={(p) => { setSelectedPackage(p); setScreen('package-details'); }} savedPackages={savedPackages} toggleSavedPackage={toggleSavedPackage} language={language} appearance={appearance} />;
+        return <PackagesListScreen user={user} packages={packages} onBack={() => setScreen('home')} onSelect={(p) => { setSelectedPackage(p); setScreen('package-details'); }} savedPackages={savedPackages} toggleSavedPackage={toggleSavedPackage} appearance={appearance} />;
       case 'package-details':
         return selectedPackage ? (
           <PackageDetailsScreen 
@@ -145,28 +146,27 @@ export const Router = (props: RouterProps) => {
             user={user} 
             onBack={() => setScreen('home')} 
             onBook={() => setScreen('location-picker')} 
-            language={language} 
             appearance={appearance}
             toggleSaved={toggleSavedPackage}
             isSaved={savedPackages.some(p => p.id === selectedPackage.id)}
           />
         ) : null;
       case 'location-picker':
-        return <LocationPickerScreen onBack={() => setScreen('package-details')} onSelect={(loc) => { console.log(loc); setScreen('flight-search'); }} language={language} appearance={appearance} />;
+        return <LocationPickerScreen onBack={() => setScreen('package-details')} onSelect={(loc) => { console.log(loc); setScreen('flight-search'); }} appearance={appearance} />;
       case 'hotel-results':
-        return <HotelListScreen hotels={hotels} onBack={() => setScreen('home')} onSelectHotel={(h) => { setSelectedHotel(h); setScreen('hotel-details'); }} language={language} savedHotels={savedHotels} toggleSavedHotel={toggleSavedHotel} appearance={appearance} />;
+        return <HotelListScreen hotels={hotels} onBack={() => setScreen('home')} onSelectHotel={(h) => { setSelectedHotel(h); setScreen('hotel-details'); }} savedHotels={savedHotels} toggleSavedHotel={toggleSavedHotel} appearance={appearance} />;
       case 'hotel-details':
-        return selectedHotel ? <HotelDetailsScreen hotel={selectedHotel} onBack={() => setScreen('hotel-results')} onBook={() => setScreen('hotel-confirmation')} language={language} toggleSaved={toggleSavedHotel} isSaved={savedHotels.some(h => h.id === selectedHotel.id)} appearance={appearance} /> : null;
+        return selectedHotel ? <HotelDetailsScreen hotel={selectedHotel} onBack={() => setScreen('hotel-results')} onBook={() => setScreen('hotel-confirmation')} toggleSaved={toggleSavedHotel} isSaved={savedHotels.some(h => h.id === selectedHotel.id)} appearance={appearance} /> : null;
       case 'hotel-confirmation':
-        return selectedHotel ? <HotelConfirmationScreen hotel={selectedHotel} onBack={() => setScreen('hotel-details')} onContinue={() => setScreen('payment')} language={language} onEdit={(field) => { console.log('Edit', field); setScreen('hotel-details'); }} appearance={appearance} /> : null;
+        return selectedHotel ? <HotelConfirmationScreen hotel={selectedHotel} onBack={() => setScreen('hotel-details')} onContinue={() => setScreen('payment')} onEdit={(field) => { console.log('Edit', field); setScreen('hotel-details'); }} appearance={appearance} /> : null;
       case 'saved':
-        return <SavedScreen savedPackages={savedPackages} savedHotels={savedHotels} savedBookings={savedBookings} user={user} onSelectPackage={(p) => { setSelectedPackage(p); setScreen('package-details'); }} onSelectHotel={(h) => { setSelectedHotel(h); setScreen('hotel-details'); }} toggleSavedPackage={toggleSavedPackage} toggleSavedHotel={toggleSavedHotel} toggleSavedBooking={toggleSavedBooking} language={language} appearance={appearance} />;
+        return <SavedScreen savedPackages={savedPackages} savedHotels={savedHotels} savedBookings={savedBookings} user={user} onSelectPackage={(p) => { setSelectedPackage(p); setScreen('package-details'); }} onSelectHotel={(h) => { setSelectedHotel(h); setScreen('hotel-details'); }} toggleSavedPackage={toggleSavedPackage} toggleSavedHotel={toggleSavedHotel} toggleSavedBooking={toggleSavedBooking} appearance={appearance} />;
       case 'flight-search':
-        return <FlightSearchScreen onBack={() => setScreen('home')} onSearch={() => setScreen('flight-results')} language={language} appearance={appearance} />;
+        return <FlightSearchScreen onBack={() => setScreen('home')} onSearch={() => setScreen('flight-results')} appearance={appearance} />;
       case 'flight-results':
-        return <FlightListScreen onBack={() => setScreen('flight-search')} onSelectFlight={(f) => { setSelectedFlight(f); setScreen('seat-selection'); }} language={language} appearance={appearance} />;
+        return <FlightListScreen onBack={() => setScreen('flight-search')} onSelectFlight={(f) => { setSelectedFlight(f); setScreen('seat-selection'); }} appearance={appearance} />;
       case 'seat-selection':
-        return <SeatSelectionScreen onBack={() => setScreen('flight-results')} onContinue={(seat) => { setSelectedSeat(seat); setScreen('confirmation'); }} language={language} appearance={appearance} flight={selectedFlight} />;
+        return <SeatSelectionScreen onBack={() => setScreen('flight-results')} onContinue={(seat) => { setSelectedSeat(seat); setScreen('confirmation'); }} appearance={appearance} flight={selectedFlight} />;
       case 'payment':
         return <PaymentScreen 
           flight={selectedFlight || undefined} 
@@ -176,7 +176,6 @@ export const Router = (props: RouterProps) => {
             setScreen('success');
           }} 
           onBack={() => setScreen('traveler-info')} 
-          language={language} 
           appearance={appearance}
         />;
       case 'confirmation':
@@ -188,7 +187,6 @@ export const Router = (props: RouterProps) => {
             setGuestCount(guests);
             setScreen('traveler-info');
           }} 
-          language={language} 
           onEdit={(field) => { console.log('Edit', field); setScreen('flight-search'); }} 
           appearance={appearance} 
         />;
@@ -203,12 +201,11 @@ export const Router = (props: RouterProps) => {
           }}
           appearance={appearance}
           initialTravelers={travelers}
-          language={language}
         />;
       case 'success':
         return <SuccessScreen onBackToHome={() => setScreen('home')} onViewTrips={() => setScreen('my-trips')} appearance={appearance} />;
       case 'my-trips':
-        return <HistoryScreen bookings={bookings} user={user} onCancel={handleCancelBooking} onSelect={(b) => { setSelectedBooking(b); setScreen('trip-details'); }} onBack={() => setScreen('home')} onProfile={() => setScreen('settings')} language={language} appearance={appearance} savedBookings={savedBookings} toggleSavedBooking={toggleSavedBooking} />;
+        return <HistoryScreen bookings={bookings} user={user} onCancel={handleCancelBooking} onSelect={(b) => { setSelectedBooking(b); setScreen('trip-details'); }} onBack={() => setScreen('home')} onProfile={() => setScreen('settings')} appearance={appearance} savedBookings={savedBookings} toggleSavedBooking={toggleSavedBooking} />;
       case 'trip-details':
         if (!selectedBooking) return null;
         if (selectedBooking.type === 'flight') {
@@ -237,13 +234,13 @@ export const Router = (props: RouterProps) => {
           />
         );
       case 'ticket':
-        return <TicketScreen onBack={() => setScreen('home')} onDownload={() => setScreen('home')} language={language} appearance={appearance} flight={selectedFlight || (selectedBooking?.type === 'flight' ? selectedBooking as any : null)} seat={selectedSeat || selectedBooking?.seat || '17'} />;
+        return <TicketScreen onBack={() => setScreen('home')} onDownload={() => setScreen('home')} appearance={appearance} flight={selectedFlight || (selectedBooking?.type === 'flight' ? selectedBooking as any : null)} seat={selectedSeat || selectedBooking?.seat || '17'} />;
       case 'settings':
-        return user ? <SettingsScreen user={user} onLogout={() => setScreen('auth-welcome')} language={language} setLanguage={setLanguage} currency={currency} setCurrency={setCurrency} appearance={appearance} setAppearance={setAppearance} notificationsEnabled={notificationsEnabled} setNotificationsEnabled={setNotificationsEnabled} emailNotificationsEnabled={emailNotificationsEnabled} setEmailNotificationsEnabled={setEmailNotificationsEnabled} notifications={notifications} onUpdateUser={(updated) => setUser({ ...user, ...updated })} subScreen={settingsSubScreen} setSubScreen={setSettingsSubScreen} /> : null;
+        return user ? <SettingsScreen user={user} onLogout={() => setScreen('auth-welcome')} currency={currency} setCurrency={setCurrency} appearance={appearance} setAppearance={setAppearance} notificationsEnabled={notificationsEnabled} setNotificationsEnabled={setNotificationsEnabled} emailNotificationsEnabled={emailNotificationsEnabled} setEmailNotificationsEnabled={setEmailNotificationsEnabled} notifications={notifications} onUpdateUser={(updated) => setUser({ ...user, ...updated })} subScreen={settingsSubScreen} setSubScreen={setSettingsSubScreen} /> : null;
       case 'alerts':
-        return <AlertsScreen notifications={notifications} onClear={onClearNotifications} language={language} appearance={appearance} />;
+        return <AlertsScreen notifications={notifications} onClear={onClearNotifications} appearance={appearance} />;
       default:
-        return <HomeScreen user={user} packages={packages} onSelectPackage={(p) => { setSelectedPackage(p); setScreen('package-details'); }} onSeeAllPackages={() => setScreen('place-list')} onSearchFlights={() => setScreen('flight-search')} onSearchHotels={handleSearchHotels} onSelectHotel={(h) => { setSelectedHotel(h); setScreen('hotel-details'); }} onProfile={() => setScreen('settings')} language={language} savedPackages={savedPackages} toggleSavedPackage={toggleSavedPackage} savedHotels={savedHotels} toggleSavedHotel={toggleSavedHotel} appearance={appearance} />;
+        return <HomeScreen user={user} packages={packages} onSelectPackage={(p) => { setSelectedPackage(p); setScreen('package-details'); }} onSeeAllPackages={() => setScreen('place-list')} onSearchFlights={() => setScreen('flight-search')} onSearchHotels={handleSearchHotels} onSelectHotel={(h) => { setSelectedHotel(h); setScreen('hotel-details'); }} onProfile={() => setScreen('settings')} savedPackages={savedPackages} toggleSavedPackage={toggleSavedPackage} savedHotels={savedHotels} toggleSavedHotel={toggleSavedHotel} appearance={appearance} />;
     }
   };
 
@@ -252,7 +249,7 @@ export const Router = (props: RouterProps) => {
       <div className={`${(screen === 'splash' || screen.startsWith('auth-')) ? '' : 'pt-24 pb-24 md:pb-0'}`}>
         {renderScreen()}
       </div>
-      <Navbar activeScreen={screen} setScreen={setScreen} language={language} appearance={appearance} user={user} setSettingsSubScreen={setSettingsSubScreen} />
+      <Navbar activeScreen={screen} setScreen={setScreen} appearance={appearance} user={user} setSettingsSubScreen={setSettingsSubScreen} />
     </div>
   );
 };

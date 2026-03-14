@@ -1,16 +1,15 @@
 import React from 'react';
 import { Chrome, Facebook, Plane } from 'lucide-react';
-import { translations } from '../../constants/translations';
+import { useTranslation } from '../../hooks/useTranslation';
 import { authService } from '../../services/auth';
 
 interface WelcomeScreenProps {
   onSignup: () => void;
   onLogin: () => void;
-  language: string;
 }
 
-export const WelcomeScreen = ({ onSignup, onLogin, language }: WelcomeScreenProps) => {
-  const t = (key: string) => translations[language]?.[key] || translations['English'][key];
+export const WelcomeScreen = ({ onSignup, onLogin }: WelcomeScreenProps) => {
+  const { t } = useTranslation();
   
   const handleSocialLogin = async (provider: 'google' | 'facebook') => {
     try {
@@ -24,6 +23,12 @@ export const WelcomeScreen = ({ onSignup, onLogin, language }: WelcomeScreenProp
       console.error(`${provider} auth error:`, error);
     }
   };
+
+  const noAccountText = t('noAccount');
+  const noAccountParts = noAccountText.includes('?') ? noAccountText.split('?') : [noAccountText, 'Sign Up'];
+  
+  const alreadyAccountText = t('alreadyAccount');
+  const alreadyAccountParts = alreadyAccountText.includes('?') ? alreadyAccountText.split('?') : [alreadyAccountText, 'Sign In'];
 
   return (
     <div className="fixed inset-0 bg-white z-[90] flex flex-col">
@@ -60,10 +65,10 @@ export const WelcomeScreen = ({ onSignup, onLogin, language }: WelcomeScreenProp
         </div>
         
         <div className="mt-auto mb-10 flex gap-1 text-sm">
-          <span className="text-slate-400">{t('noAccount').split('?')[0]}?</span>
-          <button onClick={onSignup} className="text-red-500 font-bold">{t('noAccount').split('?')[1].trim()}</button>
+          <span className="text-slate-400">{noAccountParts[0].trim()}{noAccountText.includes('?') ? '?' : ''}</span>
+          <button onClick={onSignup} className="text-red-500 font-bold">{noAccountParts[1].trim()}</button>
           <span className="text-slate-400 mx-1">or</span>
-          <button onClick={onLogin} className="text-primary font-bold">{t('alreadyAccount').split('?')[1].trim()}</button>
+          <button onClick={onLogin} className="text-primary font-bold">{alreadyAccountParts[1].trim()}</button>
         </div>
       </div>
     </div>

@@ -2,18 +2,18 @@ import React, { useState } from 'react';
 import { ChevronLeft, CreditCard, Loader2, Building2, CheckCircle2 } from 'lucide-react';
 import { useStripe, useElements, CardNumberElement, CardExpiryElement, CardCvcElement } from '@stripe/react-stripe-js';
 import { Flight, Package } from '../../types';
-import { translations } from '../../constants/translations';
+import { useTranslation } from '../../hooks/useTranslation';
 
 interface PaymentScreenProps {
   flight?: Flight;
   pkg?: Package;
   onConfirm: () => Promise<void> | void;
   onBack: () => void;
-  language: string;
   appearance: string;
 }
 
-export const PaymentScreen = ({ flight, pkg, onConfirm, onBack, language, appearance }: PaymentScreenProps) => {
+export const PaymentScreen = ({ flight, pkg, onConfirm, onBack, appearance }: PaymentScreenProps) => {
+  const { t } = useTranslation();
   const stripe = useStripe();
   const elements = useElements();
   const [view, setView] = useState<'selection' | 'form'>('selection');
@@ -28,7 +28,6 @@ export const PaymentScreen = ({ flight, pkg, onConfirm, onBack, language, appear
     accountNumber: ''
   });
 
-  const t = (key: string) => translations[language]?.[key] || translations['English'][key];
   const price = flight?.price || pkg?.price || 700;
 
   const STRIPE_PAYMENT_LINK = "https://buy.stripe.com/test_9B6eV7faW19u4cTeWr6Zy01";

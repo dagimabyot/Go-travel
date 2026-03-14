@@ -8,6 +8,7 @@ import { FlightMap } from '../../components/ui/FlightMap';
 import { Avatar } from '../../components/ui/Avatar';
 import { CalendarModal } from '../../components/ui/CalendarModal';
 import { generateProfessionalPDF } from '../../utils/pdfGenerator';
+import { useTranslation } from '../../hooks/useTranslation';
 
 // Leaflet icon fix
 import icon from 'leaflet/dist/images/marker-icon.png';
@@ -49,6 +50,7 @@ export const TripDetailsScreen = ({ booking: initialBooking, user, onBack, onCan
   const [showFlightModal, setShowFlightModal] = useState(false);
   const [showHotelModal, setShowHotelModal] = useState(false);
   const [showCancelConfirm, setShowCancelConfirm] = useState(false);
+  const { t } = useTranslation();
 
   // Mock flight map data
   const flightMapData = {
@@ -87,22 +89,22 @@ export const TripDetailsScreen = ({ booking: initialBooking, user, onBack, onCan
             <div className={`w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 ${appearance === 'Dark Mode' ? 'bg-red-500/10' : 'bg-red-50'}`}>
               <AlertCircle size={40} className="text-red-500" />
             </div>
-            <h3 className={`text-xl font-bold mb-2 ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>Cancel Booking?</h3>
+            <h3 className={`text-xl font-bold mb-2 ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{t('cancelBookingQuestion')}</h3>
             <p className="text-slate-500 text-sm mb-8">
-              Are you sure you want to cancel this {booking.type}? This action cannot be undone and cancellation fees may apply.
+              {t('cancelFlightWarning')}
             </p>
             <div className="flex gap-3">
               <button 
                 onClick={() => setShowCancelConfirm(false)}
                 className={`flex-1 py-4 rounded-2xl font-bold text-sm transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-800 text-white' : 'bg-slate-100 text-slate-900'}`}
               >
-                Keep Trip
+                {t('keepTrip')}
               </button>
               <button 
                 onClick={confirmCancel}
                 className="flex-1 py-4 bg-red-500 text-white rounded-2xl font-bold text-sm shadow-lg shadow-red-500/20"
               >
-                Yes, Cancel
+                {t('yesCancel')}
               </button>
             </div>
           </motion.div>
@@ -122,7 +124,7 @@ export const TripDetailsScreen = ({ booking: initialBooking, user, onBack, onCan
             className={`w-full max-w-md rounded-t-[48px] p-8 transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-900' : 'bg-white'}`}
           >
             <div className="flex justify-between items-center mb-8">
-              <h3 className={`text-xl font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>Flight Details</h3>
+              <h3 className={`text-xl font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{t('flightDetails')}</h3>
               <button onClick={() => setShowFlightModal(false)} className={`w-10 h-10 flex items-center justify-center rounded-full transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-800 text-white' : 'bg-slate-50 text-slate-900'}`}>
                 <X size={20} />
               </button>
@@ -178,7 +180,7 @@ export const TripDetailsScreen = ({ booking: initialBooking, user, onBack, onCan
             className={`w-full max-w-md rounded-t-[48px] p-8 transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-900' : 'bg-white'}`}
           >
             <div className="flex justify-between items-center mb-8">
-              <h3 className={`text-xl font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>Hotel Details</h3>
+              <h3 className={`text-xl font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{t('hotelDetails')}</h3>
               <button onClick={() => setShowHotelModal(false)} className={`w-10 h-10 flex items-center justify-center rounded-full transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-800 text-white' : 'bg-slate-50 text-slate-900'}`}>
                 <X size={20} />
               </button>
@@ -212,14 +214,14 @@ export const TripDetailsScreen = ({ booking: initialBooking, user, onBack, onCan
 
   const renderMoreInfo = () => (
     <div className="mb-8 space-y-4">
-      <h2 className={`text-lg font-bold mb-4 ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>Trip Information</h2>
+      <h2 className={`text-lg font-bold mb-4 ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{t('tripInformation')}</h2>
       <div className="grid grid-cols-1 gap-3">
         <div className={`p-4 rounded-2xl flex items-start gap-3 transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-900' : 'bg-slate-50'}`}>
           <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 ${appearance === 'Dark Mode' ? 'bg-blue-900/30' : 'bg-blue-100'}`}>
             <CheckCircle2 size={16} className="text-blue-600" />
           </div>
           <div>
-            <p className={`text-xs font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>Confirmation Number</p>
+            <p className={`text-xs font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{t('confirmationNumber')}</p>
             <p className="text-[10px] text-slate-400">#GT-{Math.floor(100000 + Math.random() * 900000)}</p>
           </div>
         </div>
@@ -228,7 +230,7 @@ export const TripDetailsScreen = ({ booking: initialBooking, user, onBack, onCan
             <Info size={16} className="text-emerald-600" />
           </div>
           <div>
-            <p className={`text-xs font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>Check-in Instructions</p>
+            <p className={`text-xs font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{t('checkInInstructions')}</p>
             <p className="text-[10px] text-slate-400">Please arrive 2 hours before departure. Digital boarding pass available in app.</p>
           </div>
         </div>
@@ -237,7 +239,7 @@ export const TripDetailsScreen = ({ booking: initialBooking, user, onBack, onCan
             <Star size={16} className="text-amber-600" />
           </div>
           <div>
-            <p className={`text-xs font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>Travel Tips</p>
+            <p className={`text-xs font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{t('travelTips')}</p>
             <p className="text-[10px] text-slate-400">Carry a light jacket as evenings can get chilly. Don't forget your universal adapter!</p>
           </div>
         </div>
@@ -307,7 +309,7 @@ export const TripDetailsScreen = ({ booking: initialBooking, user, onBack, onCan
 
         <div className="mb-8">
           <div className="flex justify-between items-center mb-3">
-            <h2 className={`text-lg font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>About Trip</h2>
+            <h2 className={`text-lg font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{t('aboutTrip')}</h2>
           </div>
           <p className="text-slate-400 text-sm leading-relaxed">
             {booking.description || 'Manarola is one of the most famous and picturesque villages of the Cinque Terre. Known for its colorful houses that seem to tumble down the cliffs into the sea, it offers a truly unique and breathtaking experience. The village is surrounded by lush vineyards that produce the famous Sciacchetrà wine. Visitors can explore the narrow winding streets, enjoy fresh seafood at local trattorias, and take in the stunning sunsets from the harbor. Whether you are looking for a romantic getaway or an adventurous hiking trip, Manarola has something for everyone. The famous Via dell\'Amore (Path of Love) connects Manarola to Riomaggiore, offering spectacular coastal views.'}
@@ -317,25 +319,25 @@ export const TripDetailsScreen = ({ booking: initialBooking, user, onBack, onCan
         {renderMoreInfo()}
 
         <div className="mb-8">
-          <h2 className={`text-lg font-bold mb-4 ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>What's Included?</h2>
+          <h2 className={`text-lg font-bold mb-4 ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{t('whatsIncluded')}</h2>
           <div className="flex gap-4">
             <button onClick={() => setShowFlightModal(true)} className={`flex-1 flex flex-col items-center gap-2 p-4 rounded-2xl transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-800' : 'bg-slate-50'}`}>
               <Plane size={20} className={appearance === 'Dark Mode' ? 'text-slate-300' : 'text-slate-600'} />
-              <span className="text-[10px] font-bold text-slate-400 uppercase">Flight</span>
+              <span className="text-[10px] font-bold text-slate-400 uppercase">{t('flight')}</span>
             </button>
             <button onClick={() => setShowHotelModal(true)} className={`flex-1 flex flex-col items-center gap-2 p-4 rounded-2xl transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-800' : 'bg-slate-50'}`}>
               <Hotel size={20} className={appearance === 'Dark Mode' ? 'text-slate-300' : 'text-slate-600'} />
-              <span className="text-[10px] font-bold text-slate-400 uppercase">Hotel</span>
+              <span className="text-[10px] font-bold text-slate-400 uppercase">{t('hotel')}</span>
             </button>
             <button className={`flex-1 flex flex-col items-center gap-2 p-4 rounded-2xl transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-800' : 'bg-slate-50'}`}>
               <Car size={20} className={appearance === 'Dark Mode' ? 'text-slate-300' : 'text-slate-600'} />
-              <span className="text-[10px] font-bold text-slate-400 uppercase">Transfer</span>
+              <span className="text-[10px] font-bold text-slate-400 uppercase">{t('transfer')}</span>
             </button>
           </div>
         </div>
 
         <div className="mb-8">
-          <h2 className={`text-lg font-bold mb-4 ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>Photo Gallery</h2>
+          <h2 className={`text-lg font-bold mb-4 ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{t('photoGallery')}</h2>
           <div className="grid grid-cols-2 gap-3 mb-4">
             <div className="h-48 rounded-2xl overflow-hidden shadow-sm">
               <img src={booking.image || "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=400&q=80"} alt="Destination" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
@@ -372,7 +374,7 @@ export const TripDetailsScreen = ({ booking: initialBooking, user, onBack, onCan
             )}
           </div>
           <button className={`w-full py-4 rounded-2xl text-sm font-bold transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-800 text-slate-300' : 'bg-slate-50 text-slate-600'}`}>
-            Explore All Photos
+            {t('exploreAllPhotos')}
           </button>
         </div>
 
@@ -403,14 +405,14 @@ export const TripDetailsScreen = ({ booking: initialBooking, user, onBack, onCan
             className={`w-full py-5 rounded-[24px] font-bold text-lg flex items-center justify-center gap-2 active:scale-95 transition-all ${appearance === 'Dark Mode' ? 'bg-slate-800 text-white' : 'bg-slate-100 text-slate-900'}`}
           >
             <Download size={20} className="text-primary" />
-            Download Ticket (PDF)
+            {t('downloadTicketPDF')}
           </button>
           <button 
             onClick={handleCancelClick}
             className="w-full py-5 bg-red-500 text-white rounded-[24px] font-bold text-lg shadow-lg shadow-red-500/30 flex items-center justify-center gap-2"
           >
             <Trash2 size={20} />
-            Cancel This Trip
+            {t('cancelThisTrip')}
           </button>
         </div>
       </div>
@@ -431,7 +433,7 @@ export const TripDetailsScreen = ({ booking: initialBooking, user, onBack, onCan
         >
           <ChevronLeft size={24} />
         </button>
-        <h1 className={`text-2xl font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>Flight Details</h1>
+        <h1 className={`text-2xl font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{t('flightDetails')}</h1>
       </header>
 
       <div className="mb-10">
@@ -447,32 +449,32 @@ export const TripDetailsScreen = ({ booking: initialBooking, user, onBack, onCan
         <div className="space-y-4">
           <div className={`p-4 rounded-2xl transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-900' : 'bg-slate-50'}`}>
             <p className={`text-lg font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>
-              Date : {booking.date ? booking.date.replace(' ', ' T') : '2026-08-20 T14:00:00'}
+              {t('date')} : {booking.date ? booking.date.replace(' ', ' T') : '2026-08-20 T14:00:00'}
             </p>
           </div>
 
           <div className={`p-4 rounded-2xl transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-900' : 'bg-slate-50'}`}>
             <p className={`text-lg font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>
-              From : {booking.from_city || 'New York'}
+              {t('from')} : {booking.from_city || 'New York'}
             </p>
           </div>
 
           <div className={`p-4 rounded-2xl transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-900' : 'bg-slate-50'}`}>
             <p className={`text-lg font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>
-              To : {booking.to_city || 'Tokyo'}
+              {t('to')} : {booking.to_city || 'Tokyo'}
             </p>
           </div>
 
           <div className={`p-4 rounded-2xl transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-900' : 'bg-slate-50'}`}>
             <p className={`text-lg font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>
-              Flight : {booking.airline || 'Japan Airlines'}
+              {t('flight')} : {booking.airline || 'Japan Airlines'}
             </p>
           </div>
         </div>
 
         <div className={`flex justify-between items-center p-4 rounded-2xl transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-900' : 'bg-slate-50'}`}>
           <div>
-            <p className="text-slate-400 text-[10px] font-bold uppercase tracking-wider mb-1">Guests</p>
+            <p className="text-slate-400 text-[10px] font-bold uppercase tracking-wider mb-1">{t('guests')}</p>
             <p className={`text-lg font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{booking.guests || '1 Adult'}</p>
           </div>
         </div>
@@ -486,14 +488,14 @@ export const TripDetailsScreen = ({ booking: initialBooking, user, onBack, onCan
           className={`w-full bg-blue-600 text-white py-5 rounded-[24px] font-bold text-lg shadow-lg active:scale-95 transition-all flex items-center justify-center gap-2 ${appearance === 'Dark Mode' ? 'shadow-blue-900/40' : 'shadow-blue-200'}`}
         >
           <Download size={20} />
-          Download Ticket (PDF)
+          {t('downloadTicketPDF')}
         </button>
         <button 
           onClick={handleCancelClick}
           className="w-full py-5 bg-red-500 text-white rounded-[24px] font-bold text-lg shadow-lg shadow-red-500/30 flex items-center justify-center gap-2"
         >
           <Trash2 size={20} />
-          Cancel This Flight
+          {t('cancelThisFlight')}
         </button>
       </div>
       {renderCancelModal()}
@@ -557,7 +559,7 @@ export const TripDetailsScreen = ({ booking: initialBooking, user, onBack, onCan
               <Calendar size={20} className={appearance === 'Dark Mode' ? 'text-slate-300' : 'text-slate-600'} />
             </div>
             <div>
-              <p className="text-xs text-slate-400">Date : {booking.date || '10 May - 14 May'}</p>
+              <p className="text-xs text-slate-400">{t('date')} : {booking.date || '10 May - 14 May'}</p>
             </div>
           </div>
         </div>
@@ -587,18 +589,18 @@ export const TripDetailsScreen = ({ booking: initialBooking, user, onBack, onCan
 
         <div className="mb-8">
           <div className="flex justify-between items-center mb-4">
-            <h2 className={`text-lg font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>Sleeping Arrangements</h2>
+            <h2 className={`text-lg font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{t('sleepingArrangements')}</h2>
           </div>
           <div className="flex gap-4">
             <div className={`flex-1 p-6 rounded-[32px] border transition-colors ${appearance === 'Dark Mode' ? 'border-red-500/50 bg-slate-800' : 'border-red-400 bg-white'}`}>
               <Hotel size={24} className="text-primary mb-4" />
-              <p className={`text-sm font-bold mb-1 ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>Bedroom 1</p>
-              <p className="text-xs text-slate-400">1 King Bed</p>
+              <p className={`text-sm font-bold mb-1 ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{t('bedroom')} 1</p>
+              <p className="text-xs text-slate-400">1 {t('kingBed')}</p>
             </div>
             <div className={`flex-1 p-6 rounded-[32px] border transition-colors ${appearance === 'Dark Mode' ? 'border-slate-700 bg-slate-800' : 'border-slate-100 bg-white'}`}>
               <Hotel size={24} className="text-primary mb-4" />
-              <p className={`text-sm font-bold mb-1 ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>Bedroom 2</p>
-              <p className="text-xs text-slate-400">1 Single Bed</p>
+              <p className={`text-sm font-bold mb-1 ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{t('bedroom')} 2</p>
+              <p className="text-xs text-slate-400">1 {t('singleBed')}</p>
             </div>
           </div>
         </div>
@@ -609,14 +611,14 @@ export const TripDetailsScreen = ({ booking: initialBooking, user, onBack, onCan
             className={`w-full py-5 rounded-[24px] font-bold text-lg flex items-center justify-center gap-2 active:scale-95 transition-all ${appearance === 'Dark Mode' ? 'bg-slate-800 text-white' : 'bg-slate-100 text-slate-900'}`}
           >
             <Download size={20} className="text-primary" />
-            Download Ticket (PDF)
+            {t('downloadTicketPDF')}
           </button>
           <button 
             onClick={handleCancelClick}
             className="w-full py-5 bg-red-500 text-white rounded-[24px] font-bold text-lg shadow-lg shadow-red-500/30 flex items-center justify-center gap-2"
           >
             <Trash2 size={20} />
-            Cancel This Hotel
+            {t('cancelThisHotel')}
           </button>
         </div>
       </div>

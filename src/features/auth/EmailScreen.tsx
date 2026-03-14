@@ -1,18 +1,20 @@
 import React, { useState } from 'react';
 import { ArrowLeft } from 'lucide-react';
-import { translations } from '../../constants/translations';
+import { useTranslation } from '../../hooks/useTranslation';
 
 interface EmailScreenProps {
   onContinue: (email: string) => void;
   onSignup: () => void;
   onBack: () => void;
-  language: string;
 }
 
-export const EmailScreen = ({ onContinue, onSignup, onBack, language }: EmailScreenProps) => {
+export const EmailScreen = ({ onContinue, onSignup, onBack }: EmailScreenProps) => {
   const [email, setEmail] = useState('');
-  const t = (key: string) => translations[language]?.[key] || translations['English'][key];
+  const { t } = useTranslation();
   
+  const noAccountText = t('noAccount');
+  const noAccountParts = noAccountText.includes('?') ? noAccountText.split('?') : [noAccountText, 'Sign Up'];
+
   return (
     <div className="fixed inset-0 bg-white z-[90] p-8 flex flex-col">
       <button onClick={onBack} className="mb-10 w-12 h-12 flex items-center justify-center rounded-full border border-slate-50 hover:bg-slate-50 transition-colors">
@@ -42,7 +44,7 @@ export const EmailScreen = ({ onContinue, onSignup, onBack, language }: EmailScr
         
         <div className="text-center">
           <p className="text-sm text-slate-400">
-            {t('noAccount').split('?')[0]}? <button onClick={onSignup} className="text-red-500 font-bold">{t('noAccount').split('?')[1].trim()}</button>
+            {noAccountParts[0].trim()}{noAccountText.includes('?') ? '?' : ''} <button onClick={onSignup} className="text-red-500 font-bold">{noAccountParts[1].trim()}</button>
           </p>
         </div>
       </div>

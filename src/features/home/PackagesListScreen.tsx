@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { ChevronLeft, Star, Bookmark, ListFilter } from 'lucide-react';
 import { Package, User } from '../../types';
-import { translations } from '../../constants/translations';
+import { useTranslation } from '../../hooks/useTranslation';
 import { Avatar } from '../../components/ui/Avatar';
 
 interface PackagesListScreenProps {
@@ -12,7 +12,6 @@ interface PackagesListScreenProps {
   onSelect: (p: Package) => void;
   savedPackages: Package[];
   toggleSavedPackage: (p: Package) => void;
-  language: string;
   appearance: string;
 }
 
@@ -23,10 +22,9 @@ export const PackagesListScreen = ({
   onSelect, 
   savedPackages, 
   toggleSavedPackage,
-  language,
   appearance
 }: PackagesListScreenProps) => {
-  const t = (key: string) => translations[language]?.[key] || translations['English'][key];
+  const { t } = useTranslation();
   const isSaved = (id: string) => savedPackages.some(p => p.id === id);
 
   return (
@@ -39,13 +37,13 @@ export const PackagesListScreen = ({
       </header>
 
       <div className="mb-8">
-        <h1 className={`text-2xl font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>Popular Packages</h1>
+        <h1 className={`text-2xl font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{t('popularPackages')}</h1>
       </div>
 
       <div className="flex justify-between items-center mb-6">
-        <p className="text-sm font-bold text-slate-400">Result found (128)</p>
+        <p className="text-sm font-bold text-slate-400">{t('resultFound')} (128)</p>
         <button className={`flex items-center gap-2 text-sm font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>
-          Sort By <ListFilter size={18} />
+          {t('sortBy')} <ListFilter size={18} />
         </button>
       </div>
 

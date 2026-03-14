@@ -1,22 +1,21 @@
 import React, { useState } from 'react';
 import { ChevronLeft, Plane, Calendar, Users, Search } from 'lucide-react';
-import { translations } from '../../constants/translations';
+import { useTranslation } from '../../hooks/useTranslation';
 
 interface FlightSearchScreenProps {
   onBack: () => void;
   onSearch: (searchParams: any) => void;
-  language: string;
   appearance: string;
 }
 
-export const FlightSearchScreen = ({ onBack, onSearch, language, appearance }: FlightSearchScreenProps) => {
+export const FlightSearchScreen = ({ onBack, onSearch, appearance }: FlightSearchScreenProps) => {
   const [from, setFrom] = useState('');
   const [to, setTo] = useState('');
   const [date, setDate] = useState('');
   const [returnDate, setReturnDate] = useState('');
   const [travelers, setTravelers] = useState('');
 
-  const t = (key: string) => translations[language]?.[key] || translations['English'][key];
+  const { t } = useTranslation();
 
   return (
     <div className={`min-h-screen pb-24 pt-8 px-6 max-w-4xl mx-auto transition-colors duration-300 ${appearance === 'Dark Mode' ? 'bg-slate-950 text-white' : 'bg-white text-slate-900'}`}>
@@ -44,7 +43,7 @@ export const FlightSearchScreen = ({ onBack, onSearch, language, appearance }: F
                 type="text" 
                 value={from} 
                 onChange={(e) => setFrom(e.target.value)}
-                placeholder="Sylhet, BD"
+                placeholder={t('fromPlaceholder')}
                 className={`text-lg font-bold bg-transparent focus:outline-none w-full truncate ${appearance === 'Dark Mode' ? 'text-white placeholder:text-slate-700' : 'text-slate-900 placeholder:text-slate-300'}`}
               />
               <div className="w-6 h-4 bg-green-600 rounded-sm relative flex items-center justify-center overflow-hidden shrink-0">
@@ -66,7 +65,7 @@ export const FlightSearchScreen = ({ onBack, onSearch, language, appearance }: F
                 type="text" 
                 value={to} 
                 onChange={(e) => setTo(e.target.value)}
-                placeholder="Manarola, IT"
+                placeholder={t('toPlaceholder')}
                 className={`text-lg font-bold bg-transparent focus:outline-none w-full truncate ${appearance === 'Dark Mode' ? 'text-white placeholder:text-slate-700' : 'text-slate-900 placeholder:text-slate-300'}`}
               />
               <div className="w-6 h-4 bg-green-600 rounded-sm relative flex flex-col shrink-0 overflow-hidden">
@@ -89,7 +88,7 @@ export const FlightSearchScreen = ({ onBack, onSearch, language, appearance }: F
               type="text" 
               value={date} 
               onChange={(e) => setDate(e.target.value)}
-              placeholder="20 Jun, 2021"
+              placeholder={t('datePlaceholder')}
               className={`text-lg font-bold bg-transparent focus:outline-none w-full ${appearance === 'Dark Mode' ? 'text-white placeholder:text-slate-700' : 'text-slate-900 placeholder:text-slate-300'}`}
             />
           </div>
@@ -106,7 +105,7 @@ export const FlightSearchScreen = ({ onBack, onSearch, language, appearance }: F
               type="text" 
               value={returnDate} 
               onChange={(e) => setReturnDate(e.target.value)}
-              placeholder="25 Jun, 2021"
+              placeholder={t('datePlaceholder')}
               className={`text-lg font-bold bg-transparent focus:outline-none w-full ${appearance === 'Dark Mode' ? 'text-white placeholder:text-slate-700' : 'text-slate-900 placeholder:text-slate-300'}`}
             />
           </div>
@@ -123,7 +122,7 @@ export const FlightSearchScreen = ({ onBack, onSearch, language, appearance }: F
               type="text" 
               value={travelers} 
               onChange={(e) => setTravelers(e.target.value)}
-              placeholder="1 Person"
+              placeholder={t('travelerPlaceholder')}
               className={`text-lg font-bold bg-transparent focus:outline-none w-full ${appearance === 'Dark Mode' ? 'text-white placeholder:text-slate-700' : 'text-slate-900 placeholder:text-slate-300'}`}
             />
           </div>

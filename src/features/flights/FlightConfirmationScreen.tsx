@@ -1,20 +1,19 @@
 import React, { useState } from 'react';
 import { ChevronLeft, Info, Minus, Plus, CreditCard, FileText } from 'lucide-react';
 import { Flight, User } from '../../types';
-import { translations } from '../../constants/translations';
+import { useTranslation } from '../../hooks/useTranslation';
 
 interface FlightConfirmationScreenProps {
   flight?: Flight;
   user: User | null;
   onBack: () => void;
   onContinue: (guests: number) => void;
-  language: string;
   onEdit: (field: string) => void;
   appearance: string;
 }
 
-export const FlightConfirmationScreen = ({ flight, user, onBack, onContinue, language, onEdit, appearance }: FlightConfirmationScreenProps) => {
-  const t = (key: string) => translations[language]?.[key] || translations['English'][key];
+export const FlightConfirmationScreen = ({ flight, user, onBack, onContinue, onEdit, appearance }: FlightConfirmationScreenProps) => {
+  const { t } = useTranslation();
   const [guests, setGuests] = useState(2);
   const pricePerGuest = flight?.price || 700;
   const total = guests * pricePerGuest;

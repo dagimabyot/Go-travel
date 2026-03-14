@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ChevronLeft, User } from 'lucide-react';
 import { Traveler } from '../../types';
-import { translations } from '../../constants/translations';
+import { useTranslation } from '../../hooks/useTranslation';
 
 interface TravelerInformationScreenProps {
   guestCount: number;
@@ -9,12 +9,11 @@ interface TravelerInformationScreenProps {
   onBack: () => void;
   onContinue: (travelers: Traveler[]) => void;
   appearance: string;
-  language: string;
   initialTravelers?: Traveler[];
 }
 
-export const TravelerInformationScreen = ({ guestCount, user, onBack, onContinue, appearance, language, initialTravelers }: TravelerInformationScreenProps) => {
-  const t = (key: string) => translations[language]?.[key] || translations['English'][key];
+export const TravelerInformationScreen = ({ guestCount, user, onBack, onContinue, appearance, initialTravelers }: TravelerInformationScreenProps) => {
+  const { t } = useTranslation();
   const [travelers, setTravelers] = useState<Traveler[]>(() => {
     if (initialTravelers && initialTravelers.length === guestCount) {
       return initialTravelers;
@@ -103,7 +102,7 @@ export const TravelerInformationScreen = ({ guestCount, user, onBack, onContinue
                   type="text" 
                   value={traveler.fullName} 
                   onChange={e => updateTraveler(index, 'fullName', e.target.value)} 
-                  placeholder="e.g. Johnathan Doe"
+                  placeholder={t('fullNamePlaceholder')}
                   className={`w-full text-sm font-bold px-5 py-4 rounded-2xl border focus:outline-none transition-all ${appearance === 'Dark Mode' ? 'bg-slate-950 text-white border-slate-800 focus:border-blue-600' : 'bg-slate-50 text-slate-900 border-slate-100 focus:border-blue-600'}`} 
                 />
               </div>
@@ -128,7 +127,7 @@ export const TravelerInformationScreen = ({ guestCount, user, onBack, onContinue
                     type="text" 
                     value={traveler.nationality} 
                     onChange={e => updateTraveler(index, 'nationality', e.target.value)} 
-                    placeholder="e.g. American"
+                    placeholder={t('nationalityPlaceholder')}
                     className={`w-full text-sm font-bold px-5 py-4 rounded-2xl border focus:outline-none transition-all ${appearance === 'Dark Mode' ? 'bg-slate-950 text-white border-slate-800 focus:border-blue-600' : 'bg-slate-50 text-slate-900 border-slate-100 focus:border-blue-600'}`} 
                   />
                 </div>
@@ -140,7 +139,7 @@ export const TravelerInformationScreen = ({ guestCount, user, onBack, onContinue
                   type="text" 
                   value={traveler.passportNumber} 
                   onChange={e => updateTraveler(index, 'passportNumber', e.target.value)} 
-                  placeholder="e.g. A12345678"
+                  placeholder={t('passportPlaceholder')}
                   className={`w-full text-sm font-bold px-5 py-4 rounded-2xl border focus:outline-none transition-all ${appearance === 'Dark Mode' ? 'bg-slate-950 text-white border-slate-800 focus:border-blue-600' : 'bg-slate-50 text-slate-900 border-slate-100 focus:border-blue-600'}`} 
                 />
               </div>

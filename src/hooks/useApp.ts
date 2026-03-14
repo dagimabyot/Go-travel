@@ -1,9 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Screen, User, Flight, Booking, AppNotification, Package, Hotel } from '../types';
-import { useLanguage } from './useLanguage';
 
 export const useApp = () => {
-  const { language: contextLanguage, setLanguage: setContextLanguage } = useLanguage();
   const [screen, setScreen] = useState<Screen>('splash');
   const [user, setUser] = useState<User | null>(() => {
     const saved = localStorage.getItem('travel_user');
@@ -23,12 +21,6 @@ export const useApp = () => {
       localStorage.removeItem('travel_user');
     }
   }, [user]);
-  
-  const language = contextLanguage;
-  const setLanguage = (lang: string) => {
-    setContextLanguage(lang as any);
-  };
-  
   const [currency, setCurrency] = useState('USD ($)');
   const [appearance, setAppearance] = useState('Light Mode');
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
@@ -289,7 +281,6 @@ export const useApp = () => {
   return {
     screen, setScreen,
     user, setUser,
-    language, setLanguage,
     currency, setCurrency,
     appearance, setAppearance,
     notificationsEnabled, setNotificationsEnabled,

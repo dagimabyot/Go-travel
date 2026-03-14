@@ -6,15 +6,13 @@ import {
   ChevronLeft
 } from 'lucide-react';
 import { User, AppNotification } from '../../types';
-import { useLanguage } from '../../contexts/LanguageContext';
-import { getLanguageDisplayName, getLanguageFlagEmoji } from '../../utils/i18n';
+import { useTranslation } from '../../hooks/useTranslation';
+import { useLanguage } from '../../context/LanguageContext';
 import { Avatar } from '../../components/ui/Avatar';
 
 interface SettingsScreenProps {
   user: User;
   onLogout: () => void;
-  language: string;
-  setLanguage: (l: string) => void;
   currency: string;
   setCurrency: (c: string) => void;
   appearance: string;
@@ -32,8 +30,6 @@ interface SettingsScreenProps {
 export const SettingsScreen = ({ 
   user, 
   onLogout, 
-  language, 
-  setLanguage, 
   currency, 
   setCurrency, 
   appearance, 
@@ -48,28 +44,29 @@ export const SettingsScreen = ({
   setSubScreen
 }: SettingsScreenProps) => {
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
-  const { t } = useLanguage();
+  const { t } = useTranslation();
+  const { language, setLanguage } = useLanguage();
 
   const renderSubScreen = () => {
     switch (subScreen) {
       case 'profile':
-        return <PersonalInformationSubScreen user={user} onSave={onUpdateUser} language={language} onBack={() => setSubScreen('main')} appearance={appearance} />;
+        return <PersonalInformationSubScreen user={user} onSave={onUpdateUser} onBack={() => setSubScreen('main')} appearance={appearance} />;
       case 'payment':
-        return <PaymentMethodsSubScreen language={language} appearance={appearance} onBack={() => setSubScreen('main')} />;
+        return <PaymentMethodsSubScreen appearance={appearance} onBack={() => setSubScreen('main')} />;
       case 'notifications':
-        return <NotificationsSubScreen notifications={notifications} language={language} appearance={appearance} onBack={() => setSubScreen('main')} />;
+        return <NotificationsSubScreen notifications={notifications} appearance={appearance} onBack={() => setSubScreen('main')} />;
       case 'privacy':
-        return <PrivacySettingsSubScreen language={language} appearance={appearance} onBack={() => setSubScreen('main')} />;
+        return <PrivacySettingsSubScreen appearance={appearance} onBack={() => setSubScreen('main')} />;
       case 'help':
-        return <HelpSupportSubScreen language={language} appearance={appearance} onBack={() => setSubScreen('main')} />;
+        return <HelpSupportSubScreen appearance={appearance} onBack={() => setSubScreen('main')} />;
       case 'contact':
-        return <ContactUsSubScreen language={language} appearance={appearance} onBack={() => setSubScreen('main')} />;
+        return <ContactUsSubScreen appearance={appearance} onBack={() => setSubScreen('main')} />;
       case 'language':
-        return <LanguageSubScreen language={language} setLanguage={setLanguage} appearance={appearance} onBack={() => setSubScreen('main')} />;
+        return <LanguageSubScreen appearance={appearance} onBack={() => setSubScreen('main')} />;
       case 'about':
-        return <AboutAppSubScreen onBack={() => setSubScreen('main')} appearance={appearance} language={language} />;
+        return <AboutAppSubScreen onBack={() => setSubScreen('main')} appearance={appearance} />;
       case 'terms':
-        return <TermsOfServiceSubScreen appearance={appearance} onBack={() => setSubScreen('main')} language={language} />;
+        return <TermsOfServiceSubScreen appearance={appearance} onBack={() => setSubScreen('main')} />;
       default:
         return (
           <>
@@ -181,22 +178,22 @@ export const SettingsScreen = ({
             <div className={`w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 ${appearance === 'Dark Mode' ? 'bg-red-500/10' : 'bg-red-50'}`}>
               <LogOut size={40} className="text-red-500" />
             </div>
-            <h3 className={`text-xl font-bold mb-2 ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>Logout?</h3>
+            <h3 className={`text-xl font-bold mb-2 ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{t('logoutQuestion')}</h3>
             <p className="text-slate-500 text-sm mb-8">
-              Are you sure you want to log out of your account? You will need to sign in again to access your bookings.
+              {t('logoutConfirmMsg')}
             </p>
             <div className="flex gap-3">
               <button 
                 onClick={() => setShowLogoutConfirm(false)}
                 className={`flex-1 py-4 rounded-2xl font-bold text-sm transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-800 text-white' : 'bg-slate-100 text-slate-900'}`}
               >
-                Cancel
+                {t('cancel')}
               </button>
               <button 
                 onClick={onLogout}
                 className="flex-1 py-4 bg-red-500 text-white rounded-2xl font-bold text-sm shadow-lg shadow-red-500/20"
               >
-                Logout
+                {t('logout')}
               </button>
             </div>
           </motion.div>
@@ -251,8 +248,8 @@ const SettingItem = ({ label, onClick, appearance, value }: { label: string, onC
 
 // --- Sub-screens ---
 
-const PersonalInformationSubScreen = ({ user, onSave, language, onBack, appearance }: { user: User, onSave: (updated: Partial<User>) => void, language: string, onBack: () => void, appearance: string }) => {
-  const t = (key: string) => translations[language]?.[key] || translations['English'][key];
+const PersonalInformationSubScreen = ({ user, onSave, onBack, appearance }: { user: User, onSave: (updated: Partial<User>) => void, onBack: () => void, appearance: string }) => {
+  const { t } = useTranslation();
   const [formData, setFormData] = React.useState({
     name: user.name || '',
     email: user.email || '',
@@ -426,8 +423,8 @@ const PersonalInformationSubScreen = ({ user, onSave, language, onBack, appearan
   );
 };
 
-const PaymentMethodsSubScreen = ({ language, appearance, onBack }: { language: string, appearance: string, onBack: () => void }) => {
-  const t = (key: string) => translations[language]?.[key] || translations['English'][key];
+const PaymentMethodsSubScreen = ({ appearance, onBack }: { appearance: string, onBack: () => void }) => {
+  const { t } = useTranslation();
   const [cards, setCards] = React.useState<any[]>([]);
   const [showAddCard, setShowAddCard] = React.useState(false);
   const [newCard, setNewCard] = React.useState({ number: '', holder: '', expiry: '' });
@@ -491,8 +488,8 @@ const PaymentMethodsSubScreen = ({ language, appearance, onBack }: { language: s
   );
 };
 
-const NotificationsSubScreen = ({ notifications, language, appearance, onBack }: { notifications: AppNotification[], language: string, appearance: string, onBack: () => void }) => {
-  const t = (key: string) => translations[language]?.[key] || translations['English'][key];
+const NotificationsSubScreen = ({ notifications, appearance, onBack }: { notifications: AppNotification[], appearance: string, onBack: () => void }) => {
+  const { t } = useTranslation();
   return (
     <div className="space-y-6">
       <div className="space-y-4">
@@ -546,8 +543,8 @@ const NotificationToggle = ({ label, description, defaultChecked, appearance }: 
   );
 };
 
-const PrivacySettingsSubScreen = ({ language, appearance, onBack }: { language: string, appearance: string, onBack: () => void }) => {
-  const t = (key: string) => translations[language]?.[key] || translations['English'][key];
+const PrivacySettingsSubScreen = ({ appearance, onBack }: { appearance: string, onBack: () => void }) => {
+  const { t } = useTranslation();
   return (
     <div className={`fixed inset-0 z-[210] flex flex-col transition-colors duration-300 ${appearance === 'Dark Mode' ? 'bg-slate-950 text-white' : 'bg-slate-50 text-slate-900'}`}>
       <header className={`flex items-center px-6 pt-12 pb-6 transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-950' : 'bg-white border-b border-slate-100'}`}>
@@ -629,8 +626,8 @@ const PrivacySettingsSubScreen = ({ language, appearance, onBack }: { language: 
   );
 };
 
-const HelpSupportSubScreen = ({ language, appearance, onBack }: { language: string, appearance: string, onBack: () => void }) => {
-  const t = (key: string) => translations[language]?.[key] || translations['English'][key];
+const HelpSupportSubScreen = ({ appearance, onBack }: { appearance: string, onBack: () => void }) => {
+  const { t } = useTranslation();
   return (
     <div className={`fixed inset-0 z-[210] flex flex-col transition-colors duration-300 ${appearance === 'Dark Mode' ? 'bg-slate-950 text-white' : 'bg-slate-50 text-slate-900'}`}>
       <header className={`flex items-center px-6 pt-12 pb-6 transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-950' : 'bg-white border-b border-slate-100'}`}>
@@ -698,9 +695,9 @@ const HelpSupportSubScreen = ({ language, appearance, onBack }: { language: stri
   );
 };
 
-const ContactUsSubScreen = ({ language, appearance, onBack }: { language: string, appearance: string, onBack: () => void }) => {
+const ContactUsSubScreen = ({ appearance, onBack }: { appearance: string, onBack: () => void }) => {
   const [submitted, setSubmitted] = useState(false);
-  const t = (key: string) => translations[language]?.[key] || translations['English'][key];
+  const { t } = useTranslation();
   return (
     <div className={`fixed inset-0 z-[210] flex flex-col transition-colors duration-300 ${appearance === 'Dark Mode' ? 'bg-slate-950 text-white' : 'bg-slate-50 text-slate-900'}`}>
       <header className={`flex items-center px-6 pt-12 pb-6 transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-950' : 'bg-white border-b border-slate-100'}`}>
@@ -772,21 +769,17 @@ const ContactUsSubScreen = ({ language, appearance, onBack }: { language: string
   );
 };
 
-const LanguageSubScreen = ({ language, setLanguage, appearance, onBack }: { language: string, setLanguage: (l: string) => void, appearance: string, onBack: () => void }) => {
-  const { t } = useLanguage();
+const LanguageSubScreen = ({ appearance, onBack }: { appearance: string, onBack: () => void }) => {
+  const { t } = useTranslation();
+  const { language, setLanguage } = useLanguage();
   const languages = [
-    { name: 'English', code: 'English' as const, flag: '🇬🇧' },
-    { name: 'Español', code: 'Spanish' as const, flag: '🇪🇸' },
-    { name: 'አማርኛ', code: 'Amharic' as const, flag: '🇪🇹' },
-    { name: 'Français', code: 'French' as const, flag: '🇫🇷' },
-    { name: 'العربية', code: 'Arabic' as const, flag: '🇸🇦' },
-    { name: 'Deutsch', code: 'German' as const, flag: '🇩🇪' },
-    { name: '中文', code: 'Chinese' as const, flag: '🇨🇳' },
-    { name: 'हिन्दी', code: 'Hindi' as const, flag: '🇮🇳' },
-    { name: 'Português', code: 'Portuguese' as const, flag: '🇵🇹' },
-    { name: 'Русский', code: 'Russian' as const, flag: '🇷🇺' },
-    { name: 'Türkçe', code: 'Turkish' as const, flag: '🇹🇷' },
-    { name: 'Kiswahili', code: 'Swahili' as const, flag: '🇹🇿' }
+    { name: 'English', code: 'en', flag: '🇺🇸' },
+    { name: 'العربية', code: 'ar', flag: '🇸🇦' },
+    { name: 'አማርኛ', code: 'am', flag: '🇪🇹' },
+    { name: 'Español', code: 'es', flag: '🇪🇸' },
+    { name: 'Italiano', code: 'it', flag: '🇮🇹' },
+    { name: 'Deutsch', code: 'de', flag: '🇩🇪' },
+    { name: '中文', code: 'zh', flag: '🇨🇳' },
   ];
 
   return (
@@ -795,7 +788,7 @@ const LanguageSubScreen = ({ language, setLanguage, appearance, onBack }: { lang
         <button onClick={onBack} className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-900 text-white' : 'bg-slate-100 text-slate-900'}`}>
           <ChevronLeft size={20} />
         </button>
-        <h1 className={`text-lg font-semibold ml-4 ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{t('settings.selectLanguage')}</h1>
+        <h1 className={`text-lg font-semibold ml-4 ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{t('selectLanguage')}</h1>
       </header>
 
       <div className="flex-1 px-6 pt-8 overflow-y-auto no-scrollbar pb-32">
@@ -820,8 +813,8 @@ const LanguageSubScreen = ({ language, setLanguage, appearance, onBack }: { lang
   );
 };
 
-const AboutAppSubScreen = ({ onBack, appearance, language }: { onBack: () => void, appearance: string, language: string }) => {
-  const t = (key: string) => translations[language]?.[key] || translations['English'][key];
+const AboutAppSubScreen = ({ onBack, appearance }: { onBack: () => void, appearance: string }) => {
+  const { t } = useTranslation();
   return (
     <div className={`fixed inset-0 z-[210] flex flex-col transition-colors duration-300 ${appearance === 'Dark Mode' ? 'bg-slate-950 text-white' : 'bg-slate-50 text-slate-900'}`}>
       <header className={`flex items-center px-6 pt-12 pb-6 transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-950' : 'bg-white border-b border-slate-100'}`}>
@@ -876,8 +869,8 @@ const AboutAppSubScreen = ({ onBack, appearance, language }: { onBack: () => voi
   );
 };
 
-const TermsOfServiceSubScreen = ({ appearance, onBack, language }: { appearance: string, onBack: () => void, language: string }) => {
-  const t = (key: string) => translations[language]?.[key] || translations['English'][key];
+const TermsOfServiceSubScreen = ({ appearance, onBack }: { appearance: string, onBack: () => void }) => {
+  const { t } = useTranslation();
   return (
     <div className={`fixed inset-0 z-[210] flex flex-col transition-colors duration-300 ${appearance === 'Dark Mode' ? 'bg-slate-950 text-white' : 'bg-slate-50 text-slate-900'}`}>
       <header className={`flex items-center px-6 pt-12 pb-6 transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-950' : 'bg-white border-b border-slate-100'}`}>
@@ -900,8 +893,8 @@ const TermsOfServiceSubScreen = ({ appearance, onBack, language }: { appearance:
   );
 };
 
-const SettingsItem = ({ icon, label, onClick, language, appearance }: any) => {
-  const t = (key: string) => translations[language]?.[key] || translations['English'][key];
+const SettingsItem = ({ icon, label, onClick, appearance }: any) => {
+  const { t } = useTranslation();
   return (
     <div onClick={onClick} className={`p-5 border-b flex items-center justify-between cursor-pointer transition-colors ${appearance === 'Dark Mode' ? 'border-slate-800 hover:bg-slate-800/50' : 'border-slate-50 hover:bg-slate-50'}`}>
       <div className="flex items-center gap-4">

@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
-import { translations } from '../../constants/translations';
+import { useTranslation } from '../../hooks/useTranslation';
 
 interface CheckAvailabilityModalProps {
   onClose: () => void;
   onNext: (dates: string[]) => void;
-  language: string;
 }
 
-export const CheckAvailabilityModal = ({ onClose, onNext, language }: CheckAvailabilityModalProps) => {
-  const t = (key: string) => translations[language]?.[key] || translations['English'][key];
+export const CheckAvailabilityModal = ({ onClose, onNext }: CheckAvailabilityModalProps) => {
+  const { t } = useTranslation();
   const [selectedDates, setSelectedDates] = useState<number[]>([12, 13, 14, 15, 16]);
   
   const days = Array.from({ length: 31 }, (_, i) => i + 1);
@@ -33,7 +32,7 @@ export const CheckAvailabilityModal = ({ onClose, onNext, language }: CheckAvail
         onClick={e => e.stopPropagation()}
       >
         <div className="flex justify-center items-center mb-8 relative">
-          <h3 className="text-2xl font-bold text-slate-900">Check Availability</h3>
+          <h3 className="text-2xl font-bold text-slate-900">{t('checkAvailability')}</h3>
           <button onClick={onClose} className="absolute right-0 w-10 h-10 bg-slate-50 rounded-full flex items-center justify-center text-slate-400">
             <X size={20} />
           </button>
@@ -88,15 +87,15 @@ export const CheckAvailabilityModal = ({ onClose, onNext, language }: CheckAvail
         <div className="mt-10 flex flex-col gap-4">
           <div className="flex justify-between items-center">
             <p className="text-sm font-bold text-slate-900">
-              May 2021 : <span className="text-blue-600">{selectedDates.length} Days</span>
+              May 2021 : <span className="text-blue-600">{selectedDates.length} {t('days')}</span>
             </p>
-            <button onClick={() => setSelectedDates([])} className="text-xs text-red-500 font-bold">Clear more</button>
+            <button onClick={() => setSelectedDates([])} className="text-xs text-red-500 font-bold">{t('clearMore')}</button>
           </div>
           <button 
             onClick={() => onNext(selectedDates.map(d => `2021-05-${d}`))}
             className="w-full bg-blue-600 text-white py-5 rounded-[24px] font-bold text-xl shadow-xl shadow-blue-200 active:scale-95 transition-all"
           >
-            Next
+            {t('next')}
           </button>
         </div>
       </motion.div>

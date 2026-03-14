@@ -1,19 +1,18 @@
 import React, { useState } from 'react';
 import { ArrowLeft, MapPin, Calendar, Users, Plane } from 'lucide-react';
-import { translations } from '../../constants/translations';
+import { useTranslation } from '../../hooks/useTranslation';
 
 interface SearchScreenProps {
   onSearch: (from: string, to: string, date: string, flightClass: string) => void;
-  language: string;
   currency: string;
 }
 
-export const SearchScreen = ({ onSearch, language, currency }: SearchScreenProps) => {
+export const SearchScreen = ({ onSearch, currency }: SearchScreenProps) => {
   const [from, setFrom] = useState('New York (JFK)');
   const [to, setTo] = useState('Paris (CDG)');
   const [date, setDate] = useState('2026-06-20');
   const [flightClass, setFlightClass] = useState('Economy');
-  const t = (key: string) => translations[language]?.[key] || translations['English'][key];
+  const { t } = useTranslation();
 
   return (
     <div className="min-h-screen bg-white pb-24 pt-8 px-6 max-w-4xl mx-auto flex flex-col">
@@ -77,7 +76,7 @@ export const SearchScreen = ({ onSearch, language, currency }: SearchScreenProps
               </div>
               <div className="flex-1">
                 <p className="text-[10px] uppercase font-bold text-slate-400 tracking-widest mb-1">{t('traveler')}</p>
-                <p className="font-bold text-slate-900 text-xs">1 Person</p>
+                <p className="font-bold text-slate-900 text-xs">1 {t('person')}</p>
               </div>
             </div>
           </div>

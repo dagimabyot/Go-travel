@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
 import { ArrowLeft } from 'lucide-react';
-import { translations } from '../../constants/translations';
+import { useTranslation } from '../../hooks/useTranslation';
 
 interface ForgotScreenProps {
   onSend: (email: string) => void;
   onBack: () => void;
-  language: string;
 }
 
-export const ForgotScreen = ({ onSend, onBack, language }: ForgotScreenProps) => {
+export const ForgotScreen = ({ onSend, onBack }: ForgotScreenProps) => {
   const [email, setEmail] = useState('');
-  const t = (key: string) => translations[language]?.[key] || translations['English'][key];
+  const { t } = useTranslation();
   
   return (
     <div className="fixed inset-0 bg-white z-[90] p-8 flex flex-col">
@@ -19,7 +18,7 @@ export const ForgotScreen = ({ onSend, onBack, language }: ForgotScreenProps) =>
       </button>
       
       <h2 className="text-3xl font-bold text-slate-900 mb-2">{t('forgotPassword')}</h2>
-      <p className="text-slate-400 text-sm mb-12">{t('enterEmail')}</p>
+      <p className="text-slate-400 text-sm mb-12">{t('enterEmailReset')}</p>
       
       <div className="space-y-8 flex-1">
         <div className="space-y-2">
@@ -37,7 +36,7 @@ export const ForgotScreen = ({ onSend, onBack, language }: ForgotScreenProps) =>
           onClick={() => onSend(email)}
           className="btn-primary w-full"
         >
-          {t('send')}
+          {t('sendCode')}
         </button>
       </div>
     </div>

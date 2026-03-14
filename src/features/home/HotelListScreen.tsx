@@ -2,18 +2,19 @@ import React, { useState } from 'react';
 import { ChevronLeft, SlidersHorizontal, Bookmark, X } from 'lucide-react';
 import { Hotel } from '../../types';
 import { motion, AnimatePresence } from 'motion/react';
+import { useTranslation } from '../../hooks/useTranslation';
 
 interface HotelListScreenProps {
   hotels: Hotel[];
   onBack: () => void;
   onSelectHotel: (h: Hotel) => void;
-  language: string;
   savedHotels: Hotel[];
   toggleSavedHotel: (h: Hotel) => void;
   appearance: string;
 }
 
 export const HotelListScreen = ({ hotels, onBack, onSelectHotel, savedHotels, toggleSavedHotel, appearance }: HotelListScreenProps) => {
+  const { t } = useTranslation();
   const [showFilters, setShowFilters] = useState(false);
   const [filters, setFilters] = useState({
     rating: 4,
@@ -33,7 +34,7 @@ export const HotelListScreen = ({ hotels, onBack, onSelectHotel, savedHotels, to
             className={`w-full max-w-md rounded-t-[48px] p-8 shadow-2xl transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-900' : 'bg-white'}`}
           >
             <div className="flex justify-between items-center mb-8">
-              <h3 className={`text-xl font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>Filter Hotels</h3>
+              <h3 className={`text-xl font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{t('filterHotels')}</h3>
               <button onClick={() => setShowFilters(false)} className={`w-10 h-10 flex items-center justify-center rounded-full transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-800 text-white' : 'bg-slate-50 text-slate-900'}`}>
                 <X size={20} />
               </button>
@@ -42,7 +43,7 @@ export const HotelListScreen = ({ hotels, onBack, onSelectHotel, savedHotels, to
             <div className="space-y-8">
               {/* Rating */}
               <div>
-                <p className={`text-sm font-bold mb-4 ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>Minimum Rating</p>
+                <p className={`text-sm font-bold mb-4 ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{t('minimumRating')}</p>
                 <div className="flex gap-3">
                   {[3, 4, 5].map(star => (
                     <button 
@@ -50,7 +51,7 @@ export const HotelListScreen = ({ hotels, onBack, onSelectHotel, savedHotels, to
                       onClick={() => setFilters({ ...filters, rating: star })}
                       className={`px-6 py-2 rounded-xl text-xs font-bold transition-all ${filters.rating === star ? 'bg-primary text-white' : (appearance === 'Dark Mode' ? 'bg-slate-800 text-slate-400' : 'bg-slate-50 text-slate-400')}`}
                     >
-                      {star} Stars
+                      {star} {t('stars')}
                     </button>
                   ))}
                 </div>
@@ -59,7 +60,7 @@ export const HotelListScreen = ({ hotels, onBack, onSelectHotel, savedHotels, to
               {/* Price Range */}
               <div>
                 <div className="flex justify-between items-center mb-4">
-                  <p className={`text-sm font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>Price per Night</p>
+                  <p className={`text-sm font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{t('pricePerNight')}</p>
                   <p className="text-sm font-bold text-primary">${filters.maxPrice}</p>
                 </div>
                 <input 
@@ -77,7 +78,7 @@ export const HotelListScreen = ({ hotels, onBack, onSelectHotel, savedHotels, to
                 onClick={() => setShowFilters(false)}
                 className={`w-full py-5 bg-primary text-white rounded-[24px] font-bold text-lg shadow-lg ${appearance === 'Dark Mode' ? 'shadow-primary/40' : 'shadow-primary/30'}`}
               >
-                Apply Filters
+                {t('applyFilters')}
               </button>
             </div>
           </motion.div>
@@ -99,8 +100,8 @@ export const HotelListScreen = ({ hotels, onBack, onSelectHotel, savedHotels, to
           <ChevronLeft size={24} />
         </button>
         <div className="text-center">
-          <h1 className={`text-xl font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>Choose Hotel</h1>
-          <p className="text-xs text-slate-400">Please book a hotel</p>
+          <h1 className={`text-xl font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{t('chooseHotel')}</h1>
+          <p className="text-xs text-slate-400">{t('pleaseBookHotel')}</p>
         </div>
         <button 
           onClick={() => setShowFilters(true)}
@@ -124,7 +125,7 @@ export const HotelListScreen = ({ hotels, onBack, onSelectHotel, savedHotels, to
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
               <div className="absolute bottom-6 left-8 right-8 text-white">
                 <h3 className="text-2xl font-bold leading-tight">{hotel.name}</h3>
-                <p className="text-sm opacity-80">${hotel.price.toFixed(2)} <span className="text-xs">/per day</span></p>
+                <p className="text-sm opacity-80">${hotel.price.toFixed(2)} <span className="text-xs">/{t('perDay')}</span></p>
               </div>
               <button 
                 onClick={(e) => {
@@ -139,8 +140,8 @@ export const HotelListScreen = ({ hotels, onBack, onSelectHotel, savedHotels, to
           ))
         ) : (
           <div className="flex flex-col items-center justify-center py-20 text-slate-400 text-center">
-            <p className={`text-lg font-bold mb-2 ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>No hotels found</p>
-            <p className="text-sm">Try adjusting your filters</p>
+            <p className={`text-lg font-bold mb-2 ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{t('noHotelsFound')}</p>
+            <p className="text-sm">{t('tryAdjustingFilters')}</p>
           </div>
         )}
       </div>

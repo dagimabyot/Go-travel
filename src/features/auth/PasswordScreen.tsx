@@ -1,18 +1,17 @@
 import React, { useState } from 'react';
 import { ArrowLeft, Eye, EyeOff } from 'lucide-react';
-import { translations } from '../../constants/translations';
+import { useTranslation } from '../../hooks/useTranslation';
 
 interface PasswordScreenProps {
   onContinue: (password: string) => void;
   onForgot: () => void;
   onBack: () => void;
-  language: string;
 }
 
-export const PasswordScreen = ({ onContinue, onForgot, onBack, language }: PasswordScreenProps) => {
+export const PasswordScreen = ({ onContinue, onForgot, onBack }: PasswordScreenProps) => {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const t = (key: string) => translations[language]?.[key] || translations['English'][key];
+  const { t } = useTranslation();
   
   return (
     <div className="fixed inset-0 bg-white z-[90] p-8 flex flex-col">

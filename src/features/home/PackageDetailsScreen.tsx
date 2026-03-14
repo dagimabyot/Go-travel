@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ChevronLeft, Bookmark, Plane, Hotel, Car, MapPin, Star, Compass } from 'lucide-react';
 import { Package, User } from '../../types';
-import { translations } from '../../constants/translations';
+import { useTranslation } from '../../hooks/useTranslation';
 import { CheckAvailabilityModal } from './CheckAvailabilityModal';
 import { FlightDetailsModal } from './FlightDetailsModal';
 import { HotelDetailsModal } from './HotelDetailsModal';
@@ -13,19 +13,18 @@ interface PackageDetailsScreenProps {
   user: User | null;
   onBack: () => void;
   onBook: () => void;
-  language: string;
   appearance: string;
   toggleSaved: (p: Package) => void;
   isSaved: boolean;
 }
 
-export const PackageDetailsScreen = ({ pkg, user, onBack, onBook, language, appearance, toggleSaved, isSaved }: PackageDetailsScreenProps) => {
+export const PackageDetailsScreen = ({ pkg, user, onBack, onBook, appearance, toggleSaved, isSaved }: PackageDetailsScreenProps) => {
   const [activeModal, setActiveModal] = useState<'availability' | 'flight' | 'hotel' | null>(null);
   const [mainImage, setMainImage] = useState(pkg.image);
 
   const galleryImages = pkg.images || [pkg.image];
 
-  const t = (key: string) => translations[language]?.[key] || translations['English'][key];
+  const { t } = useTranslation();
 
   return (
     <div className={`fixed inset-0 z-[210] flex flex-col overflow-y-auto no-scrollbar pt-12 transition-colors duration-300 ${appearance === 'Dark Mode' ? 'bg-slate-950 text-white' : 'bg-white text-slate-900'}`}>
@@ -80,8 +79,8 @@ export const PackageDetailsScreen = ({ pkg, user, onBack, onBook, language, appe
       {/* Content Section */}
       <div className="px-8 pt-10 pb-12">
         <div className="mb-8">
-          <h2 className={`text-4xl font-bold mb-2 ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{pkg.name}</h2>
-          <p className="text-slate-400 text-lg">{pkg.location}</p>
+          <h2 className={`text-4xl font-bold mb-2 ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{t(pkg.name)}</h2>
+          <p className="text-slate-400 text-lg">{t(pkg.location)}</p>
         </div>
 
         <div className="mb-12">
@@ -89,11 +88,11 @@ export const PackageDetailsScreen = ({ pkg, user, onBack, onBook, language, appe
             {t('weKnowWhatYouWant')}
           </h3>
           <p className="text-slate-400 text-base leading-relaxed mb-6">
-            {pkg.weKnowWhatYouWant || "This destination is designed for travelers who seek balance — adventure, relaxation, and unforgettable moments all in one place. From breathtaking natural views to rich local culture, every experience here feels carefully crafted just for you."}
+            {t(pkg.weKnowWhatYouWant || "This destination is designed for travelers who seek balance — adventure, relaxation, and unforgettable moments all in one place. From breathtaking natural views to rich local culture, every experience here feels carefully crafted just for you.")}
           </p>
           {pkg.weKnowWhatYouWantSecondary && (
             <p className="text-slate-400 text-base leading-relaxed mb-10">
-              {pkg.weKnowWhatYouWantSecondary}
+              {t(pkg.weKnowWhatYouWantSecondary)}
             </p>
           )}
           
@@ -104,9 +103,9 @@ export const PackageDetailsScreen = ({ pkg, user, onBack, onBook, language, appe
               <div className="space-y-8">
                 {pkg.highlights.map((highlight, index) => (
                   <div key={index}>
-                    <h4 className={`font-bold text-lg mb-2 ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{highlight.title}</h4>
+                    <h4 className={`font-bold text-lg mb-2 ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{t(highlight.title)}</h4>
                     <p className="text-slate-400 text-sm leading-relaxed">
-                      {highlight.description}
+                      {t(highlight.description)}
                     </p>
                   </div>
                 ))}
@@ -116,14 +115,14 @@ export const PackageDetailsScreen = ({ pkg, user, onBack, onBook, language, appe
 
           <div className="mb-10">
             <h3 className={`font-bold text-2xl mb-4 ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>
-              {pkg.sunsetTitle || `🌅 ${t('bestSunsetEver')}`}
+              {pkg.sunsetTitle ? t(pkg.sunsetTitle) : `🌅 ${t('bestSunsetEver')}`}
             </h3>
             <p className="text-slate-400 text-base leading-relaxed mb-6">
-              {pkg.sunsetDescription || "As the day comes to an end, the destination reveals its most magical moment. Golden light spreads across the horizon, reflecting on the landscape and creating a peaceful, unforgettable sunset experience."}
+              {t(pkg.sunsetDescription || "As the day comes to an end, the destination reveals its most magical moment. Golden light spreads across the horizon, reflecting on the landscape and creating a peaceful, unforgettable sunset experience.")}
             </p>
             {pkg.sunsetDescriptionSecondary && (
               <p className="text-slate-400 text-base leading-relaxed mb-8">
-                {pkg.sunsetDescriptionSecondary}
+                {t(pkg.sunsetDescriptionSecondary)}
               </p>
             )}
           </div>
@@ -157,19 +156,16 @@ export const PackageDetailsScreen = ({ pkg, user, onBack, onBook, language, appe
           <CheckAvailabilityModal 
             onClose={() => setActiveModal(null)} 
             onNext={() => setActiveModal(null)} 
-            language={language} 
           />
         )}
         {activeModal === 'flight' && (
           <FlightDetailsModal 
             onClose={() => setActiveModal(null)} 
-            language={language} 
           />
         )}
         {activeModal === 'hotel' && (
           <HotelDetailsModal 
             onClose={() => setActiveModal(null)} 
-            language={language} 
           />
         )}
       </AnimatePresence>

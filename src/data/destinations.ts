@@ -14,912 +14,914 @@ export interface Destination {
 
 export const FAMOUS_PLACES: Destination[] = [
   {
-    "place": "Eiffel Tower",
-    "location": "Paris, France",
-    "description": "The Eiffel Tower is a world‑renowned iron lattice structure and a global cultural icon of France. It offers breathtaking panoramic views of Paris and is especially magical when illuminated at night. Best visited in Spring (April–June) and Autumn (Sep–Oct) for mild weather.",
-    "weather": "Mild temperatures in spring and fall (15-20°C). Winters can be chilly (3-8°C) while summers are warm (20-25°C).",
+    "place": "dest_eiffelTower_place",
+    "location": "dest_eiffelTower_location",
+    "description": "dest_eiffelTower_description",
+    "weather": "dest_eiffelTower_weather",
     "price": 450,
     "image": {
       "url": "https://images.pexels.com/photos/532826/pexels-photo-532826.jpeg",
       "source": "Pexels",
       "alt": "Eiffel Tower at sunset from Champ de Mars"
     },
-    "tip": "Visit at sunset for the best views and light show."
+    "tip": "dest_eiffelTower_tip"
   },
   {
-    "place": "Great Wall of China",
-    "location": "China",
-    "description": "The Great Wall is a series of fortifications built across the historical northern borders of ancient Chinese states. It is one of the most impressive architectural feats in history, snaking through mountains and deserts. Spring and autumn offer the most comfortable temperatures for hiking.",
-    "weather": "Spring (April-May) and Autumn (September-October) are ideal with temperatures between 10-25°C. Summers are hot and humid.",
+    "place": "dest_greatWallOfChina_place",
+    "location": "dest_greatWallOfChina_location",
+    "description": "dest_greatWallOfChina_description",
+    "weather": "dest_greatWallOfChina_weather",
     "price": 680,
     "image": {
       "url": "https://images.pexels.com/photos/1423580/pexels-photo-1423580.jpeg",
       "source": "Pexels",
       "alt": "Great Wall of China winding through mountains"
     },
-    "tip": "Visit the Mutianyu section for a less crowded experience and a fun toboggan ride down."
+    "tip": "dest_greatWallOfChina_tip"
   },
   {
-    "place": "Taj Mahal",
-    "location": "Agra, India",
-    "description": "An ivory-white marble mausoleum on the south bank of the Yamuna river, the Taj Mahal is a masterpiece of Mughal architecture. It was commissioned by Emperor Shah Jahan in memory of his favorite wife. October to March is the best time to visit to avoid extreme heat.",
-    "weather": "Cooler months (Oct-Mar) see 10-25°C. Summer (Apr-Jun) is extremely hot, often exceeding 40°C. Monsoon season is Jul-Sep.",
+    "place": "dest_tajMahal_place",
+    "location": "dest_tajMahal_location",
+    "description": "dest_tajMahal_description",
+    "weather": "dest_tajMahal_weather",
     "price": 320,
     "image": {
       "url": "https://images.pexels.com/photos/1603650/pexels-photo-1603650.jpeg",
       "source": "Pexels",
       "alt": "The Taj Mahal reflecting in the water at sunrise"
     },
-    "tip": "Arrive at sunrise to see the marble change colors and beat the crowds."
+    "tip": "dest_tajMahal_tip"
   },
   {
-    "place": "Grand Canyon",
-    "location": "Arizona, USA",
-    "description": "The Grand Canyon is a steep-sided canyon carved by the Colorado River, known for its visually overwhelming size and intricate landscape. Its red rock layers reveal millions of years of geological history. Spring and fall provide the best balance of weather and accessibility.",
-    "weather": "Spring and fall are pleasant (15-25°C). Summer at the South Rim is warm, but the canyon floor can exceed 40°C.",
+    "place": "dest_grandCanyon_place",
+    "location": "dest_grandCanyon_location",
+    "description": "dest_grandCanyon_description",
+    "weather": "dest_grandCanyon_weather",
     "price": 250,
     "image": {
       "url": "https://images.pexels.com/photos/2649403/pexels-photo-2649403.jpeg",
       "source": "Pexels",
       "alt": "Grand Canyon layered red rock formations"
     },
-    "tip": "Watch the sunset at Hopi Point for incredible colors across the canyon."
+    "tip": "dest_grandCanyon_tip"
   },
   {
-    "place": "Machu Picchu",
-    "location": "Peru",
-    "description": "Machu Picchu is a 15th-century Inca citadel located in the Eastern Cordillera of southern Peru on a 2,430-meter mountain ridge. It is the most familiar icon of the Inca Empire and a marvel of dry-stone construction. The dry season from May to September is best for hiking.",
-    "weather": "Dry season (May-Sep) has sunny days (20°C) and cold nights. Rainy season (Oct-Apr) can make trails slippery.",
+    "place": "dest_machuPicchu_place",
+    "location": "dest_machuPicchu_location",
+    "description": "dest_machuPicchu_description",
+    "weather": "dest_machuPicchu_weather",
     "price": 850,
     "image": {
       "url": "https://images.pexels.com/photos/2599626/pexels-photo-2599626.jpeg",
       "source": "Pexels",
       "alt": "Machu Picchu ruins overlooking the Andes mountains"
     },
-    "tip": "Hike up to the Sun Gate (Inti Punku) for the classic postcard view of the ruins."
+    "tip": "dest_machuPicchu_tip"
   },
   {
-    "place": "Statue of Liberty",
-    "location": "New York City, USA",
-    "description": "A colossal neoclassical sculpture on Liberty Island in New York Harbor, the Statue of Liberty was a gift from the people of France. It stands as a universal symbol of freedom and democracy. May to October is ideal for visiting the island.",
-    "weather": "Spring and fall are mild (15-22°C). Winters are cold and windy, while summers are hot and humid.",
+    "place": "dest_statueOfLiberty_place",
+    "location": "dest_statueOfLiberty_location",
+    "description": "dest_statueOfLiberty_description",
+    "weather": "dest_statueOfLiberty_weather",
     "price": 550,
     "image": {
       "url": "https://images.pexels.com/photos/356079/pexels-photo-356079.jpeg",
       "source": "Pexels",
       "alt": "Statue of Liberty in New York Harbor"
     },
-    "tip": "Book crown tickets months in advance if you want to climb to the top."
+    "tip": "dest_statueOfLiberty_tip"
   },
   {
-    "place": "Colosseum",
-    "location": "Rome, Italy",
-    "description": "The Colosseum is the largest ancient amphitheater ever built and is still the largest standing amphitheater in the world today. It was used for gladiatorial contests and public spectacles in the heart of Rome. Spring and autumn offer pleasant temperatures for exploring.",
-    "weather": "Spring (Apr-Jun) and Fall (Sep-Oct) are mild (18-25°C). Summers can be very hot (30°C+).",
+    "place": "dest_colosseum_place",
+    "location": "dest_colosseum_location",
+    "description": "dest_colosseum_description",
+    "weather": "dest_colosseum_weather",
     "price": 420,
     "image": {
       "url": "https://images.pexels.com/photos/532263/pexels-photo-532263.jpeg",
       "source": "Pexels",
       "alt": "The Colosseum at dusk"
     },
-    "tip": "Buy tickets online in advance to skip the massive queues."
+    "tip": "dest_colosseum_tip"
   },
   {
-    "place": "Pyramids of Giza",
-    "location": "Cairo, Egypt",
-    "description": "The Giza Pyramid Complex includes the Great Pyramid of Giza, the Pyramid of Khafre, and the Pyramid of Menkaure, along with the Great Sphinx. These ancient structures are the last of the original Seven Wonders of the Ancient World. October to April is the best time to visit.",
-    "weather": "Winter (Oct-Apr) is pleasant (18-25°C). Summer is extremely hot, often reaching 40°C+.",
+    "place": "dest_pyramidsOfGiza_place",
+    "location": "dest_pyramidsOfGiza_location",
+    "description": "dest_pyramidsOfGiza_description",
+    "weather": "dest_pyramidsOfGiza_weather",
     "price": 380,
     "image": {
       "url": "https://images.pexels.com/photos/71241/pexels-photo-71241.jpeg",
       "source": "Pexels",
       "alt": "The Great Pyramids of Giza in the desert"
     },
-    "tip": "Take a camel ride at sunset for the best photo opportunities with the pyramids."
+    "tip": "dest_pyramidsOfGiza_tip"
   },
   {
-    "place": "Sydney Opera House",
-    "location": "Sydney, Australia",
-    "description": "The Sydney Opera House is a multi-venue performing arts centre in Sydney, identified by its unique sail-like roof. It is one of the 20th century's most distinctive buildings and a masterpiece of modern architecture. September to November and March to May offer mild weather.",
-    "weather": "Spring (Sep-Nov) and Autumn (Mar-May) are mild (18-24°C). Summer (Dec-Feb) is warm and sunny.",
+    "place": "dest_sydneyOperaHouse_place",
+    "location": "dest_sydneyOperaHouse_location",
+    "description": "dest_sydneyOperaHouse_description",
+    "weather": "dest_sydneyOperaHouse_weather",
+    "price": 620,
     "image": {
       "url": "https://images.pexels.com/photos/1878293/pexels-photo-1878293.jpeg",
       "source": "Pexels",
       "alt": "Sydney Opera House at night"
     },
-    "tip": "Walk around the Royal Botanic Garden for the best views of the Opera House and Harbour Bridge together."
+    "tip": "dest_sydneyOperaHouse_tip"
   },
   {
-    "place": "Christ the Redeemer",
-    "location": "Rio de Janeiro, Brazil",
-    "description": "An Art Deco statue of Jesus Christ in Rio de Janeiro, created by French sculptor Paul Landowski. It stands atop the 700-meter Corcovado mountain, offering breathtaking views of the city and bay. December to March is warm, while June to August is cooler.",
-    "weather": "Summer (Dec-Mar) is hot and humid (30°C+). Winter (Jun-Aug) is mild and pleasant (20-25°C).",
+    "place": "dest_christTheRedeemer_place",
+    "location": "dest_christTheRedeemer_location",
+    "description": "dest_christTheRedeemer_description",
+    "weather": "dest_christTheRedeemer_weather",
+    "price": 480,
     "image": {
       "url": "https://images.pexels.com/photos/2816732/pexels-photo-2816732.jpeg",
       "source": "Pexels",
       "alt": "Christ the Redeemer statue overlooking Rio"
     },
-    "tip": "Take the cog train up the mountain for a scenic journey through the Tijuca Forest."
+    "tip": "dest_christTheRedeemer_tip"
   },
   {
-    "place": "Lalibela",
-    "location": "Ethiopia",
-    "description": "Lalibela is famous for its 11 monolithic rock-hewn churches, carved out of solid rock in the 12th century. It is a major pilgrimage site for Ethiopian Orthodox Christians and a UNESCO World Heritage site. The best time to visit is during the dry season from October to March.",
-    "weather": "Dry season (Oct-Mar) is pleasant (20-25°C). Rainy season (Jun-Aug) can make travel difficult.",
+    "place": "dest_lalibela_place",
+    "location": "dest_lalibela_location",
+    "description": "dest_lalibela_description",
+    "weather": "dest_lalibela_weather",
     "image": {
       "url": "https://images.pexels.com/photos/158398/pexels-photo-158398.jpeg",
       "source": "Pexels",
       "alt": "Rock-hewn church of Saint George in Lalibela"
     },
-    "tip": "Visit during Genna (Ethiopian Christmas) in January for a truly unique spiritual experience."
+    "tip": "dest_lalibela_tip"
   },
   {
-    "place": "Simien Mountains",
-    "location": "Ethiopia",
-    "description": "The Simien Mountains National Park is a stunning landscape of jagged peaks, deep valleys, and sharp precipices. It is home to unique wildlife like the Gelada baboon and the Walia ibex. The dry season from October to March is ideal for trekking.",
-    "weather": "Days are sunny (15-20°C) but nights can drop below freezing in the dry season.",
+    "place": "dest_simienMountains_place",
+    "location": "dest_simienMountains_location",
+    "description": "dest_simienMountains_description",
+    "weather": "dest_simienMountains_weather",
     "image": {
       "url": "https://images.pexels.com/photos/2387873/pexels-photo-2387873.jpeg",
       "source": "Pexels",
       "alt": "Gelada baboons in the Simien Mountains"
     },
-    "tip": "Hire a local guide and scout to see the endemic Walia ibex on the higher ridges."
+    "tip": "dest_simienMountains_tip"
   },
   {
-    "place": "Santorini",
-    "location": "Greece",
-    "description": "Santorini is one of the Cyclades islands in the Aegean Sea, known for its dramatic views and stunning sunsets from Oia. Its whitewashed houses and blue-domed churches perched on cliffs are iconic. May to October is sunny and warm.",
-    "weather": "Summer (Jun-Aug) is hot and dry (30°C). Shoulder seasons (May, Sep-Oct) are perfect (20-25°C).",
+    "place": "dest_santorini_place",
+    "location": "dest_santorini_location",
+    "description": "dest_santorini_description",
+    "weather": "dest_santorini_weather",
     "image": {
       "url": "https://images.pexels.com/photos/1010657/pexels-photo-1010657.jpeg",
       "source": "Pexels",
       "alt": "Blue domes and white buildings of Santorini"
     },
-    "tip": "Hike the trail from Fira to Oia for the most spectacular coastal views."
+    "tip": "dest_santorini_tip"
   },
   {
-    "place": "Angkor Wat",
-    "location": "Cambodia",
-    "description": "Angkor Wat is a temple complex in Cambodia and the largest religious monument in the world by land area. Originally constructed as a Hindu temple, it was transformed into a Buddhist temple in the 12th century. November to February is the cooler dry season.",
-    "weather": "Dry season (Nov-Apr) is best. Nov-Feb is cooler (25-30°C). Mar-May is very hot.",
+    "place": "dest_angkorWat_place",
+    "location": "dest_angkorWat_location",
+    "description": "dest_angkorWat_description",
+    "weather": "dest_angkorWat_weather",
     "image": {
       "url": "https://images.pexels.com/photos/158948/pexels-photo-158948.jpeg",
       "source": "Pexels",
       "alt": "Angkor Wat temple at sunrise"
     },
-    "tip": "Visit Ta Prohm (the 'Tomb Raider' temple) early to see the trees growing through the ruins without the crowds."
+    "tip": "dest_angkorWat_tip"
   },
   {
-    "place": "Great Barrier Reef",
-    "location": "Australia",
-    "description": "The Great Barrier Reef is the world's largest coral reef system, composed of over 2,900 individual reefs. It supports a wide diversity of life and is visible from outer space. June to November is the dry season with the best visibility for diving.",
-    "weather": "Winter/Dry season (Jun-Oct) is mild (20-26°C) with low rainfall. Summer is humid with more rain.",
+    "place": "dest_greatBarrierReef_place",
+    "location": "dest_greatBarrierReef_location",
+    "description": "dest_greatBarrierReef_description",
+    "weather": "dest_greatBarrierReef_weather",
     "image": {
       "url": "https://images.pexels.com/photos/847393/pexels-photo-847393.jpeg",
       "source": "Pexels",
       "alt": "Aerial view of the Great Barrier Reef"
     },
-    "tip": "Take a scenic flight to see the Heart Reef from above."
+    "tip": "dest_greatBarrierReef_tip"
   },
   {
-    "place": "Banff National Park",
-    "location": "Canada",
-    "description": "Canada's oldest national park, Banff is located in the Rocky Mountains and is known for its turquoise glacial lakes and mountain vistas. It offers world-class hiking, skiing, and wildlife viewing. June to September is mild, while winters are snowy and beautiful.",
-    "weather": "Summer (Jun-Aug) is mild (15-22°C). Winter (Dec-Mar) is cold (-10°C) and perfect for skiing.",
+    "place": "dest_banffNationalPark_place",
+    "location": "dest_banffNationalPark_location",
+    "description": "dest_banffNationalPark_description",
+    "weather": "dest_banffNationalPark_weather",
     "image": {
       "url": "https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg",
       "source": "Pexels",
       "alt": "Lake Louise in Banff National Park"
     },
-    "tip": "Visit Moraine Lake at sunrise for the most stunning reflection of the Ten Peaks."
+    "tip": "dest_banffNationalPark_tip"
   },
   {
-    "place": "Petra",
-    "location": "Jordan",
-    "description": "Petra is a historical and archaeological city in southern Jordan, famous for its rock-cut architecture and water conduit system. Known as the 'Rose City' due to the color of the stone, it was the capital of the Nabataean Kingdom. March to May and September to November are the best times.",
-    "weather": "Spring and Autumn are mild (18-25°C). Summers are very hot (35°C+).",
+    "place": "dest_petra_place",
+    "location": "dest_petra_location",
+    "description": "dest_petra_description",
+    "weather": "dest_petra_weather",
     "image": {
       "url": "https://images.pexels.com/photos/1631665/pexels-photo-1631665.jpeg",
       "source": "Pexels",
       "alt": "The Treasury building at Petra"
     },
-    "tip": "Experience 'Petra by Night' to see the Siq and Treasury lit by thousands of candles."
+    "tip": "dest_petra_tip"
   },
   {
-    "place": "Burj Khalifa",
-    "location": "Dubai, UAE",
-    "description": "The Burj Khalifa is the tallest building in the world, standing at 828 meters. It features observation decks with stunning panoramas of Dubai and the Persian Gulf. November to March is cooler and more comfortable for visiting.",
-    "weather": "Winter (Nov-Mar) is pleasant (20-28°C). Summer is extremely hot, often reaching 45°C+.",
+    "place": "dest_burjKhalifa_place",
+    "location": "dest_burjKhalifa_location",
+    "description": "dest_burjKhalifa_description",
+    "weather": "dest_burjKhalifa_weather",
     "image": {
       "url": "https://images.pexels.com/photos/3763190/pexels-photo-3763190.jpeg",
       "source": "Pexels",
       "alt": "Burj Khalifa skyscraper in Dubai"
     },
-    "tip": "Book tickets for the observation deck at sunset to see the city transition from day to night."
+    "tip": "dest_burjKhalifa_tip"
   },
   {
-    "place": "Serengeti National Park",
-    "location": "Tanzania",
-    "description": "The Serengeti is world-famous for its massive annual migration of wildebeest and zebra. It offers some of the best wildlife viewing in Africa, including the 'Big Five'. The dry season from June to October is the best time for safaris.",
-    "weather": "Dry season (Jun-Oct) is cool and dry. Wet season (Nov-May) brings lush landscapes and baby animals.",
+    "place": "dest_serengeti_place",
+    "location": "dest_serengeti_location",
+    "description": "dest_serengeti_description",
+    "weather": "dest_serengeti_weather",
     "image": {
       "url": "https://images.pexels.com/photos/259593/pexels-photo-259593.jpeg",
       "source": "Pexels",
       "alt": "Lions in the Serengeti savanna"
     },
-    "tip": "Take a hot air balloon safari at dawn for a unique perspective on the migration."
+    "tip": "dest_serengeti_tip"
   },
   {
-    "place": "Mount Fuji",
-    "location": "Japan",
-    "description": "Mount Fuji is an active stratovolcano and the highest mountain in Japan. It is a sacred symbol of the country and has inspired artists and poets for centuries. The official climbing season is from July to early September.",
-    "weather": "Summer (Jul-Aug) is the only time to climb safely. Winter is beautiful but extremely cold.",
+    "place": "dest_mountFuji_place",
+    "location": "dest_mountFuji_location",
+    "description": "dest_mountFuji_description",
+    "weather": "dest_mountFuji_weather",
     "image": {
       "url": "https://images.pexels.com/photos/3408744/pexels-photo-3408744.jpeg",
       "source": "Pexels",
       "alt": "Mount Fuji with cherry blossoms"
     },
-    "tip": "Visit Lake Kawaguchi for the best mirrored views of the mountain."
+    "tip": "dest_mountFuji_tip"
   },
   {
-    "place": "Niagara Falls",
-    "location": "Canada/USA",
-    "description": "Niagara Falls is a group of three waterfalls at the southern end of Niagara Gorge, spanning the border between Ontario and New York. It is famous for its beauty and as a valuable source of hydroelectric power. June to August is the peak season with the best weather.",
-    "weather": "Summer (Jun-Aug) is warm (20-25°C). Winter is very cold and the falls can partially freeze.",
+    "place": "dest_niagaraFalls_place",
+    "location": "dest_niagaraFalls_location",
+    "description": "dest_niagaraFalls_description",
+    "weather": "dest_niagaraFalls_weather",
     "image": {
       "url": "https://images.pexels.com/photos/2101187/pexels-photo-2101187.jpeg",
       "source": "Pexels",
       "alt": "Powerful Niagara Falls with a rainbow"
     },
-    "tip": "Take the 'Maid of the Mist' boat tour to experience the power of the falls up close."
+    "tip": "dest_niagaraFalls_tip"
   },
   {
-    "place": "Big Ben",
-    "location": "London, UK",
-    "description": "Big Ben is the nickname for the Great Bell of the striking clock at the north end of the Palace of Westminster. It is a British cultural icon and one of the most prominent symbols of the United Kingdom. Spring and summer offer the best weather for walking tours.",
-    "weather": "Mild temperatures in spring and summer (15-22°C). Frequent light rain throughout the year.",
+    "place": "dest_bigBen_place",
+    "location": "dest_bigBen_location",
+    "description": "dest_bigBen_description",
+    "weather": "dest_bigBen_weather",
     "image": {
       "url": "https://images.pexels.com/photos/460672/pexels-photo-460672.jpeg",
       "source": "Pexels",
       "alt": "Big Ben and the Houses of Parliament"
     },
-    "tip": "The best view is from the Westminster Bridge at sunset."
+    "tip": "dest_bigBen_tip"
   },
   {
-    "place": "Louvre Museum",
-    "location": "Paris, France",
-    "description": "The Louvre is the world's most-visited museum and a historic monument in Paris. It is home to thousands of works of art, including the Mona Lisa and the Venus de Milo. Spring and autumn are the most comfortable times to visit the city.",
-    "weather": "Mild in spring and fall. Indoor galleries are climate-controlled year-round.",
+    "place": "dest_louvre_place",
+    "location": "dest_louvre_location",
+    "description": "dest_louvre_description",
+    "weather": "dest_louvre_weather",
     "image": {
       "url": "https://images.pexels.com/photos/2363/france-landmark-louvre-pyramid.jpg",
       "source": "Pexels",
       "alt": "The Louvre Pyramid at night"
     },
-    "tip": "Enter through the Carrousel du Louvre entrance to avoid the longest lines at the pyramid."
+    "tip": "dest_louvre_tip"
   },
   {
-    "place": "Hagia Sophia",
-    "location": "Istanbul, Turkey",
-    "description": "Hagia Sophia is a major cultural and historical site in Istanbul, originally built as a Christian cathedral and later converted into a mosque. It is famous for its massive dome and stunning mosaics. April to June and September to October are ideal.",
-    "weather": "Spring and Autumn are mild (15-25°C). Summers are hot and humid.",
+    "place": "dest_hagiaSophia_place",
+    "location": "dest_hagiaSophia_location",
+    "description": "dest_hagiaSophia_description",
+    "weather": "dest_hagiaSophia_weather",
     "image": {
       "url": "https://images.pexels.com/photos/1544880/pexels-photo-1544880.jpeg",
       "source": "Pexels",
       "alt": "Hagia Sophia mosque in Istanbul"
     },
-    "tip": "Visit in the late afternoon when the light through the windows is most beautiful."
+    "tip": "dest_hagiaSophia_tip"
   },
   {
-    "place": "Chichen Itza",
-    "location": "Mexico",
-    "description": "Chichen Itza was a large pre-Columbian city built by the Maya people. The stepped pyramid, known as El Castillo, is one of the New Seven Wonders of the World. The dry season from November to April is the best time to visit.",
-    "weather": "Dry season (Nov-Apr) is warm (25-30°C). Humidity is high year-round.",
+    "place": "dest_chichenItza_place",
+    "location": "dest_chichenItza_location",
+    "description": "dest_chichenItza_description",
+    "weather": "dest_chichenItza_weather",
     "image": {
       "url": "https://images.pexels.com/photos/2356045/pexels-photo-2356045.jpeg",
       "source": "Pexels",
       "alt": "El Castillo pyramid at Chichen Itza"
     },
-    "tip": "Arrive as soon as the gates open at 8 AM to beat the heat and the tour buses."
+    "tip": "dest_chichenItza_tip"
   },
   {
-    "place": "Table Mountain",
-    "location": "Cape Town, South Africa",
-    "description": "Table Mountain is a flat-topped mountain forming a prominent landmark overlooking the city of Cape Town. It is a significant tourist attraction, with many visitors using the cableway or hiking to the top. November to March is the best time for clear views.",
-    "weather": "Summer (Nov-Mar) is warm and dry. Winter (Jun-Aug) is cool and rainy.",
+    "place": "dest_tableMountain_place",
+    "location": "dest_tableMountain_location",
+    "description": "dest_tableMountain_description",
+    "weather": "dest_tableMountain_weather",
     "image": {
       "url": "https://images.pexels.com/photos/259447/pexels-photo-259447.jpeg",
       "source": "Pexels",
       "alt": "Table Mountain overlooking Cape Town"
     },
-    "tip": "Check the weather forecast and 'tablecloth' cloud cover before booking your cableway ticket."
+    "tip": "dest_tableMountain_tip"
   },
   {
-    "place": "Alhambra",
-    "location": "Granada, Spain",
-    "description": "The Alhambra is a palace and fortress complex located in Granada, Andalusia, Spain. It is one of the most famous monuments of Islamic architecture and one of the best-preserved palaces of the historic Islamic world. Spring and autumn are perfect.",
-    "weather": "Spring (Apr-Jun) and Fall (Sep-Oct) are mild (18-24°C). Summers are very hot.",
+    "place": "dest_alhambra_place",
+    "location": "dest_alhambra_location",
+    "description": "dest_alhambra_description",
+    "weather": "dest_alhambra_weather",
     "image": {
       "url": "https://images.pexels.com/photos/1631665/pexels-photo-1631665.jpeg",
       "source": "Pexels",
       "alt": "The Alhambra fortress at sunset"
     },
-    "tip": "Tickets sell out weeks in advance; book early to ensure you can see the Nasrid Palaces."
+    "tip": "dest_alhambra_tip"
   },
   {
-    "place": "Acropolis of Athens",
-    "location": "Athens, Greece",
-    "description": "The Acropolis is an ancient citadel located on a rocky outcrop above the city of Athens and contains the remains of several ancient buildings of great architectural and historical significance, the most famous being the Parthenon. Spring and late autumn are best.",
-    "weather": "Spring and Fall are mild (18-25°C). Summers are extremely hot and crowded.",
+    "place": "dest_acropolis_place",
+    "location": "dest_acropolis_location",
+    "description": "dest_acropolis_description",
+    "weather": "dest_acropolis_weather",
     "image": {
       "url": "https://images.pexels.com/photos/164336/pexels-photo-164336.jpeg",
       "source": "Pexels",
       "alt": "The Parthenon on the Acropolis"
     },
-    "tip": "Visit the Acropolis Museum first to understand the history before walking the site."
+    "tip": "dest_acropolis_tip"
   },
   {
-    "place": "Yellowstone National Park",
-    "location": "USA",
-    "description": "Yellowstone was the first national park in the world and is known for its wildlife and its many geothermal features, especially Old Faithful geyser. It sits atop a volcanic hotspot. June to September is the main visiting season.",
-    "weather": "Summer (Jun-Aug) is mild (20-25°C). Winters are harsh and snowy, but beautiful for snowcoach tours.",
+    "place": "dest_yellowstone_place",
+    "location": "dest_yellowstone_location",
+    "description": "dest_yellowstone_description",
+    "weather": "dest_yellowstone_weather",
     "image": {
       "url": "https://images.pexels.com/photos/2440024/pexels-photo-2440024.jpeg",
       "source": "Pexels",
       "alt": "Grand Prismatic Spring in Yellowstone"
     },
-    "tip": "Hike the Fairy Falls trail for the best elevated view of the Grand Prismatic Spring."
+    "tip": "dest_yellowstone_tip"
   },
   {
-    "place": "Victoria Falls",
-    "location": "Zambia/Zimbabwe",
-    "description": "Victoria Falls is a waterfall on the Zambezi River in southern Africa, which provides habitat for several unique species of plants and animals. It is one of the world's largest waterfalls. February to May is the peak flow season.",
-    "weather": "Peak flow (Feb-May) means lots of spray. Dry season (Oct-Nov) offers clearer views but less water.",
+    "place": "dest_victoriaFalls_place",
+    "location": "dest_victoriaFalls_location",
+    "description": "dest_victoriaFalls_description",
+    "weather": "dest_victoriaFalls_weather",
     "image": {
       "url": "https://images.pexels.com/photos/2902536/pexels-photo-2902536.jpeg",
       "source": "Pexels",
       "alt": "Victoria Falls with a massive spray"
     },
-    "tip": "Visit Livingstone Island and swim in the Devil's Pool during the dry season for a thrill."
+    "tip": "dest_victoriaFalls_tip"
   },
   {
-    "place": "Forbidden City",
-    "location": "Beijing, China",
-    "description": "The Forbidden City is a palace complex in central Beijing, China. It served as the home of emperors and their households as well as the ceremonial and political centre of Chinese government for almost 500 years. Spring and autumn are ideal.",
-    "weather": "Spring and Autumn are mild (15-25°C). Winters are cold and dry.",
+    "place": "dest_forbiddenCity_place",
+    "location": "dest_forbiddenCity_location",
+    "description": "dest_forbiddenCity_description",
+    "weather": "dest_forbiddenCity_weather",
     "image": {
       "url": "https://images.pexels.com/photos/236730/pexels-photo-236730.jpeg",
       "source": "Pexels",
       "alt": "Imperial architecture of the Forbidden City"
     },
-    "tip": "Climb Jingshan Hill just north of the palace for a stunning bird's-eye view of the entire complex."
+    "tip": "dest_forbiddenCity_tip"
   },
   {
-    "place": "Hollywood Sign",
-    "location": "Los Angeles, USA",
-    "description": "The Hollywood Sign is an American landmark and cultural icon overlooking Hollywood, Los Angeles. It is situated on Mount Lee in the Beachwood Canyon area of the Santa Monica Mountains. Year-round sunshine makes any time a good time to visit.",
-    "weather": "Sunny and warm year-round (20-28°C). Mornings can be foggy.",
+    "place": "dest_hollywoodSign_place",
+    "location": "dest_hollywoodSign_location",
+    "description": "dest_hollywoodSign_description",
+    "weather": "dest_hollywoodSign_weather",
     "image": {
       "url": "https://images.pexels.com/photos/2690629/pexels-photo-2690629.jpeg",
       "source": "Pexels",
       "alt": "The Hollywood Sign on the hills"
     },
-    "tip": "Hike the Brush Canyon Trail for a great view and a close-up of the sign."
+    "tip": "dest_hollywoodSign_tip"
   },
   {
-    "place": "Plitvice Lakes National Park",
-    "location": "Croatia",
-    "description": "Plitvice Lakes is one of the oldest and largest national parks in Croatia. It is famous for its 16 terraced lakes joined by waterfalls that extend into a limestone canyon. Spring and autumn offer lush greenery and fewer crowds.",
-    "weather": "Spring and Fall are mild (15-22°C). Summer is warm but very busy.",
+    "place": "dest_plitvice_place",
+    "location": "dest_plitvice_location",
+    "description": "dest_plitvice_description",
+    "weather": "dest_plitvice_weather",
     "image": {
       "url": "https://images.pexels.com/photos/1525041/pexels-photo-1525041.jpeg",
       "source": "Pexels",
       "alt": "Cascading waterfalls and turquoise lakes in Plitvice"
     },
-    "tip": "Start at Entrance 2 and work your way up for the best photographic light on the waterfalls."
+    "tip": "dest_plitvice_tip"
   },
   {
-    "place": "Tower Bridge",
-    "location": "London, UK",
-    "description": "Tower Bridge is a combined bascule and suspension bridge in London, built between 1886 and 1894. The bridge crosses the River Thames close to the Tower of London and has become a world-famous symbol of the city. Best visited in late spring.",
-    "weather": "Mild and often overcast. Best views on clear summer evenings.",
+    "place": "dest_towerBridge_place",
+    "location": "dest_towerBridge_location",
+    "description": "dest_towerBridge_description",
+    "weather": "dest_towerBridge_weather",
     "image": {
       "url": "https://images.pexels.com/photos/726484/pexels-photo-726484.jpeg",
       "source": "Pexels",
       "alt": "Tower Bridge at night"
     },
-    "tip": "Check the bridge lift times online to see the massive bascules in action."
+    "tip": "dest_towerBridge_tip"
   },
   {
-    "place": "Buckingham Palace",
-    "location": "London, UK",
-    "description": "Buckingham Palace is the London residence and administrative headquarters of the monarch of the United Kingdom. Located in the City of Westminster, the palace is often at the centre of state occasions and royal hospitality. The State Rooms are open to the public in summer.",
-    "weather": "Summer (Jul-Sep) is the best time to visit when the palace is open and weather is warm.",
+    "place": "dest_buckinghamPalace_place",
+    "location": "dest_buckinghamPalace_location",
+    "description": "dest_buckinghamPalace_description",
+    "weather": "dest_buckinghamPalace_weather",
     "image": {
       "url": "https://images.pexels.com/photos/2097118/pexels-photo-2097118.jpeg",
       "source": "Pexels",
       "alt": "Buckingham Palace with the Victoria Memorial"
     },
-    "tip": "Watch the Changing of the Guard ceremony at 11 AM (check schedule as it varies)."
+    "tip": "dest_buckinghamPalace_tip"
   },
   {
-    "place": "Mount Kilimanjaro",
-    "location": "Tanzania",
-    "description": "Mount Kilimanjaro is a dormant volcano in Tanzania. It has three volcanic cones: Kibo, Mawenzi, and Shira. It is the highest mountain in Africa and the highest single free-standing mountain in the world. January to March and June to October are best for climbing.",
-    "weather": "Dry seasons (Jan-Mar, Jun-Oct) are best. Temperatures drop significantly with altitude.",
+    "place": "dest_kilimanjaro_place",
+    "location": "dest_kilimanjaro_location",
+    "description": "dest_kilimanjaro_description",
+    "weather": "dest_kilimanjaro_weather",
     "image": {
       "url": "https://images.pexels.com/photos/2387873/pexels-photo-2387873.jpeg",
       "source": "Pexels",
       "alt": "Mount Kilimanjaro peak above the clouds"
     },
-    "tip": "Choose the Lemosho or Machame route for better acclimatization and higher success rates."
+    "tip": "dest_kilimanjaro_tip"
   },
   {
-    "place": "Potala Palace",
-    "location": "Lhasa, Tibet",
-    "description": "The Potala Palace is a dzong fortress in the city of Lhasa, in Tibet. It was the winter palace of the Dalai Lamas from 1649 to 1959. It is now a museum and a UNESCO World Heritage Site. April to October is the best time to visit.",
-    "weather": "Sunny and dry most of the year. High altitude means cool temperatures (10-20°C).",
+    "place": "dest_potalaPalace_place",
+    "location": "dest_potalaPalace_location",
+    "description": "dest_potalaPalace_description",
+    "weather": "dest_potalaPalace_weather",
     "image": {
       "url": "https://images.pexels.com/photos/2097118/pexels-photo-2097118.jpeg",
       "source": "Pexels",
       "alt": "The majestic Potala Palace on a hill"
     },
-    "tip": "Visit the Jokhang Temple nearby to see the heart of Tibetan Buddhism."
+    "tip": "dest_potalaPalace_tip"
   },
   {
-    "place": "Empire State Building",
-    "location": "New York City, USA",
-    "description": "The Empire State Building is a 102-story Art Deco skyscraper in Midtown Manhattan. It was the world's tallest building for 40 years and is a signature part of the NYC skyline. Spring and fall offer the clearest views.",
-    "weather": "Clear days in spring and fall are best for visibility. Can be very windy at the top.",
+    "place": "dest_empireState_place",
+    "location": "dest_empireState_location",
+    "description": "dest_empireState_description",
+    "weather": "dest_empireState_weather",
     "image": {
       "url": "https://images.pexels.com/photos/466685/pexels-photo-466685.jpeg",
       "source": "Pexels",
       "alt": "Empire State Building in the NYC skyline"
     },
-    "tip": "Visit late at night (after 10 PM) to avoid the crowds and see the city lights."
+    "tip": "dest_empireState_tip"
   },
   {
-    "place": "Great Ocean Road",
-    "location": "Australia",
-    "description": "The Great Ocean Road is an Australian National Heritage-listed 243-kilometre stretch of road along the south-eastern coast of Australia. It features the famous Twelve Apostles limestone stacks. December to February is warm and perfect for coastal drives.",
-    "weather": "Summer (Dec-Feb) is warm (20-28°C). Winter can be windy and rainy.",
+    "place": "dest_greatOceanRoad_place",
+    "location": "dest_greatOceanRoad_location",
+    "description": "dest_greatOceanRoad_description",
+    "weather": "dest_greatOceanRoad_weather",
     "image": {
       "url": "https://images.pexels.com/photos/1878293/pexels-photo-1878293.jpeg",
       "source": "Pexels",
       "alt": "The Twelve Apostles on the Great Ocean Road"
     },
-    "tip": "Stop at Kennett River to spot wild koalas in the eucalyptus trees."
+    "tip": "dest_greatOceanRoad_tip"
   },
   {
-    "place": "Dead Sea",
-    "location": "Jordan/Israel",
-    "description": "The Dead Sea is a salt lake bordered by Jordan to the east and Israel and the West Bank to the west. It is the lowest point on Earth and its hypersaline water makes floating easy. October to April is the best time to visit for comfortable temperatures.",
-    "weather": "Winter (Oct-Apr) is pleasant (20-25°C). Summer is extremely hot, often exceeding 40°C.",
+    "place": "dest_deadSea_place",
+    "location": "dest_deadSea_location",
+    "description": "dest_deadSea_description",
+    "weather": "dest_deadSea_weather",
     "image": {
       "url": "https://images.pexels.com/photos/3370311/pexels-photo-3370311.jpeg",
       "source": "Pexels",
       "alt": "Floating in the hypersaline Dead Sea"
     },
-    "tip": "Don't shave for at least two days before visiting, as the salt will sting any small cuts."
+    "tip": "dest_deadSea_tip"
   },
   {
-    "place": "Neuschwanstein Castle",
-    "location": "Bavaria, Germany",
-    "description": "Neuschwanstein is a 19th-century historicist palace on a rugged hill above the village of Hohenschwangau in southwest Bavaria. It was intended as a personal refuge for the reclusive King Ludwig II. May to September offers the best weather for exploring the area.",
-    "weather": "Summer (May-Sep) is mild and green. Winter is snowy and magical but can be very cold.",
+    "place": "dest_neuschwanstein_place",
+    "location": "dest_neuschwanstein_location",
+    "description": "dest_neuschwanstein_description",
+    "weather": "dest_neuschwanstein_weather",
     "image": {
       "url": "https://images.pexels.com/photos/258196/pexels-photo-258196.jpeg",
       "source": "Pexels",
       "alt": "Fairytale Neuschwanstein Castle in the mountains"
     },
-    "tip": "Walk to Mary's Bridge (Marienbrücke) for the classic postcard view of the castle."
+    "tip": "dest_neuschwanstein_tip"
   },
   {
-    "place": "Blue Mosque",
-    "location": "Istanbul, Turkey",
-    "description": "The Sultan Ahmed Mosque, known as the Blue Mosque, is a historic mosque in Istanbul. It is known for its six minarets and stunning blue tilework that adorns its interior. April to June and September to October are the most pleasant months.",
-    "weather": "Spring and Autumn are mild (15-25°C). Summers are hot and humid.",
+    "place": "dest_blueMosque_place",
+    "location": "dest_blueMosque_location",
+    "description": "dest_blueMosque_description",
+    "weather": "dest_blueMosque_weather",
     "image": {
       "url": "https://images.pexels.com/photos/1544880/pexels-photo-1544880.jpeg",
       "source": "Pexels",
       "alt": "The Blue Mosque with its six minarets"
     },
-    "tip": "Visit outside of prayer times and remember to dress modestly (shoulders and knees covered)."
+    "tip": "dest_blueMosque_tip"
   },
   {
-    "place": "Ganges River",
-    "location": "Varanasi, India",
-    "description": "The Ganges is a trans-boundary river of Asia which flows through India and Bangladesh. It is the most sacred river to Hindus and is a lifeline to millions of Indians. October to March is the best time to visit for cooler weather.",
-    "weather": "Winter (Oct-Mar) is pleasant (10-25°C). Summer is very hot and monsoon season is humid.",
+    "place": "dest_ganges_place",
+    "location": "dest_ganges_location",
+    "description": "dest_ganges_description",
+    "weather": "dest_ganges_weather",
     "image": {
       "url": "https://images.pexels.com/photos/2104882/pexels-photo-2104882.jpeg",
       "source": "Pexels",
       "alt": "Ghats along the Ganges River in Varanasi"
     },
-    "tip": "Take a boat ride at sunrise or sunset to witness the Ganga Aarti ceremony."
+    "tip": "dest_ganges_tip"
   },
   {
-    "place": "Sagrada Familia",
-    "location": "Barcelona, Spain",
-    "description": "The Basílica i Temple Expiatori de la Sagrada Família is a large unfinished Roman Catholic minor basilica in Barcelona, designed by Antoni Gaudí. It is a UNESCO World Heritage site and an icon of the city. April to June and September to October are ideal.",
-    "weather": "Spring and Fall are mild (18-24°C). Summers are warm and sunny.",
+    "place": "dest_sagradaFamilia_place",
+    "location": "dest_sagradaFamilia_location",
+    "description": "dest_sagradaFamilia_description",
+    "weather": "dest_sagradaFamilia_weather",
     "image": {
       "url": "https://images.pexels.com/photos/1388030/pexels-photo-1388030.jpeg",
       "source": "Pexels",
       "alt": "The intricate towers of the Sagrada Familia"
     },
-    "tip": "Book your tickets online well in advance and include a tower visit for great city views."
+    "tip": "dest_sagradaFamilia_tip"
   },
   {
-    "place": "Bryce Canyon National Park",
-    "location": "Utah, USA",
-    "description": "Bryce Canyon is famous for its unique geology, consisting of horseshoe-shaped amphitheaters carved from the eastern edge of the Paunsaugunt Plateau. It features thousands of hoodoos, which are tall, thin spires of rock. June to September is best for hiking.",
-    "weather": "Summer (Jun-Sep) is warm (20-28°C). Winter is snowy and offers a stunning contrast with the red rocks.",
+    "place": "dest_bryceCanyon_place",
+    "location": "dest_bryceCanyon_location",
+    "description": "dest_bryceCanyon_description",
+    "weather": "dest_bryceCanyon_weather",
     "image": {
       "url": "https://images.pexels.com/photos/2649403/pexels-photo-2649403.jpeg",
       "source": "Pexels",
       "alt": "Hoodoo rock formations in Bryce Canyon"
     },
-    "tip": "Hike the Navajo Loop trail to walk among the towering hoodoos."
+    "tip": "dest_bryceCanyon_tip"
   },
   {
-    "place": "Yosemite National Park",
-    "location": "California, USA",
-    "description": "Yosemite is known for its granite cliffs, waterfalls, clear streams, giant sequoia groves, lakes, mountains, meadows, and glaciers. It is a mecca for rock climbers and hikers alike. May and June are best for seeing the waterfalls at their peak.",
-    "weather": "Spring (May-Jun) is perfect for waterfalls. Summer is warm (25-30°C) and great for high-country hiking.",
+    "place": "dest_yosemite_place",
+    "location": "dest_yosemite_location",
+    "description": "dest_yosemite_description",
+    "weather": "dest_yosemite_weather",
     "image": {
       "url": "https://images.pexels.com/photos/2440024/pexels-photo-2440024.jpeg",
       "source": "Pexels",
       "alt": "Half Dome and Yosemite Valley"
     },
-    "tip": "Drive to Glacier Point for the most spectacular panoramic view of the entire valley."
+    "tip": "dest_yosemite_tip"
   },
   {
-    "place": "Glacier National Park",
-    "location": "Montana, USA",
-    "description": "Glacier National Park is a wilderness area in Montana's Rocky Mountains, with glacier-carved peaks and valleys running to the Canadian border. It is known for the Going-to-the-Sun Road and its diverse wildlife. July to September is the best time for hiking.",
-    "weather": "Summer (Jul-Sep) is the only time the Going-to-the-Sun Road is fully open. Days are warm (20-25°C).",
+    "place": "dest_glacier_place",
+    "location": "dest_glacier_location",
+    "description": "dest_glacier_description",
+    "weather": "dest_glacier_weather",
     "image": {
       "url": "https://images.pexels.com/photos/2440024/pexels-photo-2440024.jpeg",
       "source": "Pexels",
       "alt": "Alpine lake in Glacier National Park"
     },
-    "tip": "Hike the Highline Trail for incredible views and the chance to see mountain goats."
+    "tip": "dest_glacier_tip"
   },
   {
-    "place": "Great Buddha of Kamakura",
-    "location": "Kamakura, Japan",
-    "description": "The Great Buddha of Kamakura is a monumental outdoor bronze statue of Amida Buddha, which is one of the most famous icons of Japan. It stands at the Kotoku-in temple and dates back to the 13th century. March to May and September to November are mild.",
-    "weather": "Spring (cherry blossoms) and Autumn (fall colors) are the most beautiful times to visit.",
+    "place": "dest_kamakuraBuddha_place",
+    "location": "dest_kamakuraBuddha_location",
+    "description": "dest_kamakuraBuddha_description",
+    "weather": "dest_kamakuraBuddha_weather",
     "image": {
       "url": "https://images.pexels.com/photos/3408744/pexels-photo-3408744.jpeg",
       "source": "Pexels",
       "alt": "The Great Buddha bronze statue in Kamakura"
     },
-    "tip": "You can actually go inside the statue for a small fee to see how it was cast."
+    "tip": "dest_kamakuraBuddha_tip"
   },
   {
-    "place": "Matterhorn",
-    "location": "Zermatt, Switzerland",
-    "description": "The Matterhorn is a mountain of the Alps, straddling the main watershed and border between Switzerland and Italy. It is a huge and near-symmetrical pyramidal peak in the extended Monte Rosa area. June to September is best for hiking and views.",
-    "weather": "Summer (Jun-Sep) is mild and clear. Winter is perfect for world-class skiing.",
+    "place": "dest_matterhorn_place",
+    "location": "dest_matterhorn_location",
+    "description": "dest_matterhorn_description",
+    "weather": "dest_matterhorn_weather",
     "image": {
       "url": "https://images.pexels.com/photos/258196/pexels-photo-258196.jpeg",
       "source": "Pexels",
       "alt": "The iconic pyramidal peak of the Matterhorn"
     },
-    "tip": "Take the Gornergrat railway for the best panoramic view of the Matterhorn and surrounding glaciers."
+    "tip": "dest_matterhorn_tip"
   },
   {
-    "place": "Hawaii Volcanoes National Park",
-    "location": "Hawaii, USA",
-    "description": "This park on the Big Island of Hawaii encompasses two active volcanoes: Kilauea and Mauna Loa. It offers a unique look at the geological forces that created the Hawaiian Islands. Year-round warm weather makes it a great destination anytime.",
-    "weather": "Warm and tropical year-round (22-28°C). Higher elevations can be cool and rainy.",
+    "place": "dest_hawaiiVolcanoes_place",
+    "location": "dest_hawaiiVolcanoes_location",
+    "description": "dest_hawaiiVolcanoes_description",
+    "weather": "dest_hawaiiVolcanoes_weather",
     "image": {
       "url": "https://images.pexels.com/photos/2440024/pexels-photo-2440024.jpeg",
       "source": "Pexels",
       "alt": "Lava flow in Hawaii Volcanoes National Park"
     },
-    "tip": "Drive the Chain of Craters Road to see where past lava flows have crossed the road."
+    "tip": "dest_hawaiiVolcanoes_tip"
   },
   {
-    "place": "Okavango Delta",
-    "location": "Botswana",
-    "description": "The Okavango Delta is a vast inland river delta in northern Botswana, known for its sprawling grassy plains and seasonal floods. It is a world-class safari destination with incredible wildlife diversity. May to October is the dry season with the best game viewing.",
-    "weather": "Dry season (May-Oct) is best for wildlife. Floods peak in July/August, perfect for mokoro trips.",
+    "place": "dest_okavango_place",
+    "location": "dest_okavango_location",
+    "description": "dest_okavango_description",
+    "weather": "dest_okavango_weather",
     "image": {
       "url": "https://images.pexels.com/photos/259593/pexels-photo-259593.jpeg",
       "source": "Pexels",
       "alt": "Elephants in the Okavango Delta"
     },
-    "tip": "Take a traditional mokoro (dugout canoe) trip to experience the delta's quiet beauty."
+    "tip": "dest_okavango_tip"
   },
   {
-    "place": "Everest Base Camp",
-    "location": "Nepal",
-    "description": "Everest Base Camp is the gateway for climbers attempting to summit the world's highest peak. The trek to base camp is one of the most famous in the world, offering stunning Himalayan scenery. March to May and September to November are the trekking seasons.",
-    "weather": "Trekking seasons (Mar-May, Sep-Nov) offer clear skies. Temperatures are cold, especially at night.",
+    "place": "dest_everestBaseCamp_place",
+    "location": "dest_everestBaseCamp_location",
+    "description": "dest_everestBaseCamp_description",
+    "weather": "dest_everestBaseCamp_weather",
     "image": {
       "url": "https://images.pexels.com/photos/2387873/pexels-photo-2387873.jpeg",
       "source": "Pexels",
       "alt": "Tents at Everest Base Camp with the Himalayas"
     },
-    "tip": "Climb Kala Patthar at sunrise for the best view of Mount Everest itself."
+    "tip": "dest_everestBaseCamp_tip"
   },
   {
-    "place": "Sahara Desert",
-    "location": "North Africa",
-    "description": "The Sahara is the largest hot desert in the world and the third largest desert overall. It covers much of North Africa and is known for its massive sand dunes and nomadic cultures. October to April is the best time to visit to avoid extreme heat.",
-    "weather": "Winter (Oct-Apr) has warm days (20-25°C) and very cold nights. Summer is dangerously hot.",
+    "place": "dest_sahara_place",
+    "location": "dest_sahara_location",
+    "description": "dest_sahara_description",
+    "weather": "dest_sahara_weather",
     "image": {
       "url": "https://images.pexels.com/photos/71241/pexels-photo-71241.jpeg",
       "source": "Pexels",
       "alt": "Sand dunes in the Sahara Desert at sunset"
     },
-    "tip": "Spend a night in a traditional desert camp to see the most incredible starry sky of your life."
+    "tip": "dest_sahara_tip"
   },
   {
-    "place": "Blue Lagoon",
-    "location": "Iceland",
-    "description": "The Blue Lagoon is a geothermal spa in southwestern Iceland, located in a lava field near Grindavík. Its milky blue waters are rich in minerals like silica and sulfur and are reputed to have healing properties. Year-round visiting is possible.",
-    "weather": "Cool to cold year-round. The water is a constant 37-39°C, perfect even in winter.",
+    "place": "dest_blueLagoon_place",
+    "location": "dest_blueLagoon_location",
+    "description": "dest_blueLagoon_description",
+    "weather": "dest_blueLagoon_weather",
     "image": {
       "url": "https://images.pexels.com/photos/1010657/pexels-photo-1010657.jpeg",
       "source": "Pexels",
       "alt": "The milky blue waters of the Blue Lagoon"
     },
-    "tip": "Apply the silica mud mask provided for a natural spa treatment while you soak."
+    "tip": "dest_blueLagoon_tip"
   },
   {
-    "place": "Gateway of India",
-    "location": "Mumbai, India",
-    "description": "The Gateway of India is an arch-monument built during the 20th century in Mumbai. It was erected to commemorate the landing of King-Emperor George V and Queen-Mary at Apollo Bunder. November to February is the most comfortable time.",
-    "weather": "Winter (Nov-Feb) is pleasant (20-30°C). Monsoon season (Jun-Sep) is very rainy.",
+    "place": "dest_gatewayOfIndia_place",
+    "location": "dest_gatewayOfIndia_location",
+    "description": "dest_gatewayOfIndia_description",
+    "weather": "dest_gatewayOfIndia_weather",
     "image": {
       "url": "https://images.pexels.com/photos/1603650/pexels-photo-1603650.jpeg",
       "source": "Pexels",
       "alt": "The Gateway of India arch in Mumbai"
     },
-    "tip": "Take a ferry from the gateway to the Elephanta Caves for a great day trip."
+    "tip": "dest_gatewayOfIndia_tip"
   },
   {
-    "place": "Piazza San Marco",
-    "location": "Venice, Italy",
-    "description": "Piazza San Marco, often known in English as St Mark's Square, is the principal public square of Venice. It is dominated by the magnificent St Mark's Basilica and the Campanile. April to June and September to October are ideal.",
-    "weather": "Spring and Fall are mild (15-22°C). 'Acqua Alta' (flooding) can occur in late autumn/winter.",
+    "place": "dest_piazzaSanMarco_place",
+    "location": "dest_piazzaSanMarco_location",
+    "description": "dest_piazzaSanMarco_description",
+    "weather": "dest_piazzaSanMarco_weather",
     "image": {
       "url": "https://images.pexels.com/photos/532263/pexels-photo-532263.jpeg",
       "source": "Pexels",
       "alt": "St Mark's Square and Basilica in Venice"
     },
-    "tip": "Visit early in the morning or late at night to enjoy the square without the massive crowds."
+    "tip": "dest_piazzaSanMarco_tip"
   },
   {
-    "place": "Brandenburg Gate",
-    "location": "Berlin, Germany",
-    "description": "The Brandenburg Gate is an 18th-century neoclassical monument in Berlin, built on the orders of Prussian king Frederick William II. It is one of the best-known landmarks of Germany and a symbol of European unity. May to September is pleasant.",
-    "weather": "Summer (May-Sep) is warm and sunny (20-25°C). Winters are cold and often grey.",
+    "place": "dest_brandenburgGate_place",
+    "location": "dest_brandenburgGate_location",
+    "description": "dest_brandenburgGate_description",
+    "weather": "dest_brandenburgGate_weather",
     "image": {
       "url": "https://images.pexels.com/photos/258196/pexels-photo-258196.jpeg",
       "source": "Pexels",
       "alt": "The Brandenburg Gate at night"
     },
-    "tip": "Walk through the gate at night when it is beautifully illuminated."
+    "tip": "dest_brandenburgGate_tip"
   },
   {
-    "place": "Red Square",
-    "location": "Moscow, Russia",
-    "description": "Red Square is a city square in Moscow, separating the Kremlin from a historic merchant quarter. It is the heart of the city and home to St. Basil's Cathedral and the State Historical Museum. May to September is the best time for warm weather.",
-    "weather": "Summer (May-Sep) is warm (20-25°C). Winter is iconic but extremely cold (-10°C).",
+    "place": "dest_redSquare_place",
+    "location": "dest_redSquare_location",
+    "description": "dest_redSquare_description",
+    "weather": "dest_redSquare_weather",
     "image": {
       "url": "https://images.pexels.com/photos/2097118/pexels-photo-2097118.jpeg",
       "source": "Pexels",
       "alt": "St. Basil's Cathedral on Red Square"
     },
-    "tip": "Visit the GUM department store on the square for its beautiful architecture and famous ice cream."
+    "tip": "dest_redSquare_tip"
   },
   {
-    "place": "Ha Long Bay",
-    "location": "Vietnam",
-    "description": "Ha Long Bay is a UNESCO World Heritage Site and popular travel destination in Quảng Ninh Province, Vietnam. It features thousands of limestone karsts and isles in various shapes and sizes. October to December is the best time for pleasant weather.",
-    "weather": "Autumn (Oct-Dec) is cool and dry. Summer is hot and can have tropical storms.",
+    "place": "dest_haLongBay_place",
+    "location": "dest_haLongBay_location",
+    "description": "dest_haLongBay_description",
+    "weather": "dest_haLongBay_weather",
     "image": {
       "url": "https://images.pexels.com/photos/1010657/pexels-photo-1010657.jpeg",
       "source": "Pexels",
       "alt": "Limestone karsts in Ha Long Bay"
     },
-    "tip": "Book an overnight cruise on a traditional junk boat to see the bay's hidden corners."
+    "tip": "dest_haLongBay_tip"
   },
   {
-    "place": "Grand Bazaar",
-    "location": "Istanbul, Turkey",
-    "description": "The Grand Bazaar in Istanbul is one of the largest and oldest covered markets in the world, with 61 covered streets and over 4,000 shops. It is a vibrant hub of Turkish culture and commerce. April to June and September to October are ideal.",
-    "weather": "Mild in spring and fall. The bazaar is covered, making it a great rainy-day activity.",
+    "place": "dest_grandBazaar_place",
+    "location": "dest_grandBazaar_location",
+    "description": "dest_grandBazaar_description",
+    "weather": "dest_grandBazaar_weather",
     "image": {
       "url": "https://images.pexels.com/photos/1544880/pexels-photo-1544880.jpeg",
       "source": "Pexels",
       "alt": "Colorful lanterns in the Grand Bazaar"
     },
-    "tip": "Be prepared to haggle; it's part of the experience and expected by the shopkeepers."
+    "tip": "dest_grandBazaar_tip"
   },
   {
-    "place": "Kiyomizu-dera",
-    "location": "Kyoto, Japan",
-    "description": "Kiyomizu-dera is an independent Buddhist temple in eastern Kyoto. The temple is part of the Historic Monuments of Ancient Kyoto UNESCO World Heritage site. April for cherry blossoms and November for fall colors are the most stunning times.",
-    "weather": "Spring and Autumn are mild and beautiful. Summers are hot and humid.",
+    "place": "dest_kiyomizuDera_place",
+    "location": "dest_kiyomizuDera_location",
+    "description": "dest_kiyomizuDera_description",
+    "weather": "dest_kiyomizuDera_weather",
     "image": {
       "url": "https://images.pexels.com/photos/3408744/pexels-photo-3408744.jpeg",
       "source": "Pexels",
       "alt": "Kiyomizu-dera temple overlooking Kyoto"
     },
-    "tip": "Drink from the Otowa Waterfall for health, longevity, or success in studies."
+    "tip": "dest_kiyomizuDera_tip"
   },
   {
-    "place": "Tulum Ruins",
-    "location": "Mexico",
-    "description": "Tulum is the site of a pre-Columbian Mayan walled city which served as a major port for Coba, in the Mexican state of Quintana Roo. The ruins are situated on 12-meter tall cliffs along the east coast of the Yucatán Peninsula. November to April is best.",
-    "weather": "Dry season (Nov-Apr) is warm (25-30°C). Humidity is high year-round.",
+    "place": "dest_tulum_place",
+    "location": "dest_tulum_location",
+    "description": "dest_tulum_description",
+    "weather": "dest_tulum_weather",
     "image": {
       "url": "https://images.pexels.com/photos/2356045/pexels-photo-2356045.jpeg",
       "source": "Pexels",
       "alt": "Mayan ruins on the cliffside in Tulum"
     },
-    "tip": "Bring your swimsuit; there's a beautiful beach right below the ruins accessible via stairs."
+    "tip": "dest_tulum_tip"
   },
   {
-    "place": "Mesa Verde National Park",
-    "location": "Colorado, USA",
-    "description": "Mesa Verde is an American national park and UNESCO World Heritage Site located in Montezuma County, Colorado. It protects some of the best-preserved Ancestral Puebloan archaeological sites in the United States. May to September is the main visiting season.",
-    "weather": "Summer (May-Sep) is warm and dry (25-30°C). Winters are snowy and many sites are closed.",
+    "place": "dest_mesaVerde_place",
+    "location": "dest_mesaVerde_location",
+    "description": "dest_mesaVerde_description",
+    "weather": "dest_mesaVerde_weather",
     "image": {
       "url": "https://images.pexels.com/photos/2649403/pexels-photo-2649403.jpeg",
       "source": "Pexels",
       "alt": "Cliff Palace dwellings in Mesa Verde"
     },
-    "tip": "Book a ranger-led tour to see the interior of the cliff dwellings like Cliff Palace."
+    "tip": "dest_mesaVerde_tip"
   },
   {
-    "place": "Leaning Tower of Pisa",
-    "location": "Pisa, Italy",
-    "description": "The Leaning Tower of Pisa is the campanile, or freestanding bell tower, of the cathedral of the Italian city of Pisa, known worldwide for its nearly four-degree lean. It is situated in the Piazza dei Miracoli. April to June and September to October are ideal.",
-    "weather": "Spring and Fall are mild (18-25°C). Summers are hot and busy.",
+    "place": "dest_pisa_place",
+    "location": "dest_pisa_location",
+    "description": "dest_pisa_description",
+    "weather": "dest_pisa_weather",
     "image": {
       "url": "https://images.pexels.com/photos/532263/pexels-photo-532263.jpeg",
       "source": "Pexels",
       "alt": "The Leaning Tower of Pisa"
     },
-    "tip": "Climb the 294 steps to the top for a unique perspective on the lean and great city views."
+    "tip": "dest_pisa_tip"
   },
   {
-    "place": "Champs-Élysées",
-    "location": "Paris, France",
-    "description": "The Avenue des Champs-Élysées is an avenue in the 8th arrondissement of Paris, running between the Place de la Concorde and the Place Charles de Gaulle. It is known for its theatres, cafés, and luxury shops. Spring and autumn are the most pleasant times.",
-    "weather": "Mild in spring and fall. Beautifully lit with Christmas lights in December.",
+    "place": "dest_champsElysees_place",
+    "location": "dest_champsElysees_location",
+    "description": "dest_champsElysees_description",
+    "weather": "dest_champsElysees_weather",
     "image": {
       "url": "https://images.pexels.com/photos/532826/pexels-photo-532826.jpeg",
       "source": "Pexels",
       "alt": "Arc de Triomphe at the end of Champs-Élysées"
     },
-    "tip": "Walk from the Place de la Concorde to the Arc de Triomphe to experience the full grandeur."
+    "tip": "dest_champsElysees_tip"
   },
   {
-    "place": "Sistine Chapel",
-    "location": "Vatican City",
-    "description": "The Sistine Chapel is a chapel in the Apostolic Palace, the official residence of the pope, in Vatican City. It is famous for its Renaissance frescoes, especially the ceiling and The Last Judgment by Michelangelo. April to June and September to October are ideal.",
-    "weather": "Mild in spring and fall. Indoor galleries are climate-controlled.",
+    "place": "dest_sistineChapel_place",
+    "location": "dest_sistineChapel_location",
+    "description": "dest_sistineChapel_description",
+    "weather": "dest_sistineChapel_weather",
     "image": {
       "url": "https://images.pexels.com/photos/532263/pexels-photo-532263.jpeg",
       "source": "Pexels",
       "alt": "The ornate ceiling of the Sistine Chapel"
     },
-    "tip": "Visit as part of a 'Vatican Museums' tour and try to go early to avoid the heaviest crowds."
+    "tip": "dest_sistineChapel_tip"
   },
   {
-    "place": "Palace of Versailles",
-    "location": "Versailles, France",
-    "description": "The Palace of Versailles was the principal royal residence of France from 1682, under Louis XIV, until the start of the French Revolution in 1789. It is famous for the Hall of Mirrors and its vast gardens. April to June and September to October are perfect.",
-    "weather": "Spring and Fall are mild (15-22°C). The gardens are most beautiful in late spring.",
+    "place": "dest_versailles_place",
+    "location": "dest_versailles_location",
+    "description": "dest_versailles_description",
+    "weather": "dest_versailles_weather",
     "image": {
       "url": "https://images.pexels.com/photos/2363/france-landmark-louvre-pyramid.jpg",
       "source": "Pexels",
       "alt": "The golden gates of the Palace of Versailles"
     },
-    "tip": "Rent a bike or a golf cart to explore the massive gardens and the Trianon estate."
+    "tip": "dest_versailles_tip"
   },
   {
-    "place": "St. Peter's Basilica",
-    "location": "Vatican City",
-    "description": "St. Peter's Basilica is an Italian Renaissance church in Vatican City, the papal enclave within the city of Rome. It is the most renowned work of Renaissance architecture and one of the largest churches in the world. April to June and September to October are ideal.",
-    "weather": "Mild in spring and fall. Summers are hot and very crowded.",
+    "place": "dest_stPeters_place",
+    "location": "dest_stPeters_location",
+    "description": "dest_stPeters_description",
+    "weather": "dest_stPeters_weather",
     "image": {
       "url": "https://images.pexels.com/photos/532263/pexels-photo-532263.jpeg",
       "source": "Pexels",
       "alt": "St. Peter's Basilica from the square"
     },
-    "tip": "Climb to the top of the dome for the best view of St. Peter's Square and the city of Rome."
+    "tip": "dest_stPeters_tip"
   },
   {
-    "place": "The Alamo",
-    "location": "San Antonio, USA",
-    "description": "The Alamo is a historic Spanish mission and fortress compound founded in the 18th century. It was the site of the Battle of the Alamo in 1836 and is a symbol of Texas independence. October to April offers the most comfortable weather.",
-    "weather": "Winter and Spring are pleasant (15-25°C). Summers are very hot and humid.",
+    "place": "dest_alamo_place",
+    "location": "dest_alamo_location",
+    "description": "dest_alamo_description",
+    "weather": "dest_alamo_weather",
     "image": {
       "url": "https://images.pexels.com/photos/2690629/pexels-photo-2690629.jpeg",
       "source": "Pexels",
       "alt": "The historic Alamo mission building"
     },
-    "tip": "Visit the nearby San Antonio River Walk for a scenic stroll and dining after your tour."
+    "tip": "dest_alamo_tip"
   },
   {
-    "place": "Independence Hall",
-    "location": "Philadelphia, USA",
-    "description": "Independence Hall is the building where both the United States Declaration of Independence and the United States Constitution were debated and adopted. It is the centerpiece of Independence National Historical Park. April to June and September to October are ideal.",
-    "weather": "Spring and Fall are mild (15-22°C). Winters are cold and summers are humid.",
+    "place": "dest_independenceHall_place",
+    "location": "dest_independenceHall_location",
+    "description": "dest_independenceHall_description",
+    "weather": "dest_independenceHall_weather",
     "image": {
       "url": "https://images.pexels.com/photos/466685/pexels-photo-466685.jpeg",
       "source": "Pexels",
       "alt": "Independence Hall in Philadelphia"
     },
-    "tip": "Tickets are required for tours; reserve them online in advance as they are often free but limited."
+    "tip": "dest_independenceHall_tip"
   },
   {
-    "place": "Sea of Galilee",
-    "location": "Israel",
-    "description": "The Sea of Galilee is the lowest freshwater lake on Earth and the second-lowest lake in the world. It is a significant site in the Bible and a popular destination for pilgrims and tourists. October to April offers mild weather.",
-    "weather": "Winter and Spring are pleasant (18-25°C). Summers are hot.",
+    "place": "dest_seaOfGalilee_place",
+    "location": "dest_seaOfGalilee_location",
+    "description": "dest_seaOfGalilee_description",
+    "weather": "dest_seaOfGalilee_weather",
     "image": {
       "url": "https://images.pexels.com/photos/3370311/pexels-photo-3370311.jpeg",
       "source": "Pexels",
       "alt": "The calm waters of the Sea of Galilee"
     },
-    "tip": "Take a boat ride on the lake to experience the peaceful atmosphere and see the surrounding hills."
+    "tip": "dest_seaOfGalilee_tip"
   },
   {
-    "place": "Uffizi Gallery",
-    "location": "Florence, Italy",
-    "description": "The Uffizi Gallery is a prominent art museum located adjacent to the Piazza della Signoria in the Historic Centre of Florence. It holds a collection of priceless works, particularly from the period of the Italian Renaissance. April to June and September to October are ideal.",
-    "weather": "Mild in spring and fall. Indoor galleries are climate-controlled.",
+    "place": "dest_uffizi_place",
+    "location": "dest_uffizi_location",
+    "description": "dest_uffizi_description",
+    "weather": "dest_uffizi_weather",
     "image": {
       "url": "https://images.pexels.com/photos/532263/pexels-photo-532263.jpeg",
       "source": "Pexels",
       "alt": "The exterior of the Uffizi Gallery"
     },
-    "tip": "Book your entry time well in advance to avoid waiting for hours in the queue."
+    "tip": "dest_uffizi_tip"
   },
   {
-    "place": "Galleria Vittorio Emanuele II",
-    "location": "Milan, Italy",
-    "description": "The Galleria Vittorio Emanuele II is Italy's oldest active shopping gallery and a major landmark of Milan. Housed within a four-story double arcade in the center of town, it is named after the first king of the Kingdom of Italy. April to June and September to October are ideal.",
-    "weather": "Mild in spring and fall. The gallery is covered, making it perfect for any weather.",
+    "place": "dest_galleriaVittorio_place",
+    "location": "dest_galleriaVittorio_location",
+    "description": "dest_galleriaVittorio_description",
+    "weather": "dest_galleriaVittorio_weather",
     "image": {
       "url": "https://images.pexels.com/photos/532263/pexels-photo-532263.jpeg",
       "source": "Pexels",
       "alt": "The glass-domed ceiling of the Galleria in Milan"
     },
-    "tip": "Spin three times with your heel on the testicles of the bull in the mosaic floor for good luck."
+    "tip": "dest_galleriaVittorio_tip"
   },
   {
-    "place": "Mount Sinai",
-    "location": "Egypt",
-    "description": "Mount Sinai is a mountain in the Sinai Peninsula of Egypt that is a possible location of the biblical Mount Sinai. It is a sacred site for Judaism, Christianity, and Islam. October to April offers the most comfortable climbing temperatures.",
-    "weather": "Winter and Spring are best. Nights are very cold at the summit, even in summer.",
+    "place": "dest_mountSinai_place",
+    "location": "dest_mountSinai_location",
+    "description": "dest_mountSinai_description",
+    "weather": "dest_mountSinai_weather",
     "image": {
       "url": "https://images.pexels.com/photos/71241/pexels-photo-71241.jpeg",
       "source": "Pexels",
       "alt": "Sunrise from the summit of Mount Sinai"
     },
-    "tip": "Start your climb at midnight to reach the summit in time for a spectacular sunrise."
+    "tip": "dest_mountSinai_tip"
   },
   {
-    "place": "Bora Bora",
-    "location": "French Polynesia",
-    "description": "Bora Bora is a small South Pacific island northwest of Tahiti in French Polynesia. Surrounded by sand-fringed islets and a turquoise lagoon protected by a coral reef, it's known for its scuba diving and overwater bungalows. May to October is the dry season.",
-    "weather": "Dry season (May-Oct) is sunny and pleasant (25-28°C). Rainy season is humid.",
+    "place": "dest_boraBora_place",
+    "location": "dest_boraBora_location",
+    "description": "dest_boraBora_description",
+    "weather": "dest_boraBora_weather",
     "image": {
       "url": "https://images.pexels.com/photos/1010657/pexels-photo-1010657.jpeg",
       "source": "Pexels",
       "alt": "Overwater bungalows in Bora Bora"
     },
-    "tip": "Take a snorkeling tour to swim with blacktip reef sharks and stingrays in the lagoon."
+    "tip": "dest_boraBora_tip"
   },
   {
     "place": "Great Mosque of Mecca",

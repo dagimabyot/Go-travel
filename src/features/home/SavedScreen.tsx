@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { Bookmark, Star, MapPin, ChevronLeft } from 'lucide-react';
 import { Package, Hotel, User, Booking } from '../../types';
-import { translations } from '../../constants/translations';
+import { useTranslation } from '../../hooks/useTranslation';
 import { Avatar } from '../../components/ui/Avatar';
 
 interface SavedScreenProps {
@@ -15,7 +15,6 @@ interface SavedScreenProps {
   toggleSavedPackage: (p: Package) => void;
   toggleSavedHotel: (h: Hotel) => void;
   toggleSavedBooking: (b: Booking) => void;
-  language: string;
   appearance: string;
 }
 
@@ -29,10 +28,9 @@ export const SavedScreen = ({
   toggleSavedPackage, 
   toggleSavedHotel, 
   toggleSavedBooking,
-  language,
   appearance
 }: SavedScreenProps) => {
-  const t = (key: string) => translations[language]?.[key] || translations['English'][key];
+  const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState<'packages' | 'flights' | 'hotels'>('packages');
 
   const filteredSavedBookings = savedBookings.filter(b => {
@@ -47,8 +45,8 @@ export const SavedScreen = ({
   return (
     <div className={`min-h-screen pb-24 pt-2 px-6 max-w-4xl mx-auto relative overflow-hidden transition-colors duration-300 ${appearance === 'Dark Mode' ? 'bg-slate-950 text-white' : 'bg-white text-slate-900'}`}>
       <div className="mb-2">
-        <h1 className={`text-2xl font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>Saved</h1>
-        <p className="text-slate-400 text-sm">Result found ({resultCount})</p>
+        <h1 className={`text-2xl font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{t('saved')}</h1>
+        <p className="text-slate-400 text-sm">{t('resultsFound')} ({resultCount})</p>
       </div>
 
       <div className={`flex gap-8 mb-6 border-b transition-colors duration-300 ${appearance === 'Dark Mode' ? 'border-slate-900' : 'border-slate-50'}`}>
@@ -60,7 +58,7 @@ export const SavedScreen = ({
               activeTab === tab ? 'text-red-500' : 'text-slate-400'
             }`}
           >
-            {tab}
+            {t(tab)}
             {activeTab === tab && (
               <motion.div 
                 layoutId="savedTab" 
@@ -78,7 +76,7 @@ export const SavedScreen = ({
               <div className={`w-20 h-20 rounded-full flex items-center justify-center text-slate-300 mb-4 ${appearance === 'Dark Mode' ? 'bg-slate-900' : 'bg-slate-50'}`}>
                 <Star size={32} />
               </div>
-              <p className="text-slate-400 font-medium">No saved packages yet</p>
+              <p className="text-slate-400 font-medium">{t('noSavedPackages')}</p>
             </div>
           ) : (
             <>
@@ -154,7 +152,7 @@ export const SavedScreen = ({
               <div className={`w-20 h-20 rounded-full flex items-center justify-center text-slate-300 mb-4 ${appearance === 'Dark Mode' ? 'bg-slate-900' : 'bg-slate-50'}`}>
                 <Star size={32} />
               </div>
-              <p className="text-slate-400 font-medium">No saved hotels yet</p>
+              <p className="text-slate-400 font-medium">{t('noSavedHotels')}</p>
             </div>
           ) : (
             <>
@@ -189,7 +187,7 @@ export const SavedScreen = ({
                       <span className="text-white text-sm font-bold ml-1">{hotel.rating}</span>
                     </div>
                     <h3 className="text-xl font-bold text-white mb-1">{hotel.name}</h3>
-                    <p className="text-white/80 text-sm">${hotel.price}/night</p>
+                    <p className="text-white/80 text-sm">${hotel.price}/{t('night')}</p>
                   </div>
                 </motion.div>
               ))}
@@ -215,7 +213,7 @@ export const SavedScreen = ({
 
                   <div className="absolute bottom-6 left-6 right-6">
                     <h3 className="text-xl font-bold text-white mb-1">{booking.name}</h3>
-                    <p className="text-white/80 text-sm">${booking.price}/per day</p>
+                    <p className="text-white/80 text-sm">${booking.price}/{t('perDay')}</p>
                   </div>
                 </motion.div>
               ))}
@@ -231,7 +229,7 @@ export const SavedScreen = ({
               <div className={`w-20 h-20 rounded-full flex items-center justify-center text-slate-300 mb-4 ${appearance === 'Dark Mode' ? 'bg-slate-900' : 'bg-slate-50'}`}>
                 <Star size={32} />
               </div>
-              <p className="text-slate-400 font-medium">No saved flights yet</p>
+              <p className="text-slate-400 font-medium">{t('noSavedFlights')}</p>
             </div>
           ) : (
             filteredSavedBookings.map(booking => (
@@ -267,7 +265,7 @@ export const SavedScreen = ({
                   </div>
                 </div>
                 <div className={`flex justify-between items-center pt-4 border-t transition-colors duration-300 ${appearance === 'Dark Mode' ? 'border-slate-800' : 'border-slate-100'}`}>
-                  <p className={`text-lg font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>${booking.price}<span className="text-xs font-normal text-slate-500">/person</span></p>
+                  <p className={`text-lg font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>${booking.price}<span className="text-xs font-normal text-slate-500">/{t('perPerson')}</span></p>
                   <p className="text-xs text-slate-400 font-bold">{booking.departure_time}</p>
                 </div>
               </motion.div>

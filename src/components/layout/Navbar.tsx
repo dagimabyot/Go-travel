@@ -1,21 +1,20 @@
 import React from 'react';
 import { Plane, Home, Compass, Search, Bookmark, Settings, Navigation } from 'lucide-react';
 import { Screen, User } from '../../types';
-import { useLanguage } from '../../contexts/LanguageContext';
+import { useTranslation } from '../../hooks/useTranslation';
 import { Avatar } from '../ui/Avatar';
 
 interface NavbarProps {
   activeScreen: Screen;
   setScreen: (s: Screen) => void;
-  language: string;
   appearance: string;
   user: User | null;
   setSettingsSubScreen: (s: string) => void;
 }
 
-export const Navbar = ({ activeScreen, setScreen, language, appearance, user, setSettingsSubScreen }: NavbarProps) => {
+export const Navbar = ({ activeScreen, setScreen, appearance, user, setSettingsSubScreen }: NavbarProps) => {
   if (activeScreen === 'splash' || (activeScreen as string).startsWith('auth-')) return null;
-  const { t } = useLanguage();
+  const { t } = useTranslation();
 
   const isActive = (screen: Screen) => activeScreen === screen || (screen === 'my-trips' && activeScreen === 'trip-details');
 

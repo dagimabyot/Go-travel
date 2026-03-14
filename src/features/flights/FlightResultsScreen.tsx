@@ -2,17 +2,16 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ArrowLeft, Filter, Plane, X } from 'lucide-react';
 import { Flight } from '../../types';
-import { translations } from '../../constants/translations';
+import { useTranslation } from '../../hooks/useTranslation';
 
 interface FlightResultsScreenProps {
   flights: Flight[];
   onSelect: (f: Flight) => void;
   onBack: () => void;
-  language: string;
 }
 
-export const FlightResultsScreen = ({ flights, onSelect, onBack, language }: FlightResultsScreenProps) => {
-  const t = (key: string) => translations[language]?.[key] || translations['English'][key];
+export const FlightResultsScreen = ({ flights, onSelect, onBack }: FlightResultsScreenProps) => {
+  const { t } = useTranslation();
   const [sortBy, setSortBy] = useState('cheapest');
   const [showFilters, setShowFilters] = useState(false);
   const [maxPrice, setMaxPrice] = useState(1000);

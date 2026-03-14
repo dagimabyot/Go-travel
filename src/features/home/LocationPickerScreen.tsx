@@ -3,6 +3,7 @@ import { ChevronLeft, Search, Compass, MapPin, Loader2, X } from 'lucide-react';
 import { MapContainer, TileLayer, Marker, useMap, useMapEvents } from 'react-leaflet';
 import L from 'leaflet';
 import { motion, AnimatePresence } from 'motion/react';
+import { useTranslation } from '../../hooks/useTranslation';
 
 // Fix for default marker icons in Leaflet
 import icon from 'leaflet/dist/images/marker-icon.png';
@@ -20,7 +21,6 @@ L.Marker.prototype.options.icon = DefaultIcon;
 interface LocationPickerScreenProps {
   onBack: () => void;
   onSelect: (location: string) => void;
-  language: string;
   appearance: string;
 }
 
@@ -48,12 +48,13 @@ function MapEvents({ onLocationSelect }: { onLocationSelect: (lat: number, lng: 
 }
 
 export const LocationPickerScreen = ({ onBack, onSelect, appearance }: LocationPickerScreenProps) => {
+  const { t } = useTranslation();
   const [position, setPosition] = useState<[number, number]>([51.505, -0.09]); // Default to London
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState<any[]>([]);
   const [isSearching, setIsSearching] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
-  const [selectedAddress, setSelectedAddress] = useState('Select a location');
+  const [selectedAddress, setSelectedAddress] = useState(t('selectLocation'));
   const [isLoadingLocation, setIsLoadingLocation] = useState(false);
 
   // Get user location on mount
@@ -143,7 +144,7 @@ export const LocationPickerScreen = ({ onBack, onSelect, appearance }: LocationP
               <input 
                 autoFocus
                 type="text"
-                placeholder="Search for a place..."
+                placeholder={t('searchPlaceholder')}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className={`w-full h-14 border rounded-2xl px-12 font-medium focus:outline-none focus:border-blue-600 transition-all ${appearance === 'Dark Mode' ? 'bg-slate-900 border-slate-800 text-white placeholder:text-slate-600' : 'bg-slate-50 border-slate-100 text-slate-900 placeholder:text-slate-400'}`}
@@ -167,7 +168,7 @@ export const LocationPickerScreen = ({ onBack, onSelect, appearance }: LocationP
                 </button>
               ))}
               {searchQuery && searchResults.length === 0 && !isSearching && (
-                <p className="text-center text-slate-400 py-4 text-sm">No results found</p>
+                <p className="text-center text-slate-400 py-4 text-sm">{t('noResultsFound')}</p>
               )}
             </div>
           </motion.div>
@@ -210,7 +211,7 @@ export const LocationPickerScreen = ({ onBack, onSelect, appearance }: LocationP
             <MapPin size={20} />
           </div>
           <div className="flex-1 overflow-hidden">
-            <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">Selected Location</p>
+            <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">{t('selectedLocation')}</p>
             <p className={`text-sm font-bold truncate ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{selectedAddress}</p>
           </div>
         </div>
@@ -218,7 +219,7 @@ export const LocationPickerScreen = ({ onBack, onSelect, appearance }: LocationP
           onClick={() => onSelect(selectedAddress)}
           className={`w-full py-5 bg-blue-700 text-white rounded-[24px] font-bold text-xl shadow-xl active:scale-95 transition-all ${appearance === 'Dark Mode' ? 'shadow-blue-900/40' : 'shadow-blue-200'}`}
         >
-          Select Location
+          {t('selectLocation')}
         </button>
       </div>
     </div>

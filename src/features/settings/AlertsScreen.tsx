@@ -1,17 +1,16 @@
 import React from 'react';
 import { Bell, Trash2 } from 'lucide-react';
 import { AppNotification } from '../../types';
-import { translations } from '../../constants/translations';
+import { useTranslation } from '../../hooks/useTranslation';
 
 interface AlertsScreenProps {
   notifications: AppNotification[];
   onClear: () => void;
-  language: string;
   appearance: string;
 }
 
-export const AlertsScreen = ({ notifications, onClear, language, appearance }: AlertsScreenProps) => {
-  const t = (key: string) => translations[language]?.[key] || translations['English'][key];
+export const AlertsScreen = ({ notifications, onClear, appearance }: AlertsScreenProps) => {
+  const { t } = useTranslation();
   
   return (
     <div className={`pb-24 pt-8 px-6 max-w-4xl mx-auto min-h-screen transition-colors duration-300 ${appearance === 'Dark Mode' ? 'bg-slate-950 text-white' : 'bg-white text-slate-900'}`}>
@@ -20,7 +19,7 @@ export const AlertsScreen = ({ notifications, onClear, language, appearance }: A
         {notifications.length > 0 && (
           <button onClick={onClear} className="text-red-500 text-xs font-bold uppercase tracking-widest flex items-center gap-2">
             <Trash2 size={16} />
-            Clear All
+            {t('clearAll')}
           </button>
         )}
       </header>

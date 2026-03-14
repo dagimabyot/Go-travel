@@ -1,18 +1,17 @@
 import React, { useState } from 'react';
 import { ChevronLeft, Plane } from 'lucide-react';
 import { Flight } from '../../types';
-import { translations } from '../../constants/translations';
+import { useTranslation } from '../../hooks/useTranslation';
 
 interface SeatSelectionScreenProps {
   onBack: () => void;
   onContinue: (seat: string) => void;
-  language: string;
   appearance: string;
   flight: Flight | null;
 }
 
-export const SeatSelectionScreen = ({ onBack, onContinue, language, appearance, flight }: SeatSelectionScreenProps) => {
-  const t = (key: string) => translations[language]?.[key] || translations['English'][key];
+export const SeatSelectionScreen = ({ onBack, onContinue, appearance, flight }: SeatSelectionScreenProps) => {
+  const { t } = useTranslation();
   const [selectedSeat, setSelectedSeat] = useState('04');
 
   const economySeats = Array.from({ length: 60 }, (_, i) => i + 1);
