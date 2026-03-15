@@ -29,6 +29,7 @@ import { TicketScreen } from '../features/flights/TicketScreen';
 import { FlightBookingDetailsScreen } from '../features/flights/FlightBookingDetailsScreen';
 import { SettingsScreen } from '../features/settings/SettingsScreen';
 import { AlertsScreen } from '../features/settings/AlertsScreen';
+import { PrivacyScreen } from '../features/settings/PrivacyScreen';
 import { SavedScreen } from '../features/home/SavedScreen';
 import { Navbar } from '../components/layout/Navbar';
 
@@ -239,6 +240,8 @@ export const Router = (props: RouterProps) => {
         return user ? <SettingsScreen user={user} onLogout={() => setScreen('auth-welcome')} currency={currency} setCurrency={setCurrency} appearance={appearance} setAppearance={setAppearance} notificationsEnabled={notificationsEnabled} setNotificationsEnabled={setNotificationsEnabled} emailNotificationsEnabled={emailNotificationsEnabled} setEmailNotificationsEnabled={setEmailNotificationsEnabled} notifications={notifications} onUpdateUser={(updated) => setUser({ ...user, ...updated })} subScreen={settingsSubScreen} setSubScreen={setSettingsSubScreen} /> : null;
       case 'alerts':
         return <AlertsScreen notifications={notifications} onClear={onClearNotifications} appearance={appearance} />;
+      case 'privacy':
+        return <PrivacyScreen onBack={() => setScreen('settings')} appearance={appearance} />;
       default:
         return <HomeScreen user={user} packages={packages} onSelectPackage={(p) => { setSelectedPackage(p); setScreen('package-details'); }} onSeeAllPackages={() => setScreen('place-list')} onSearchFlights={() => setScreen('flight-search')} onSearchHotels={handleSearchHotels} onSelectHotel={(h) => { setSelectedHotel(h); setScreen('hotel-details'); }} onProfile={() => setScreen('settings')} savedPackages={savedPackages} toggleSavedPackage={toggleSavedPackage} savedHotels={savedHotels} toggleSavedHotel={toggleSavedHotel} appearance={appearance} />;
     }

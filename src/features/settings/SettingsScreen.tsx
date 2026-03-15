@@ -557,67 +557,86 @@ const PrivacySettingsSubScreen = ({ appearance, onBack }: { appearance: string, 
       <div className="flex-1 px-6 pt-8 overflow-y-auto no-scrollbar pb-32">
         <div className="space-y-8">
           <section className="space-y-4">
-            <div className={`rounded-3xl p-6 space-y-6 ${appearance === 'Dark Mode' ? 'bg-slate-900' : 'bg-white shadow-sm border border-slate-100'}`}>
+            <div className={`rounded-3xl p-6 space-y-4 ${appearance === 'Dark Mode' ? 'bg-slate-900' : 'bg-white shadow-sm border border-slate-100'}`}>
               <div className="flex items-center gap-4 text-blue-600">
                 <Shield size={24} />
-                <h3 className="text-lg font-bold">{t('dataProtectionEncryption')}</h3>
+                <h3 className="text-lg font-bold">{t('privacySecurity')}</h3>
               </div>
               <p className={`text-sm leading-relaxed ${appearance === 'Dark Mode' ? 'text-slate-400' : 'text-slate-600'}`}>
-                {t('dataProtectionDesc')}
+                {t('privacyIntro')}
               </p>
-              <div className="p-4 rounded-2xl bg-blue-600/5 border border-blue-600/10">
-                <p className="text-xs font-bold text-blue-600 uppercase tracking-widest mb-2">{t('securityAudits')}</p>
-                <p className="text-xs text-slate-500 leading-relaxed">{t('securityAuditsDesc')}</p>
-              </div>
             </div>
           </section>
 
           <section className="space-y-4">
-            <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest px-1">{t('howWeUseData')}</h3>
-            <div className={`rounded-3xl p-6 space-y-6 ${appearance === 'Dark Mode' ? 'bg-slate-900' : 'bg-white shadow-sm border border-slate-100'}`}>
-              <div className="space-y-6">
-                <div className="flex gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-blue-600/10 text-blue-600 flex items-center justify-center shrink-0">
-                    <Check size={20} />
-                  </div>
-                  <div>
-                    <p className="text-sm font-bold">{t('bookingFulfillment')}</p>
-                    <p className="text-xs text-slate-400 mt-1 leading-relaxed">{t('bookingFulfillmentDesc')}</p>
-                  </div>
-                </div>
-                <div className="flex gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-blue-600/10 text-blue-600 flex items-center justify-center shrink-0">
-                    <Check size={20} />
-                  </div>
-                  <div>
-                    <p className="text-sm font-bold">{t('securePayments')}</p>
-                    <p className="text-xs text-slate-400 mt-1 leading-relaxed">{t('securePaymentsDesc')}</p>
-                  </div>
-                </div>
-                <div className="flex gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-blue-600/10 text-blue-600 flex items-center justify-center shrink-0">
-                    <Check size={20} />
-                  </div>
-                  <div>
-                    <p className="text-sm font-bold">{t('accessControl')}</p>
-                    <p className="text-xs text-slate-400 mt-1 leading-relaxed">{t('accessControlDesc')}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <section className="space-y-4">
-            <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest px-1">{t('yourRightsControl')}</h3>
+            <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest px-1">{t('privacyInfoCollect')}</h3>
             <div className={`rounded-3xl p-6 space-y-4 ${appearance === 'Dark Mode' ? 'bg-slate-900' : 'bg-white shadow-sm border border-slate-100'}`}>
               <p className={`text-sm leading-relaxed ${appearance === 'Dark Mode' ? 'text-slate-400' : 'text-slate-600'}`}>
-                {t('yourRightsDesc')}
+                {t('privacyInfoCollectDesc')}
               </p>
-              <div className="grid grid-cols-1 gap-3">
-                <button className="w-full py-4 rounded-2xl bg-blue-600 text-white font-bold text-sm shadow-lg shadow-blue-600/20">{t('requestDataExport')}</button>
-                <button className={`w-full py-4 rounded-2xl font-bold text-sm border ${appearance === 'Dark Mode' ? 'border-slate-800 text-slate-300' : 'border-slate-100 text-slate-600'}`}>{t('revokeAccess')}</button>
-                <button className="w-full py-4 rounded-2xl border border-red-500/20 text-red-500 font-bold text-sm hover:bg-red-500/5 transition-colors">{t('deleteMyAccount')}</button>
-              </div>
+            </div>
+          </section>
+
+          <section className="space-y-4">
+            <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest px-1">{t('privacyHowUse')}</h3>
+            <div className={`rounded-3xl p-6 space-y-4 ${appearance === 'Dark Mode' ? 'bg-slate-900' : 'bg-white shadow-sm border border-slate-100'}`}>
+              <p className={`text-sm leading-relaxed ${appearance === 'Dark Mode' ? 'text-slate-400' : 'text-slate-600'}`}>
+                {t('privacyHowUseDesc')}
+              </p>
+            </div>
+          </section>
+
+          <section className="space-y-4">
+            <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest px-1">{t('privacyDataSecurity')}</h3>
+            <div className={`rounded-3xl p-6 space-y-4 ${appearance === 'Dark Mode' ? 'bg-slate-900' : 'bg-white shadow-sm border border-slate-100'}`}>
+              <p className={`text-sm leading-relaxed ${appearance === 'Dark Mode' ? 'text-slate-400' : 'text-slate-600'}`}>
+                {t('privacyDataSecurityDesc')}
+              </p>
+            </div>
+          </section>
+
+          <section className="space-y-4">
+            <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest px-1">{t('privacyDataSharing')}</h3>
+            <div className={`rounded-3xl p-6 space-y-4 ${appearance === 'Dark Mode' ? 'bg-slate-900' : 'bg-white shadow-sm border border-slate-100'}`}>
+              <p className={`text-sm leading-relaxed ${appearance === 'Dark Mode' ? 'text-slate-400' : 'text-slate-600'}`}>
+                {t('privacyDataSharingDesc')}
+              </p>
+            </div>
+          </section>
+
+          <section className="space-y-4">
+            <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest px-1">{t('privacyCookies')}</h3>
+            <div className={`rounded-3xl p-6 space-y-4 ${appearance === 'Dark Mode' ? 'bg-slate-900' : 'bg-white shadow-sm border border-slate-100'}`}>
+              <p className={`text-sm leading-relaxed ${appearance === 'Dark Mode' ? 'text-slate-400' : 'text-slate-600'}`}>
+                {t('privacyCookiesDesc')}
+              </p>
+            </div>
+          </section>
+
+          <section className="space-y-4">
+            <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest px-1">{t('privacyYourRights')}</h3>
+            <div className={`rounded-3xl p-6 space-y-4 ${appearance === 'Dark Mode' ? 'bg-slate-900' : 'bg-white shadow-sm border border-slate-100'}`}>
+              <p className={`text-sm leading-relaxed ${appearance === 'Dark Mode' ? 'text-slate-400' : 'text-slate-600'}`}>
+                {t('privacyYourRightsDesc')}
+              </p>
+            </div>
+          </section>
+
+          <section className="space-y-4">
+            <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest px-1">{t('privacyPolicyUpdates')}</h3>
+            <div className={`rounded-3xl p-6 space-y-4 ${appearance === 'Dark Mode' ? 'bg-slate-900' : 'bg-white shadow-sm border border-slate-100'}`}>
+              <p className={`text-sm leading-relaxed ${appearance === 'Dark Mode' ? 'text-slate-400' : 'text-slate-600'}`}>
+                {t('privacyPolicyUpdatesDesc')}
+              </p>
+            </div>
+          </section>
+
+          <section className="space-y-4">
+            <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest px-1">{t('privacyContactUs')}</h3>
+            <div className={`rounded-3xl p-6 space-y-4 ${appearance === 'Dark Mode' ? 'bg-slate-900' : 'bg-white shadow-sm border border-slate-100'}`}>
+              <p className={`text-sm leading-relaxed ${appearance === 'Dark Mode' ? 'text-slate-400' : 'text-slate-600'}`}>
+                {t('privacyContactUsDesc')}
+              </p>
             </div>
           </section>
         </div>
@@ -625,6 +644,7 @@ const PrivacySettingsSubScreen = ({ appearance, onBack }: { appearance: string, 
     </div>
   );
 };
+
 
 const HelpSupportSubScreen = ({ appearance, onBack }: { appearance: string, onBack: () => void }) => {
   const { t } = useTranslation();

@@ -116,4 +116,4 @@ export type Screen =
   | 'home' | 'packages-list' | 'package-details' | 'place-list' | 'flight-search' | 'flight-results' | 'flight-details' 
   | 'hotel-search' | 'hotel-results' | 'hotel-details' | 'hotel-confirmation' | 'location-picker'
   | 'seat-selection' | 'check-availability' | 'payment' | 'confirmation' | 'traveler-info' | 'ticket' | 'success'
-  | 'my-trips' | 'trip-details' | 'saved' | 'profile' | 'settings' | 'alerts';
+  | 'my-trips' | 'trip-details' | 'saved' | 'profile' | 'settings' | 'alerts' | 'privacy';
