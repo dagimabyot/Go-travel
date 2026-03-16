@@ -646,8 +646,55 @@ const PrivacySettingsSubScreen = ({ appearance, onBack }: { appearance: string, 
 };
 
 
+
+const FAQItem = ({ question, answer, isOpen, onToggle, appearance }: any) => {
+  return (
+    <div className={`border rounded-2xl overflow-hidden transition-all ${appearance === 'Dark Mode' ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-100 shadow-sm'}`}>
+      <button 
+        onClick={onToggle}
+        className="w-full p-5 flex items-center justify-between text-left"
+      >
+        <span className="text-sm font-bold pr-4">{question}</span>
+        <ChevronRight 
+          size={18} 
+          className={`transition-transform duration-300 ${isOpen ? 'rotate-90' : ''} text-slate-400`} 
+        />
+      </button>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            <div className={`px-5 pb-5 text-xs leading-relaxed border-t pt-4 ${appearance === 'Dark Mode' ? 'text-slate-400 border-slate-800' : 'text-slate-500 border-slate-50'}`}>
+              {answer}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+};
+
 const HelpSupportSubScreen = ({ appearance, onBack }: { appearance: string, onBack: () => void }) => {
   const { t } = useTranslation();
+  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
+
+  const faqs = [
+    { q: t('faq1Q'), a: t('faq1A') },
+    { q: t('faq2Q'), a: t('faq2A') },
+    { q: t('faq3Q'), a: t('faq3A') },
+    { q: t('faq4Q'), a: t('faq4A') },
+    { q: t('faq5Q'), a: t('faq5A') },
+    { q: t('faq6Q'), a: t('faq6A') },
+    { q: t('faq7Q'), a: t('faq7A') },
+    { q: t('faq8Q'), a: t('faq8A') },
+    { q: t('faq9Q'), a: t('faq9A') },
+    { q: t('faq10Q'), a: t('faq10A') },
+  ];
+
   return (
     <div className={`fixed inset-0 z-[210] flex flex-col transition-colors duration-300 ${appearance === 'Dark Mode' ? 'bg-slate-950 text-white' : 'bg-slate-50 text-slate-900'}`}>
       <header className={`flex items-center px-6 pt-12 pb-6 transition-colors ${appearance === 'Dark Mode' ? 'bg-slate-950' : 'bg-white border-b border-slate-100'}`}>
@@ -691,16 +738,15 @@ const HelpSupportSubScreen = ({ appearance, onBack }: { appearance: string, onBa
           <section className="space-y-4">
             <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest px-1">{t('faqTitle')}</h3>
             <div className="space-y-3">
-              {[
-                { q: t('faq1Q'), a: t('faq1A') },
-                { q: t('faq2Q'), a: t('faq2A') },
-                { q: t('faq3Q'), a: t('faq3A') },
-                { q: t('faq4Q'), a: t('faq4A') }
-              ].map((faq, i) => (
-                <div key={i} className={`p-5 rounded-2xl border ${appearance === 'Dark Mode' ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-100 shadow-sm'}`}>
-                  <p className="text-sm font-bold mb-2">{faq.q}</p>
-                  <p className="text-xs text-slate-400 leading-relaxed">{faq.a}</p>
-                </div>
+              {faqs.map((faq, i) => (
+                <FAQItem 
+                  key={i}
+                  question={faq.q}
+                  answer={faq.a}
+                  isOpen={openFaqIndex === i}
+                  onToggle={() => setOpenFaqIndex(openFaqIndex === i ? null : i)}
+                  appearance={appearance}
+                />
               ))}
             </div>
           </section>
