@@ -139,6 +139,41 @@ export const PackageDetailsScreen = ({ pkg, user, onBack, onBook, appearance, to
             </div>
           )}
 
+          {/* Additional Details Section */}
+          <div className="mb-12">
+            <h3 className={`font-bold text-2xl mb-6 ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{t('additionalDetails')}</h3>
+            
+            <div className={`p-6 rounded-3xl space-y-4 ${appearance === 'Dark Mode' ? 'bg-slate-900/50 border border-white/5' : 'bg-slate-50 border border-slate-100'}`}>
+              <div className="flex justify-between items-center">
+                <span className="text-slate-400 font-medium">{t('tourDuration')}</span>
+                <span className={`font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{t(pkg.duration)}</span>
+              </div>
+              
+              {pkg.meals && (
+                <div className="flex justify-between items-center pt-4 border-t border-slate-200/10">
+                  <span className="text-slate-400 font-medium">{t('meals')}</span>
+                  <span className={`font-bold text-right max-w-[200px] ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{t(pkg.meals)}</span>
+                </div>
+              )}
+              
+              {pkg.transportation && (
+                <div className="flex justify-between items-center pt-4 border-t border-slate-200/10">
+                  <span className="text-slate-400 font-medium">{t('transportation')}</span>
+                  <span className={`font-bold text-right max-w-[200px] ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{t(pkg.transportation)}</span>
+                </div>
+              )}
+
+              {pkg.weather && (
+                <div className="pt-4 border-t border-slate-200/10">
+                  <span className="text-slate-400 font-medium block mb-2">{t('weather')}</span>
+                  <p className={`text-sm leading-relaxed ${appearance === 'Dark Mode' ? 'text-slate-300' : 'text-slate-600'}`}>
+                    {t(pkg.weather)}
+                  </p>
+                </div>
+              )}
+            </div>
+          </div>
+
           {/* Let's Go Button - Moved inside scrollable content to appear at the end */}
           <div className="flex justify-center pb-12">
             <button 

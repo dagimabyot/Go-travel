@@ -66,7 +66,7 @@ export const PackagesListScreen = ({
                     <Star key={i} size={12} className={`${i < Math.floor(pkg.rating) ? 'text-yellow-400 fill-current' : 'text-slate-400'}`} />
                   ))}
                 </div>
-                <span className="text-xs font-bold">{pkg.rating.toFixed(1)}</span>
+                <span className="text-xs font-bold">{(pkg.rating ?? 0).toFixed(1)}</span>
               </div>
               <p className="font-bold text-2xl leading-tight">{pkg.location}</p>
             </div>

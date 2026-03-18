@@ -89,7 +89,7 @@ export const HotelConfirmationScreen = ({ hotel, onBack, onContinue, onEdit, app
 
         <div className={`mt-12 pt-8 border-t flex justify-between items-center transition-colors ${appearance === 'Dark Mode' ? 'border-slate-900' : 'border-slate-100'}`}>
           <p className="text-slate-400 text-sm">{t('total')} :</p>
-          <p className={`text-2xl font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>${(hotel.price * guests).toFixed(2)}</p>
+          <p className={`text-2xl font-bold ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>${((hotel.price ?? 0) * guests).toFixed(2)}</p>
         </div>
       </div>
 

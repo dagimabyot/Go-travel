@@ -3,6 +3,13 @@ import { createServer as createViteServer } from "vite";
 import Database from "better-sqlite3";
 import path from "path";
 import Stripe from "stripe";
+import { initializeApp } from 'firebase/app';
+import { getFirestore, collection, getDocs } from 'firebase/firestore';
+import fs from 'fs';
+
+const firebaseConfig = JSON.parse(fs.readFileSync('./firebase-applet-config.json', 'utf-8'));
+const firebaseApp = initializeApp(firebaseConfig);
+const firestore = getFirestore(firebaseApp, firebaseConfig.firestoreDatabaseId);
 
 const db = new Database("flybook.db");
 
@@ -291,300 +298,78 @@ async function startServer() {
   });
 
   // Mock Packages Search
-  app.get("/api/packages/search", (req, res) => {
-    const packages = [
-      {
-        id: "PKG-1",
-        name: "pkg1_name",
-        location: "pkg1_location",
-        price: 500,
-        rating: 4.5,
-        image: "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=800&q=80",
-        images: [
-          "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=800&q=80",
-          "https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?auto=format&fit=crop&w=800&q=80",
-          "https://images.unsplash.com/photo-1504150559654-7255e7c51455?auto=format&fit=crop&w=800&q=80",
-          "https://images.unsplash.com/photo-1467269204594-9661b134dd2b?auto=format&fit=crop&w=800&q=80"
-        ],
-        description: "pkg1_desc",
-        included: ["Flight", "Hotel", "Transfer"],
-        duration: "3 days 2 nights",
-        category: "Beach",
-        weKnowWhatYouWant: "pkg1_we_know",
-        weKnowWhatYouWantSecondary: "pkg1_we_know_secondary",
-        highlights: [
-          { title: "pkg1_highlight1_title", description: "pkg1_highlight1_desc" },
-          { title: "pkg1_highlight2_title", description: "pkg1_highlight2_desc" },
-          { title: "pkg1_highlight3_title", description: "pkg1_highlight3_desc" }
-        ],
-        sunsetTitle: "pkg1_sunset_title",
-        sunsetDescription: "pkg1_sunset_desc",
-        sunsetDescriptionSecondary: "pkg1_sunset_desc_secondary",
-        sunsetImage: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80"
-      },
-      {
-        id: "PKG-2",
-        name: "pkg2_name",
-        location: "pkg2_location",
-        price: 600,
-        rating: 4.5,
-        image: "https://images.unsplash.com/photo-1560969184-10fe8719e047?auto=format&fit=crop&w=800&q=80",
-        images: [
-          "https://images.unsplash.com/photo-1560969184-10fe8719e047?auto=format&fit=crop&w=800&q=80",
-          "https://images.unsplash.com/photo-1599946347341-6cd48244c123?auto=format&fit=crop&w=800&q=80",
-          "https://images.unsplash.com/photo-1528728329032-2972f65dfb3f?auto=format&fit=crop&w=800&q=80",
-          "https://images.unsplash.com/photo-1559564484-e48b3e040ff4?auto=format&fit=crop&w=800&q=80"
-        ],
-        description: "pkg2_desc",
-        included: ["Flight", "Hotel", "Transfer"],
-        duration: "3 days 2 nights",
-        category: "Forest",
-        weKnowWhatYouWant: "pkg2_we_know",
-        weKnowWhatYouWantSecondary: "pkg2_we_know_secondary",
-        highlights: [
-          { title: "pkg2_highlight1_title", description: "pkg2_highlight1_desc" },
-          { title: "pkg2_highlight2_title", description: "pkg2_highlight2_desc" },
-          { title: "pkg2_highlight3_title", description: "pkg2_highlight3_desc" }
-        ],
-        sunsetTitle: "pkg2_sunset_title",
-        sunsetDescription: "pkg2_sunset_desc",
-        sunsetDescriptionSecondary: "pkg2_sunset_desc_secondary",
-        sunsetImage: "https://images.unsplash.com/photo-1560930950-5cc20e80e392?auto=format&fit=crop&w=1200&q=80"
-      },
-      {
-        id: "PKG-3",
-        name: "pkg3_name",
-        location: "pkg3_location",
-        price: 700,
-        rating: 4.5,
-        image: "https://images.unsplash.com/photo-1505118380757-91f5f45d8de4?auto=format&fit=crop&w=800&q=80",
-        images: [
-          "https://images.unsplash.com/photo-1505118380757-91f5f45d8de4?auto=format&fit=crop&w=800&q=80",
-          "https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=800&q=80",
-          "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80",
-          "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=800&q=80"
-        ],
-        description: "pkg3_desc",
-        included: ["Flight", "Hotel", "Transfer"],
-        duration: "2 days 3 night",
-        category: "Beach",
-        weKnowWhatYouWant: "pkg3_we_know",
-        weKnowWhatYouWantSecondary: "pkg3_we_know_secondary",
-        highlights: [
-          { title: "pkg3_highlight1_title", description: "pkg3_highlight1_desc" },
-          { title: "pkg3_highlight2_title", description: "pkg3_highlight2_desc" },
-          { title: "pkg3_highlight3_title", description: "pkg3_highlight3_desc" }
-        ],
-        sunsetTitle: "pkg3_sunset_title",
-        sunsetDescription: "pkg3_sunset_desc",
-        sunsetDescriptionSecondary: "pkg3_sunset_desc_secondary",
-        sunsetImage: "https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=1200&q=80"
-      },
-      {
-        id: "PKG-4",
-        name: "pkg4_name",
-        location: "pkg4_location",
-        price: 800,
-        rating: 4.5,
-        image: "https://images.unsplash.com/photo-1583422409516-2895a77efded?auto=format&fit=crop&w=800&q=80",
-        images: [
-          "https://images.unsplash.com/photo-1583422409516-2895a77efded?auto=format&fit=crop&w=800&q=80",
-          "https://images.unsplash.com/photo-1539186607619-df476afe3ff1?auto=format&fit=crop&w=800&q=80",
-          "https://images.unsplash.com/photo-1523531294919-4bcd7c65e216?auto=format&fit=crop&w=800&q=80",
-          "https://images.unsplash.com/photo-1511527661048-7fe73d85e9a4?auto=format&fit=crop&w=800&q=80"
-        ],
-        description: "pkg4_desc",
-        included: ["Flight", "Hotel", "Transfer"],
-        duration: "3 days 2 nights",
-        category: "Beach",
-        weKnowWhatYouWant: "pkg4_we_know",
-        weKnowWhatYouWantSecondary: "pkg4_we_know_secondary",
-        highlights: [
-          { title: "pkg4_highlight1_title", description: "pkg4_highlight1_desc" },
-          { title: "pkg4_highlight2_title", description: "pkg4_highlight2_desc" },
-          { title: "pkg4_highlight3_title", description: "pkg4_highlight3_desc" }
-        ],
-        sunsetTitle: "pkg4_sunset_title",
-        sunsetDescription: "pkg4_sunset_desc",
-        sunsetDescriptionSecondary: "pkg4_sunset_desc_secondary",
-        sunsetImage: "https://images.unsplash.com/photo-1523531294919-4bcd7c65e216?auto=format&fit=crop&w=1200&q=80"
-      },
-      {
-        id: "PKG-5",
-        name: "pkg5_name",
-        location: "pkg5_location",
-        price: 900,
-        rating: 4.5,
-        image: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=800&q=80",
-        images: [
-          "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=800&q=80",
-          "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&w=800&q=80",
-          "https://images.unsplash.com/photo-1549144511-f099e773c147?auto=format&fit=crop&w=800&q=80",
-          "https://images.unsplash.com/photo-1511739001486-6bfe10ce785f?auto=format&fit=crop&w=800&q=80"
-        ],
-        description: "pkg5_desc",
-        included: ["Flight", "Hotel", "Transfer"],
-        duration: "3 days 2 nights",
-        category: "Forest",
-        weKnowWhatYouWant: "pkg5_we_know",
-        weKnowWhatYouWantSecondary: "pkg5_we_know_secondary",
-        highlights: [
-          { title: "pkg5_highlight1_title", description: "pkg5_highlight1_desc" },
-          { title: "pkg5_highlight2_title", description: "pkg5_highlight2_desc" },
-          { title: "pkg5_highlight3_title", description: "pkg5_highlight3_desc" }
-        ],
-        sunsetTitle: "pkg5_sunset_title",
-        sunsetDescription: "pkg5_sunset_desc",
-        sunsetDescriptionSecondary: "pkg5_sunset_desc_secondary",
-        sunsetImage: "https://images.unsplash.com/photo-1500313830540-7b6650a74fd0?auto=format&fit=crop&w=1200&q=80"
-      },
-      {
-        id: "PKG-6",
-        name: "pkg6_name",
-        location: "pkg6_location",
-        price: 1200,
-        rating: 4.9,
-        image: "https://images.unsplash.com/photo-1531310197839-ccf54634509e?auto=format&fit=crop&w=800&q=80",
-        images: [
-          "https://images.unsplash.com/photo-1531310197839-ccf54634509e?auto=format&fit=crop&w=800&q=80",
-          "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80",
-          "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=800&q=80",
-          "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80"
-        ],
-        description: "pkg6_desc",
-        included: ["Flight", "Resort", "Ski Pass"],
-        duration: "5 days 4 nights",
-        category: "Mountain",
-        weKnowWhatYouWant: "pkg6_we_know",
-        weKnowWhatYouWantSecondary: "pkg6_we_know_secondary",
-        highlights: [
-          { title: "pkg6_highlight1_title", description: "pkg6_highlight1_desc" },
-          { title: "pkg6_highlight2_title", description: "pkg6_highlight2_desc" },
-          { title: "pkg6_highlight3_title", description: "pkg6_highlight3_desc" }
-        ],
-        sunsetTitle: "pkg6_sunset_title",
-        sunsetDescription: "pkg6_sunset_desc",
-        sunsetDescriptionSecondary: "pkg6_sunset_desc_secondary",
-        sunsetImage: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80"
-      },
-      {
-        id: "PKG-7",
-        name: "pkg7_name",
-        location: "pkg7_location",
-        price: 1500,
-        rating: 4.7,
-        image: "https://images.unsplash.com/photo-1516939884455-1445c8652f83?auto=format&fit=crop&w=800&q=80",
-        images: [
-          "https://images.unsplash.com/photo-1516939884455-1445c8652f83?auto=format&fit=crop&w=800&q=80",
-          "https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?auto=format&fit=crop&w=800&q=80",
-          "https://images.unsplash.com/photo-1581067720543-54876083f633?auto=format&fit=crop&w=800&q=80",
-          "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80"
-        ],
-        description: "pkg7_desc",
-        included: ["Flight", "Eco-lodge", "Guided Tour"],
-        duration: "7 days 6 nights",
-        category: "Forest",
-        weKnowWhatYouWant: "pkg7_we_know",
-        weKnowWhatYouWantSecondary: "pkg7_we_know_secondary",
-        highlights: [
-          { title: "pkg7_highlight1_title", description: "pkg7_highlight1_desc" },
-          { title: "pkg7_highlight2_title", description: "pkg7_highlight2_desc" },
-          { title: "pkg7_highlight3_title", description: "pkg7_highlight3_desc" }
-        ],
-        sunsetTitle: "pkg7_sunset_title",
-        sunsetDescription: "pkg7_sunset_desc",
-        sunsetDescriptionSecondary: "pkg7_sunset_desc_secondary",
-        sunsetImage: "https://images.unsplash.com/photo-1516939884455-1445c8652f83?auto=format&fit=crop&w=1200&q=80"
-      },
-      {
-        id: "PKG-8",
-        name: "pkg8_name",
-        location: "pkg8_location",
-        price: 2000,
-        rating: 4.8,
-        image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80",
-        images: [
-          "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80",
-          "https://images.unsplash.com/photo-1582967788606-a171c1080cb0?auto=format&fit=crop&w=800&q=80",
-          "https://images.unsplash.com/photo-1546026423-cc4642628d2b?auto=format&fit=crop&w=800&q=80",
-          "https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=800&q=80"
-        ],
-        description: "pkg8_desc",
-        included: ["Flight", "Resort", "Diving Gear"],
-        duration: "6 days 5 nights",
-        category: "Submarine",
-        weKnowWhatYouWant: "pkg8_we_know",
-        weKnowWhatYouWantSecondary: "pkg8_we_know_secondary",
-        highlights: [
-          { title: "pkg8_highlight1_title", description: "pkg8_highlight1_desc" },
-          { title: "pkg8_highlight2_title", description: "pkg8_highlight2_desc" },
-          { title: "pkg8_highlight3_title", description: "pkg8_highlight3_desc" }
-        ],
-        sunsetTitle: "pkg8_sunset_title",
-        sunsetDescription: "pkg8_sunset_desc",
-        sunsetDescriptionSecondary: "pkg8_sunset_desc_secondary",
-        sunsetImage: "https://images.unsplash.com/photo-1582967788606-a171c1080cb0?auto=format&fit=crop&w=1200&q=80"
-      },
-      {
-        id: "PKG-9",
-        name: "pkg9_name",
-        location: "pkg9_location",
-        price: 1100,
-        rating: 4.6,
-        image: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=800&q=80",
-        images: [
-          "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=800&q=80",
-          "https://images.unsplash.com/photo-1528164344705-47542687000d?auto=format&fit=crop&w=800&q=80",
-          "https://images.unsplash.com/photo-1490806678282-2d4d3f77eead?auto=format&fit=crop&w=800&q=80",
-          "https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=800&q=80"
-        ],
-        description: "pkg9_desc",
-        included: ["Flight", "Ryokan", "Train Pass"],
-        duration: "4 days 3 nights",
-        category: "Mountain",
-        weKnowWhatYouWant: "pkg9_we_know",
-        weKnowWhatYouWantSecondary: "pkg9_we_know_secondary",
-        highlights: [
-          { title: "pkg9_highlight1_title", description: "pkg9_highlight1_desc" },
-          { title: "pkg9_highlight2_title", description: "pkg9_highlight2_desc" },
-          { title: "pkg9_highlight3_title", description: "pkg9_highlight3_desc" }
-        ],
-        sunsetTitle: "pkg9_sunset_title",
-        sunsetDescription: "pkg9_sunset_desc",
-        sunsetDescriptionSecondary: "pkg9_sunset_desc_secondary",
-        sunsetImage: "https://images.unsplash.com/photo-1528164344705-47542687000d?auto=format&fit=crop&w=1200&q=80"
-      },
-      {
-        id: "PKG-10",
-        name: "pkg10_name",
-        location: "pkg10_location",
-        price: 2500,
-        rating: 5.0,
-        image: "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=800&q=80",
-        images: [
-          "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=800&q=80",
-          "https://images.unsplash.com/photo-1573843981267-be1999ff37cd?auto=format&fit=crop&w=800&q=80",
-          "https://images.unsplash.com/photo-1540202404-a2f29036bb57?auto=format&fit=crop&w=800&q=80",
-          "https://images.unsplash.com/photo-1506953823976-52e1fdc0149a?auto=format&fit=crop&w=800&q=80"
-        ],
-        description: "pkg10_desc",
-        included: ["Flight", "Overwater Villa", "All-inclusive"],
-        duration: "5 days 4 nights",
-        category: "Beach",
-        weKnowWhatYouWant: "pkg10_we_know",
-        weKnowWhatYouWantSecondary: "pkg10_we_know_secondary",
-        highlights: [
-          { title: "pkg10_highlight1_title", description: "pkg10_highlight1_desc" },
-          { title: "pkg10_highlight2_title", description: "pkg10_highlight2_desc" },
-          { title: "pkg10_highlight3_title", description: "pkg10_highlight3_desc" }
-        ],
-        sunsetTitle: "pkg10_sunset_title",
-        sunsetDescription: "pkg10_sunset_desc",
-        sunsetDescriptionSecondary: "pkg10_sunset_desc_secondary",
-        sunsetImage: "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=1200&q=80"
+  app.get("/api/packages/search", async (req, res) => {
+    try {
+      const querySnapshot = await getDocs(collection(firestore, "destinations"));
+      const destinations = querySnapshot.docs.map(doc => {
+        const data = doc.data();
+        // Map Firestore destination to Package type
+        return {
+          id: doc.id,
+          name: data.place,
+          location: data.location,
+          price: data.price || 500,
+          rating: 4.5, // Default rating
+          image: data.image?.url || "",
+          images: data.additionalImages || [data.image?.url].filter(Boolean),
+          description: data.description,
+          included: ["Flight", "Hotel", "Transfer"], // Default
+          duration: data.duration || "3 days 2 nights",
+          category: "Popular", // Default
+          weKnowWhatYouWant: "pkg_weknow_title",
+          weKnowWhatYouWantSecondary: "pkg_weknow_secondary",
+          highlights: (data.highlights || []).map((h: string, i: number) => ({
+            title: `pkg_highlight${i + 1}_title`,
+            description: h
+          })),
+          sunsetTitle: "pkg_sunset_title",
+          sunsetDescription: data.sunsetExperience || "pkg_sunset_desc",
+          sunsetDescriptionSecondary: "pkg_sunset_desc_secondary",
+          sunsetImage: data.image?.url || ""
+        };
+      });
+
+      if (destinations.length > 0) {
+        res.json(destinations);
+      } else {
+        // Fallback to mock data if Firestore is empty
+        const mockPackages = [
+          {
+            id: "PKG-1",
+            name: "pkg1_name",
+            location: "pkg1_location",
+            price: 500,
+            rating: 4.5,
+            image: "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=800&q=80",
+            images: [
+              "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=800&q=80",
+              "https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?auto=format&fit=crop&w=800&q=80",
+              "https://images.unsplash.com/photo-1504150559654-7255e7c51455?auto=format&fit=crop&w=800&q=80",
+              "https://images.unsplash.com/photo-1467269204594-9661b134dd2b?auto=format&fit=crop&w=800&q=80"
+            ],
+            description: "pkg1_desc",
+            included: ["Flight", "Hotel", "Transfer"],
+            duration: "3 days 2 nights",
+            category: "Beach",
+            weKnowWhatYouWant: "pkg1_we_know",
+            weKnowWhatYouWantSecondary: "pkg1_we_know_secondary",
+            highlights: [
+              { title: "pkg1_highlight1_title", description: "pkg1_highlight1_desc" },
+              { title: "pkg1_highlight2_title", description: "pkg1_highlight2_desc" },
+              { title: "pkg1_highlight3_title", description: "pkg1_highlight3_desc" }
+            ],
+            sunsetTitle: "pkg1_sunset_title",
+            sunsetDescription: "pkg1_sunset_desc",
+            sunsetDescriptionSecondary: "pkg1_sunset_desc_secondary",
+            sunsetImage: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80"
+          }
+        ];
+        res.json(mockPackages);
       }
-    ];
-    res.json(packages);
+    } catch (error) {
+      console.error("Error fetching destinations from Firestore:", error);
+      res.status(500).json({ error: "Failed to fetch destinations" });
+    }
   });
 
   // Mock Hotels Search

@@ -137,6 +137,35 @@ export const HotelDetailsScreen = ({ hotel, onBack, onBook, toggleSaved, isSaved
             </button>
           </div>
         </div>
+
+        {/* Amenities */}
+        {hotel.amenities && hotel.amenities.length > 0 && (
+          <div className="mb-10">
+            <h3 className={`font-bold text-xl mb-6 ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{t('amenities')}</h3>
+            <div className="flex flex-wrap gap-3">
+              {hotel.amenities.map((amenity, i) => (
+                <div key={i} className={`px-4 py-2 rounded-full text-sm font-medium ${appearance === 'Dark Mode' ? 'bg-slate-900 text-slate-300' : 'bg-slate-50 text-slate-600'}`}>
+                  {t(amenity)}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Highlights */}
+        {hotel.highlights && hotel.highlights.length > 0 && (
+          <div className="mb-10">
+            <h3 className={`font-bold text-xl mb-6 ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{t('hotelHighlights')}</h3>
+            <div className="space-y-4">
+              {hotel.highlights.map((highlight, i) => (
+                <div key={i} className={`p-4 rounded-2xl ${appearance === 'Dark Mode' ? 'bg-slate-900/50' : 'bg-slate-50'}`}>
+                  <p className={`font-bold text-sm mb-1 ${appearance === 'Dark Mode' ? 'text-white' : 'text-slate-900'}`}>{t(highlight.title)}</p>
+                  <p className="text-xs text-slate-400 leading-relaxed">{t(highlight.description)}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Bottom Bar */}

@@ -86,9 +86,9 @@ export const LocationPickerScreen = ({ onBack, onSelect, appearance }: LocationP
         headers: { 'User-Agent': 'FlyBook-App' }
       });
       const data = await response.json();
-      setSelectedAddress(data.display_name || `${lat.toFixed(4)}, ${lng.toFixed(4)}`);
+      setSelectedAddress(data.display_name || `${(lat ?? 0).toFixed(4)}, ${(lng ?? 0).toFixed(4)}`);
     } catch (e) {
-      setSelectedAddress(`${lat.toFixed(4)}, ${lng.toFixed(4)}`);
+      setSelectedAddress(`${(lat ?? 0).toFixed(4)}, ${(lng ?? 0).toFixed(4)}`);
     }
   };
 

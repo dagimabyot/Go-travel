@@ -8,7 +8,7 @@ interface AvatarProps {
 }
 
 export const Avatar = ({ user, className = '', size = 48 }: AvatarProps) => {
-  const avatarUrl = user?.avatar || `https://api.dicebear.com/7.x/avataaars/svg?seed=${user?.name || 'Guest'}`;
+  const avatarUrl = user?.avatar || `https://api.dicebear.com/7.x/avataaars/svg?seed=${user?.fullName || user?.name || 'Guest'}`;
   
   return (
     <div 
@@ -17,7 +17,7 @@ export const Avatar = ({ user, className = '', size = 48 }: AvatarProps) => {
     >
       <img 
         src={avatarUrl} 
-        alt={user?.name || 'Avatar'} 
+        alt={user?.fullName || user?.name || 'Avatar'} 
         className="w-full h-full object-cover"
         referrerPolicy="no-referrer"
       />

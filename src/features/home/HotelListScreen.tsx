@@ -125,7 +125,7 @@ export const HotelListScreen = ({ hotels, onBack, onSelectHotel, savedHotels, to
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
               <div className="absolute bottom-6 left-8 right-8 text-white">
                 <h3 className="text-2xl font-bold leading-tight">{hotel.name}</h3>
-                <p className="text-sm opacity-80">${hotel.price.toFixed(2)} <span className="text-xs">/{t('perDay')}</span></p>
+                <p className="text-sm opacity-80">${(hotel.price ?? 0).toFixed(2)} <span className="text-xs">/{t('perDay')}</span></p>
               </div>
               <button 
                 onClick={(e) => {

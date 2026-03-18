@@ -1520,6 +1520,11 @@ export const am = {
   faqTitle: "ተዘውትረው የሚጠየቁ ጥያቄዎች",
   needMoreHelp: "ተጨማሪ እርዳታ ይፈልጋሉ?",
   supportTeamAvailability: "የእኛ የድጋፍ ቡድን የሚያጋጥሙዎትን ማንኛውንም ጥያቄዎች ወይም ችግሮች ለመርዳት በቀን 24 ሰዓት በሳምንት 7 ቀናት ይገኛል።",
+  additionalDetails: "ተጨማሪ ዝርዝሮች",
+  tourDuration: "የጉብኝት ቆይታ",
+  meals: "ምግቦች",
+  transportation: "መጓጓዣ",
+  weather: "የአየር ሁኔታ",
   
   // FAQs
   faq1Q: "What is this app/website about?",

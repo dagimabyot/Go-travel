@@ -7,7 +7,7 @@ import { useTranslation } from '../../hooks/useTranslation';
 interface HistoryScreenProps {
   bookings: Booking[];
   user: User | null;
-  onCancel: (id: number) => void;
+  onCancel: (id: string) => void;
   onSelect: (b: Booking) => void;
   onBack: () => void;
   onProfile: () => void;

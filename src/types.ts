@@ -1,14 +1,20 @@
 export interface User {
-  id: number;
+  uid: string;
   email: string;
-  name: string;
-  frequent_flyer_no?: string;
-  saved_payment_methods?: string;
-  dob?: string;
+  fullName: string;
+  name?: string; // For backward compatibility with UI
+  birthDate?: string;
+  dob?: string; // For backward compatibility with UI
   gender?: string;
-  phone?: string;
+  phoneNumber?: string;
+  phone?: string; // For backward compatibility with UI
   country?: string;
-  zipCode?: string;
+  address?: string;
+  zipCode?: string; // For backward compatibility with UI
+  preferredDestinations?: string[];
+  travelHistory?: string[];
+  role: 'user' | 'admin';
+  createdAt: string;
   avatar?: string;
   bio?: string;
 }
@@ -27,8 +33,8 @@ export interface Flight {
 }
 
 export interface Booking {
-  id: number;
-  user_id: number;
+  id: string;
+  userId: string;
   type: 'package' | 'flight' | 'hotel';
   // Flight specific
   flight_id?: string;
@@ -39,7 +45,7 @@ export interface Booking {
   airline?: string;
   seat?: string;
   // Package/Hotel specific
-  item_id?: string;
+  itemId?: string;
   name?: string;
   location?: string;
   image?: string;
@@ -87,18 +93,26 @@ export interface Package {
   sunsetDescription?: string;
   sunsetDescriptionSecondary?: string;
   sunsetImage?: string;
+  meals?: string;
+  transportation?: string;
+  weather?: string;
 }
 
 export interface Hotel {
   id: string;
   name: string;
+  destinationId: string;
   location: string;
+  city?: string;
+  country?: string;
+  contact?: string;
   price: number;
   rating: number;
   image: string;
   images?: string[];
   description: string;
   amenities: string[];
+  highlights?: PackageHighlight[];
 }
 
 export interface Traveler {

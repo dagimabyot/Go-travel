@@ -10,7 +10,7 @@ interface FlightBookingDetailsScreenProps {
   booking: Booking;
   user: User | null;
   onBack: () => void;
-  onCancel: (id: number) => void;
+  onCancel: (id: string) => void;
   onDownload: () => void;
   appearance: string;
   isSaved: boolean;
@@ -37,7 +37,7 @@ export const FlightBookingDetailsScreen = ({
   };
 
   const handleDownloadPDF = async () => {
-    generateProfessionalPDF(booking);
+    generateProfessionalPDF(booking, user);
   };
 
   return (

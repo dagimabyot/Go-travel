@@ -10,99 +10,204 @@ export interface Destination {
     alt: string;
   };
   tip: string;
+  highlights?: string[];
+  sunsetExperience?: string;
+  duration?: string;
+  meals?: string;
+  transportation?: string;
+  additionalImages?: string[];
 }
 
 export const FAMOUS_PLACES: Destination[] = [
   {
     "place": "dest_eiffelTower_place",
-    "location": "dest_eiffelTower_location",
-    "description": "dest_eiffelTower_description",
-    "weather": "dest_eiffelTower_weather",
+    "location": "Paris, France",
+    "description": "Experience the romance and elegance of Paris with a visit to its most iconic symbol, the Eiffel Tower. Ascend to the summit for unparalleled views of the city of light, stroll through the picturesque Champ de Mars, and explore the charming streets of the 7th arrondissement. This tour offers a perfect blend of history, architecture, and Parisian flair, ensuring an unforgettable experience in the heart of France.",
+    "weather": "Paris has a temperate climate. The best time to visit is from late spring (May-June) to early autumn (September-October) when the weather is mild and pleasant. Pack layers and a light raincoat.",
     "price": 450,
     "image": {
       "url": "https://images.pexels.com/photos/532826/pexels-photo-532826.jpeg",
       "source": "Pexels",
       "alt": "Eiffel Tower at sunset from Champ de Mars"
     },
-    "tip": "dest_eiffelTower_tip"
+    "tip": "dest_eiffelTower_tip",
+    "highlights": [
+      "Eiffel Tower Summit – Take the elevator to the top for breathtaking 360-degree views of Paris.",
+      "Champ de Mars Picnic – Relax on the green lawns and enjoy a classic French picnic with the tower as your backdrop.",
+      "Seine River Cruise – Glide past historic monuments and under beautiful bridges on a romantic boat tour."
+    ],
+    "sunsetExperience": "Trocadéro Gardens – Watch the Eiffel Tower sparkle as the sun sets, creating a magical atmosphere perfect for photos.",
+    "duration": "Half day (4 hours)",
+    "meals": "Optional dinner at a nearby Parisian bistro",
+    "transportation": "Walking tour with metro access",
+    "additionalImages": [
+      "https://images.pexels.com/photos/338515/pexels-photo-338515.jpeg",
+      "https://images.pexels.com/photos/699466/pexels-photo-699466.jpeg",
+      "https://images.pexels.com/photos/1530259/pexels-photo-1530259.jpeg"
+    ]
   },
   {
     "place": "dest_greatWallOfChina_place",
-    "location": "dest_greatWallOfChina_location",
-    "description": "dest_greatWallOfChina_description",
-    "weather": "dest_greatWallOfChina_weather",
+    "location": "Beijing, China",
+    "description": "Embark on an epic journey to the Great Wall of China, one of the world's most impressive architectural feats. Hike along the ancient stone paths, marvel at the breathtaking mountain scenery, and learn about the wall's rich history and strategic importance. Whether you choose the restored sections near Beijing or the more rugged wild wall, this experience promises adventure and awe-inspiring views.",
+    "weather": "Beijing has four distinct seasons. Spring (April-May) and Autumn (September-October) are the best times to visit for comfortable temperatures and clear skies. Summers can be hot and humid.",
     "price": 680,
     "image": {
       "url": "https://images.pexels.com/photos/1423580/pexels-photo-1423580.jpeg",
       "source": "Pexels",
       "alt": "Great Wall of China winding through mountains"
     },
-    "tip": "dest_greatWallOfChina_tip"
+    "tip": "dest_greatWallOfChina_tip",
+    "highlights": [
+      "Mutianyu Section Hike – Walk along the well-preserved battlements and enjoy panoramic views of the surrounding forest.",
+      "Watchtower Exploration – Climb the historic watchtowers and imagine the lives of the soldiers who once guarded the wall.",
+      "Toboggan Ride – Experience a thrilling descent from the wall on a fun toboggan ride at the Mutianyu section."
+    ],
+    "sunsetExperience": "Simatai West Sunset – Witness the wall glow in golden light as the sun sets over the rugged mountain ridges.",
+    "duration": "Full day (9 hours)",
+    "meals": "Traditional Chinese lunch at a local village restaurant included",
+    "transportation": "Private car with English-speaking guide",
+    "additionalImages": [
+      "https://images.pexels.com/photos/2166559/pexels-photo-2166559.jpeg",
+      "https://images.pexels.com/photos/208733/pexels-photo-208733.jpeg",
+      "https://images.pexels.com/photos/161251/pexels-photo-161251.jpeg"
+    ]
   },
   {
     "place": "dest_tajMahal_place",
-    "location": "dest_tajMahal_location",
-    "description": "dest_tajMahal_description",
-    "weather": "dest_tajMahal_weather",
+    "location": "Agra, India",
+    "description": "Witness the ethereal beauty of the Taj Mahal, a masterpiece of Mughal architecture and a timeless symbol of love. Explore the intricate marble carvings, stroll through the lush gardens, and learn the poignant story behind this world-renowned monument. This tour takes you into the heart of India's rich heritage, offering a truly spiritual and awe-inspiring experience.",
+    "weather": "Agra can be very hot in summer. The best time to visit is from October to March when the weather is cool and pleasant. Early morning visits are recommended to avoid the heat and crowds.",
     "price": 320,
     "image": {
       "url": "https://images.pexels.com/photos/1603650/pexels-photo-1603650.jpeg",
       "source": "Pexels",
       "alt": "The Taj Mahal reflecting in the water at sunrise"
     },
-    "tip": "dest_tajMahal_tip"
+    "tip": "dest_tajMahal_tip",
+    "highlights": [
+      "Taj Mahal Sunrise – Experience the monument's changing colors as the first light of day hits the white marble.",
+      "Agra Fort – Explore the massive red sandstone fortress that served as the main residence of the Mughal emperors.",
+      "Mehtab Bagh – Enjoy a peaceful view of the Taj Mahal from across the Yamuna River in these beautiful gardens."
+    ],
+    "sunsetExperience": "Yamuna River Sunset – Watch the Taj Mahal reflect in the calm waters of the river as the sky turns shades of pink and orange.",
+    "duration": "Full day (7 hours)",
+    "meals": "Authentic Mughlai lunch at a top-rated Agra restaurant",
+    "transportation": "Private air-conditioned vehicle with expert guide",
+    "additionalImages": [
+      "https://images.pexels.com/photos/1583339/pexels-photo-1583339.jpeg",
+      "https://images.pexels.com/photos/3881104/pexels-photo-3881104.jpeg",
+      "https://images.pexels.com/photos/2356045/pexels-photo-2356045.jpeg"
+    ]
   },
   {
     "place": "dest_grandCanyon_place",
-    "location": "dest_grandCanyon_location",
-    "description": "dest_grandCanyon_description",
-    "weather": "dest_grandCanyon_weather",
+    "location": "Arizona, USA",
+    "description": "Marvel at the sheer scale and natural beauty of the Grand Canyon, one of the world's most spectacular geological wonders. Explore the South Rim's iconic viewpoints, hike into the canyon's depths, and witness the ever-changing colors of the ancient rock layers. This tour provides a deep connection with nature and offers some of the most breathtaking landscapes on Earth.",
+    "weather": "The South Rim is open year-round. Spring and fall offer the most pleasant weather for hiking. Summers can be hot at the rim and extremely hot at the bottom of the canyon.",
     "price": 250,
     "image": {
       "url": "https://images.pexels.com/photos/2649403/pexels-photo-2649403.jpeg",
       "source": "Pexels",
       "alt": "Grand Canyon layered red rock formations"
     },
-    "tip": "dest_grandCanyon_tip"
+    "tip": "dest_grandCanyon_tip",
+    "highlights": [
+      "Mather Point – Take in the first breathtaking views of the canyon's vastness from this popular overlook.",
+      "Bright Angel Trail – Hike a portion of this historic trail for a closer look at the canyon's unique geology.",
+      "Desert View Drive – Enjoy a scenic drive with multiple stops offering diverse perspectives of the canyon and Colorado River."
+    ],
+    "sunsetExperience": "Hopi Point Sunset – Experience one of the most famous sunset spots at the Grand Canyon, where the colors of the rock truly come alive.",
+    "duration": "Full day (10 hours)",
+    "meals": "Picnic lunch with a view included",
+    "transportation": "Guided shuttle tour from Grand Canyon Village",
+    "additionalImages": [
+      "https://images.pexels.com/photos/1450360/pexels-photo-1450360.jpeg",
+      "https://images.pexels.com/photos/2132126/pexels-photo-2132126.jpeg",
+      "https://images.pexels.com/photos/2649403/pexels-photo-2649403.jpeg"
+    ]
   },
   {
     "place": "dest_machuPicchu_place",
-    "location": "dest_machuPicchu_location",
-    "description": "dest_machuPicchu_description",
-    "weather": "dest_machuPicchu_weather",
+    "location": "Cusco, Peru",
+    "description": "Uncover the mysteries of the 'Lost City of the Incas' at Machu Picchu, a breathtaking archaeological site perched high in the Andes. Explore the ancient temples, terraces, and plazas, and marvel at the incredible stone craftsmanship of the Inca civilization. This journey through history and nature is a bucket-list experience that will leave you in awe of human ingenuity and the beauty of the mountains.",
+    "weather": "The dry season (May-October) is the best time to visit for clear skies. The rainy season (November-April) can be misty and atmospheric. Pack for variable mountain weather.",
     "price": 850,
     "image": {
       "url": "https://images.pexels.com/photos/2599626/pexels-photo-2599626.jpeg",
       "source": "Pexels",
       "alt": "Machu Picchu ruins overlooking the Andes mountains"
     },
-    "tip": "dest_machuPicchu_tip"
+    "tip": "dest_machuPicchu_tip",
+    "highlights": [
+      "Temple of the Sun – Admire the precision of the Inca stonework at this sacred site dedicated to the sun god.",
+      "Intihuatana Stone – See the famous 'hitching post of the sun,' an ancient ritual stone used for astronomical observations.",
+      "Huayna Picchu Hike – For the adventurous, climb the steep peak for a stunning bird's-eye view of the entire ruins."
+    ],
+    "sunsetExperience": "Sun Gate (Intipunku) – Watch the ruins glow in the soft light of late afternoon as you look back from the historic entrance to the city.",
+    "duration": "Full day (12 hours including train travel)",
+    "meals": "Gourmet lunch at the Sanctuary Lodge included",
+    "transportation": "Train from Cusco/Ollantaytambo and bus to the ruins",
+    "additionalImages": [
+      "https://images.pexels.com/photos/2599626/pexels-photo-2599626.jpeg",
+      "https://images.pexels.com/photos/1574843/pexels-photo-1574843.jpeg",
+      "https://images.pexels.com/photos/2356045/pexels-photo-2356045.jpeg"
+    ]
   },
   {
     "place": "dest_statueOfLiberty_place",
-    "location": "dest_statueOfLiberty_location",
-    "description": "dest_statueOfLiberty_description",
-    "weather": "dest_statueOfLiberty_weather",
+    "location": "New York City, USA",
+    "description": "Visit the Statue of Liberty, an enduring symbol of freedom and democracy, standing tall in New York Harbor. Take a ferry to Liberty Island, explore the museum, and climb to the pedestal or crown for iconic views of the Manhattan skyline. This tour offers a profound look at American history and the immigrant experience at nearby Ellis Island.",
+    "weather": "New York City has a humid continental climate. Spring and fall are ideal for sightseeing. Summers can be hot, and winters can be cold and snowy. Dress for the season.",
     "price": 550,
     "image": {
       "url": "https://images.pexels.com/photos/356079/pexels-photo-356079.jpeg",
       "source": "Pexels",
       "alt": "Statue of Liberty in New York Harbor"
     },
-    "tip": "dest_statueOfLiberty_tip"
+    "tip": "dest_statueOfLiberty_tip",
+    "highlights": [
+      "Liberty Island Exploration – Walk around the base of the statue and learn about its construction and significance.",
+      "Ellis Island National Museum of Immigration – Discover the stories of millions of immigrants who passed through this historic gateway.",
+      "Battery Park – Enjoy a stroll through this beautiful waterfront park before or after your ferry ride."
+    ],
+    "sunsetExperience": "Staten Island Ferry – Take a free ferry ride at sunset for a spectacular view of the Statue of Liberty and the glowing Manhattan skyline.",
+    "duration": "Half day (5 hours)",
+    "meals": "Optional lunch at a classic NYC deli",
+    "transportation": "Ferry ride and walking tour",
+    "additionalImages": [
+      "https://images.pexels.com/photos/356079/pexels-photo-356079.jpeg",
+      "https://images.pexels.com/photos/290386/pexels-photo-290386.jpeg",
+      "https://images.pexels.com/photos/466685/pexels-photo-466685.jpeg"
+    ]
   },
   {
     "place": "dest_colosseum_place",
-    "location": "dest_colosseum_location",
-    "description": "dest_colosseum_description",
-    "weather": "dest_colosseum_weather",
+    "location": "Rome, Italy",
+    "description": "Step into the heart of Rome and explore its iconic landmarks, ancient ruins, and vibrant streets. From the awe-inspiring Colosseum to the artistic masterpieces of Vatican City, this tour brings history to life. Stroll through charming piazzas, savor authentic Italian cuisine, and experience the city’s lively atmosphere. Perfect for history lovers, culture enthusiasts, and photographers seeking unforgettable memories. Every stop is guided to ensure you fully appreciate Rome’s rich heritage and modern charm.",
+    "weather": "Rome enjoys a Mediterranean climate; ideal months for touring are April–June and September–October, with warm days and mild evenings. Bring comfortable clothing and a light jacket for evenings.",
     "price": 420,
     "image": {
       "url": "https://images.pexels.com/photos/532263/pexels-photo-532263.jpeg",
       "source": "Pexels",
       "alt": "The Colosseum at dusk"
     },
-    "tip": "dest_colosseum_tip"
+    "tip": "dest_colosseum_tip",
+    "highlights": [
+      "Colosseum & Roman Forum – Explore ancient Roman architecture and learn fascinating stories from the past.",
+      "Vatican City & St. Peter’s Basilica – Witness world-famous art and religious treasures.",
+      "Piazza Navona & Trevi Fountain – Enjoy beautiful squares, fountains, and lively street life."
+    ],
+    "sunsetExperience": "Gianicolo Hill Sunset – Watch the city glow as the sun sets, offering breathtaking panoramic views of Rome.",
+    "duration": "Full day (8 hours)",
+    "meals": "Lunch at a traditional Italian trattoria included",
+    "transportation": "Air-conditioned van with professional guide included",
+    "additionalImages": [
+      "https://images.pexels.com/photos/rome_colosseum.jpg",
+      "https://images.pexels.com/photos/vatican_st_peter.jpg",
+      "https://images.pexels.com/photos/piazza_navona.jpg",
+      "https://images.pexels.com/photos/gianicolo_sunset.jpg"
+    ]
   },
   {
     "place": "dest_pyramidsOfGiza_place",

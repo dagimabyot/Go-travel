@@ -1506,6 +1506,11 @@ export const en = {
   faqTitle: "Frequently Asked Questions",
   needMoreHelp: "Need More Help?",
   supportTeamAvailability: "Our support team is available 24/7 to assist you with any questions or issues you may encounter.",
+  additionalDetails: "Additional Details",
+  tourDuration: "Tour Duration",
+  meals: "Meals",
+  transportation: "Transportation",
+  weather: "Weather",
   
   // FAQs
   faq1Q: "What is this app/website about?",

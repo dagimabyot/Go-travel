@@ -1,26 +1,22 @@
 import { useState, useEffect } from 'react';
 import { Screen, User, Flight, Booking, AppNotification, Package, Hotel } from '../types';
+import { auth, db, handleFirestoreError, OperationType } from '../firebase';
+import { authService } from '../services/auth';
+import { 
+  collection, 
+  onSnapshot, 
+  doc, 
+  setDoc, 
+  query,
+  where,
+  deleteDoc
+} from 'firebase/firestore';
 
 export const useApp = () => {
   const [screen, setScreen] = useState<Screen>('splash');
-  const [user, setUser] = useState<User | null>(() => {
-    const saved = localStorage.getItem('travel_user');
-    if (saved) return JSON.parse(saved);
-    return { 
-      id: 1, 
-      email: '', 
-      name: '',
-      avatar: ''
-    };
-  });
-
-  useEffect(() => {
-    if (user) {
-      localStorage.setItem('travel_user', JSON.stringify(user));
-    } else {
-      localStorage.removeItem('travel_user');
-    }
-  }, [user]);
+  const [user, setUser] = useState<User | null>(null);
+  const [isAuthReady, setIsAuthReady] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [currency, setCurrency] = useState('USD ($)');
   const [appearance, setAppearance] = useState('Light Mode');
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
@@ -37,7 +33,7 @@ export const useApp = () => {
   const [packages, setPackages] = useState<Package[]>([]);
   const [savedPackages, setSavedPackages] = useState<Package[]>([]);
   const [savedBookings, setSavedBookings] = useState<Booking[]>([]);
-  const [authEmail, setAuthEmail] = useState('');
+  const [authEmail, setAuthEmail] = useState('dagim045@gmail.com');
   const [toast, setToast] = useState<{ message: string; type: 'success' | 'info' } | null>(null);
   const [settingsSubScreen, setSettingsSubScreen] = useState('main');
   const [guestCount, setGuestCount] = useState(1);
@@ -60,64 +56,163 @@ export const useApp = () => {
     setNotifications(prev => [newNotif, ...prev]);
   };
 
-  const fetchBookings = async () => {
-    if (!user) return;
+  // Auth Listener
+  useEffect(() => {
+    const unsubscribe = authService.onAuthChange(async (firebaseUser) => {
+      if (firebaseUser) {
+        const profile = await authService.getUserProfile(firebaseUser.uid);
+        if (profile) {
+          setUser(profile);
+        } else {
+          const newUser: User = {
+            uid: firebaseUser.uid,
+            email: firebaseUser.email || '',
+            fullName: firebaseUser.displayName || '',
+            role: 'user',
+            createdAt: new Date().toISOString()
+          };
+          setUser(newUser);
+        }
+
+        if (firebaseUser.emailVerified && screen === 'auth-verify') {
+          setScreen('home');
+        }
+      } else {
+        setUser(null);
+      }
+      setIsAuthReady(true);
+      setLoading(false);
+    });
+    return () => unsubscribe();
+  }, [screen]);
+
+  const handleResendVerification = async () => {
     try {
-      const res = await fetch(`/api/bookings/${user.id}`);
-      const data = await res.json();
-      setBookings(data);
-    } catch (err) {
-      console.error('Failed to fetch bookings:', err);
+      await authService.sendVerification();
+      showToast('Verification email resent!');
+    } catch (err: any) {
+      showToast(err.message, 'info');
     }
   };
 
+  const handleCheckVerification = async () => {
+    if (auth.currentUser) {
+      try {
+        await auth.currentUser.reload();
+        if (auth.currentUser.emailVerified) {
+          setScreen('home');
+          showToast('Email verified successfully!');
+        } else {
+          showToast('Email not verified yet. Please check your inbox.', 'info');
+        }
+      } catch (err: any) {
+        showToast(err.message, 'info');
+      }
+    }
+  };
+
+  // Fetch Packages (Destinations)
   useEffect(() => {
-    fetch('/api/packages/search').then(res => res.json()).then(data => {
-      setPackages(data);
+    const unsubscribe = onSnapshot(collection(db, 'destinations'), (snapshot) => {
+      const pkgs = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Package));
+      setPackages(pkgs);
+    }, (error) => {
+      handleFirestoreError(error, OperationType.LIST, 'destinations');
     });
+    return () => unsubscribe();
   }, []);
 
+  // Fetch Hotels
   useEffect(() => {
-    if (user) {
-      fetchBookings();
+    const unsubscribe = onSnapshot(collection(db, 'hotels'), (snapshot) => {
+      const htls = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Hotel));
+      setHotels(htls);
+    }, (error) => {
+      handleFirestoreError(error, OperationType.LIST, 'hotels');
+    });
+    return () => unsubscribe();
+  }, []);
+
+  // Fetch Bookings
+  useEffect(() => {
+    if (!user) {
+      setBookings([]);
+      return;
     }
+    const q = query(collection(db, 'bookings'), where('userId', '==', user.uid));
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      const bks = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Booking));
+      setBookings(bks);
+    }, (error) => {
+      handleFirestoreError(error, OperationType.LIST, 'bookings');
+    });
+    return () => unsubscribe();
   }, [user]);
 
   const handleLogin = async (email: string, pass: string) => {
     try {
-      const res = await fetch('/api/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password: pass })
-      });
-      const data = await res.json();
-      if (res.ok) {
-        setUser(data);
-        setScreen('home');
-      } else {
-        alert(data.error);
-      }
-    } catch (err) {
+      await authService.login(email, pass);
+      setAuthEmail(email);
+      setScreen('home');
+      showToast('Welcome back!');
+    } catch (err: any) {
       console.error(err);
+      if (err.code === 'auth/operation-not-allowed') {
+        showToast('Email/Password auth not enabled. Please check Firebase console.', 'info');
+      } else if (err.code === 'auth/invalid-credential' || err.code === 'auth/user-not-found' || err.code === 'auth/wrong-password') {
+        showToast('Invalid email or password. Please try again.', 'info');
+      } else {
+        showToast(err.message, 'info');
+      }
+      throw err;
     }
   };
 
-  const handleSignup = async (name: string, email: string, pass: string) => {
+  const handleSignup = async (name: string, email: string, pass: string, phone: string) => {
     try {
-      const res = await fetch('/api/auth/signup', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, password: pass })
-      });
-      const data = await res.json();
-      if (res.ok) {
-        setUser(data);
-        setScreen('home');
-      } else {
-        alert(data.error);
-      }
-    } catch (err) {
+      const newUser = await authService.signup(name, email, pass, phone);
+      setAuthEmail(email);
+      setUser(newUser);
+      setScreen('auth-verify');
+      showToast('Account created! Please verify your email.');
+    } catch (err: any) {
       console.error(err);
+      if (err.code === 'auth/operation-not-allowed') {
+        showToast('Email/Password auth not enabled. Please check Firebase console.', 'info');
+      } else if (err.code === 'auth/email-already-in-use') {
+        showToast('This email is already in use. Please try logging in instead.', 'info');
+      } else {
+        showToast(err.message, 'info');
+      }
+      throw err;
+    }
+  };
+
+  const handleForgotPassword = async (email: string) => {
+    try {
+      await authService.resetPassword(email);
+      showToast('Password reset email sent!');
+      setScreen('auth-email');
+    } catch (err: any) {
+      showToast(err.message, 'info');
+    }
+  };
+
+  const handleGoogleLogin = async () => {
+    try {
+      const profile = await authService.signInWithGoogle();
+      setUser(profile);
+      setScreen('home');
+      showToast('Logged in with Google!');
+    } catch (err: any) {
+      console.error(err);
+      if (err.code === 'auth/operation-not-allowed') {
+        showToast('Google auth not enabled. Please check Firebase console.', 'info');
+      } else if (err.code === 'auth/popup-closed-by-user') {
+        showToast('Login cancelled', 'info');
+      } else {
+        showToast(err.message, 'info');
+      }
     }
   };
 
@@ -158,8 +253,9 @@ export const useApp = () => {
   const handleBooking = async (seat: string) => {
     if (!user || (!selectedFlight && !selectedPackage && !selectedHotel)) return;
     
+    const bookingId = Math.random().toString(36).substring(7);
     let bookingData: Partial<Booking> = {
-      user_id: user.id,
+      userId: user.uid,
       status: 'confirmed',
       date: new Date().toISOString(),
       guests: guestCount.toString(),
@@ -180,14 +276,13 @@ export const useApp = () => {
         seat
       };
     } else if (selectedPackage) {
-      // Set a travel date 1 month in the future for demo purposes
       const travelDate = new Date();
       travelDate.setMonth(travelDate.getMonth() + 1);
       
       bookingData = {
         ...bookingData,
         type: 'package',
-        item_id: selectedPackage.id,
+        itemId: selectedPackage.id,
         name: selectedPackage.name,
         location: selectedPackage.location,
         image: selectedPackage.image,
@@ -196,14 +291,13 @@ export const useApp = () => {
         date: travelDate.toISOString()
       };
     } else if (selectedHotel) {
-      // Set a stay date 2 weeks in the future for demo purposes
       const stayDate = new Date();
       stayDate.setDate(stayDate.getDate() + 14);
       
       bookingData = {
         ...bookingData,
         type: 'hotel',
-        item_id: selectedHotel.id,
+        itemId: selectedHotel.id,
         name: selectedHotel.name,
         location: selectedHotel.location,
         image: selectedHotel.image,
@@ -214,37 +308,28 @@ export const useApp = () => {
     }
 
     try {
-      const res = await fetch('/api/bookings', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(bookingData)
-      });
+      await setDoc(doc(db, 'bookings', bookingId), bookingData);
       
-      if (res.ok) {
-        await fetchBookings();
-        // Removed setScreen('confirmation') to allow caller to handle transition
-
-        const title = 'Booking Confirmed! ✈️';
-        const body = selectedFlight 
-          ? `Your flight to ${selectedFlight.to} has been successfully booked.`
-          : selectedPackage 
-            ? `Your trip to ${selectedPackage.name} has been successfully booked.`
-            : `Your stay at ${selectedHotel!.name} has been successfully booked.`;
-        
-        addNotification(title, body, 'booking');
-        showToast(body);
-      }
+      const title = 'Booking Confirmed! ✈️';
+      const body = selectedFlight 
+        ? `Your flight to ${selectedFlight.to} has been successfully booked.`
+        : selectedPackage 
+          ? `Your trip to ${selectedPackage.name} has been successfully booked.`
+          : `Your stay at ${selectedHotel!.name} has been successfully booked.`;
+      
+      addNotification(title, body, 'booking');
+      showToast(body);
     } catch (err) {
-      console.error(err);
+      handleFirestoreError(err, OperationType.CREATE, 'bookings');
     }
   };
 
-  const handleCancelBooking = async (id: number) => {
+  const handleCancelBooking = async (id: string) => {
     try {
-      const res = await fetch(`/api/bookings/${id}`, { method: 'DELETE' });
-      if (res.ok) fetchBookings();
+      await deleteDoc(doc(db, 'bookings', id));
+      showToast('Booking cancelled', 'info');
     } catch (err) {
-      console.error(err);
+      handleFirestoreError(err, OperationType.DELETE, `bookings/${id}`);
     }
   };
 
@@ -278,6 +363,28 @@ export const useApp = () => {
     });
   };
 
+  const onUpdateUser = async (updatedData: Partial<User>) => {
+    if (!user) return;
+    try {
+      const userRef = doc(db, 'users', user.uid);
+      await setDoc(userRef, { ...user, ...updatedData }, { merge: true });
+      setUser(prev => prev ? { ...prev, ...updatedData } : null);
+      showToast('Profile updated successfully!');
+    } catch (err) {
+      handleFirestoreError(err, OperationType.UPDATE, `users/${user.uid}`);
+    }
+  };
+
+  const handleLogout = async () => {
+    try {
+      await authService.logout();
+      setScreen('auth-welcome');
+      showToast('Logged out successfully');
+    } catch (err: any) {
+      showToast(err.message, 'info');
+    }
+  };
+
   return {
     screen, setScreen,
     user, setUser,
@@ -303,7 +410,8 @@ export const useApp = () => {
     settingsSubScreen, setSettingsSubScreen,
     guestCount, setGuestCount,
     travelers, setTravelers,
-    handleLogin, handleSignup, handleSearch, handleBooking, handleCancelBooking,
-    onClearNotifications, toggleSavedPackage, toggleSavedHotel, toggleSavedBooking, handleSearchHotels
+    handleLogin, handleSignup, handleSearch, handleBooking, handleCancelBooking, handleForgotPassword, handleGoogleLogin,
+    handleResendVerification, handleCheckVerification, handleLogout,
+    onClearNotifications, toggleSavedPackage, toggleSavedHotel, toggleSavedBooking, handleSearchHotels, onUpdateUser
   };
 };

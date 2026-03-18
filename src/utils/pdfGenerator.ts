@@ -1,17 +1,11 @@
 import { jsPDF } from 'jspdf';
 import { Booking, User } from '../types';
 
-export const generateProfessionalPDF = (booking: Booking) => {
-  // Try to get user name from localStorage
+export const generateProfessionalPDF = (booking: Booking, user: User | null) => {
+  // Try to get user name
   let passengerName = 'JOHN DOE';
-  try {
-    const savedUser = localStorage.getItem('travel_user');
-    if (savedUser) {
-      const user: User = JSON.parse(savedUser);
-      passengerName = user.name.toUpperCase();
-    }
-  } catch (e) {
-    console.error('Failed to get user for PDF', e);
+  if (user) {
+    passengerName = (user.fullName || user.name || 'JOHN DOE').toUpperCase();
   }
 
   // Boarding pass dimensions (approx 8x3.25 inches -> 203x82mm)

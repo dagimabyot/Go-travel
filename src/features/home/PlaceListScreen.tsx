@@ -48,7 +48,7 @@ export const PlaceListScreen = ({ places, onBack, onSelectPlace, toggleSaved, is
                     <Star key={i} size={12} className={`${i < Math.floor(place.rating) ? 'text-yellow-400 fill-current' : 'text-slate-400'}`} />
                   ))}
                 </div>
-                <span className="text-xs font-bold">{place.rating.toFixed(1)}</span>
+                <span className="text-xs font-bold">{(place.rating ?? 0).toFixed(1)}</span>
               </div>
               <h3 className="text-2xl font-bold leading-tight">{place.name}</h3>
               <p className="text-sm opacity-80">{place.location}</p>

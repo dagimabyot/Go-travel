@@ -39,7 +39,7 @@ interface TripDetailsScreenProps {
   booking: Booking;
   user: User | null;
   onBack: () => void;
-  onCancel: (id: number) => void;
+  onCancel: (id: string) => void;
   appearance: string;
   isSaved: boolean;
   toggleSaved: () => void;
@@ -73,7 +73,7 @@ export const TripDetailsScreen = ({ booking: initialBooking, user, onBack, onCan
   };
 
   const handleDownloadPDF = async () => {
-    generateProfessionalPDF(booking);
+    generateProfessionalPDF(booking, user);
   };
 
   const renderCancelModal = () => (

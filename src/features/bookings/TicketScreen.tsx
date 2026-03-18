@@ -1,17 +1,18 @@
 import React from 'react';
 import { ArrowLeft, Download, QrCode, MapPin, Calendar, Clock, Plane } from 'lucide-react';
-import { Booking } from '../../types';
+import { Booking, User } from '../../types';
 import { translations } from '../../constants/translations';
 import { motion } from 'motion/react';
 import { generateProfessionalPDF } from '../../utils/pdfGenerator';
 
 interface TicketScreenProps {
   booking: Booking;
+  user: User | null;
   onBack: () => void;
   language: string;
 }
 
-export const TicketScreen = ({ booking, onBack, language }: TicketScreenProps) => {
+export const TicketScreen = ({ booking, user, onBack, language }: TicketScreenProps) => {
   const t = (key: string) => translations[language]?.[key] || translations['English'][key];
 
   return (
@@ -67,7 +68,7 @@ export const TicketScreen = ({ booking, onBack, language }: TicketScreenProps) =
             </div>
             <div>
               <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Passenger</p>
-              <p className="text-white font-bold">{localStorage.getItem('travel_user') ? JSON.parse(localStorage.getItem('travel_user')!).name : 'John Doe'}</p>
+              <p className="text-white font-bold">{user?.fullName || user?.name || 'John Doe'}</p>
             </div>
             <div className="text-right">
               <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Seat</p>
@@ -92,7 +93,7 @@ export const TicketScreen = ({ booking, onBack, language }: TicketScreenProps) =
 
       <div className="max-w-sm mx-auto mt-10 space-y-4">
         <button 
-          onClick={() => generateProfessionalPDF(booking)}
+          onClick={() => generateProfessionalPDF(booking, user)}
           className="w-full bg-primary text-white py-5 rounded-[24px] font-bold text-lg shadow-xl shadow-primary/20 flex items-center justify-center gap-3 active:scale-95 transition-all"
         >
           <Download size={20} />

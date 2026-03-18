@@ -1,6 +1,6 @@
 import React from 'react';
 import { ChevronLeft, Plane } from 'lucide-react';
-import { Flight } from '../../types';
+import { Flight, User, Booking } from '../../types';
 import { generateProfessionalPDF } from '../../utils/pdfGenerator';
 import { useTranslation } from '../../hooks/useTranslation';
 import { BoardingPass } from '../../components/ui/BoardingPass';
@@ -10,17 +10,18 @@ interface TicketScreenProps {
   onDownload: () => void;
   appearance: string;
   flight: Flight | null;
+  user: User | null;
   seat: string;
 }
 
-export const TicketScreen = ({ onBack, onDownload, appearance, flight, seat }: TicketScreenProps) => {
+export const TicketScreen = ({ onBack, onDownload, appearance, flight, user, seat }: TicketScreenProps) => {
   const { t } = useTranslation();
   const handleDownload = () => {
     if (flight) {
       // Create a temporary booking object for the PDF generator
-      const mockBooking = {
-        id: Math.floor(Math.random() * 1000000),
-        user_id: 1,
+      const mockBooking: Booking = {
+        id: Math.random().toString(36).substring(7),
+        userId: user?.uid || 'guest',
         type: 'flight' as const,
         flight_id: flight.id,
         from_city: flight.from,
@@ -33,14 +34,12 @@ export const TicketScreen = ({ onBack, onDownload, appearance, flight, seat }: T
         status: 'Confirmed',
         date: flight.departure
       };
-      generateProfessionalPDF(mockBooking);
+      generateProfessionalPDF(mockBooking, user);
       onDownload();
     }
   };
 
-  const passengerName = localStorage.getItem('travel_user') 
-    ? JSON.parse(localStorage.getItem('travel_user')!).name 
-    : 'John Doe';
+  const passengerName = user?.fullName || user?.name || 'John Doe';
 
   const boardingTime = flight?.departure 
     ? new Date(flight.departure).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false }) 

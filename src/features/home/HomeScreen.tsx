@@ -8,11 +8,12 @@ import { Avatar } from '../../components/ui/Avatar';
 interface HomeScreenProps {
   user: User | null;
   packages: Package[];
+  hotels: Hotel[];
   onSelectPackage: (p: Package) => void;
   onSeeAllPackages: () => void;
   onSearchFlights: () => void;
   onSearchHotels: () => void;
-  onSelectHotel: (h: any) => void;
+  onSelectHotel: (h: Hotel) => void;
   onProfile: () => void;
   savedPackages: Package[];
   toggleSavedPackage: (p: Package) => void;
@@ -24,6 +25,7 @@ interface HomeScreenProps {
 export const HomeScreen = ({ 
   user, 
   packages,
+  hotels,
   onSelectPackage, 
   onSeeAllPackages,
   onSearchFlights, 
@@ -127,7 +129,7 @@ export const HomeScreen = ({
                             <Star key={i} size={10} className={`${i < Math.floor(pkg.rating) ? 'text-yellow-400 fill-current' : 'text-slate-400'}`} />
                           ))}
                         </div>
-                        <span className="text-[10px] font-bold">{pkg.rating.toFixed(1)}</span>
+                        <span className="text-[10px] font-bold">{(pkg.rating ?? 0).toFixed(1)}</span>
                       </div>
                       <p className="font-bold text-base leading-tight">{translateLocation(pkg.location)}</p>
                     </div>
@@ -167,7 +169,7 @@ export const HomeScreen = ({
                             <Star key={i} size={12} className={`${i < Math.floor(popularPackages[0].rating) ? 'text-yellow-400 fill-current' : 'text-slate-400'}`} />
                           ))}
                         </div>
-                        <span className="text-xs font-bold">{popularPackages[0].rating.toFixed(1)}</span>
+                        <span className="text-xs font-bold">{(popularPackages[0].rating ?? 0).toFixed(1)}</span>
                       </div>
                       <p className="font-bold text-2xl leading-tight mb-1">{t(popularPackages[0].name)}</p>
                       <p className="text-sm opacity-80">{popularPackages[0].duration} {t('fullPackage')}</p>
@@ -213,7 +215,7 @@ export const HomeScreen = ({
                       <p className="text-[10px] text-slate-400 mb-1">{translateLocation(pkg.location)}</p>
                       <div className="flex items-center gap-1">
                         <Star size={10} className="text-yellow-400 fill-current" />
-                        <span className="text-[10px] font-bold text-slate-400">{pkg.rating.toFixed(1)}</span>
+                        <span className="text-[10px] font-bold text-slate-400">{(pkg.rating ?? 0).toFixed(1)}</span>
                       </div>
                     </div>
                   </motion.div>
@@ -287,7 +289,7 @@ export const HomeScreen = ({
                             <Star key={i} size={10} className={`${i < Math.floor(pkg.rating) ? 'text-yellow-400 fill-current' : 'text-slate-400'}`} />
                           ))}
                         </div>
-                        <span className="text-[10px] font-bold">{pkg.rating.toFixed(1)}</span>
+                        <span className="text-[10px] font-bold">{(pkg.rating ?? 0).toFixed(1)}</span>
                       </div>
                       <p className="font-bold text-lg leading-tight">{translateLocation(pkg.location)}</p>
                     </div>
@@ -328,7 +330,7 @@ export const HomeScreen = ({
                             <Star key={i} size={10} className={`${i < Math.floor(pkg.rating) ? 'text-yellow-400 fill-current' : 'text-slate-400'}`} />
                           ))}
                         </div>
-                        <span className="text-[10px] font-bold">{pkg.rating.toFixed(1)}</span>
+                        <span className="text-[10px] font-bold">{(pkg.rating ?? 0).toFixed(1)}</span>
                       </div>
                       <p className="font-bold text-lg leading-tight">{translateLocation(pkg.location)}</p>
                     </div>
@@ -357,10 +359,7 @@ export const HomeScreen = ({
                 <button onClick={onSearchHotels} className="text-sm text-primary font-bold">{t('seeAll')}</button>
               </div>
               <div className="flex overflow-x-auto gap-6 pb-4 hide-scrollbar -mx-6 px-6">
-                {[
-                  { id: 'h1', name: 'Water Hotel', price: 15.99, image: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=800&q=80' },
-                  { id: 'h2', name: 'Beach Hotel', price: 15.99, image: 'https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=800&q=80' },
-                ].map((hotel, i) => (
+                {hotels.slice(0, 5).map((hotel, i) => (
                   <motion.div 
                     key={hotel.id}
                     whileHover={{ scale: 1.02 }}
@@ -373,8 +372,14 @@ export const HomeScreen = ({
                       <p className="font-bold text-lg leading-tight">{t(hotel.name)}</p>
                       <p className="text-sm opacity-80">${hotel.price}/{t('perDay')}</p>
                     </div>
-                    <button className={`absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center shadow-md transition-all ${appearance === 'Dark Mode' ? 'bg-slate-800 text-slate-400' : 'bg-white text-slate-400'}`}>
-                      <Star size={14} />
+                    <button 
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        toggleSavedHotel(hotel);
+                      }}
+                      className={`absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center shadow-md transition-all ${savedHotels.some(h => h.id === hotel.id) ? (appearance === 'Dark Mode' ? 'bg-slate-800 text-white' : 'bg-white text-amber-500') : (appearance === 'Dark Mode' ? 'bg-slate-800 text-slate-400' : 'bg-white text-slate-400')}`}
+                    >
+                      <Star size={14} fill={savedHotels.some(h => h.id === hotel.id) ? 'currentColor' : 'none'} />
                     </button>
                   </motion.div>
                 ))}
@@ -388,10 +393,7 @@ export const HomeScreen = ({
                 <button onClick={onSearchHotels} className="text-sm text-primary font-bold">{t('seeAll')}</button>
               </div>
               <div className="flex overflow-x-auto gap-6 pb-4 hide-scrollbar -mx-6 px-6">
-                {[
-                  { id: 'h3', name: 'Ayo Nagra', price: 10.99, image: 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=800&q=80' },
-                  { id: 'h4', name: 'Beach Hotel', price: 15.99, image: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=800&q=80' },
-                ].map((hotel, i) => (
+                {hotels.slice(5, 10).map((hotel, i) => (
                   <motion.div 
                     key={hotel.id}
                     whileHover={{ scale: 1.02 }}
@@ -404,8 +406,14 @@ export const HomeScreen = ({
                       <p className="font-bold text-lg leading-tight">{t(hotel.name)}</p>
                       <p className="text-sm opacity-80">${hotel.price}/{t('perDay')}</p>
                     </div>
-                    <button className={`absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center shadow-md transition-all ${appearance === 'Dark Mode' ? 'bg-slate-800 text-slate-400' : 'bg-white text-slate-400'}`}>
-                      <Star size={14} />
+                    <button 
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        toggleSavedHotel(hotel);
+                      }}
+                      className={`absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center shadow-md transition-all ${savedHotels.some(h => h.id === hotel.id) ? (appearance === 'Dark Mode' ? 'bg-slate-800 text-white' : 'bg-white text-amber-500') : (appearance === 'Dark Mode' ? 'bg-slate-800 text-slate-400' : 'bg-white text-slate-400')}`}
+                    >
+                      <Star size={14} fill={savedHotels.some(h => h.id === hotel.id) ? 'currentColor' : 'none'} />
                     </button>
                   </motion.div>
                 ))}
